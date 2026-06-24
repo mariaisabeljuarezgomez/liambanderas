@@ -1,0 +1,317 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#77de3d",
+                        "tertiary-fixed": "#92fc58",
+                        "outline-variant": "#bec8d3",
+                        "surface-variant": "#dee3e9",
+                        "error": "#ba1a1a",
+                        "secondary": "#735c00",
+                        "primary": "#006495",
+                        "on-background": "#171c21",
+                        "tertiary-container": "#59be1b",
+                        "on-primary-container": "#004163",
+                        "on-primary-fixed": "#001e30",
+                        "background": "#f7f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffe084",
+                        "inverse-surface": "#2c3136",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#171c21",
+                        "surface-tint": "#006495",
+                        "tertiary": "#2b6c00",
+                        "surface-bright": "#f7f9ff",
+                        "on-tertiary-fixed-variant": "#1f5100",
+                        "secondary-fixed-dim": "#efc200",
+                        "primary-fixed": "#cbe6ff",
+                        "surface-container": "#eaeef5",
+                        "primary-fixed-dim": "#90cdff",
+                        "on-secondary-fixed": "#231b00",
+                        "surface-container-low": "#f0f4fb",
+                        "inverse-primary": "#90cdff",
+                        "surface-container-high": "#e4e8ef",
+                        "primary-container": "#2bb1ff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#004b71",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-surface-variant": "#3e4851",
+                        "surface-container-highest": "#dee3e9",
+                        "secondary-container": "#fccc00",
+                        "outline": "#6e7882",
+                        "on-tertiary-container": "#1a4600",
+                        "on-secondary-container": "#6d5700",
+                        "surface-dim": "#d6dae1",
+                        "on-tertiary-fixed": "#082100",
+                        "inverse-on-surface": "#edf1f8",
+                        "surface": "#f7f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target-min": "48px",
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "container-margin": "24px",
+                        "card-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Quicksand"],
+                        "label-bold": ["Quicksand"],
+                        "headline-md": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "headline-lg": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .tactile-shadow-primary {
+            box-shadow: 0 4px 0 0 #004b71;
+        }
+        .tactile-shadow-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 0 #004b71;
+        }
+        .tactile-shadow-secondary {
+            box-shadow: 0 4px 0 0 #bec8d3;
+        }
+        .tactile-shadow-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 0 #bec8d3;
+        }
+        .audio-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+        .paint-stripe {
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        .color-bubble {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .color-bubble:active {
+            transform: scale(0.9) translateY(4px);
+        }
+        .selected-color {
+            outline: 6px solid #2bb1ff;
+            outline-offset: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:opacity-80 active:translate-y-1 transition-all text-primary">
+<span class="material-symbols-outlined text-3xl">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">España / Spain</h1>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:opacity-80 active:translate-y-1 transition-all text-primary">
+<span class="material-symbols-outlined text-3xl">volume_up</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container tactile-shadow-secondary hover:opacity-80 active:translate-y-1 transition-all" title="¡Alarma! / Sound Alarm">
+<span class="material-symbols-outlined text-3xl">notifications_active</span>
+</button></header>
+<main class="max-w-4xl mx-auto px-container-margin py-unit">
+<!-- Title & Subtitle Section -->
+<div class="flex flex-col items-center mt-6 text-center">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Alemania</h2>
+<button class="audio-pulse w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center tactile-shadow-secondary" onclick="playAudio('Alemania')">
+<span class="material-symbols-outlined text-white">volume_up</span>
+</button>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<p class="font-body-lg text-body-lg text-on-surface-variant">Germany</p>
+<button class="w-10 h-10 bg-surface-variant rounded-full flex items-center justify-center opacity-80" onclick="playAudio('Germany')">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Canvas Container -->
+<div class="mt-10 bg-white rounded-lg p-card-padding border-4 border-surface-container-highest shadow-sm relative overflow-hidden">
+<div class="aspect-[5/3] w-full flex flex-col border-2 border-outline-variant rounded-md overflow-hidden bg-surface-container-low" id="flag-canvas">
+<!-- Three horizontal stripes -->
+<div class="paint-stripe flex-1 border-b-2 border-dashed border-outline-variant flex items-center justify-center group" id="stripe-0" onclick="paintStripe(0)">
+<span class="material-symbols-outlined text-outline-variant opacity-20 group-hover:opacity-50 text-4xl">format_paint</span>
+</div>
+<div class="paint-stripe flex-1 border-b-2 border-dashed border-outline-variant flex items-center justify-center group" id="stripe-1" onclick="paintStripe(1)">
+<span class="material-symbols-outlined text-outline-variant opacity-20 group-hover:opacity-50 text-4xl">format_paint</span>
+</div>
+<div class="paint-stripe flex-1 flex items-center justify-center group" id="stripe-2" onclick="paintStripe(2)">
+<span class="material-symbols-outlined text-outline-variant opacity-20 group-hover:opacity-50 text-4xl">format_paint</span>
+</div>
+</div>
+<!-- Instructions Overlay (Optional/Decorative) -->
+<div class="absolute top-4 right-4 flex gap-2">
+<span class="px-4 py-1 bg-primary-container text-on-primary-container rounded-full font-label-bold text-label-bold">Pinta la Bandera!</span>
+</div>
+</div>
+<!-- Palette Selector -->
+<div class="mt-12 flex flex-col items-center">
+<p class="font-label-bold text-label-bold mb-6 text-on-surface-variant uppercase tracking-widest">Elige un Color / Choose a Color</p>
+<div class="flex flex-wrap justify-center gap-8">
+<!-- Black -->
+<div class="flex flex-col items-center gap-3">
+<button class="color-bubble w-20 h-20 bg-[#171c21] rounded-full tactile-shadow-secondary border-4 border-white" id="btn-negro" onclick="selectColor('#171c21', 'Negro', 'Black', this)"></button>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold">Negro</span>
+<span class="material-symbols-outlined text-sm cursor-pointer" onclick="playAudio('Negro')">volume_up</span>
+</div>
+</div>
+<!-- Red -->
+<div class="flex flex-col items-center gap-3">
+<button class="color-bubble w-20 h-20 bg-[#ba1a1a] rounded-full tactile-shadow-secondary border-4 border-white" id="btn-rojo" onclick="selectColor('#ba1a1a', 'Rojo', 'Red', this)"></button>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold">Rojo</span>
+<span class="material-symbols-outlined text-sm cursor-pointer" onclick="playAudio('Rojo')">volume_up</span>
+</div>
+</div>
+<!-- Yellow/Gold -->
+<div class="flex flex-col items-center gap-3">
+<button class="color-bubble w-20 h-20 bg-[#fccc00] rounded-full tactile-shadow-secondary border-4 border-white" id="btn-amarillo" onclick="selectColor('#fccc00', 'Amarillo', 'Yellow', this)"></button>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold">Amarillo</span>
+<span class="material-symbols-outlined text-sm cursor-pointer" onclick="playAudio('Amarillo')">volume_up</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Reset Button -->
+<div class="mt-12 flex justify-center">
+<button class="px-8 py-4 bg-white text-primary font-label-bold text-label-bold rounded-xl tactile-shadow-secondary flex items-center gap-2" onclick="resetFlag()">
+<span class="material-symbols-outlined">restart_alt</span>
+                Limpiar / Reset
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest shadow-lg z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6" id="success-modal">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm"></div>
+<div class="relative bg-white w-full max-w-sm rounded-xl p-8 flex flex-col items-center text-center tactile-shadow-primary border-4 border-primary">
+<div class="w-24 h-24 bg-tertiary-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white text-6xl">star</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">¡Excelente!</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Has pintado la bandera de Alemania perfectamente.</p>
+<button class="w-full py-4 bg-primary text-white font-label-bold text-label-bold rounded-xl tactile-shadow-primary uppercase" onclick="closeModal()">Continuar</button>
+</div>
+</div>
+<script>
+        let currentColor = null;
+        let stripeState = [null, null, null];
+        const correctFlag = ['#171c21', '#ba1a1a', '#fccc00'];
+
+        function selectColor(hex, es, en, btn) {
+            currentColor = hex;
+            
+            // Remove selection from all bubbles
+            document.querySelectorAll('.color-bubble').forEach(b => b.classList.remove('selected-color'));
+            // Add to active
+            btn.classList.add('selected-color');
+
+            // Feedback sound simulation
+            console.log(`Color selected: ${es} / ${en}`);
+        }
+
+        function paintStripe(index) {
+            if (!currentColor) {
+                alert("Primero elige un color de la paleta.");
+                return;
+            }
+
+            const stripe = document.getElementById(`stripe-${index}`);
+            stripe.style.backgroundColor = currentColor;
+            stripe.innerHTML = ""; // Remove the icon
+            stripe.classList.remove('group');
+            
+            stripeState[index] = currentColor;
+
+            checkWin();
+        }
+
+        function checkWin() {
+            const isCorrect = stripeState.every((color, index) => color === correctFlag[index]);
+            if (isCorrect) {
+                setTimeout(() => {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                    playAudio('Success');
+                }, 500);
+            }
+        }
+
+        function resetFlag() {
+            stripeState = [null, null, null];
+            for(let i=0; i<3; i++) {
+                const stripe = document.getElementById(`stripe-${i}`);
+                stripe.style.backgroundColor = "";
+                stripe.innerHTML = `<span class="material-symbols-outlined text-outline-variant opacity-20 group-hover:opacity-50 text-4xl">format_paint</span>`;
+                stripe.classList.add('group');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            resetFlag();
+        }
+
+        function playAudio(label) {
+            // Simplified feedback for prototype
+            const synth = window.speechSynthesis;
+            const utter = new SpeechSynthesisUtterance(label);
+            utter.lang = label === 'Alemania' || label === 'Negro' || label === 'Rojo' || label === 'Amarillo' ? 'es-ES' : 'en-US';
+            synth.speak(utter);
+        }
+    </script>
+
+
+</body></html>

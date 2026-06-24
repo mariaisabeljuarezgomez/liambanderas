@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Flag Adventure - Israel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "outline": "#6e7882",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-low": "#f0f4fb",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bec8d3",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        
+        .chunky-button-primary {
+            background-color: #2bb1ff;
+            border-bottom: 6px solid #004b71;
+            transition: all 0.1s;
+        }
+        .chunky-button-primary:active {
+            transform: translateY(4px);
+            border-bottom-width: 0;
+        }
+
+        .chunky-button-secondary {
+            background-color: #ffffff;
+            border-bottom: 6px solid #dee3e9;
+            color: #006495;
+            transition: all 0.1s;
+        }
+        .chunky-button-secondary:active {
+            transform: translateY(4px);
+            border-bottom-width: 0;
+        }
+
+        .color-well {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .color-well:hover { transform: scale(1.1); }
+        .color-well.active { ring: 6px solid #fccc00; transform: scale(1.15); }
+
+        .flag-path { transition: fill 0.3s ease; cursor: pointer; }
+        .flag-path:hover { opacity: 0.8; }
+
+        @keyframes pulse-yellow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+        .pulse-audio { animation: pulse-yellow 2s infinite; }
+
+        .celebration-bg {
+            background: radial-gradient(circle, #ffe084 0%, #fccc00 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-24">
+<!-- Top Navigation Header -->
+<header class="w-full top-0 sticky z-40 bg-surface-container-low flex items-center justify-between px-container-margin py-unit h-16">
+<div class="flex items-center gap-3">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary tracking-tight">Israel</h1><button onclick="triggerAlarm()" class="flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full border-b-4 border-secondary-fixed active:translate-y-1 transition-all duration-75 shadow-md ml-2" aria-label="Alarma"><span class="material-symbols-outlined text-xl">notifications_active</span><span class="font-label-bold text-sm">¡Alarma! / Sound Alarm</span></button>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-6 mr-4">
+<a class="text-primary font-label-bold" href="#">Explore</a>
+<a class="text-on-surface-variant font-label-bold" href="#">Passport</a>
+<a class="text-on-surface-variant font-label-bold" href="#">Play</a>
+</div>
+<div class="flex items-center bg-primary-container/20 px-4 py-1.5 rounded-full border-2 border-primary-container">
+<span class="material-symbols-outlined text-primary mr-2" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-bold text-on-primary-container">Nivel 5</span>
+</div>
+<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined text-primary">volume_up</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-container-margin py-8 gap-8">
+<!-- Interactive Flag Area -->
+<div class="relative w-full max-w-2xl bg-white p-card-padding rounded-lg shadow-xl border-2 border-surface-variant">
+<!-- Progress Bar -->
+<div class="absolute -top-10 left-0 w-full px-4">
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-bold text-primary">¡Casi listo!</span>
+<span class="font-label-bold text-primary">80%</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden border-2 border-surface-variant">
+<div class="h-full bg-tertiary-container rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<!-- Blank Flag SVG (Interactive) -->
+<div class="aspect-[3/2] w-full flex items-center justify-center bg-surface-container-lowest rounded-md overflow-hidden shadow-inner border-2 border-dashed border-outline-variant">
+<svg class="w-full h-full drop-shadow-md" id="israel-flag" viewBox="0 0 220 160">
+<!-- Top Stripe -->
+<rect class="flag-path" fill="#f0f4fb" height="20" id="stripe-top" onclick="paintPath(this)" stroke="#bec8d3" stroke-width="0.5" width="220" x="0" y="20"></rect>
+<!-- Middle Area -->
+<rect fill="white" height="80" width="220" x="0" y="40"></rect>
+<!-- Bottom Stripe -->
+<rect class="flag-path" fill="#f0f4fb" height="20" id="stripe-bottom" onclick="paintPath(this)" stroke="#bec8d3" stroke-width="0.5" width="220" x="0" y="120"></rect>
+<!-- Magen David -->
+<path class="flag-path" d="M110 50 L125 75 L150 75 L130 90 L135 115 L110 100 L85 115 L90 90 L70 75 L95 75 Z" fill="none" id="star-of-david" onclick="paintPath(this)" stroke="#bec8d3" stroke-linejoin="round" stroke-width="2"></path>
+<!-- Note: simplified star for clarity, using Magen David structure usually requires two interlocking triangles -->
+<g class="flag-path" id="magen-david" onclick="paintPath(this)">
+<path d="M110 52 L132 90 L88 90 Z" fill="none" stroke="#bec8d3" stroke-width="2.5"></path>
+<path d="M110 108 L132 70 L88 70 Z" fill="none" stroke="#bec8d3" stroke-width="2.5"></path>
+</g>
+</svg>
+</div>
+<div class="mt-6 flex items-center gap-4 bg-surface-container rounded-xl p-4">
+<button class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center pulse-audio shadow-md" onclick="playAudio('La estrella de la bandera se llama Estrella de David.')">
+<span class="material-symbols-outlined text-3xl">volume_up</span>
+</button>
+<p class="font-body-lg text-body-lg text-on-surface">
+<span class="font-bold text-primary">¿Sabías qué?</span> <br>
+                    La estrella de la bandera se llama Estrella de David.
+                </p>
+</div>
+</div>
+<!-- Color Palette Station -->
+<div class="w-full max-w-xl bg-surface-container-high rounded-xl p-6 shadow-md border-b-8 border-surface-dim">
+<h2 class="text-center font-headline-md text-headline-md text-on-surface-variant mb-6">¡Elige un color!</h2>
+<div class="flex justify-center gap-8 md:gap-12">
+<!-- Color: Azul -->
+<button class="color-well group flex flex-col items-center gap-3" onclick="selectColor('#006495', this)">
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary border-4 border-white shadow-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl opacity-0 group-[.active]:opacity-100">brush</span>
+</div>
+<span class="font-label-bold text-on-surface text-lg">Azul</span>
+</button>
+<!-- Color: Blanco -->
+<button class="color-well group flex flex-col items-center gap-3 active" onclick="selectColor('#ffffff', this)">
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white border-4 border-white shadow-xl flex items-center justify-center ring-4 ring-primary-container">
+<span class="material-symbols-outlined text-primary text-4xl">brush</span>
+</div>
+<span class="font-label-bold text-on-surface text-lg">Blanco</span>
+</button>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex gap-4 w-full max-w-md">
+<button class="chunky-button-secondary flex-1 py-4 rounded-xl font-headline-md flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">refresh</span>
+                Reiniciar
+            </button>
+<button class="chunky-button-primary flex-1 py-4 rounded-xl font-headline-md text-white flex items-center justify-center gap-2" onclick="showCelebration()">
+<span class="material-symbols-outlined">check_circle</span>
+                ¡Listo!
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Predicted from JSON) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Success Modal (Celebration) -->
+<div class="fixed inset-0 z-[100] hidden celebration-bg flex flex-col items-center justify-center p-8 text-center" id="celebration-modal">
+<div class="absolute inset-0 overflow-hidden pointer-events-none opacity-50">
+<!-- Celebration rays effect placeholder -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] aspect-square bg-[conic-gradient(from_0deg,#ffffff,transparent_15deg)] animate-[spin_20s_linear_infinite]"></div>
+</div>
+<div class="relative z-10 scale-0 transition-transform duration-500 ease-out" id="modal-content">
+<div class="w-48 h-48 bg-white rounded-full flex items-center justify-center shadow-2xl mb-8 mx-auto border-8 border-secondary-fixed">
+<span class="material-symbols-outlined text-9xl text-secondary-container" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-secondary-container mb-4">¡Increíble Trabajo!</h2>
+<p class="font-body-lg text-body-lg text-on-secondary-container max-w-md mx-auto mb-10">
+                Has completado la bandera de Israel y aprendido sobre la Estrella de David. ¡Eres un experto en banderas!
+            </p>
+<button class="chunky-button-primary px-12 py-5 rounded-full font-headline-md text-white text-2xl shadow-2xl" onclick="hideCelebration()">
+                ¡Siguiente Aventura!
+            </button>
+</div>
+</div>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Israel','Israel'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Israel!','Israel Alarm!'),750); }
+
+        let currentColor = '#ffffff';
+
+        function selectColor(color, element) {
+            currentColor = color;
+            document.querySelectorAll('.color-well').forEach(well => {
+                well.classList.remove('active');
+                well.querySelector('.w-20, .w-24').classList.remove('ring-4', 'ring-primary-container');
+                well.querySelector('span').classList.add('opacity-0');
+            });
+            element.classList.add('active');
+            const innerCircle = element.querySelector('.w-20, .w-24');
+            innerCircle.classList.add('ring-4', 'ring-primary-container');
+            element.querySelector('span').classList.remove('opacity-0');
+            const labels = { '#006495':['Azul','Blue'], '#ffffff':['Blanco','White'] };
+            const pair = labels[color] || [color, color];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        function paintPath(element) {
+            // If it's the group (star), paint children
+            if (element.tagName === 'g') {
+                const paths = element.querySelectorAll('path');
+                paths.forEach(p => {
+                    p.setAttribute('fill', currentColor === '#ffffff' ? 'none' : currentColor);
+                    p.setAttribute('stroke', currentColor);
+                });
+            } else {
+                element.setAttribute('fill', currentColor);
+                element.setAttribute('stroke', currentColor);
+            }
+            
+            // Haptic feedback simulation
+            element.style.transform = 'scale(0.98)';
+            setTimeout(() => element.style.transform = 'scale(1)', 100);
+        }
+
+        function playAudio(text) {
+            const labels = { 'Azul':['Azul','Blue'], 'Blanco':['Blanco','White'] };
+            const pair = labels[text] || [text, text];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        function showCelebration() {
+            const modal = document.getElementById('celebration-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => { content.classList.remove('scale-0'); content.classList.add('scale-100'); }, 10);
+            AudioController.speakBilingual('¡Increíble Trabajo! Has completado la bandera de Israel.','Incredible work! You completed the flag of Israel.');
+        }
+
+        function hideCelebration() {
+            const modal = document.getElementById('celebration-modal');
+            modal.classList.add('hidden');
+        }
+    </script>
+
+
+</body></html>

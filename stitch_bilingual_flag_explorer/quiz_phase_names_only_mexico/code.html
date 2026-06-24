@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-low": "#f0f4fb",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-background": "#171c21",
+                    "secondary-container": "#fccc00",
+                    "on-surface-variant": "#3e4851",
+                    "on-surface": "#171c21",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed-variant": "#574500",
+                    "outline": "#6e7882",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9ff",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-bright": "#f7f9ff",
+                    "on-primary-container": "#004163",
+                    "on-tertiary-container": "#1a4600",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline-variant": "#bec8d3",
+                    "surface-dim": "#d6dae1",
+                    "surface-container-high": "#e4e8ef",
+                    "tertiary": "#2b6c00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-on-surface": "#edf1f8",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#082100",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004b71",
+                    "surface-container-highest": "#dee3e9",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "surface-tint": "#006495",
+                    "inverse-surface": "#2c3136",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "surface-variant": "#dee3e9",
+                    "surface": "#f7f9ff",
+                    "secondary-fixed": "#ffe084",
+                    "primary": "#006495",
+                    "tertiary-container": "#59be1b",
+                    "surface-container": "#eaeef5",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-button-primary {
+            box-shadow: 0 6px 0 #004b71;
+        }
+        .chunky-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #004b71;
+        }
+        .chunky-card {
+            box-shadow: 0 8px 0 #dee3e9;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .chunky-card:active {
+            transform: scale(0.95) translateY(4px);
+            box-shadow: 0 2px 0 #dee3e9;
+        }
+        .audio-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fccc00;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden selection:bg-primary-container">
+<!-- Top AppBar Component -->
+<header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high transition-all active:translate-y-1">
+<span class="material-symbols-outlined text-primary text-3xl">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">España / Spain</h1>
+<div class="w-48 h-3 bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="w-2/3 h-full bg-tertiary-container rounded-full"></div>
+</div>
+</div>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container hover:opacity-80 transition-all active:translate-y-1">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl">volume_up</span>
+</button>
+<button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-all shadow-sm border-b-2 border-secondary"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[8px] font-bold uppercase leading-none">Alarma</span></button><button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-all shadow-sm border-b-2 border-secondary"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[8px] font-bold uppercase leading-none">Alarma</span></button><button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-all shadow-sm border-b-2 border-secondary"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[8px] font-bold uppercase leading-none">Alarma</span></button><button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-all shadow-sm border-b-2 border-secondary"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[8px] font-bold uppercase leading-none">Alarma</span></button><button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-all shadow-sm border-b-2 border-secondary"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[8px] font-bold uppercase leading-none">Alarma</span></button><button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-all shadow-sm border-b-2 border-secondary"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[8px] font-bold uppercase leading-none">Alarma</span></button><button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-all shadow-sm border-b-2 border-secondary"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[8px] font-bold uppercase leading-none">Alarma</span></button><button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-all shadow-sm border-b-2 border-secondary"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[8px] font-bold uppercase leading-none">Alarma</span></button></header>
+<main class="min-h-[calc(100vh-144px)] px-container-margin pt-8 pb-32 max-w-2xl mx-auto flex flex-col items-center gap-10">
+<!-- Question Section -->
+<section class="w-full text-center space-y-6">
+<div class="relative inline-block">
+<button class="audio-pulse w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center chunky-card group" onclick="playAudio()">
+<span class="material-symbols-outlined text-on-secondary-container text-5xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<div class="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">¡ESCUCHA!</div>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">¿Cuál es la bandera de México?</h2>
+<p class="font-body-lg text-on-surface-variant italic">Which is the flag of Mexico?</p>
+</div>
+</section>
+<!-- Quiz Options - Bento-ish Grid -->
+<section class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Italy (Incorrect) -->
+<button class="chunky-card bg-surface-container-lowest border-2 border-surface-container-highest rounded-lg p-card-padding flex flex-col items-center gap-4 group" onclick="handleSelection(false, this)">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A clean, vibrant digital illustration of the national flag of Italy with vertical stripes of green, white, and red. The style is educational and friendly, using bright, saturated colors suitable for a premium children's learning application. The lighting is even and soft, making the colors pop against a neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlDd6FdZBw3Mm-vmEpDOHUgURCVwKrY226juztADE0WQ_3nyzZLXNDTEo97eg6bWutiwyyrkbXkxpebjVle0JOqsKTZdZy4pbcKvMRerj5JnB6U3uURJbbHTm0rUTGcohV_GcPCtk0IXrCfbnazQBtrYB9tAwM3rNRfq_yi2wCNx3qPwvVyUyvpDEWyWtr4zmfA45iezGtcYjnLw20n3HYFk2gq1CTPlxWNge2tMij95bC3lDTgi1MXLnp9mZeTMRHpeDYPhCbmTU"/>
+</div>
+<span class="font-headline-md text-on-surface">Italia / Italy</span></button>
+<!-- Mexico (Correct) -->
+<button class="chunky-card bg-surface-container-lowest border-2 border-surface-container-highest rounded-lg p-card-padding flex flex-col items-center gap-4 group" onclick="handleSelection(true, this)">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A detailed, colorful digital depiction of the Mexican flag, showing the tricolor of green, white, and red with the coat of arms featuring an eagle on a cactus with a snake in its beak centered on the white stripe. The visual style is playful and chunky, optimized for 4-8 year old children, featuring high contrast and friendly textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaksyIA79prSiRWuDSBxV9J41itX2QpNDOfHBoQYnDRWI4sxfF9bKALQzlIwm7bDtIP7HTlnbzyan5InLfiNx6l47q9Tu2gWIHibVXsOMNCQSHCSiWh2X_z3X_fIN2VNIotBawXjPkylipySFzPQJZIVmLIpMn7w-FKwYtPe9RxsxgISPLPjoWrjOgkCdEAygXqiQrf4jtHUqdTMvygSHe-kA-vdOPG7pWehLNmmY-K3qew_wF4CkHXuTxP3VISGwzJjOd07tuCrQ"/>
+</div>
+<span class="font-headline-md text-on-surface">México / Mexico</span></button>
+<!-- Japan (Incorrect) -->
+<button class="chunky-card bg-surface-container-lowest border-2 border-surface-container-highest rounded-lg p-card-padding flex flex-col items-center gap-4 group" onclick="handleSelection(false, this)">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A high-quality digital illustration of the flag of Japan, consisting of a stark white rectangular field with a deep red disc in the center representing the sun. The aesthetic is clean, minimal, and vibrant, designed with soft rounded corners and tactile textures for a premium educational mobile app interface for young children." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7UHvituZZxmT6IF6H4Bf4iVJ5BFIqReR-LOf2UzUbG1yAUOFvwVdcdKwnTFZMYdDPAO8tCitFFZv7Zq6vOE3nDxcUbg9RWKeqrMiNgil9XFg7EGEhOkdqwBgOwNL68B079uaZFBK-ay3eErS1-ws-lGk9KaV92NruObcyrJePwWBDTxeSdzgapTJWB_AjcB9hVo5SgtilQ05kKJdcXAhsivLrOtM4RorBUnAC2nDf8uiQcL6mYq8sE2LVzW2nWSS6kwGxGzmWqAc"/>
+</div>
+<span class="font-headline-md text-on-surface">Japón / Japan</span></button>
+</section>
+<!-- Visual Encouragement Decor -->
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary-container text-4xl animate-bounce" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container text-4xl animate-bounce" style="animation-delay: 0.2s; font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary-container text-4xl animate-bounce" style="animation-delay: 0.4s; font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Contextual) -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest shadow-lg z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined text-2xl">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined text-2xl">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<!-- Feedback Modal (Hidden by default) -->
+<div class="fixed inset-0 bg-white/90 z-[60] hidden flex-col items-center justify-center p-container-margin text-center" id="feedback-overlay">
+<div class="bg-surface-container-lowest p-10 rounded-xl chunky-card border-4 border-primary flex flex-col items-center gap-6 max-w-sm" id="modal-content">
+<div class="w-32 h-32 rounded-full bg-tertiary-container flex items-center justify-center" id="icon-container">
+<span class="material-symbols-outlined text-white text-7xl" id="feedback-icon" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary" id="feedback-title">¡Excelente!</h2>
+<p class="font-body-lg text-on-surface-variant" id="feedback-subtitle">That's the flag of Mexico!</p>
+<button class="w-full py-4 rounded-full bg-primary text-white font-headline-md chunky-button-primary" onclick="closeFeedback()">
+                ¡SIGUIENTE!
+            </button>
+</div>
+</div>
+<script>
+        function playAudio() {
+            // Animation only for prototype
+            const icon = document.querySelector('.audio-pulse');
+            icon.classList.remove('audio-pulse');
+            void icon.offsetWidth; // Trigger reflow
+            icon.classList.add('audio-pulse');
+            
+            // Haptic-like visual feedback
+            icon.style.transform = "scale(1.1) translateY(4px)";
+            setTimeout(() => icon.style.transform = "", 200);
+        }
+
+        function handleSelection(isCorrect, element) {
+            const overlay = document.getElementById('feedback-overlay');
+            const title = document.getElementById('feedback-title');
+            const subtitle = document.getElementById('feedback-subtitle');
+            const icon = document.getElementById('feedback-icon');
+            const iconBg = document.getElementById('icon-container');
+            const modal = document.getElementById('modal-content');
+
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+
+            if (isCorrect) {
+                title.innerText = "¡Excelente!";
+                subtitle.innerText = "That's the flag of Mexico!";
+                icon.innerText = "celebration";
+                iconBg.className = "w-32 h-32 rounded-full bg-tertiary-container flex items-center justify-center";
+                modal.style.borderColor = "#2b6c00";
+                createConfetti();
+            } else {
+                title.innerText = "¡Casi!";
+                subtitle.innerText = "Try again! You can do it!";
+                icon.innerText = "refresh";
+                iconBg.className = "w-32 h-32 rounded-full bg-secondary-container flex items-center justify-center";
+                modal.style.borderColor = "#735c00";
+            }
+        }
+
+        function closeFeedback() {
+            document.getElementById('feedback-overlay').classList.add('hidden');
+            document.getElementById('feedback-overlay').classList.remove('flex');
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = ['#fccc00', '#2bb1ff', '#59be1b', '#ffdad6'][Math.floor(Math.random() * 4)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                document.body.appendChild(confetti);
+
+                const animation = confetti.animate([
+                    { transform: `translate(0, 0) rotate(0)`, opacity: 1 },
+                    { transform: `translate(${(Math.random() - 0.5) * 200}px, 100vh) rotate(${Math.random() * 1000}deg)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0, .9, .57, 1)'
+                });
+
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+    </script>
+</body></html>

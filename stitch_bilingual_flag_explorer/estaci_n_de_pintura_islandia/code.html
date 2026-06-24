@@ -1,0 +1,251 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Estación de Pintura (Islandia)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .tactile-shadow-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .tactile-shadow-secondary {
+            box-shadow: 0 6px 0 0 #dee3e9;
+        }
+        .tactile-shadow-yellow {
+            box-shadow: 0 6px 0 0 #b28900;
+        }
+        .active-press:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 transparent;
+        }
+        .flag-grid {
+            display: grid;
+            grid-template-columns: 7fr 1fr 2fr 1fr 14fr;
+            grid-template-rows: 7fr 1fr 2fr 1fr 7fr;
+            aspect-ratio: 25 / 18;
+        }
+        .pulsing {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#006495",
+                        "on-surface": "#171c21",
+                        "secondary-fixed": "#ffe084",
+                        "on-tertiary-fixed": "#082100",
+                        "secondary-container": "#fccc00",
+                        "on-primary-fixed-variant": "#004b71",
+                        "tertiary-fixed": "#92fc58",
+                        "on-tertiary-fixed-variant": "#1f5100",
+                        "surface-bright": "#f7f9ff",
+                        "on-surface-variant": "#3e4851",
+                        "on-tertiary-container": "#1a4600",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#59be1b",
+                        "surface-variant": "#dee3e9",
+                        "primary-fixed-dim": "#90cdff",
+                        "on-background": "#171c21",
+                        "primary-fixed": "#cbe6ff",
+                        "surface-tint": "#006495",
+                        "outline": "#6e7882",
+                        "on-secondary-container": "#6d5700",
+                        "secondary": "#735c00",
+                        "on-secondary-fixed": "#231b00",
+                        "on-error": "#ffffff",
+                        "primary-container": "#2bb1ff",
+                        "surface-container-high": "#e4e8ef",
+                        "inverse-surface": "#2c3136",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#dee3e9",
+                        "inverse-on-surface": "#edf1f8",
+                        "surface-dim": "#d6dae1",
+                        "inverse-primary": "#90cdff",
+                        "outline-variant": "#bec8d3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001e30",
+                        "tertiary": "#2b6c00",
+                        "surface-container": "#eaeef5",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#77de3d",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-container": "#004163",
+                        "surface-container-low": "#f0f4fb",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#efc200",
+                        "surface": "#f7f9ff",
+                        "background": "#f7f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "container-margin": "24px",
+                        "card-padding": "20px",
+                        "unit": "8px",
+                        "touch-target-min": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Quicksand"],
+                        "label-bold": ["Quicksand"],
+                        "headline-md": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "headline-lg-mobile": ["Quicksand"],
+                        "headline-lg": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface-container-low z-40 flex items-center justify-between px-container-margin py-unit h-16">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold tracking-tight">Estación de Pintura</h1>
+<button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</header>
+<main class="max-w-md mx-auto px-container-margin mt-8 space-y-8">
+<!-- Progress Bar -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-label-bold text-label-bold text-primary">Tu Progreso</span>
+<span class="font-label-bold text-label-bold text-primary">60%</span>
+</div>
+<div class="w-full h-4 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[60%] rounded-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Flag Canvas Section -->
+<section class="bg-surface-container-lowest p-card-padding rounded-lg border-2 border-surface-variant shadow-lg">
+<h2 class="font-headline-md text-headline-md text-center mb-6">Bandera de Islandia</h2>
+<div class="flag-grid rounded-lg overflow-hidden border-4 border-surface-variant bg-surface-dim">
+<!-- Blue Sections -->
+<div class="bg-primary hover:opacity-90 cursor-pointer transition-opacity"></div>
+<div class="bg-surface-container-lowest"></div> <!-- White horizontal outline -->
+<div class="bg-error"></div> <!-- Red horizontal cross -->
+<div class="bg-surface-container-lowest"></div> <!-- White horizontal outline -->
+<div class="bg-primary hover:opacity-90 cursor-pointer transition-opacity"></div>
+<div class="bg-surface-container-lowest col-span-5"></div> <!-- Top white vertical outline -->
+<div class="bg-error col-span-5 h-full"></div> <!-- Middle red vertical cross (simplified for grid display) -->
+<div class="bg-surface-container-lowest col-span-5"></div> <!-- Bottom white vertical outline -->
+<div class="bg-primary hover:opacity-90 cursor-pointer transition-opacity"></div>
+<div class="bg-surface-container-lowest"></div>
+<div class="bg-error"></div>
+<div class="bg-surface-container-lowest"></div>
+<div class="bg-primary hover:opacity-90 cursor-pointer transition-opacity"></div>
+</div>
+<p class="mt-6 text-center text-on-surface-variant font-body-md italic">¡Toca los colores para pintar!</p>
+</section>
+<!-- Audio Buttons (Color Learning) -->
+<section class="grid grid-cols-3 gap-4">
+<!-- Azul -->
+<button class="flex flex-col items-center gap-2 group" onclick="playAudio('azul')">
+<div class="w-20 h-20 rounded-full bg-secondary-container tactile-shadow-yellow active-press flex items-center justify-center pulsing">
+<span class="material-symbols-outlined text-on-secondary-container scale-150" data-icon="volume_up">volume_up</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Azul</span>
+</button>
+<!-- Blanco -->
+<button class="flex flex-col items-center gap-2 group" onclick="playAudio('blanco')">
+<div class="w-20 h-20 rounded-full bg-secondary-container tactile-shadow-yellow active-press flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container scale-150" data-icon="volume_up">volume_up</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Blanco</span>
+</button>
+<!-- Rojo -->
+<button class="flex flex-col items-center gap-2 group" onclick="playAudio('rojo')">
+<div class="w-20 h-20 rounded-full bg-secondary-container tactile-shadow-yellow active-press flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container scale-150" data-icon="volume_up">volume_up</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Rojo</span>
+</button>
+</section>
+<!-- Fun Fact Card -->
+<section class="bg-primary-container p-card-padding rounded-lg relative overflow-hidden tactile-shadow-primary">
+<div class="relative z-10 flex items-start gap-4">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-primary-container uppercase tracking-wider">¿Sabías que?</h3>
+<p class="font-body-lg text-body-lg text-on-primary-container mt-1 font-bold">Islandia es la isla del hielo y el fuego.</p>
+</div>
+</div>
+<!-- Decorative circle -->
+<div class="absolute -right-8 -bottom-8 w-24 h-24 bg-on-primary-container opacity-10 rounded-full"></div>
+</section>
+<!-- Action Button -->
+<div class="pt-4">
+<button class="w-full h-14 bg-primary text-on-primary font-headline-md rounded-lg tactile-shadow-primary active-press flex items-center justify-center gap-3">
+<span class="">¡Terminar!</span>
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant active:translate-y-1 transition-transform duration-75 hover:bg-surface-variant rounded-lg">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant active:translate-y-1 transition-transform duration-75 hover:bg-surface-variant rounded-lg">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</button>
+</nav>
+<script>
+        function playAudio(color) {
+            // Simulated audio feedback for children
+            const utterance = new SpeechSynthesisUtterance(color);
+            utterance.lang = 'es-ES';
+            window.speechSynthesis.speak(utterance);
+            
+            // Visual feedback
+            console.log("Playing audio for: " + color);
+        }
+
+        // Simple interaction for the "painting" feel
+        document.querySelectorAll('.flag-grid > div').forEach(part => {
+            part.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 100);
+            });
+        });
+    </script>
+
+
+</body></html>

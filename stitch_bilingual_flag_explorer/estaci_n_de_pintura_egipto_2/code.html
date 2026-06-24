@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Flag Adventure - Egipto</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "outline": "#6e7882",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-low": "#f0f4fb",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bec8d3",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Tactical Shadows for Buttons */
+        .btn-chunky-primary {
+            @apply transition-all duration-75 active:translate-y-1 active:shadow-none;
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .btn-chunky-secondary {
+            @apply transition-all duration-75 active:translate-y-1 active:shadow-none;
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .btn-chunky-yellow {
+            @apply transition-all duration-75 active:translate-y-1 active:shadow-none;
+            box-shadow: 0 6px 0 0 #b38f00;
+        }
+
+        /* Paint Interaction Styles */
+        .paint-surface {
+            transition: background-color 0.3s ease;
+        }
+        .color-active {
+            transform: scale(1.1) translateY(-4px);
+            outline: 4px solid #006495;
+        }
+
+        @keyframes pulse-audio {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-audio {
+            animation: pulse-audio 2s infinite ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface-container-low flex items-center justify-between px-container-margin py-unit">
+<div class="flex items-center gap-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary">Flag Adventure</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="">Nivel 5</span>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary">volume_up</span>
+</button>
+</div>
+</header>
+<main class="max-w-md mx-auto px-container-margin pt-6 flex flex-col gap-6">
+<!-- Header Section -->
+<section class="text-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Egipto</h2>
+<p class="text-body-md text-on-surface-variant">¡Pinta la bandera para ganar tu medalla!</p>
+<button class="mt-4 mx-auto w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full flex flex-col items-center justify-center btn-chunky-yellow animate-audio gap-1">
+  <span class="material-symbols-outlined text-3xl">notifications_active</span>
+  <span class="text-[10px] font-label-bold leading-none">¡Alarma!</span>
+</button></section>
+<!-- Flag Canvas -->
+<section class="relative bg-white rounded-lg border-4 border-surface-variant p-4 shadow-sm">
+<div class="aspect-[3/2] flex flex-col cursor-pointer overflow-hidden rounded-md border-2 border-outline-variant" id="flag-canvas">
+<!-- Top Stripe -->
+<div class="flex-1 paint-surface bg-surface-container-highest border-b-2 border-outline-variant flex items-center justify-center" id="stripe-top">
+<span class="material-symbols-outlined text-surface-variant opacity-20 text-6xl">format_paint</span>
+</div>
+<!-- Middle Stripe -->
+<div class="flex-1 paint-surface bg-white relative flex items-center justify-center" id="stripe-middle">
+<!-- Eagle Emblem -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant text-7xl opacity-80" style="font-variation-settings: 'FILL' 1;">cable</span>
+</div>
+<span class="material-symbols-outlined text-surface-variant opacity-20 text-6xl">format_paint</span>
+</div>
+<!-- Bottom Stripe -->
+<div class="flex-1 paint-surface bg-surface-container-highest border-t-2 border-outline-variant flex items-center justify-center" id="stripe-bottom">
+<span class="material-symbols-outlined text-surface-variant opacity-20 text-6xl">format_paint</span>
+</div>
+</div>
+</section>
+<!-- Palette Selection -->
+<section class="flex justify-between items-center bg-surface-container p-card-padding rounded-lg">
+<div class="flex gap-4">
+<!-- Red -->
+<button class="w-16 h-16 rounded-full bg-[#ba1a1a] border-4 border-white shadow-md active:translate-y-1 transition-all" onclick="selectColor('bg-[#ba1a1a]', this)"></button>
+<!-- White -->
+<button class="w-16 h-16 rounded-full bg-white border-4 border-outline-variant shadow-md active:translate-y-1 transition-all" onclick="selectColor('bg-white', this)"></button>
+<!-- Black -->
+<button class="w-16 h-16 rounded-full bg-[#171c21] border-4 border-white shadow-md active:translate-y-1 transition-all" onclick="selectColor('bg-[#171c21]', this)"></button>
+</div>
+<button class="w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center btn-chunky-yellow animate-audio">
+<span class="material-symbols-outlined text-3xl">record_voice_over</span>
+</button>
+</section>
+<!-- Fun Fact Card -->
+<div class="bg-primary-fixed text-on-primary-fixed p-card-padding rounded-lg flex items-start gap-4">
+<div class="bg-primary p-2 rounded-xl text-white">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h3 class="font-label-bold mb-1">¿Sabías que?</h3>
+<p class="font-body-md">¡En Egipto hay pirámides gigantes!</p>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-5 bg-primary text-white font-headline-md rounded-lg btn-chunky-primary flex items-center justify-center gap-2" id="check-flag">
+<span class="">¡Revisar Bandera!</span>
+<span class="material-symbols-outlined">check_circle</span>
+</button>
+<!-- Contextual Visual (Pyramids) -->
+<section class="mt-4 rounded-xl overflow-hidden shadow-sm border-2 border-surface-variant">
+<div class="bg-cover bg-center h-48 w-full" data-alt="A vibrant and playful digital illustration of the Great Pyramids of Giza under a clear blue sky. The style is educational and child-friendly with soft, rounded geometric shapes and a cheerful, warm lighting. Tiny cartoon camels graze nearby. The colors are predominantly sandy yellows and deep sky blues, matching a premium educational app aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLy0ddAgCoLiBiQ3KYjYzIw_ZgjXjHSix51JRGZV1eWugy4RHRBVFITTwMwlAU80k41vmnFvgSCb5rfHoMBLeI0zrrQvEzuZ-KlMfOacSCsYe0kxjxO_fQq3NtRUdWJ35Ra5jV-VO7JjpuVkKIbu0YZ-ELKt-PQ_1FaYqRJ3oigzGoKNdxtwjZxGCIAfnCUz0L_PmPS5cGa6g4O1OMOWPRWAnvv-cGj8FJ_40eQxEFzp4gG7le5FnIkmnisCj03gcav25AKOrYFhY')"></div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant rounded-t-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 hover:bg-surface-variant transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</div>
+</nav>
+<script>
+        let currentColor = '';
+
+        function selectColor(colorClass, element) {
+            currentColor = colorClass;
+            // Remove active state from all buttons
+            document.querySelectorAll('section button').forEach(btn => btn.classList.remove('color-active'));
+            // Add active state to selected
+            element.classList.add('color-active');
+        }
+
+        // Apply color to flag stripes
+        document.querySelectorAll('.paint-surface').forEach(stripe => {
+            stripe.addEventListener('click', function() {
+                if (currentColor) {
+                    // Remove current bg classes
+                    this.className = this.className.replace(/bg-\[[^\]]+\]|bg-white|bg-surface-container-highest/g, '').trim();
+                    // Add new color class
+                    this.classList.add(currentColor);
+                    // Hide the "paint" icon hint
+                    const icon = this.querySelector('.material-symbols-outlined');
+                    if (icon) icon.style.opacity = '0';
+                }
+            });
+        });
+
+        // Simple feedback for the check button
+        document.getElementById('check-flag').addEventListener('click', function() {
+            const top = document.getElementById('stripe-top');
+            const mid = document.getElementById('stripe-middle');
+            const bot = document.getElementById('stripe-bottom');
+
+            // Correct Egypt sequence: Red, White, Black
+            const isCorrect = top.classList.contains('bg-[#ba1a1a]') && 
+                              mid.classList.contains('bg-white') && 
+                              bot.classList.contains('bg-[#171c21]');
+
+            if (isCorrect) {
+                alert('¡Excelente! ¡Has completado la bandera de Egipto!');
+                this.classList.replace('bg-primary', 'bg-tertiary-container');
+                this.innerHTML = '<span>¡Completado!</span> <span class="material-symbols-outlined">stars</span>';
+            } else {
+                alert('¡Casi lo tienes! El orden es Rojo, Blanco y Negro.');
+            }
+        });
+    </script>
+
+
+</body></html>

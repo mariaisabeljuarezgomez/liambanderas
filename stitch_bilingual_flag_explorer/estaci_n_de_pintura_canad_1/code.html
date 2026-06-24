@@ -1,0 +1,327 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Flag Paint Station - Canadá</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#77de3d",
+                    "tertiary-fixed": "#92fc58",
+                    "outline-variant": "#bec8d3",
+                    "surface-variant": "#dee3e9",
+                    "error": "#ba1a1a",
+                    "secondary": "#735c00",
+                    "primary": "#006495",
+                    "on-background": "#171c21",
+                    "tertiary-container": "#59be1b",
+                    "on-primary-container": "#004163",
+                    "on-primary-fixed": "#001e30",
+                    "background": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "inverse-surface": "#2c3136",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#171c21",
+                    "surface-tint": "#006495",
+                    "tertiary": "#2b6c00",
+                    "surface-bright": "#f7f9ff",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "secondary-fixed-dim": "#efc200",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-container": "#eaeef5",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed": "#231b00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-high": "#e4e8ef",
+                    "primary-container": "#2bb1ff",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#004b71",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-surface-variant": "#3e4851",
+                    "surface-container-highest": "#dee3e9",
+                    "secondary-container": "#fccc00",
+                    "outline": "#6e7882",
+                    "on-tertiary-container": "#1a4600",
+                    "on-secondary-container": "#6d5700",
+                    "surface-dim": "#d6dae1",
+                    "on-tertiary-fixed": "#082100",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-shadow-red {
+            box-shadow: 0 6px 0 0 #93000a;
+        }
+        .chunky-shadow-white {
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .chunky-shadow-yellow {
+            box-shadow: 0 6px 0 0 #a38900;
+        }
+        .flag-canvas-inner {
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
+        }
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+        .paint-active {
+            transform: translateY(4px);
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen pb-24 select-none">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
+<div class="flex items-center gap-2">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center hover:opacity-80 active:translate-y-1 transition-all text-primary">
+<span class="material-symbols-outlined text-3xl">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">España / Spain</h1>
+</div>
+</div>
+<button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full chunky-shadow-yellow active:translate-y-1 transition-all mr-2"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container chunky-shadow-yellow active:translate-y-1 active:shadow-none transition-all">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</header>
+<main class="max-w-4xl mx-auto px-container-margin pt-unit space-y-8">
+<!-- Hero Section -->
+<section class="text-center space-y-2 mt-4">
+<div class="inline-flex items-center gap-4">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Canadá</h2>
+<button class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center chunky-shadow-yellow animate-pulse-soft">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+<p class="font-body-lg text-body-lg text-outline">Canada</p>
+</section>
+<!-- Flag Painting Canvas -->
+<section class="relative bg-white rounded-lg p-card-padding border-2 border-outline-variant flag-canvas-inner">
+<div class="aspect-[2/1] w-full max-w-2xl mx-auto relative overflow-hidden rounded-md border border-surface-variant bg-surface-container-low group cursor-crosshair" id="canvas-container">
+<!-- Blank Flag Template -->
+<div class="absolute inset-0 flex">
+<div class="h-full w-1/4 transition-colors duration-300 border-r border-surface-variant/20" id="stripe-left"></div>
+<div class="h-full w-1/2 transition-colors duration-300 flex items-center justify-center" id="stripe-center">
+<!-- Maple Leaf Silhouette -->
+<span class="material-symbols-outlined text-[12rem] md:text-[18rem] text-surface-variant transition-colors duration-300" id="leaf-icon" style="font-variation-settings: 'FILL' 1;">1k</span>
+<!-- Fallback if icon font doesn't have maple leaf glyph -->
+<div class="hidden" id="leaf-fallback">
+<svg class="w-48 h-48 fill-current text-surface-variant" viewBox="0 0 100 100">
+<path d="M50 5 L55 25 L75 20 L70 40 L90 45 L75 55 L85 75 L65 70 L55 90 L50 75 L45 90 L35 70 L15 75 L25 55 L10 45 L30 40 L25 20 L45 25 Z"></path>
+</svg>
+</div>
+</div>
+<div class="h-full w-1/4 transition-colors duration-300 border-l border-surface-variant/20" id="stripe-right"></div>
+</div>
+<!-- Interaction Prompt Overlay (Hidden on first click) -->
+<div class="absolute inset-0 bg-white/40 flex items-center justify-center pointer-events-none transition-opacity" id="instruction-overlay">
+<div class="bg-white/90 px-6 py-3 rounded-full shadow-lg border-2 border-primary animate-bounce">
+<p class="font-label-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">format_paint</span>
+                           ¡Pinta la bandera!
+                       </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Palette & Tools -->
+<section class="flex flex-col items-center gap-6">
+<h3 class="font-label-bold text-outline uppercase tracking-widest">Elige un color</h3>
+<div class="flex flex-wrap justify-center gap-6">
+<!-- Color: Rojo -->
+<button class="color-btn group flex flex-col items-center gap-2" onclick="selectColor('red', this)">
+<div class="w-20 h-20 rounded-full bg-error chunky-shadow-red flex items-center justify-center transition-all group-active:translate-y-1 group-active:shadow-none">
+<span class="material-symbols-outlined text-white text-3xl hidden check">check</span>
+</div>
+<span class="font-label-bold text-error">Rojo</span>
+</button>
+<!-- Color: Blanco -->
+<button class="color-btn group flex flex-col items-center gap-2" onclick="selectColor('white', this)">
+<div class="w-20 h-20 rounded-full bg-white border-2 border-surface-container-highest chunky-shadow-white flex items-center justify-center transition-all group-active:translate-y-1 group-active:shadow-none">
+<span class="material-symbols-outlined text-outline text-3xl hidden check">check</span>
+</div>
+<span class="font-label-bold text-outline">Blanco</span>
+</button>
+<!-- Tool: Reset -->
+<button class="group flex flex-col items-center gap-2" onclick="resetCanvas()">
+<div class="w-20 h-20 rounded-full bg-surface-container-high border-2 border-surface-variant chunky-shadow-white flex items-center justify-center transition-all group-active:translate-y-1 group-active:shadow-none">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">restart_alt</span>
+</div>
+<span class="font-label-bold text-on-surface-variant">Borrar</span>
+</button>
+</div>
+</section>
+<!-- Fun Fact Card -->
+<section class="bg-primary-container/20 rounded-lg p-card-padding border-2 border-dashed border-primary-container flex items-start gap-4">
+<div class="bg-primary text-white p-3 rounded-full shrink-0">
+<span class="material-symbols-outlined text-3xl">lightbulb</span>
+</div>
+<div>
+<h4 class="font-headline-md text-primary">¿Sabías que...?</h4>
+<p class="font-body-md text-on-primary-container">La hoja de arce en el centro de la bandera es el símbolo nacional de Canadá. ¡Hay muchos árboles de arce allí!</p>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface shadow-lg border-t-4 border-surface-container-highest z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-container-margin" id="success-modal">
+<div class="absolute inset-0 bg-on-background/60 backdrop-blur-sm"></div>
+<div class="relative bg-white rounded-lg p-8 w-full max-w-md text-center space-y-6 chunky-shadow-yellow border-4 border-secondary-container overflow-hidden">
+<!-- Background Rays Effect -->
+<div class="absolute inset-0 -z-10 opacity-10 animate-spin" style="background: repeating-conic-gradient(from 0deg, transparent 0deg 20deg, #fccc00 20deg 40deg); animation-duration: 20s;"></div>
+<div class="w-24 h-24 bg-secondary-container rounded-full mx-auto flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-6xl text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline-lg text-headline-lg text-primary">¡Increíble!</h2>
+<p class="font-body-lg text-on-surface">Has pintado la bandera de Canadá perfectamente.</p>
+</div>
+<button class="w-full py-4 bg-primary text-white rounded-full font-headline-md chunky-shadow-red active:translate-y-1 active:shadow-none transition-all" onclick="closeModal()">
+                Siguiente País
+            </button>
+</div>
+</div>
+<script>
+        let currentColor = null;
+        let paintedParts = { left: false, right: false, center: false, leaf: false };
+
+        function selectColor(color, btn) {
+            currentColor = color;
+            
+            // UI Feedback for button selection
+            document.querySelectorAll('.color-btn .check').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.color-btn > div').forEach(el => el.classList.remove('paint-active'));
+            
+            btn.querySelector('.check').classList.remove('hidden');
+            btn.querySelector('div').classList.add('paint-active');
+
+            // Play a soft sound effect (simulated)
+            console.log("Color selected: " + color);
+        }
+
+        // Add interaction to canvas parts
+        const parts = {
+            'stripe-left': document.getElementById('stripe-left'),
+            'stripe-right': document.getElementById('stripe-right'),
+            'leaf-icon': document.getElementById('leaf-icon'),
+            'stripe-center': document.getElementById('stripe-center')
+        };
+
+        Object.keys(parts).forEach(id => {
+            parts[id].addEventListener('click', () => {
+                if (!currentColor) {
+                    alert("¡Primero elige un color!");
+                    return;
+                }
+
+                // Hide instruction overlay
+                document.getElementById('instruction-overlay').style.opacity = '0';
+
+                const colorValue = currentColor === 'red' ? '#ba1a1a' : '#ffffff';
+                
+                if (id === 'leaf-icon') {
+                    parts[id].style.color = colorValue;
+                    if(currentColor === 'red') paintedParts.leaf = true;
+                } else {
+                    parts[id].style.backgroundColor = colorValue;
+                    if(id === 'stripe-left' && currentColor === 'red') paintedParts.left = true;
+                    if(id === 'stripe-right' && currentColor === 'red') paintedParts.right = true;
+                    if(id === 'stripe-center' && currentColor === 'white') paintedParts.center = true;
+                }
+
+                checkCompletion();
+            });
+        });
+
+        function resetCanvas() {
+            parts['stripe-left'].style.backgroundColor = 'transparent';
+            parts['stripe-right'].style.backgroundColor = 'transparent';
+            parts['stripe-center'].style.backgroundColor = 'transparent';
+            parts['leaf-icon'].style.color = '';
+            paintedParts = { left: false, right: false, center: false, leaf: false };
+            document.getElementById('instruction-overlay').style.opacity = '1';
+        }
+
+        function checkCompletion() {
+            if (paintedParts.left && paintedParts.right && paintedParts.center && paintedParts.leaf) {
+                setTimeout(() => {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                }, 500);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            resetCanvas();
+        }
+    </script>
+
+
+</body></html>

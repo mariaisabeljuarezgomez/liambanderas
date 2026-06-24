@@ -1,0 +1,287 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-lowest": "#ffffff",
+                "outline": "#6e7882",
+                "on-secondary-fixed": "#231b00",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed-variant": "#574500",
+                "surface-container-high": "#e4e8ef",
+                "secondary-container": "#fccc00",
+                "primary-fixed": "#cbe6ff",
+                "error-container": "#ffdad6",
+                "tertiary-fixed-dim": "#77de3d",
+                "surface-variant": "#dee3e9",
+                "on-error-container": "#93000a",
+                "tertiary": "#2b6c00",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed": "#082100",
+                "background": "#f7f9ff",
+                "on-secondary-container": "#6d5700",
+                "primary-fixed-dim": "#90cdff",
+                "surface-container-low": "#f0f4fb",
+                "on-primary-fixed": "#001e30",
+                "primary": "#006495",
+                "on-primary": "#ffffff",
+                "on-tertiary-container": "#1a4600",
+                "inverse-primary": "#90cdff",
+                "tertiary-container": "#59be1b",
+                "surface-container": "#eaeef5",
+                "outline-variant": "#bec8d3",
+                "surface-bright": "#f7f9ff",
+                "secondary-fixed": "#ffe084",
+                "on-error": "#ffffff",
+                "inverse-surface": "#2c3136",
+                "on-surface-variant": "#3e4851",
+                "surface-tint": "#006495",
+                "secondary-fixed-dim": "#efc200",
+                "surface-container-highest": "#dee3e9",
+                "on-surface": "#171c21",
+                "inverse-on-surface": "#edf1f8",
+                "surface": "#f7f9ff",
+                "secondary": "#735c00",
+                "on-tertiary-fixed-variant": "#1f5100",
+                "on-primary-fixed-variant": "#004b71",
+                "primary-container": "#2bb1ff",
+                "tertiary-fixed": "#92fc58",
+                "on-background": "#171c21",
+                "on-secondary": "#ffffff",
+                "surface-dim": "#d6dae1",
+                "on-primary-container": "#004163"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "unit": "8px",
+                "gutter": "16px",
+                "container-margin": "24px",
+                "touch-target-min": "48px",
+                "card-padding": "20px"
+            },
+            "fontFamily": {
+                "body-lg": ["Quicksand"],
+                "label-bold": ["Quicksand"],
+                "headline-md": ["Quicksand"],
+                "body-md": ["Quicksand"],
+                "headline-lg-mobile": ["Quicksand"],
+                "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        .tactile-button {
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .tactile-button:active {
+            transform: translateY(4px);
+            box-shadow: none !important;
+        }
+
+        .flag-section {
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .bucket-selected {
+            transform: scale(1.1) translateY(-8px);
+            outline: 4px solid #006495;
+            outline-offset: 4px;
+        }
+
+        @keyframes pulse-yellow {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-audio {
+            animation: pulse-yellow 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky bg-surface flex justify-between items-center px-container-margin py-unit h-touch-target-min z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="language">language</span>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">Explorador de Banderas</h1>
+</div>
+<div class="flex items-center gap-4"><button class="tactile-button p-2 rounded-full bg-secondary-container shadow-[0_4px_0_0_#6d5700] hover:bg-surface-container-high transition-colors flex flex-col items-center justify-center min-w-[64px]"><span class="material-symbols-outlined text-on-secondary-container text-[24px]" data-icon="notifications_active">notifications_active</span><div class="flex flex-col items-center -mt-1"><span class="text-[8px] font-bold text-on-secondary-container uppercase leading-none">¡Alarma!</span><span class="text-[8px] font-bold text-on-secondary-container uppercase leading-none">Alarm</span></div></button>
+<button class="tactile-button p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="volume_up">volume_up</span>
+</button>
+<button class="tactile-button p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[32px]" data-icon="close">close</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center px-container-margin py-unit space-y-6 pb-32">
+<!-- Header Section: Country Label -->
+<div class="w-full max-w-md bg-surface-container-lowest rounded-xl p-card-padding shadow-[0_6px_0_0_#eaeef5] border-2 border-surface-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg-mobile text-on-surface">Italia</span>
+<span class="font-body-lg text-body-lg text-outline">Italy</span>
+</div>
+<button class="pulse-audio tactile-button w-touch-target-min h-touch-target-min rounded-full bg-secondary-container shadow-[0_4px_0_0_#6d5700] flex items-center justify-center" onclick="playAudio('italia')">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+<!-- Center Section: The Flag Silhouette -->
+<div class="relative w-full max-w-lg aspect-[3/2] bg-surface-container-highest rounded-lg border-[6px] border-on-surface overflow-hidden shadow-[0_12px_0_0_#dee3e9]">
+<div class="flex h-full w-full">
+<!-- Section 1 (Left) - Green -->
+<div class="flag-section flex-1 bg-white border-r-4 border-on-surface flex items-center justify-center group" id="section-0" onclick="paintSection(0)">
+<span class="material-symbols-outlined text-surface-variant opacity-30 text-[48px] group-hover:scale-125 transition-transform" data-icon="format_paint">format_paint</span>
+</div>
+<!-- Section 2 (Middle) - White -->
+<div class="flag-section flex-1 bg-white border-r-4 border-on-surface flex items-center justify-center group" id="section-1" onclick="paintSection(1)">
+<span class="material-symbols-outlined text-surface-variant opacity-30 text-[48px] group-hover:scale-125 transition-transform" data-icon="format_paint">format_paint</span>
+</div>
+<!-- Section 3 (Right) - Red -->
+<div class="flag-section flex-1 bg-white flex items-center justify-center group" id="section-2" onclick="paintSection(2)">
+<span class="material-symbols-outlined text-surface-variant opacity-30 text-[48px] group-hover:scale-125 transition-transform" data-icon="format_paint">format_paint</span>
+</div>
+</div>
+</div>
+<!-- Instructions Text -->
+<div class="text-center space-y-1">
+<h2 class="font-headline-md text-headline-md text-primary tracking-wide">¡ELIGE UN COLOR!</h2>
+<p class="font-label-bold text-label-bold text-outline">PICK A COLOR!</p>
+</div>
+<!-- Palette Section: Paint Buckets -->
+<div class="w-full flex justify-center gap-4 md:gap-8 flex-wrap">
+<!-- Green Bucket -->
+<button class="tactile-button flex flex-col items-center gap-2 group" onclick="selectColor('green', this)">
+<div class="w-24 h-24 rounded-full bg-[#009246] border-4 border-on-surface shadow-[0_8px_0_0_#006431] flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[40px]" data-icon="brush">brush</span>
+</div>
+<div class="text-center">
+<div class="font-label-bold text-on-surface">Verde</div>
+<div class="text-[12px] font-bold text-outline uppercase">Green</div>
+</div>
+</button>
+<!-- White Bucket -->
+<button class="tactile-button flex flex-col items-center gap-2 group" onclick="selectColor('white', this)">
+<div class="w-24 h-24 rounded-full bg-[#ffffff] border-4 border-on-surface shadow-[0_8px_0_0_#dee3e9] flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[40px]" data-icon="brush">brush</span>
+</div>
+<div class="text-center">
+<div class="font-label-bold text-on-surface">Blanco</div>
+<div class="text-[12px] font-bold text-outline uppercase">White</div>
+</div>
+</button>
+<!-- Red Bucket -->
+<button class="tactile-button flex flex-col items-center gap-2 group" onclick="selectColor('red', this)">
+<div class="w-24 h-24 rounded-full bg-[#ce2b37] border-4 border-on-surface shadow-[0_8px_0_0_#8c1d25] flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[40px]" data-icon="brush">brush</span>
+</div>
+<div class="text-center">
+<div class="font-label-bold text-on-surface">Rojo</div>
+<div class="text-[12px] font-bold text-outline uppercase">Red</div>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Fixed) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-container-margin pb-6 pt-2 bg-surface-container-lowest border-t-4 border-surface-variant shadow-lg z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-gutter py-1 hover:bg-surface-container-high rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-gutter py-1 shadow-[0_4px_0_0_#6d5700] translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="import_contacts">import_contacts</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-gutter py-1 hover:bg-surface-container-high rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="sports_esports">sports_esports</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<script>
+        let currentColor = null;
+        const colorMap = {
+            'green': '#009246',
+            'white': '#ffffff',
+            'red': '#ce2b37'
+        };
+
+        function selectColor(color, element) {
+            currentColor = colorMap[color];
+            
+            // UI Feedback for selection
+            document.querySelectorAll('.tactile-button').forEach(btn => {
+                btn.classList.remove('bucket-selected');
+            });
+            element.classList.add('bucket-selected');
+            
+            // Audio feedback
+            playAudio(color);
+        }
+
+        function paintSection(index) {
+            if (!currentColor) {
+                alert("¡Elige un color primero! / Pick a color first!");
+                return;
+            }
+            
+            const section = document.getElementById(`section-${index}`);
+            section.style.backgroundColor = currentColor;
+            
+            // Hide the paint icon once colored
+            const icon = section.querySelector('span');
+            if (icon) icon.style.display = 'none';
+
+            // Check if win condition
+            checkWin();
+        }
+
+        function checkWin() {
+            const s0 = document.getElementById('section-0').style.backgroundColor;
+            const s1 = document.getElementById('section-1').style.backgroundColor;
+            const s2 = document.getElementById('section-2').style.backgroundColor;
+
+            // Simple check for hex values or rgb strings
+            const isGreen = s0.includes('rgb(0, 146, 70)') || s0 === 'rgb(0, 146, 70)';
+            const isWhite = s1.includes('rgb(255, 255, 255)') || s1 === 'rgb(255, 255, 255)';
+            const isRed = s2.includes('rgb(206, 43, 55)') || s2 === 'rgb(206, 43, 55)';
+
+            if (isGreen && isWhite && isRed) {
+                setTimeout(() => {
+                    alert("¡Excelente! ¡Has pintado la bandera de Italia! 🇮🇹");
+                }, 300);
+            }
+        }
+
+        function playAudio(term) {
+            // Placeholder for text-to-speech or audio clips
+            console.log("Playing audio for: " + term);
+        }
+    </script>
+
+
+</body></html>

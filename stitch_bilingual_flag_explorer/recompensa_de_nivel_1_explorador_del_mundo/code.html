@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flag Explorer - Level 1 Completed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004b71",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "surface": "#f7f9ff",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-surface": "#2c3136",
+                    "tertiary-container": "#59be1b",
+                    "on-secondary-fixed-variant": "#574500",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "inverse-primary": "#90cdff",
+                    "surface-variant": "#dee3e9",
+                    "secondary-fixed": "#ffe084",
+                    "background": "#f7f9ff",
+                    "primary-fixed-dim": "#90cdff",
+                    "surface-container-highest": "#dee3e9",
+                    "on-tertiary-container": "#1a4600",
+                    "surface-container-low": "#f0f4fb",
+                    "secondary": "#735c00",
+                    "outline-variant": "#bec8d3",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#171c21",
+                    "on-primary-container": "#004163",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "surface-tint": "#006495",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed": "#cbe6ff",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#3e4851",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "outline": "#6e7882",
+                    "on-tertiary-fixed": "#082100",
+                    "tertiary-fixed": "#92fc58",
+                    "on-secondary-container": "#6d5700",
+                    "surface-container": "#eaeef5",
+                    "on-primary-fixed": "#001e30",
+                    "surface-container-high": "#e4e8ef",
+                    "tertiary": "#2b6c00",
+                    "secondary-fixed-dim": "#efc200",
+                    "primary-container": "#2bb1ff",
+                    "primary": "#006495",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f7f9ff",
+                    "inverse-on-surface": "#edf1f8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "touch-target-min": "48px",
+                    "card-padding": "20px",
+                    "unit": "8px",
+                    "gutter": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .tactile-button-primary {
+            box-shadow: 0 6px 0px 0px #004b71;
+            transition: all 0.1s ease;
+        }
+        .tactile-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px 0px #004b71;
+        }
+
+        .tactile-button-secondary {
+            box-shadow: 0 6px 0px 0px #bec8d3;
+            transition: all 0.1s ease;
+        }
+        .tactile-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px 0px #bec8d3;
+        }
+
+        .tactile-card {
+            box-shadow: 0 8px 0px 0px rgba(0,0,0,0.05);
+        }
+
+        @keyframes pulse-yellow {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 0 20px #fccc00; }
+            100% { transform: scale(1); }
+        }
+        .pulse-audio {
+            animation: pulse-yellow 2s infinite ease-in-out;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            z-index: 10;
+            animation: confetti-fall 4s linear forwards;
+        }
+
+        .star-ray {
+            background: radial-gradient(circle, rgba(252,204,0,0.2) 0%, rgba(255,255,255,0) 70%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md overflow-hidden min-h-screen flex flex-col">
+<!-- Celebration Background Layer -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute inset-0 star-ray opacity-50 scale-150 animate-pulse"></div>
+<div id="confetti-container"></div>
+</div>
+<!-- Header / Top Bar (Manual Mapping from JSON) -->
+<header class="w-full top-0 sticky bg-surface flex justify-between items-center px-container-margin py-unit h-touch-target-min border-b-4 border-surface-container-highest z-20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="A friendly, smiling cartoon blue bird character wearing pilot goggles and a vintage aviator scarf, rendered in a 3D claymation style with soft lighting and vibrant primary colors, set against a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgHjhh9ak7Nnemtd-VNJn6ka92vdofytt_NO1Zfk4bcxRFwfeVhRjuIKyu3iFOfubgcLVK5cIeU18VjTv-9rAexM0KDHM9Tw94Y2MK0zeczuIgnFFyow0NoWuRzgBMU4vvTOHGeuMORvpF5_fe0IN0FauMo5ZNlfugBeROj5TNUN9igy7VxknCMIafyT4jeYlMxGarbikG3BkzZDpFWt5OIqTIeQT6tl_ArJUSvIP6sP2_Os-azCRzyeNlrbo49B5II1ffcQy82lA"/>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary">Flag Explorer</span>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">volume_up</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-gutter py-8 relative z-10">
+<!-- Congratulatory Audio Trigger -->
+<button class="pulse-audio mb-6 w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container tactile-button-secondary border-4 border-secondary shadow-xl" onclick="playCongrats()">
+<span class="material-symbols-outlined text-5xl">volume_up</span>
+</button>
+<!-- Headline Group -->
+<div class="text-center mb-8">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:text-headline-lg text-primary mb-2 drop-shadow-sm">¡Nivel 1 Completado!</h1>
+<p class="font-headline-md text-headline-md text-on-surface-variant opacity-80">Level 1 Mastery!</p>
+</div>
+<!-- Rank Badge & Character -->
+<div class="relative w-64 h-64 md:w-80 md:h-80 mb-10 flex items-center justify-center">
+<!-- Glow effect -->
+<div class="absolute inset-0 bg-secondary-container rounded-full opacity-30 blur-3xl animate-pulse"></div>
+<div class="relative z-10 w-full h-full p-4">
+<div class="w-full h-full bg-white rounded-full border-[10px] border-secondary-container tactile-card flex flex-col items-center justify-center p-6 text-center">
+<img class="w-40 h-40 object-contain mb-2" data-alt="A chunky, golden 3D trophy badge shaped like a globe with a cute, cheering bird pilot emerging from the center. The style is premium toy-like with high-gloss textures and soft shadows, using a warm yellow and bright blue color scheme to convey a sense of accomplishment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA168WK1qEdZgqDul2lclR0VtlpMhX8ge6DNiREEn36JDLBR5mjSfMKPjV1EBS_aFwHtTAl5kbO_eeoUwFtCYqFW9rJ3ODCqOBmPX05kaNBQsHmgb-EAbcG1eKy0ZBhYgFPk5zDJ6feNJPN6v_H3jzYhgqNjvvIqxeTyKlQi_4jZI0RfG5iWiRnj9mITpZCE3V1cvfAc11XUouSj0v9h_SWizO1-O_eZ0i5ZR_q0NlB_FYBwdMjozwJGS1dFwDH4asN3GYVCrdow1k"/>
+<span class="font-headline-md text-headline-md text-secondary uppercase tracking-wider">World Traveler</span>
+</div>
+</div>
+</div>
+<!-- Mastered Flags Summary -->
+<div class="w-full max-w-2xl bg-surface-container-low rounded-xl p-card-padding tactile-card mb-12 border-2 border-surface-variant">
+<h2 class="text-center font-label-bold text-label-bold text-on-surface-variant mb-6 uppercase">10 Flags Mastered!</h2>
+<div class="grid grid-cols-5 gap-4 md:gap-6">
+<!-- Flags mapping -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="A clean, vibrant illustration of the Mexican flag, featuring a centered emblem and vertical tricolor stripes in a friendly, educational cartoon style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjXcpgc5ee1XquMei1-07NCreeh8x5v418DEJ2vefo1UontSsUfIiwwRIiWdb636rJ1lqObQbCqed2Ex9SLcHdE0LTha4MH1oXBzM7fjduYlIBqVkBKMANjV3LnhYJJf7HAdXw9RfOQ3t6kaTHQC5TGuf7C3lHs2nn1ZJFrFwTVbF3A9AgTaRjETzHCVj1nYeS6ysBpAif5N9aZBtfQoZpt3KHkpo6L6FipKEVPa-EI7-oW6EvMXKUSfw_sWEYyNxHzXGMhrMM_pU"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The national flag of France, shown as a simple, high-contrast tricolor of blue, white, and red in a playful, hand-painted digital style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPulF_mS380A3VMH20ZY4uvqazjQZ1EyDSV91OVKeWHba_vM4RJtYBK1baYGlhOj8FNwN0SdvgH3dLWrrpOMT3vJUefuXUd88pvqEU_b9E31m_0zNkrycAT3nTtkeP4UDr3-HxGm87Cr2V-EHfxxwewtGFQTbuaEbjxFOo7FctnhY8JU7OGfgLsUpYs40qsbUtFAy4Bu36qjnBZ0fBfJOoeX393WAvHX6wB3aJltFV_yO5XXL-PidZqdfcAVYuZb7HBpGOj35Io3s"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The national flag of Japan, a minimalist red sun on a white field, rendered with thick lines and vibrant colors for a kid-friendly look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUffJgpVd4x9sYgujDCj9WDnlvOb-kn_vpd5Zq6gNkCsAcqC6gmF7AboG7Q1HcUV1WZYoTBKE7hatlsv_MIXRyUn0HBxPZUqxwbqzdM9uXIltDyAb9-P4SpWrncVvkQ3jkooQTaUYqW_X1PE_3NwoL1Uu4rq4GcyxZ4e5o0H-pwTrVwMNV71oAeUb5__bhZDCIMmXDLUfspHJPgklIenLlmLh24YggpvtuyslE6EdR2R0qeLWPxx9Axg5tO--sdys2iGTPsinI6sM"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The Italian flag, featuring green, white, and red vertical stripes, presented with soft rounded corners and bright saturation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCssGyfipEVSLKLVnzQKlZsVWm2O2k-stPPD9SCnXJFhtb28PZX2R-nIlSgzN6oB9-_C6yEyACBA9mo_SmvhFWu97guCyC_Xt9yNwcn0Opw8SSlsEZQ1BL9hFo-4xUipT0XqxAyBJEX-RX-nc1425YUGF_tlLKvCoBbKEwVlqoCewIAfRc6SXCWY8tB8B1IBDUQlNfRrmlnG_6EJ3-rwOumgJhYBPG7Zpl4Rj9wPI2LN4lmFIc_qbQHTKJnxLFFWpZDr4sT_ILLDxk"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The flag of Brazil, with its iconic yellow diamond and blue globe on a green field, illustrated in a clean vector style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC01yG4WcvkcQqJOEAptwrqpq_iA3u1tY_0cwuS9A15j5WGmt7hFZcU4V73W2chMIdRl_4UMqKouLAxwV2ME8TNDRRlcfJshiHUbfsn_jIhYvI1IoFIsajFhfTVBGJJkLjpkg16wdzI4iew_g03hCm_TfhEXbrc2LYA84kvTPdMF7MrilFOTt_BYOmpzK_Gg4j0-BhK1IZMVD0XyJFJMoQj3-RAkT0UfpUTr9ma_KijhTGdUM56LVDKJ9CyRL-OIoK-aM_8CBNxpTk"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The flag of Spain, with its yellow and red horizontal stripes and crest, simplified for a children's educational app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc0S0X1Rc1fDG9UO2928xFRejxGPaY-GJLI2m1vda_SxLXRqmvIKWHZbKnHVob8gkqGiMVeacPtdjY3AQzjfp6CqwVKxWV9JIQzyrpb4nYQ3CC1Qx7kBrMcsCiYjYk99eCYqcK1ILB1vT3wJA2nYZDNCVBNmw1eDcqyoV1thc389LLockm7r9WEm0PeFS2P5O3-IG-mQtymgUx8qcQcUTVhC2NQTMz5pIdAKTxkI9JOv4x7d8jM6PTgcgBgikEkbce2B9GVIL57iY"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The national flag of Germany, showing black, red, and gold horizontal stripes in a high-quality digital illustration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrR-U-sV8DFt8fcTMWlJQQdiwuJ4E6vcZgom1j2tHsRXCxlquZ4SS9aYklk5DCFpy5CdxAj6hLKRkocQDYC95DoVykseHcicNKvJk0TBcvhNqGYKtqQ_XOxwLxvU4vMdOO2n543gZZIzu0BclWPN0gZkrB8JerFGpQfVeOPm5DgRrMy1ni1vNAfAaD1zAvFO4_WSsCmGqK7ypcKo0sYbWjzWsYdUQQK-2jBWeG8kNgRod1dT4YZEJlECAoqQkYxrk7bLoOuBOyfF8"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The Canadian flag, with its red maple leaf on a white and red field, rendered with vibrant colors and thick, friendly outlines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAor3yRIVNgCH25G-t2lWdmbQjxiARO0Cr7icMcNxPQK9MqbyVH9F7mvijuKRYCl_V0zqTvAV3vigMm0gBEUE-ZDxgCgbXRJONRopileC9RR0h0UPHujTEiEt1Pv3m9C9HulG1nDhC4NcEy_8kdWFYbf9yIsl-1jFlMM08oho2p6rAREyeC8aVN-fwr5TfFIXYvqqh1_0kwhJRXZdYb6f7Z7K6OcrubjeW_9p5nH-hiPPA3og2h6k9cSOIqUr0GWaIgeM7ZW9WQ6nQ"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The flag of Egypt, featuring red, white, and black horizontal stripes with the Golden Eagle of Saladin, simplified for young learners." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXwLIPgGMugYh1nWTl7DWN9zuvxnW_9V_Jz1FQekbMxjYtoOvTNMb7KEAFye3FfKALvTgubNVZ8bYirDzak7QSgW33qlAW-LIdZnp686ujV1bwl4OBIyJoM-cXcQsIcu7PPntWMNNzTQnBwuhpDDFqr2qeDlWSdnEzS-h-LCWIlbRXvW8vACyeE9A6Y0eVvsIYK7INmvU08GXOEKWGVhh9W9mY6U5vU6oUzzAAzq6aBvDnwLpv62x0y_jXLUOh7KIZuUrDwEPvXVE"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-lg border-2 border-white shadow-sm overflow-hidden bg-white flex items-center justify-center">
+<img class="w-10 h-auto" data-alt="The Australian flag, with the Union Jack and Southern Cross stars on a blue field, presented as a clear, colorful icon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGVlepViONNNNR23w47mX_yNdxvrEPZSm-CcpBfN7v0QIdltNnfbGu5yWP6cqdDNsWFLCFe3H54FKvOh3YBUUCZ04moS2fS8KFxw-09xVHItwhxDF9v2fk_gYHAv14Cm5DOf2b9SdEeaV6EzrQE5Rud19BtY4ZtDdFJJRuM7K4WQ-PSslbrqa85z5MOGiXKcfBrEg8SCRly-EKmP5ywW3N5l4zyRi81He8wapohNHlqt6D-ms1vAu8g51V1LriNG1JmdorMMf6Txs"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="w-full max-w-sm flex flex-col gap-6 px-gutter pb-8">
+<button class="w-full bg-primary py-5 rounded-lg tactile-button-primary flex items-center justify-center gap-3 text-on-primary">
+<span class="material-symbols-outlined text-3xl">menu_book</span>
+<span class="font-headline-md text-headline-md">Reclamar Sello de Pasaporte</span>
+</button>
+<button class="w-full bg-white border-2 border-outline-variant py-5 rounded-lg tactile-button-secondary flex items-center justify-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">map</span>
+<span class="font-headline-md text-headline-md">Seguir Explorando</span>
+</button>
+</div>
+</main>
+<!-- Bottom Nav Shell (Suppressed for Success Screen per UX rules but kept if needed for top-level context) -->
+<!-- Suppressing per: "exclude the navigation shell if the page intent is: Success/Confirmation splash screens" -->
+<script>
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#006495', '#2bb1ff', '#fccc00', '#59be1b', '#ba1a1a'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                container.appendChild(confetti);
+            }
+        }
+
+        function playCongrats() {
+            // Visual feedback
+            console.log("Playing: ¡Felicidades! ¡Eres un Explorador del Mundo! Congratulations! You are a World Explorer!");
+            const speaker = document.querySelector('.pulse-audio');
+            speaker.classList.add('scale-125');
+            setTimeout(() => speaker.classList.remove('scale-125'), 300);
+            
+            // Re-trigger confetti for fun
+            document.getElementById('confetti-container').innerHTML = '';
+            createConfetti();
+        }
+
+        // Initialize confetti on load
+        window.onload = createConfetti;
+    </script>
+</body></html>

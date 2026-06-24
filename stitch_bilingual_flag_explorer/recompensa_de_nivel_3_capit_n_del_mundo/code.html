@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Paint Adventure - World Captain Reward</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline": "#6e7882",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-container": "#6d5700",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#006495",
+                    "on-surface-variant": "#3e4851",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container": "#eaeef5",
+                    "surface-container-highest": "#dee3e9",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-tertiary-fixed": "#082100",
+                    "on-surface": "#171c21",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "background": "#f7f9ff",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary-container": "#2bb1ff",
+                    "on-secondary-fixed": "#231b00",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-container": "#59be1b",
+                    "outline-variant": "#bec8d3",
+                    "primary": "#006495",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "secondary": "#735c00",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-surface": "#2c3136",
+                    "surface": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chunky-button-primary {
+            @apply bg-primary-container text-on-primary-container border-b-[6px] border-primary active:border-b-0 active:translate-y-[4px] transition-all;
+        }
+        .chunky-button-secondary {
+            @apply bg-surface-container-lowest text-primary border-b-[6px] border-surface-variant active:border-b-0 active:translate-y-[4px] transition-all;
+        }
+        .chunky-card {
+            @apply bg-surface-container-lowest border-[2px] border-surface-variant rounded-lg shadow-[0_4px_0_0_rgba(0,0,0,0.05)];
+        }
+        .confetti-canvas {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+        }
+        @keyframes pulse-yellow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+        .animate-pulse-yellow {
+            animation: pulse-yellow 2s infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen pb-24 overflow-x-hidden">
+<!-- Celebration Header / TopAppBar -->
+<header class="bg-surface-container-low flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 fixed top-0 left-0">
+<button class="active:translate-y-1 transition-all duration-100 flex items-center justify-center w-touch-target-min h-touch-target-min">
+<span class="material-symbols-outlined text-primary text-headline-md">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Paint Adventure</h1>
+<button class="active:translate-y-1 transition-all duration-100 flex items-center justify-center w-touch-target-min h-touch-target-min" onclick="playAudio()">
+<span class="material-symbols-outlined text-primary text-headline-md">volume_up</span>
+</button>
+</header>
+<main class="mt-20 px-container-margin max-w-4xl mx-auto">
+<!-- Celebration Hero -->
+<section class="relative py-8 text-center">
+<div class="absolute inset-0 -z-10 opacity-20">
+
+</div>
+<div class="mb-6 inline-block relative">
+<div class="w-32 h-32 md:w-48 md:h-48 bg-secondary-container rounded-full flex items-center justify-center border-b-[8px] border-secondary mx-auto shadow-lg relative overflow-hidden">
+<span class="material-symbols-outlined text-6xl md:text-8xl text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div class="absolute -top-2 -right-2 bg-tertiary-container text-on-tertiary px-4 py-1 rounded-full font-label-bold shadow-md transform rotate-12">
+                    LVL 3
+                </div>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">¡Increíble, Capitán del Mundo!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-4">Amazing, World Captain!</p>
+<!-- Audio Trigger -->
+<button class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse-yellow shadow-md hover:scale-110 transition-transform active:scale-95" onclick="playAudio()">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl">play_arrow</span>
+</button>
+</section>
+<!-- Flag Grid -->
+<section class="mb-12">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">palette</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Colección de Banderas</h3>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<!-- Portugal -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A vibrant digital illustration of the Portuguese flag, featuring the vertical green and red bands and the national coat of arms in the center. The style is clean and playful for children, with bright colors and a soft matte texture against a minimalist light-mode background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWx_Y3nm_z6eIibJ6GuVowx0Vzara0L3-dbYPiiNvOsFStsXtFCEPkv6wKfoFBtinEv5-q26Db_9LjaX5yp8Kmj-JVSO82Qwu3SGuuhtESIPOEY-DvgdR0n2SVlYOG8bV1JTDa9Rn-RV7d_QowvfD_uvaMPS7olSoHKcKkjftl_fbCcOKTsiONbYNTNDVtNllXKy4jVsfaE333qTAX932yqQ-2Q-s8Ee_0zWrpQ-I3G7jJVmegfTLMyZting2AKobmQKeLM8IJngc"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Portugal</p>
+</div>
+<!-- Netherlands -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A bright, cheerful digital rendering of the Dutch flag with horizontal stripes of vermilion, white, and cobalt blue. The lighting is soft and high-key, maintaining a friendly educational aesthetic suitable for 4-8 year olds. The texture is smooth and slightly tactile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxP-yEu7Ytp3NO2ow--KF-jXqUDBJ6IlcbvwbgjYp3QEReLJg75gFPkR5Pn8ooYuTftMXT4dyDwZdi4RyPbuOfEz7NlzIWSEvUFsAo9UXvSp9BRrlJ-cYd36YbZeEpy4lcOSN0SkVmUohz0WMSQNFnqBRo9vSpx4fNMbNcU-zpqohwlqheBl-ZziqIOjtab9K3KQFzTx1MtrgiW5UrQT50PBVh9pe6M5dtFQP2ZRFJ7ymGB4_W67E0wWrjk-CYAPPUA1cr-xdR084"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Netherlands</p>
+</div>
+<!-- Turkey -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A premium 3D digital illustration of the Turkish flag, showcasing its bold red field with the iconic white crescent and star. The design is rendered with a friendly, educational feel, featuring vibrant saturation and soft-rounded edges that fit a premium learning app's UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0EMlqM6htim_aHCWO59AXy8lLHyJx9DjVMQtbV7Jm-29hZXItmXEHGQ_g8XlkeE3Rj1QioCsMzCXjUpp-TNgQmKBXbm74QCDod4Zz4F7nsLhe6-UFCglUbh4UURbC9vrq6VireMuRyWvoWK22zA6QjybptrFfrcaHngwELEb9nCCMTcnWzu2kb9OGWNg0YIxiUpZD3q9m9SoIy55i8N2QB4i5AyW4rotf5zk7r0c1QFB3YRT131zc1L9ha31tmzAz_-EDtuD73TQ"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Turkey</p>
+</div>
+<!-- Nigeria -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A playful digital representation of the Nigerian flag, with its distinctive green, white, green vertical stripes. The green is rich and vibrant, like grass green. The lighting is optimistic and bright, reflecting a high-quality educational game aesthetic for children." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlHHiT2KZkS8-PKAJD8FcgGm9RTZ547n-xWRzIViRCqPqVxdiYeU4tLY7VoeNUaApqWmbqOF2I82cWbnBdFZfuUydsHge1ivNf5y9OsLaxT-DXqttjk2y-1ml3kr3ud0qCLWrWP2S4YnzBNicfFoh0p2PKk_E_ICBrZsnD2IWQSfS3ZLHMDSNDqdeh4HodwxkVHyZvwvi98xvPVxmCvJEyvdDIAtsDM3THQneh69-C48KlQPidEFhTUhLy3hfm0dHRmOzaTk09RM0"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Nigeria</p>
+</div>
+<!-- Chile -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A clean, friendly digital graphic of the Chilean flag with its red, white, and blue fields and white star. The colors are highly saturated and cheerful. The overall style is minimalist yet tactile, perfectly matching a modern learning platform for young children." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgOke8tr3TfvvWw7Va7GTwxFwJbu9IDwWoPi3-n4EHS5HmrVpAzumx_xEIxY4az8Oq8m0qfZGNedMbvvAnp7AHdNwct9pOcgKRCiLuL2cUajBEmGJtyo5S3A0Cp2gZZaCVgddt1MCotRB_m9QZ6tUqtZYZ2zZGEk5CBx3BsMl7YwbGx3nzPDzop0HkXYu8i3QGQUuIZ-9gsZ8WOi_Xw3AdIcBPzQZwR1AYZyi8QF0ESupJV3rf7yXtytfqSDWElwSwyAhpUz33Rpk"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Chile</p>
+</div>
+<!-- Peru -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A high-quality educational illustration of the Peruvian flag, featuring bold red and white vertical stripes. The style is premium digital art with soft shadows and a bright, clean background that minimizes cognitive load for young learners while remaining engaging." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBka0tJvwldets5BIh24p02D5vXfiJQlUe1DbOEdWT-jQe4A-mhqCcZsDzcZ4Y_pmVHSnywfBEdEWlOXRdQwPKOeLjdiSIrnaktTtHwxn1y6IrupFWrICXC6CYZUk_wVgzppqA9nq4zh3nd-rWpW7R1z6kx4yglCJzOdcXgUirCfS9Aejup251nNaHgIjqpnQcxwv5RbpwNkTktAd_KtKkWSw9mErki1VVCrSoieo5VAFILt-wt9DtxkDml6DV-ySyPcqWTNhzK6o0"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Peru</p>
+</div>
+<!-- Thailand -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A playful and vibrant digital rendering of the Thai flag with its unique red, white, blue, white, and red horizontal stripes. The saturation is tuned for visual appeal in a child's learning app, using the core design system's bright blue and red tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD18M9IgBGdx5F00kT6bOAnFcQhRQB3ofxJk7u39mf-NLwEWZiyeFe7lhEmQPUHDJtTlVOA6SrSMiIRcDQ4oBfrzJ4Oi-UsNqa-0j_-d-gVELken7xnuHB5g2pTdHyofxQ5R7a-o0X7GLZqFTKhSMT8HgrImMoVby1dX0qcw1VVCTpDtysAiHsu0MGbRsZoEJg6liC95pil-ySLKOvEssI2oof-F-gV7J4m-7jHLApr1OTg7mQeAki5-Uo3jrC6k5Y767uhiRJgR-8"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Thailand</p>
+</div>
+<!-- Sweden -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A minimalist and friendly illustration of the Swedish flag, showing the yellow Nordic cross on a sky-blue field. The color palette follows the premium educational theme, using high-contrast, cheerful yellow and sky blue against a soft white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr-UHEvnJsk3LumKKzny6QPczlXB9OoyagrEh5cwMn-ocEubZfDv-5pkO5wOFcSjo7RC2W8Wd2pk-EK_Yw9PevJkWEbLTBixf321V27W93k7qk49wTdM4L5vnxeUtDJ_42gEcXTCxVUDWwW9ZNBEM6ON3vgywsaxVsqMSVnpH7dUVD_nFNIE9tmge66DvL-AcvVKTro0KPJSnhyRNTiighKkj3q_KihOKwpEC2uyZKlMHh8FxjmlR1-f1LNM2U178Wagw4G3a_VZc"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Sweden</p>
+</div>
+<!-- Norway -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A vibrant digital graphic of the Norwegian flag, featuring a blue cross with a white outline on a red field. The style is 'squishy' and approachable for children aged 4-8, with bold lines and a tactile, physical appearance like a toy block." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfqtD-bwmcLjCgmITu2oHnYHF095c98K5N9hHdHF99MtseMFQnVPW-Bz_-fOIGaMcH9NMJFu2t9YW3ZO9vGoXMmBSjLPtlaLvQL52YOR01VKBqoqK5Ja_yq6dTq_L8kmT9Zq31n330KgJAkJ6xr-xrENXlH7zgb85JPDLTcAQ-IiZu6a6dnM0A_pg0VZlHIDRJuNgiFHajFfmQTv1RnbSNj99efvGe1WapS0I7sne1TLvgPBTuhRibAr2-JhdOc-8tL5B5376CEVs"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Norway</p>
+</div>
+<!-- Iceland -->
+<div class="chunky-card p-4 flex flex-col items-center gap-2 group transition-transform hover:scale-105">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A premium digital artwork of the Icelandic flag with its red cross outlined in white on a dark blue field. The colors are punchy and clear, rendered in a high-key lighting environment to keep the mood joyful and educational for the young user." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKOWYzz7UZRTtp4grR4EJFvt29RiSpJ9-kShx5zS7vUxqegP6lP_j32yNmlMUrR3KBqKRCgcQdC2UL0SoHI1xqa0ffOyzE3bumTGy_jobkxsR2uANzQeTf3591_DoQMHO_mih3U9DLzeJS9mDiZdu0vx_zBt2byV0B_uF0co_sUVCGM5uRjxi8dKWNOeR4_RoffhwKn9yA-7IyTU60ZJ43UeHQllVzx7SkcWFNYJC-4T4yVcUY6W6UlhBXqUuYmwIFargjMS7sn84"/>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface text-center">Iceland</p>
+</div>
+</div>
+</section>
+<!-- Primary Action -->
+<section class="flex flex-col items-center gap-4 py-8">
+<button class="chunky-button-primary w-full max-w-sm h-16 rounded-xl flex items-center justify-center gap-2" onclick="claimStamp()">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">approval_delegation</span>
+<span class="font-headline-md text-headline-md">Claim Stamp</span>
+</button>
+<p class="text-on-surface-variant font-body-md">¡Recoge tu sello de Capitán!</p>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Active: Awards) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant active:translate-y-1 transition-all duration-100" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-label-bold text-label-bold">World Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant active:translate-y-1 transition-all duration-100" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label-bold text-label-bold">My Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant active:translate-y-1 transition-all duration-100" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 active:translate-y-1 transition-all duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-bold text-label-bold">Awards</span>
+</a>
+</nav>
+<!-- Confetti / Success Modal Layer -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6" id="celebration-modal">
+<div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm"></div>
+<div class="bg-surface relative z-10 w-full max-w-md rounded-lg p-card-padding flex flex-col items-center text-center shadow-2xl scale-0 transition-transform duration-500" id="modal-content">
+<div class="absolute -top-16 w-32 h-32 bg-secondary-container rounded-full border-4 border-surface flex items-center justify-center shadow-xl">
+<span class="material-symbols-outlined text-6xl text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="mt-16 space-y-4">
+<h2 class="font-headline-lg text-headline-lg text-primary">¡Felicidades!</h2>
+<p class="font-body-lg text-on-surface-variant">You've earned the Level 3 Stamp! You are truly a global artist.</p>
+<div class="h-40 w-40 bg-surface-container-low rounded-lg mx-auto border-dashed border-2 border-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-32 h-32 rotate-12" data-alt="A detailed digital 3D stamp design featuring a captain's wheel intertwined with a paintbrush. The stamp has a vibrant red ink texture and says 'WORLD CAPTAIN - LEVEL 3' in bold, friendly lettering. The style is tactile and premium, suitable for a kid's achievement award." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgcIIJmrrGW6eYwsv7aUsMiWCuugKQOjdokMEfrmHo5kr5kOc49txVbDSUet1jJO458V05imhhiBuhmxhq8A8TtYsJhN7WY8FBFcx4RvL2lHWdbQvuPkV9Mze2T4gzYUor-xtrQO9G5bZTgcejq178ozt3UAzzNNSHPqTFGTvytIdyfRJsA0tML4YmPhwxyDf72CTfV7jJSW9LZ7ElpNJ--BWvoQ-iGsCfIFj2L6d6cqmwBlupWdG02YZx1hMINFCXGNTesR1-hdc"/>
+</div>
+<button class="chunky-button-primary w-full h-14 rounded-lg font-label-bold" onclick="closeModal()">
+                    Back to Gallery
+                </button>
+</div>
+</div>
+</div>
+<canvas class="confetti-canvas" id="confetti"></canvas>
+<script>
+        function playAudio() {
+            // Mock audio playback feedback
+            const btn = document.querySelector('button[onclick="playAudio()"]');
+            btn.classList.add('scale-125');
+            setTimeout(() => btn.classList.remove('scale-125'), 200);
+            
+            // Console log the bilingual message for simulation
+            console.log("Audio: ¡Felicidades! Has completado el nivel tres. Eres un verdadero Capitán del Mundo. Congratulations! You've completed level three. You are a true World Captain.");
+        }
+
+        function claimStamp() {
+            const modal = document.getElementById('celebration-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-0');
+                content.classList.add('scale-100');
+                startConfetti();
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('celebration-modal');
+            const content = document.getElementById('modal-content');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 500);
+        }
+
+        // Simple Confetti Animation
+        function startConfetti() {
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particles = [];
+            const colors = ['#006495', '#fccc00', '#2bb1ff', '#59be1b', '#ba1a1a'];
+
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 3 + 2,
+                    angle: Math.random() * 6.28
+                });
+            }
+
+            function update() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.y += p.speed;
+                    p.x += Math.sin(p.angle) * 2;
+                    p.angle += 0.05;
+
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    if (p.y > canvas.height) p.y = -10;
+                });
+                requestAnimationFrame(update);
+            }
+            update();
+            setTimeout(() => { particles = []; ctx.clearRect(0,0,canvas.width,canvas.height); }, 4000);
+        }
+    </script>
+</body></html>

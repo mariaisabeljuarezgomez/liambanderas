@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flag Adventure - Quiz</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#90cdff",
+                    "outline": "#6e7882",
+                    "on-background": "#171c21",
+                    "surface-container-low": "#f0f4fb",
+                    "primary-fixed": "#cbe6ff",
+                    "inverse-surface": "#2c3136",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-container": "#1a4600",
+                    "background": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "secondary": "#735c00",
+                    "surface-bright": "#f7f9ff",
+                    "secondary-container": "#fccc00",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "primary": "#006495",
+                    "tertiary-container": "#59be1b",
+                    "on-primary-fixed-variant": "#004b71",
+                    "on-surface-variant": "#3e4851",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bec8d3",
+                    "on-surface": "#171c21",
+                    "on-primary-container": "#004163",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "surface-variant": "#dee3e9",
+                    "secondary-fixed-dim": "#efc200",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed": "#082100",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary": "#2b6c00",
+                    "surface": "#f7f9ff",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-container-highest": "#dee3e9",
+                    "on-secondary-fixed": "#231b00",
+                    "surface-container": "#eaeef5",
+                    "on-primary-fixed": "#001e30",
+                    "surface-tint": "#006495",
+                    "surface-container-high": "#e4e8ef",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "card-padding": "20px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "unit": "8px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        
+        .tactile-button-primary {
+            box-shadow: 0 6px 0px #004b71;
+        }
+        .tactile-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px #004b71;
+        }
+
+        .tactile-button-secondary {
+            box-shadow: 0 6px 0px #bec8d3;
+        }
+        .tactile-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px #bec8d3;
+        }
+
+        .tactile-audio {
+            box-shadow: 0 6px 0px #bca100;
+        }
+        .tactile-audio:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px #bca100;
+        }
+
+        .flag-card {
+            box-shadow: 0 8px 0px #dee3e9;
+            transition: all 0.2s ease;
+        }
+        .flag-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0px #dee3e9;
+        }
+
+        @keyframes pulse-soft {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Anchor (Shared Component: TopAppBar) -->
+<header class="w-full top-0 sticky bg-surface-container-low flex items-center justify-between px-container-margin py-unit z-50">
+<div class="flex items-center gap-4">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Flag Adventure</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center bg-secondary-container px-3 py-1 rounded-full text-on-secondary-container font-label-bold">
+<span class="material-symbols-outlined mr-1" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+                Level 3
+            </div>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+</header>
+<!-- Main Learning Canvas -->
+<main class="flex-1 container mx-auto px-container-margin py-unit max-w-lg flex flex-col items-center">
+<!-- Progress Indicator -->
+<div class="w-full mt-4 mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="text-label-bold font-label-bold text-primary">Progress</span>
+<span class="text-label-bold font-label-bold text-primary">4 / 10</span>
+</div>
+<div class="w-full h-4 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full" style="width: 40%"></div>
+</div>
+</div>
+<!-- Question Area -->
+<section class="text-center mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-6">¿Cuál es la bandera de Suecia?</h2>
+<!-- Large Tactile Audio Button -->
+<button class="tactile-audio bg-secondary-container text-on-secondary-container w-24 h-24 rounded-full flex items-center justify-center animate-pulse-soft transition-transform mb-4">
+<span class="material-symbols-outlined text-[48px]" data-icon="volume_up" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<p class="text-on-surface-variant font-label-bold">¡Escucha la pregunta!</p>
+</section>
+<!-- Flag Selection Grid (Chunky Pattern) -->
+<div class="grid grid-cols-1 gap-6 w-full mb-12">
+<!-- Correct Option: Sweden -->
+<button class="flag-card bg-surface-container-lowest border-2 border-outline-variant p-card-padding rounded-lg flex items-center gap-6 group hover:border-primary transition-colors text-left" onclick="this.classList.add('border-tertiary-container', 'bg-tertiary-container/10')">
+<div class="w-32 h-20 rounded-lg overflow-hidden border border-outline-variant flex-shrink-0 bg-white">
+<img class="w-full h-full object-cover" data-alt="A clean, flat vector illustration of the Swedish flag featuring a yellow Nordic cross on a solid blue background. The style is educational and child-friendly with vibrant primary colors and sharp, clear lines. High contrast lighting makes the flag pop against its minimal white frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV_1OkVEyUjP7R11l2BDc_vdf0SNc0xH_TZDsEl8T3WEdiYar0oZ_UxEUPDMnWdfXzCEXVMEbtAGNnIfWupst95aQKFLtdHd_Tsuyz8DBo18hmy5DnguUOAwThSF88HpTu65l6xwtvovXfcxbFNSvRinDWko4qAIqqSfdnfyE-L8Fj1yDE4aaKqISOILbU4QUWIoreRu6Dbx6TYo6mnnaUcbG9bHDnkH50MC46wduH_gvLQQLRlFWqX0pVp-wZJZxWKgomm6pkIrQ"/>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary">Suecia</span>
+</button>
+<!-- Option: Iceland -->
+<button class="flag-card bg-surface-container-lowest border-2 border-outline-variant p-card-padding rounded-lg flex items-center gap-6 group hover:border-primary transition-colors text-left" onclick="this.classList.add('border-error', 'bg-error-container/10')">
+<div class="w-32 h-20 rounded-lg overflow-hidden border border-outline-variant flex-shrink-0 bg-white">
+<img class="w-full h-full object-cover" data-alt="A clean, flat vector illustration of the Icelandic flag showing a red cross with a white border set against a deep blue field. The illustration is minimalist and educational, part of a high-quality geography learning suite for children. Bright, clear colors and simple geometry are highlighted." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAozipQX4vnCB8bB6YH7EHhFDQzhybAMFh7-2C4QqGvJ90yRsZV81kbit7EVUAHXi9Wbv6m2Tpri-FSSrmPAOPAH007Y1dJQtmEj1__x6nQ0OJO7t-ioPNrzFY7HKKwP30BzMj5ocPqrSsExqrMz1ioksyQkJozI019PdcyC94tN_Vhzk4UW1CgrV8m6dfV4sTlf9YJUhmL9X4h_CGke4WFeUEdrKAzjf32HexwAg0m5kMNCUZg0SQmM8VW_-flHLoX7Q1hz7gpGVs"/>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary">Islandia</span>
+</button>
+<!-- Option: Norway -->
+<button class="flag-card bg-surface-container-lowest border-2 border-outline-variant p-card-padding rounded-lg flex items-center gap-6 group hover:border-primary transition-colors text-left" onclick="this.classList.add('border-error', 'bg-error-container/10')">
+<div class="w-32 h-20 rounded-lg overflow-hidden border border-outline-variant flex-shrink-0 bg-white">
+<img class="w-full h-full object-cover" data-alt="A clean, flat vector illustration of the Norwegian flag with a dark blue cross outlined in white on a vibrant red field. The style is consistent with a premium educational app for young learners, emphasizing clear visual identification through saturated colors and bold shapes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVqUV8ECfDXx9fw_ZDEeHEd9AGrSKxS9-1-TcKE-4hGqsJaehk2oDwJxzcv2Y7eBKo3jO-dP17it7xLMWJPcE_KMvvKbDaWSsMLGvhYdrJHxiH711YH7-mVEsqa2S4lCvFM76V8RC5QcYojg9hrntNN2AvGALrGYMndFuLlhsU5QZZevjjDISreYgfBEfiG5tTCGry7-G6-pcTNIeOQ3byFLVBBy4OuztgXmgUNKvI8PUh3-eRmLSOcczEXRcu-aWBDSJo7QAF1qg"/>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary">Noruega</span>
+</button>
+</div>
+<!-- Mastery Stars Footer Area -->
+<section class="w-full flex flex-col items-center gap-4 pb-24">
+<p class="text-on-surface-variant font-label-bold uppercase tracking-widest text-[12px]">Tus Estrellas</p>
+<div class="flex gap-4">
+<!-- Earned Star -->
+<div class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center shadow-lg transform rotate-[-12deg]">
+<span class="material-symbols-outlined text-[32px]" data-icon="grade" style="font-variation-settings: 'FILL' 1;">grade</span>
+</div>
+<!-- Earned Star -->
+<div class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center shadow-lg transform translate-y-[-8px]">
+<span class="material-symbols-outlined text-[32px]" data-icon="grade" style="font-variation-settings: 'FILL' 1;">grade</span>
+</div>
+<!-- Empty Star Slot -->
+<div class="w-14 h-14 bg-surface-variant text-outline-variant rounded-full flex items-center justify-center transform rotate-[12deg]">
+<span class="material-symbols-outlined text-[32px]" data-icon="grade" style="font-variation-settings: 'FILL' 0;">grade</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (Shared Component: BottomNavBar) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<!-- Explore Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<!-- Passport Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<!-- Play Tab (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0" href="#">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Interaction Script for feedback -->
+<script>
+        document.querySelectorAll('.flag-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const audio = new Audio();
+                // Placeholder logic for sound feedback
+                console.log('User interaction registered for option selection');
+            });
+        });
+    </script>
+</body></html>

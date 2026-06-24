@@ -1,0 +1,365 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Paint Adventure - Bélgica</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline": "#6e7882",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-container": "#6d5700",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#006495",
+                    "on-surface-variant": "#3e4851",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container": "#eaeef5",
+                    "surface-container-highest": "#dee3e9",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-tertiary-fixed": "#082100",
+                    "on-surface": "#171c21",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "background": "#f7f9ff",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary-container": "#2bb1ff",
+                    "on-secondary-fixed": "#231b00",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-container": "#59be1b",
+                    "outline-variant": "#bec8d3",
+                    "primary": "#006495",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "secondary": "#735c00",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-surface": "#2c3136",
+                    "surface": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        .tactile-button-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+            transition: all 0.1s ease;
+        }
+        .tactile-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #004b71;
+        }
+        
+        .tactile-button-secondary {
+            box-shadow: 0 6px 0 0 #bec8d3;
+            transition: all 0.1s ease;
+        }
+        .tactile-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #bec8d3;
+        }
+
+        .audio-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+
+        .flag-canvas {
+            border: 4px solid #eaeef5;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffd300;
+            top: -10px;
+            opacity: 0;
+        }
+    </style>
+<style>
+            @keyframes confetti-fall {
+                0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+            }
+        </style></head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 w-full z-50 flex justify-between items-center px-container-margin h-touch-target-min transition-all duration-100">
+<div class="flex items-center gap-4">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Paint Adventure</h1>
+</div>
+<div class="flex items-center gap-2"><button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary-container/80 active:translate-y-1 transition-all shadow-md" title="¡Alarma! / Sound Alarm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</button>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-container-margin pt-6">
+<!-- Header Info Area -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div class="space-y-2">
+<div class="inline-flex items-center gap-2 px-4 py-1 bg-secondary-container rounded-full mb-2">
+<span class="material-symbols-outlined text-on-secondary-container text-sm">location_on</span>
+<span class="font-label-bold text-on-secondary-container">Europa</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Bélgica / Belgium</h2>
+<p class="font-body-md text-on-surface-variant max-w-md">¡Vamos a pintar la bandera belga! Usa los colores correctos para ganar una estrella.</p>
+</div>
+<!-- Audio Trigger -->
+<button class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center audio-pulse tactile-button-secondary border-4 border-white" onclick="playAudio('belgica')">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</section>
+<!-- Main Paint Station Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Color Palette Side -->
+<div class="md:col-span-3 flex md:flex-col gap-4">
+<button class="flex-1 md:flex-none aspect-square rounded-lg tactile-button-secondary bg-[#171c21] border-4 border-white flex flex-col items-center justify-center gap-2 group" onclick="selectColor('#171c21', 'Negro')">
+<span class="material-symbols-outlined text-white opacity-0 group-[.active]:opacity-100 transition-opacity">check_circle</span>
+<span class="hidden md:block font-label-bold text-white uppercase tracking-wider">Negro</span>
+</button>
+<button class="flex-1 md:flex-none aspect-square rounded-lg tactile-button-secondary bg-[#fccc00] border-4 border-white flex flex-col items-center justify-center gap-2 group" onclick="selectColor('#fccc00', 'Amarillo')">
+<span class="material-symbols-outlined text-on-secondary-container opacity-0 group-[.active]:opacity-100 transition-opacity">check_circle</span>
+<span class="hidden md:block font-label-bold text-on-secondary-container uppercase tracking-wider">Amarillo</span>
+</button>
+<button class="flex-1 md:flex-none aspect-square rounded-lg tactile-button-secondary bg-[#ba1a1a] border-4 border-white flex flex-col items-center justify-center gap-2 group" onclick="selectColor('#ba1a1a', 'Rojo')">
+<span class="material-symbols-outlined text-white opacity-0 group-[.active]:opacity-100 transition-opacity">check_circle</span>
+<span class="hidden md:block font-label-bold text-white uppercase tracking-wider">Rojo</span>
+</button>
+</div>
+<!-- Flag Painting Area -->
+<div class="md:col-span-9 bg-surface-container-low rounded-lg p-card-padding flex flex-col items-center justify-center flag-canvas">
+<div class="w-full aspect-[3/2] grid grid-cols-3 bg-white rounded-lg overflow-hidden border-8 border-white shadow-xl max-w-lg cursor-crosshair" id="flag-grid">
+<div class="bg-surface-variant transition-colors duration-300 border-r border-background flex items-center justify-center group" id="stripe-0" onclick="paintStripe(0)">
+<span class="material-symbols-outlined text-outline group-hover:scale-125 transition-transform">format_paint</span>
+</div>
+<div class="bg-surface-variant transition-colors duration-300 border-r border-background flex items-center justify-center group" id="stripe-1" onclick="paintStripe(1)">
+<span class="material-symbols-outlined text-outline group-hover:scale-125 transition-transform">format_paint</span>
+</div>
+<div class="bg-surface-variant transition-colors duration-300 flex items-center justify-center group" id="stripe-2" onclick="paintStripe(2)">
+<span class="material-symbols-outlined text-outline group-hover:scale-125 transition-transform">format_paint</span>
+</div>
+</div>
+<div class="mt-8 flex gap-4 w-full">
+<button class="flex-1 font-label-bold text-primary tactile-button-secondary bg-surface-container-lowest h-touch-target-min rounded-lg border-2 border-outline-variant" onclick="resetFlag()">
+                        Limpiar
+                    </button>
+<button class="flex-[2] font-label-bold text-white tactile-button-primary bg-primary h-touch-target-min rounded-lg" id="check-btn" onclick="checkFlag()">
+                        ¡Listo!
+                    </button>
+</div>
+</div>
+<!-- Fun Fact Card -->
+<div class="md:col-span-12 bg-tertiary-container text-on-tertiary-container rounded-lg p-card-padding flex items-center gap-6 shadow-md relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-[120px]">restaurant</span>
+</div>
+<div class="z-10 bg-white rounded-full p-4 shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-4xl text-tertiary">lightbulb</span>
+</div>
+<div class="z-10">
+<h4 class="font-label-bold uppercase text-xs opacity-80 mb-1">Dato Divertido</h4>
+<p class="font-headline-md text-body-lg">"En Bélgica se inventaron las papas fritas."</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant active:translate-y-1 transition-all duration-100 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">public</span>
+<span class="font-label-bold text-label-bold">World Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant active:translate-y-1 transition-all duration-100 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">palette</span>
+<span class="font-label-bold text-label-bold">My Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 active:translate-y-1 transition-all duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant active:translate-y-1 transition-all duration-100 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">stars</span>
+<span class="font-label-bold text-label-bold">Awards</span>
+</a>
+</nav>
+<!-- Success Modal -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-primary/40 backdrop-blur-sm" id="success-modal">
+<div class="bg-surface-container-lowest w-full max-w-sm rounded-lg p-8 text-center shadow-2xl scale-0 transition-transform duration-300" id="modal-content">
+<div class="w-32 h-32 bg-secondary-container rounded-full mx-auto mb-6 flex items-center justify-center border-8 border-white shadow-lg animate-bounce">
+<span class="material-symbols-outlined text-6xl text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h2 class="font-headline-lg text-on-surface mb-2">¡Excelente!</h2>
+<p class="font-body-md text-on-surface-variant mb-8">Has pintado la bandera de Bélgica perfectamente.</p>
+<button class="w-full font-label-bold text-white tactile-button-primary bg-primary h-touch-target-min rounded-lg" onclick="closeModal()">
+                ¡Siguiente Aventura!
+            </button>
+</div>
+</div>
+<script>
+        let currentColor = null;
+        let currentLabel = '';
+        let paintedColors = [null, null, null];
+        const correctFlag = ['#171c21', '#fccc00', '#ba1a1a']; // Black, Yellow, Red
+
+        function selectColor(color, label) {
+            currentColor = color;
+            currentLabel = label;
+            
+            // Remove active classes from all color buttons
+            document.querySelectorAll('.aspect-square').forEach(btn => btn.classList.remove('active'));
+            // Add to target
+            event.currentTarget.classList.add('active');
+            
+            playAudio(label.toLowerCase());
+        }
+
+        function paintStripe(index) {
+            if (!currentColor) {
+                alert("¡Primero elige un color!");
+                return;
+            }
+            
+            const stripe = document.getElementById(`stripe-${index}`);
+            stripe.style.backgroundColor = currentColor;
+            stripe.innerHTML = ''; // Remove icon
+            paintedColors[index] = currentColor;
+        }
+
+        function resetFlag() {
+            paintedColors = [null, null, null];
+            for (let i = 0; i < 3; i++) {
+                const stripe = document.getElementById(`stripe-${i}`);
+                stripe.style.backgroundColor = '';
+                stripe.classList.add('bg-surface-variant');
+                stripe.innerHTML = '<span class="material-symbols-outlined text-outline group-hover:scale-125 transition-transform">format_paint</span>';
+            }
+        }
+
+        function checkFlag() {
+            const isCorrect = paintedColors.every((color, index) => color === correctFlag[index]);
+            
+            if (isCorrect) {
+                showSuccess();
+            } else {
+                alert("¡Oh oh! La bandera de Bélgica tiene Negro, Amarillo y Rojo en ese orden. ¡Inténtalo de nuevo!");
+                resetFlag();
+            }
+        }
+
+        function showSuccess() {
+            const modal = document.getElementById('success-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-0');
+                content.classList.add('scale-100');
+            }, 10);
+            createConfetti();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.add('hidden');
+        }
+
+        function createConfetti() {
+            for(let i=0; i<50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = ['#fccc00', '#006495', '#ba1a1a', '#77de3d'][Math.floor(Math.random() * 4)];
+                confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear forwards`;
+                confetti.style.zIndex = '101';
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // Mock audio function
+        function playAudio(term) {
+            console.log("Playing audio for: " + term);
+            // In a real app, this would trigger a SpeechSynthesis or play a sound file
+            const utterance = new SpeechSynthesisUtterance(term);
+            utterance.lang = term === 'belgica' ? 'es-ES' : 'es-ES';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Add CSS for confetti
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes confetti-fall {
+                0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+
+</body></html>

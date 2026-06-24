@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Estación de Pintura (Chile)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tactile-button-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+            transition: all 0.1s ease;
+        }
+        .tactile-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #004b71;
+        }
+        .tactile-button-secondary {
+            box-shadow: 0 6px 0 0 #dee3e9;
+            transition: all 0.1s ease;
+        }
+        .tactile-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #dee3e9;
+        }
+        .tactile-card {
+            box-shadow: 0 8px 0 0 #eaeef5;
+        }
+        .audio-pulse:active {
+            animation: pulse 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .star-clip {
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#006495",
+                      "on-surface": "#171c21",
+                      "secondary-fixed": "#ffe084",
+                      "on-tertiary-fixed": "#082100",
+                      "secondary-container": "#fccc00",
+                      "on-primary-fixed-variant": "#004b71",
+                      "tertiary-fixed": "#92fc58",
+                      "on-tertiary-fixed-variant": "#1f5100",
+                      "surface-bright": "#f7f9ff",
+                      "on-surface-variant": "#3e4851",
+                      "on-tertiary-container": "#1a4600",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#59be1b",
+                      "surface-variant": "#dee3e9",
+                      "primary-fixed-dim": "#90cdff",
+                      "on-background": "#171c21",
+                      "primary-fixed": "#cbe6ff",
+                      "surface-tint": "#006495",
+                      "outline": "#6e7882",
+                      "on-secondary-container": "#6d5700",
+                      "secondary": "#735c00",
+                      "on-secondary-fixed": "#231b00",
+                      "on-error": "#ffffff",
+                      "primary-container": "#2bb1ff",
+                      "surface-container-high": "#e4e8ef",
+                      "inverse-surface": "#2c3136",
+                      "on-tertiary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#dee3e9",
+                      "inverse-on-surface": "#edf1f8",
+                      "surface-dim": "#d6dae1",
+                      "inverse-primary": "#90cdff",
+                      "outline-variant": "#bec8d3",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#001e30",
+                      "tertiary": "#2b6c00",
+                      "surface-container": "#eaeef5",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#77de3d",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-primary-container": "#004163",
+                      "surface-container-low": "#f0f4fb",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#efc200",
+                      "surface": "#f7f9ff",
+                      "background": "#f7f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "container-margin": "24px",
+                      "card-padding": "20px",
+                      "unit": "8px",
+                      "touch-target-min": "48px"
+              },
+              "fontFamily": {
+                      "body-md": ["Quicksand"],
+                      "label-bold": ["Quicksand"],
+                      "headline-md": ["Quicksand"],
+                      "body-lg": ["Quicksand"],
+                      "headline-lg-mobile": ["Quicksand"],
+                      "headline-lg": ["Quicksand"]
+              },
+              "fontSize": {
+                      "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                      "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                      "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface-container-low flex items-center justify-between px-container-margin py-unit transition-all duration-100">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 rounded-full hover:bg-primary-container">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Estación de Pintura (Chile)</h1>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 rounded-full hover:bg-primary-container">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+<button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<main class="max-w-4xl mx-auto px-container-margin pt-unit space-y-gutter">
+<!-- Progress Section -->
+<div class="flex items-center gap-unit bg-surface-container p-4 rounded-lg">
+<div class="flex-1 h-4 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container transition-all duration-500" id="progress-bar" style="width: 33%"></div>
+</div>
+<span class="text-label-bold font-label-bold text-tertiary">1/3</span>
+</div>
+<!-- Main Flag Canvas -->
+<section class="flex flex-col items-center">
+<div class="relative w-full aspect-[3/2] bg-white border-2 border-surface-variant rounded-lg tactile-card overflow-hidden p-card-padding">
+<div class="w-full h-full border border-outline-variant rounded-md relative cursor-crosshair" id="flag-canvas">
+<!-- Chile Flag Construction (Interactive areas) -->
+<div class="absolute inset-0 grid grid-rows-2">
+<!-- Top Band -->
+<div class="grid grid-cols-3">
+<div class="bg-surface-container-highest transition-colors duration-300 relative flex items-center justify-center group" id="target-blue" onclick="paint('blue')">
+<span class="material-symbols-outlined text-primary/20 text-6xl group-hover:scale-110 transition-transform">format_paint</span>
+<div class="absolute w-1/2 h-1/2 bg-surface-variant star-clip opacity-50" id="star"></div>
+</div>
+<div class="col-span-2 bg-surface-container-highest transition-colors duration-300 flex items-center justify-center group border-l border-white/20" id="target-white-top" onclick="paint('white')">
+<span class="material-symbols-outlined text-primary/20 text-6xl group-hover:scale-110 transition-transform">format_paint</span>
+</div>
+</div>
+<!-- Bottom Band -->
+<div class="bg-surface-container-highest transition-colors duration-300 flex items-center justify-center group" id="target-red" onclick="paint('red')">
+<span class="material-symbols-outlined text-primary/20 text-6xl group-hover:scale-110 transition-transform">format_paint</span>
+</div>
+</div>
+</div>
+</div>
+<p class="mt-4 font-label-bold text-on-surface-variant">¡Toca una parte de la bandera para pintarla!</p>
+</section>
+<!-- Color Selection & Audio -->
+<section class="grid grid-cols-3 gap-gutter">
+<!-- Azul -->
+<button class="color-btn flex flex-col items-center gap-2 p-4 bg-white rounded-lg tactile-button-secondary border-2 border-transparent" onclick="selectColor('blue', this)">
+<div class="w-16 h-16 rounded-full bg-[#00205b] border-4 border-white shadow-inner"></div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary audio-pulse" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<span class="font-label-bold text-on-surface">Azul</span>
+</div>
+</button>
+<!-- Blanco -->
+<button class="color-btn flex flex-col items-center gap-2 p-4 bg-white rounded-lg tactile-button-secondary border-2 border-transparent" onclick="selectColor('white', this)">
+<div class="w-16 h-16 rounded-full bg-white border-4 border-surface-variant shadow-inner"></div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary audio-pulse" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<span class="font-label-bold text-on-surface">Blanco</span>
+</div>
+</button>
+<!-- Rojo -->
+<button class="color-btn flex flex-col items-center gap-2 p-4 bg-white rounded-lg tactile-button-secondary border-2 border-transparent" onclick="selectColor('red', this)">
+<div class="w-16 h-16 rounded-full bg-[#d52b1e] border-4 border-white shadow-inner"></div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary audio-pulse" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<span class="font-label-bold text-on-surface">Rojo</span>
+</div>
+</button>
+</section>
+<!-- Fun Fact Bento Box -->
+<section class="bg-secondary-container p-6 rounded-lg tactile-card border-l-8 border-secondary flex items-start gap-4">
+<div class="p-3 bg-white rounded-full text-secondary">
+<span class="material-symbols-outlined text-4xl">lightbulb</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-secondary-container mb-1">Dato Curioso</h3>
+<p class="font-body-md text-on-secondary-container">Chile tiene montañas muy altas llamadas los Andes.</p>
+</div>
+</section>
+<!-- Landscape Context Image -->
+<div class="w-full h-48 rounded-lg overflow-hidden tactile-card">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, vibrant digital painting of the snowy Andes mountains in Chile under a bright blue sky with soft white clouds. In the foreground, a minimalist trail winds through colorful wildflowers and green grass. The lighting is high-key and cheerful, matching a premium educational app style for children, with saturated blues and warm sunshine." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQrqqtiYlLjq8jV1BMl0k0NNSjlSAtaamsvxpLcGbePK2sDR8Z7ga6136Z_Npjq4O4Z4sawlCpnqR3jeaT9b2SQM7ZLrZZZz09YxJ9RXOn1wjfE4xPa3kxSekeEu1TciybEA2C-J1QTKGs8CsyIJfarWIkGBFQZmkNbjwb5fcFDcx9tcpPULJqcK_dtcXM0MbUoLqJhjQ9TRMTGgOxXr-IYZwjKZG4FACsMKq1LYNKvkcYZPFsST4YMmB7b5LYK0b0xyL4OxnMxPk')"></div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 transition-transform duration-75" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Win Modal (Hidden) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm hidden" id="win-modal">
+<div class="bg-secondary-fixed p-8 rounded-xl max-w-sm w-full mx-container-margin text-center tactile-card border-4 border-white animate-bounce-short">
+<div class="mb-4">
+<span class="material-symbols-outlined text-8xl text-secondary" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<h2 class="font-headline-lg-mobile text-on-secondary-fixed mb-4">¡Excelente Trabajo!</h2>
+<p class="font-body-lg text-on-secondary-fixed-variant mb-6">Has pintado la bandera de Chile perfectamente.</p>
+<button class="w-full py-4 bg-primary text-white font-headline-md rounded-lg tactile-button-primary" onclick="resetGame()">
+                ¡Jugar de nuevo!
+            </button>
+</div>
+</div>
+<script>
+        let currentColor = null;
+        let paintedZones = { blue: false, white: false, red: false };
+
+        function selectColor(color, element) {
+            currentColor = color;
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.classList.remove('border-primary', 'bg-primary-fixed');
+                btn.classList.add('bg-white');
+            });
+            element.classList.add('border-primary', 'bg-primary-fixed');
+            element.classList.remove('bg-white');
+            
+            // Audio Feedback Simulation
+            console.log("Playing audio for: " + color);
+        }
+
+        function paint(zone) {
+            if (!currentColor) {
+                alert("¡Primero elige un color de abajo!");
+                return;
+            }
+
+            const target = document.getElementById(`target-${zone}`);
+            const star = document.getElementById('star');
+            
+            if (zone === 'blue' && currentColor === 'blue') {
+                target.style.backgroundColor = '#00205b';
+                target.innerHTML = ''; // Remove paint icon
+                target.appendChild(star);
+                star.style.backgroundColor = '#ffffff';
+                star.classList.remove('opacity-50');
+                paintedZones.blue = true;
+            } else if (zone === 'white' && currentColor === 'white') {
+                target.style.backgroundColor = '#ffffff';
+                target.innerHTML = '';
+                paintedZones.white = true;
+            } else if (zone === 'red' && currentColor === 'red') {
+                target.style.backgroundColor = '#d52b1e';
+                target.innerHTML = '';
+                paintedZones.red = true;
+            } else {
+                // Shake effect for wrong color
+                target.classList.add('bg-error-container');
+                setTimeout(() => target.classList.remove('bg-error-container'), 500);
+                return;
+            }
+
+            updateProgress();
+            checkWin();
+        }
+
+        function updateProgress() {
+            const count = Object.values(paintedZones).filter(v => v).length;
+            const percentage = (count / 3) * 100;
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.querySelector('.text-tertiary').innerText = `${count}/3`;
+        }
+
+        function checkWin() {
+            if (paintedZones.blue && paintedZones.white && paintedZones.red) {
+                setTimeout(() => {
+                    document.getElementById('win-modal').classList.remove('hidden');
+                }, 500);
+            }
+        }
+
+        function resetGame() {
+            location.reload();
+        }
+    </script>
+
+
+</body></html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Estación de Pintura (Turquía)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-shadow-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-shadow-primary:active {
+            box-shadow: 0 0px 0 0 #004b71;
+            transform: translateY(6px);
+        }
+        .chunky-shadow-secondary {
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .chunky-shadow-secondary:active {
+            box-shadow: 0 0px 0 0 #bec8d3;
+            transform: translateY(6px);
+        }
+        .chunky-shadow-yellow {
+            box-shadow: 0 6px 0 0 #b38f00;
+        }
+        .chunky-shadow-yellow:active {
+            box-shadow: 0 0px 0 0 #b38f00;
+            transform: translateY(6px);
+        }
+        .canvas-area {
+            cursor: url('https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/brush/default/24px.svg'), auto;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "surface-variant": "#dee3e9",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "outline": "#6e7882",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "inverse-surface": "#2c3136",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1",
+                    "inverse-primary": "#90cdff",
+                    "outline-variant": "#bec8d3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "surface-container-low": "#f0f4fb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px",
+                    "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface-container-low flex items-center justify-between px-container-margin py-unit h-16">
+<button onclick="window.location.href='../world_map_hub/index.html'" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full" aria-label="Volver">
+<span class="material-symbols-outlined text-3xl">arrow_back</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary text-center">Estación de Pintura (Turquía)</h1>
+<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined text-3xl">volume_up</span>
+</button>
+<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg chunky-shadow-yellow" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<main class="max-w-4xl mx-auto px-container-margin mt-8 space-y-8">
+<!-- Interactive Flag Canvas Section -->
+<div class="relative bg-surface-container-lowest p-card-padding rounded-lg shadow-sm border-2 border-surface-variant">
+<div class="flex justify-between items-center mb-6">
+<div class="space-y-1">
+<h2 class="font-headline-md text-headline-md text-primary">¡Pinta la Bandera!</h2>
+<p class="text-body-md text-on-surface-variant">Usa tus dedos para colorear.</p>
+</div>
+<div class="flex gap-4">
+<!-- Audio Button: Rojo -->
+<button class="chunky-shadow-yellow flex items-center gap-3 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-label-bold animate-pulse-slow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+                        Rojo
+                    </button>
+<!-- Audio Button: Blanco -->
+<button class="chunky-shadow-yellow flex items-center gap-3 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-label-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+                        Blanco
+                    </button>
+</div>
+</div>
+<!-- Flag Container -->
+<div class="canvas-area aspect-[3/2] w-full bg-surface-container-high rounded-xl relative overflow-hidden border-4 border-dashed border-outline-variant flex items-center justify-center" id="flag-canvas">
+<!-- Visual Placeholder of Turkish Flag Outline -->
+<div class="absolute inset-0 bg-red-500 opacity-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[12rem] text-white opacity-20">format_paint</span>
+</div>
+<!-- The Star and Crescent Outline (Simplified for UI representation) -->
+<div class="relative w-full h-full flex items-center justify-center p-12">
+<div class="w-full h-full border-4 border-on-surface-variant border-opacity-30 rounded-lg flex items-center justify-center bg-white/50 backdrop-blur-sm">
+<!-- Simulated painting brush -->
+<div class="text-center space-y-4">
+<img class="w-64 h-auto mx-auto drop-shadow-lg" data-alt="A stylized, thick-lined coloring book illustration of the Turkish flag. The design is centered, featuring a large crescent moon and a five-pointed star. The art style is bold and tactile, suitable for a children's digital painting app, set against a warm, sun-drenched minimalist classroom background. Soft high-key lighting illuminates the scene with a joyful, premium educational feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHsrHqnnf3DHrdOjM6jninGtX9Y3QeMJ4-4N-AqMkfzqGfZfFFbc1CB6g0ZJqh85nkONA3Z10DyVxQRLQDNlm6pc-i-9Z4SQ6_LQSKij_8XKed8-YCxcy3CHGyZib_gXXwzrGeYhiwPEjfXMRL2j1Gda0FFKAZUTywSkWiOHMdxMvmjL7evt603q9GfDWeC3y0mQHwg-Eu06gHNMKsHC8HAQZg-lmasbVI-m5eKJP2mBES5a9ZoZ0lVYEHdB4qtdlumoWDUOaraUM">
+<p class="font-label-bold text-on-surface-variant uppercase tracking-widest">Toque para colorear</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Style Info Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Fun Fact Card -->
+<div class="bg-tertiary-container text-on-tertiary p-card-padding rounded-lg chunky-shadow-primary flex flex-col justify-center min-h-[160px]">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2">¿Sabías que?</h3>
+<p class="font-body-lg text-body-lg leading-relaxed">"La luna y la estrella brillan en el cielo de Turquía."</p>
+</div>
+</div>
+</div>
+<!-- Tool Selection -->
+<div class="bg-surface-container-low p-card-padding rounded-lg border-2 border-surface-variant flex items-center justify-around">
+<button class="w-20 h-20 bg-red-600 rounded-full border-4 border-white shadow-lg active:scale-95 transition-transform flex items-center justify-center group">
+<span class="material-symbols-outlined text-white text-3xl group-active:scale-110">brush</span>
+</button>
+<button class="w-20 h-20 bg-white rounded-full border-4 border-surface-variant shadow-lg active:scale-95 transition-transform flex items-center justify-center group">
+<span class="material-symbols-outlined text-primary text-3xl group-active:scale-110">brush</span>
+</button>
+<button class="w-20 h-20 bg-primary-container rounded-full border-4 border-white shadow-lg active:scale-95 transition-transform flex items-center justify-center group">
+<span class="material-symbols-outlined text-white text-3xl group-active:scale-110">undo</span>
+</button>
+</div>
+</div>
+<!-- Action Section -->
+<div class="flex flex-col md:flex-row gap-6 items-center justify-center pt-8">
+<button class="chunky-shadow-primary w-full md:w-auto px-12 py-5 bg-primary text-on-primary rounded-full font-headline-md text-headline-md flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">check_circle</span>
+                ¡Terminé!
+            </button>
+<button class="chunky-shadow-secondary w-full md:w-auto px-12 py-5 bg-white text-primary rounded-full font-headline-md text-headline-md border-2 border-surface-variant flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">restart_alt</span>
+                Empezar de nuevo
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-container-lowest flex justify-around items-center px-4 pb-4 pt-2 shadow-lg border-t-4 border-surface-variant">
+<!-- Explore -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant active:translate-y-1 transition-transform duration-75 hover:bg-surface-variant rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<!-- Passport -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant active:translate-y-1 transition-transform duration-75 hover:bg-surface-variant rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<!-- Play (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 active:translate-y-1 transition-transform duration-75" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Turquía','Turkey'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Turquía!','Turkey Alarm!'),750); }
+
+        // Micro-interaction for painting feedback
+        const canvas = document.getElementById('flag-canvas');
+        canvas.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.className = 'absolute rounded-full bg-red-500/20 pointer-events-none transform -translate-x-1/2 -translate-y-1/2 animate-ping';
+            ripple.style.width = '100px';
+            ripple.style.height = '100px';
+            ripple.style.left = `${e.clientX - canvas.getBoundingClientRect().left}px`;
+            ripple.style.top = `${e.clientY - canvas.getBoundingClientRect().top}px`;
+            canvas.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 1000);
+        });
+
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const text = btn.innerText.trim();
+                if (text === 'volume_up\n                        Rojo' || text.includes('Rojo')) {
+                    AudioController.speakBilingual('Rojo','Red');
+                } else if (text === 'volume_up\n                        Blanco' || text.includes('Blanco')) {
+                    AudioController.speakBilingual('Blanco','White');
+                } else if (btn.classList.contains('bg-red-600')) {
+                    AudioController.speakBilingual('Rojo','Red');
+                } else if (btn.classList.contains('bg-white')) {
+                    AudioController.speakBilingual('Blanco','White');
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

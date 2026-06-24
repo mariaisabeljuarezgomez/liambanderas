@@ -1,0 +1,343 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Flag Paint Station - Egipto</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#77de3d",
+                    "tertiary-fixed": "#92fc58",
+                    "outline-variant": "#bec8d3",
+                    "surface-variant": "#dee3e9",
+                    "error": "#ba1a1a",
+                    "secondary": "#735c00",
+                    "primary": "#006495",
+                    "on-background": "#171c21",
+                    "tertiary-container": "#59be1b",
+                    "on-primary-container": "#004163",
+                    "on-primary-fixed": "#001e30",
+                    "background": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "inverse-surface": "#2c3136",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#171c21",
+                    "surface-tint": "#006495",
+                    "tertiary": "#2b6c00",
+                    "surface-bright": "#f7f9ff",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "secondary-fixed-dim": "#efc200",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-container": "#eaeef5",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed": "#231b00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-high": "#e4e8ef",
+                    "primary-container": "#2bb1ff",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#004b71",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-surface-variant": "#3e4851",
+                    "surface-container-highest": "#dee3e9",
+                    "secondary-container": "#fccc00",
+                    "outline": "#6e7882",
+                    "on-tertiary-container": "#1a4600",
+                    "on-secondary-container": "#6d5700",
+                    "surface-dim": "#d6dae1",
+                    "on-tertiary-fixed": "#082100",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; background-color: #f7f9ff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Tactical Shadows for chunky buttons */
+        .chunky-button-red {
+            background-color: #ba1a1a;
+            border-bottom: 6px solid #8c1111;
+        }
+        .chunky-button-white {
+            background-color: #ffffff;
+            border-bottom: 6px solid #dee3e9;
+        }
+        .chunky-button-black {
+            background-color: #171c21;
+            border-bottom: 6px solid #000000;
+        }
+        .chunky-button-audio {
+            background-color: #fccc00;
+            border-bottom: 6px solid #c9a300;
+        }
+        .active-press:active {
+            transform: translateY(4px);
+            border-bottom-width: 0px;
+        }
+
+        /* Drawing States */
+        .stripe-target {
+            transition: background-color 0.3s ease;
+        }
+        
+        .pulse-audio {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Confetti effect for success */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fccc00;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pb-24 overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit z-50">
+<button aria-label="Go back" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all">
+<span class="material-symbols-outlined" style="font-size: 32px;">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">España / Spain</h1>
+</div>
+<button aria-label="Settings" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all">
+<span class="material-symbols-outlined" style="font-size: 32px;">volume_up</span>
+</button>
+<button aria-label="Sound Alarm" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-secondary active:translate-y-1 transition-all" title="¡Alarma! / Sound Alarm"><span class="material-symbols-outlined" style="font-size: 32px;">notifications_active</span></button></header>
+<main class="flex-grow container mx-auto px-container-margin py-unit flex flex-col items-center gap-unit max-w-2xl">
+<!-- Header Content -->
+<div class="w-full flex justify-between items-end mt-4 mb-2">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Egipto</h2>
+<p class="font-body-lg text-body-lg text-outline">Egypt</p>
+</div>
+<div class="flex gap-4">
+<button class="chunky-button-audio active-press w-16 h-16 rounded-full flex items-center justify-center pulse-audio" onclick="playAudio('es')">
+<span class="material-symbols-outlined text-white" style="font-size: 36px; font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<button class="chunky-button-audio active-press w-16 h-16 rounded-full flex items-center justify-center" onclick="playAudio('en')">
+<span class="material-symbols-outlined text-white" style="font-size: 36px; font-variation-settings: 'FILL' 1;">translate</span>
+</button>
+</div>
+</div>
+<!-- The Flag Canvas (Interactive) -->
+<div class="relative w-full aspect-[3/2] bg-white rounded-lg shadow-lg border-4 border-surface-container-highest overflow-hidden flex flex-col p-1" id="flag-canvas">
+<!-- Top Stripe -->
+<div class="stripe-target flex-1 w-full bg-surface-container-low cursor-pointer flex items-center justify-center border-b-2 border-surface-variant" id="stripe-top" onclick="paintStripe('top')">
+<span class="text-outline font-label-bold opacity-30 select-none">TOQUE PARA PINTAR</span>
+</div>
+<!-- Middle Stripe with Eagle -->
+<div class="stripe-target flex-1 w-full bg-surface-container-low cursor-pointer relative flex items-center justify-center border-b-2 border-surface-variant" id="stripe-middle" onclick="paintStripe('middle')">
+<div class="w-24 h-24 z-10 opacity-40 grayscale contrast-125">
+<img class="w-full h-full object-contain" data-alt="A bold, stylized golden eagle emblem of Saladin, the national symbol of Egypt, presented as a clear black-and-white vector outline with thick strokes suitable for a children's educational app. The icon is centered, majestic, and easily recognizable, appearing as a transparent silhouette waiting to be revealed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBkavufG_VEGMdHYt_g6_uV84WfvVBSLfKfNMsV8baLT7KssJ1-oeFhui5gyqWUf0dj0FRolishJmDTz5UE92fra5iKkcHaTdfGx0CRHrrHSgBK0VIErl5BHE_JDG58YrCUAiUa3GazTJ_Sv8MqU3IQi3ddDEuXGpHB3ulP6KK7pDDQIjfGDhivyM3roGeK09Tka_VRN62DxG7vvUxfx_1MIRPPxffpcx9Ebwyg7RswO2igLAIBwthUGZ7-KQPik0bw2diEXNBCec">
+</div>
+<span class="absolute text-outline font-label-bold opacity-30 select-none">TOQUE PARA PINTAR</span>
+</div>
+<!-- Bottom Stripe -->
+<div class="stripe-target flex-1 w-full bg-surface-container-low cursor-pointer flex items-center justify-center" id="stripe-bottom" onclick="paintStripe('bottom')">
+<span class="text-outline font-label-bold opacity-30 select-none">TOQUE PARA PINTAR</span>
+</div>
+</div>
+<!-- Instruction Text -->
+<div class="bg-primary-fixed rounded-lg p-card-padding w-full mt-4 flex items-center gap-4">
+<span class="material-symbols-outlined text-on-primary-fixed-variant" style="font-size: 40px;">palette</span>
+<p class="font-body-md text-on-primary-fixed-variant flex-1 leading-tight">
+                ¡Pinta la bandera de Egipto con los colores correctos! Selecciona un color y toca una franja.
+            </p>
+</div>
+<!-- Palette Section -->
+<div class="grid grid-cols-3 gap-6 w-full mt-6 h-32">
+<button class="chunky-button-red active-press rounded-lg flex flex-col items-center justify-center gap-1 group" id="color-red" onclick="selectColor('red')">
+<div class="w-8 h-8 rounded-full border-2 border-white mb-1 shadow-inner"></div>
+<span class="text-white font-label-bold">Rojo</span>
+</button>
+<button class="chunky-button-white active-press rounded-lg flex flex-col items-center justify-center gap-1 group" id="color-white" onclick="selectColor('white')">
+<div class="w-8 h-8 rounded-full border-2 border-surface-variant mb-1 shadow-inner"></div>
+<span class="text-primary font-label-bold">Blanco</span>
+</button>
+<button class="chunky-button-black active-press rounded-lg flex flex-col items-center justify-center gap-1 group" id="color-black" onclick="selectColor('black')">
+<div class="w-8 h-8 rounded-full border-2 border-outline mb-1 shadow-inner"></div>
+<span class="text-white font-label-bold">Negro</span>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface shadow-lg border-t-4 border-surface-container-highest z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-6 py-2 translate-y-1 shadow-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<!-- Overlay Celebration (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/40 backdrop-blur-sm p-container-margin" id="celebration">
+<div class="bg-surface-container-lowest rounded-xl p-8 w-full max-w-sm flex flex-col items-center text-center shadow-2xl relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+
+</div>
+<div class="w-32 h-32 mb-6 bg-secondary-container rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-secondary text-7xl" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h3 class="font-headline-lg text-primary mb-2">¡Excelente!</h3>
+<p class="font-body-lg text-on-surface-variant mb-8">Has completado la bandera de Egipto perfectamente.</p>
+<button class="bg-primary text-white font-label-bold text-label-bold px-10 py-4 rounded-full shadow-lg active:scale-95 transition-transform" onclick="resetPainting()">
+                Jugar de Nuevo
+            </button>
+</div>
+</div>
+<script>
+        let selectedColor = null;
+        const correctFlag = {
+            top: 'red',
+            middle: 'white',
+            bottom: 'black'
+        };
+        let currentFlag = {
+            top: null,
+            middle: null,
+            bottom: null
+        };
+
+        const colorMap = {
+            red: '#ba1a1a',
+            white: '#ffffff',
+            black: '#171c21'
+        };
+
+        function selectColor(color) {
+            selectedColor = color;
+            
+            // Visual feedback on selection
+            document.querySelectorAll('[id^="color-"]').forEach(btn => {
+                btn.classList.remove('scale-110', 'ring-4', 'ring-primary-container');
+            });
+            document.getElementById(`color-${color}`).classList.add('scale-110', 'ring-4', 'ring-primary-container');
+        }
+
+        function paintStripe(stripeId) {
+            if (!selectedColor) {
+                alert("¡Primero elige un color de la paleta!");
+                return;
+            }
+
+            const element = document.getElementById(`stripe-${stripeId}`);
+            element.style.backgroundColor = colorMap[selectedColor];
+            element.querySelector('span').classList.add('hidden');
+            
+            if (stripeId === 'middle' && selectedColor === 'white') {
+                element.querySelector('div').classList.remove('opacity-40', 'grayscale');
+                element.querySelector('div').classList.add('opacity-100');
+            } else if (stripeId === 'middle') {
+                element.querySelector('div').classList.add('opacity-40', 'grayscale');
+            }
+
+            currentFlag[stripeId] = selectedColor;
+            checkWin();
+        }
+
+        function checkWin() {
+            if (currentFlag.top === correctFlag.top && 
+                currentFlag.middle === correctFlag.middle && 
+                currentFlag.bottom === correctFlag.bottom) {
+                
+                setTimeout(() => {
+                    document.getElementById('celebration').classList.remove('hidden');
+                    document.getElementById('celebration').classList.add('flex');
+                }, 500);
+            }
+        }
+
+        function resetPainting() {
+            document.getElementById('celebration').classList.add('hidden');
+            document.getElementById('celebration').classList.remove('flex');
+            
+            ['top', 'middle', 'bottom'].forEach(id => {
+                const el = document.getElementById(`stripe-${id}`);
+                el.style.backgroundColor = '';
+                el.querySelector('span').classList.remove('hidden');
+                currentFlag[id] = null;
+            });
+            
+            const middleImg = document.getElementById('stripe-middle').querySelector('div');
+            middleImg.classList.add('opacity-40', 'grayscale');
+            
+            selectedColor = null;
+            document.querySelectorAll('[id^="color-"]').forEach(btn => {
+                btn.classList.remove('scale-110', 'ring-4', 'ring-primary-container');
+            });
+        }
+
+        function playAudio(lang) {
+            // Simplified feedback for audio
+            const text = lang === 'es' ? "Egipto" : "Egypt";
+            console.log("Playing audio for: " + text);
+            
+            const btn = event.currentTarget;
+            btn.classList.add('scale-90');
+            setTimeout(() => btn.classList.remove('scale-90'), 200);
+        }
+    </script>
+
+
+</body></html>

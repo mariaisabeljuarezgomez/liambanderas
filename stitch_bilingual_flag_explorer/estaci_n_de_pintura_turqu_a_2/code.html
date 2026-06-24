@@ -1,0 +1,309 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Turquía - Flag Adventure</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+            user-select: none;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Tactile Shadow Buttons */
+        .button-primary {
+            @apply bg-primary-container text-on-primary-container border-b-[6px] border-primary active:border-b-0 active:translate-y-[6px] transition-all duration-75;
+        }
+        
+        .button-secondary {
+            @apply bg-surface-container-lowest text-primary border-b-[6px] border-surface-variant active:border-b-0 active:translate-y-[6px] transition-all duration-75;
+        }
+
+        /* Paint Interaction */
+        .paint-target {
+            transition: fill 0.3s ease, stroke 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Audio Pulse Animation */
+        @keyframes audio-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+        .pulse-audio {
+            animation: audio-pulse 2s infinite;
+        }
+
+        .canvas-bg {
+            background-image: radial-gradient(#dee3e9 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "outline": "#6e7882",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-low": "#f0f4fb",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bec8d3",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface-container-low flex items-center justify-between px-container-margin py-unit transition-all duration-100">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary">Flag Adventure</h1>
+</div>
+<div class="flex items-center">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-container-margin py-6 pb-32 canvas-bg">
+<!-- Level Progress -->
+<div class="mb-8 max-w-xl mx-auto">
+<div class="flex justify-between items-end mb-2">
+<span class="text-label-bold font-label-bold text-primary">Level 5: Turquía</span>
+<span class="text-label-bold font-label-bold text-secondary">80% Master</span>
+<button class="flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full shadow-md active:translate-y-1 transition-all hover:bg-primary-container" onclick="playAudio('alarm')"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-label-bold">¡Alarma!</span></button></div>
+<div class="h-4 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[80%] rounded-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Main Interaction Area -->
+<div class="max-w-2xl mx-auto grid grid-cols-1 gap-6">
+<!-- Flag Canvas Card -->
+<div class="bg-surface-container-lowest rounded-lg border-b-[8px] border-surface-variant p-card-padding flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute top-4 left-4">
+<button class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center pulse-audio shadow-lg" onclick="playAudio('turquia')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<div class="w-full aspect-[3/2] max-w-md bg-white border-2 border-surface-variant rounded-lg overflow-hidden shadow-inner flex items-center justify-center p-4">
+<svg class="w-full h-full drop-shadow-sm" id="turkey-flag" viewBox="0 0 1200 800">
+<!-- Flag Background -->
+<rect class="paint-target" fill="#f0f4fb" height="800" id="flag-bg" onclick="paint('flag-bg')" stroke="#dee3e9" stroke-width="4" width="1200" x="0" y="0"></rect>
+<!-- Moon -->
+<path class="paint-target" d="M400,400 m-200,0 a200,200 0 1,0 400,0 a200,200 0 1,0 -400,0 M450,400 m-160,0 a160,160 0 1,0 320,0 a160,160 0 1,0 -320,0" fill="#f0f4fb" fill-rule="evenodd" id="flag-moon" onclick="paint('flag-moon')" stroke="#dee3e9" stroke-width="4"></path>
+<!-- Star -->
+<path class="paint-target" d="M680,400 L717.3,427.1 L703.1,383.3 L740.4,356.2 L694.3,356.2 L680,312.5 L665.7,356.2 L619.6,356.2 L656.9,383.3 L642.7,427.1 Z" fill="#f0f4fb" id="flag-star" onclick="paint('flag-star')" stroke="#dee3e9" stroke-width="4"></path>
+</svg>
+</div>
+<div class="mt-6 text-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Pintar la Bandera</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">¡Toca un color y luego toca la bandera!</p>
+</div>
+</div>
+<!-- Color Palette Bento Grid -->
+<div class="grid grid-cols-2 gap-4">
+<button class="group relative bg-surface-container-lowest rounded-lg p-6 flex flex-col items-center justify-center border-b-[8px] border-surface-variant active:border-b-0 active:translate-y-[8px] transition-all" onclick="selectColor('#ba1a1a', 'Rojo')">
+<div class="w-16 h-16 rounded-full bg-[#ba1a1a] mb-3 shadow-md ring-4 ring-transparent group-focus:ring-primary-container"></div>
+<span class="font-label-bold text-label-bold">Rojo</span>
+</button>
+<button class="group relative bg-surface-container-lowest rounded-lg p-6 flex flex-col items-center justify-center border-b-[8px] border-surface-variant active:border-b-0 active:translate-y-[8px] transition-all" onclick="selectColor('#ffffff', 'Blanco')">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-surface-variant mb-3 shadow-md ring-4 ring-transparent group-focus:ring-primary-container"></div>
+<span class="font-label-bold text-label-bold">Blanco</span>
+</button>
+</div>
+<!-- Fun Fact Card -->
+<div class="bg-primary-container text-on-primary-container rounded-lg p-card-padding flex gap-4 items-start shadow-lg">
+<div class="w-12 h-12 shrink-0 bg-white/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold mb-1">Dato Curioso:</h3>
+<p class="font-body-md text-body-md">La luna y la estrella brillan en el cielo de Turquía.</p>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-6 rounded-lg bg-tertiary-container text-on-tertiary-container font-headline-md text-headline-md border-b-[8px] border-tertiary active:border-b-0 active:translate-y-[8px] transition-all" id="check-btn">
+                ¡Revisar Bandera!
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] bg-secondary-container hidden flex-col items-center justify-center p-container-margin text-center" id="success-modal">
+
+<div class="relative z-10 scale-0 transition-transform duration-500 ease-out flex flex-col items-center" id="modal-content">
+<div class="w-48 h-48 bg-white rounded-full flex items-center justify-center mb-6 shadow-2xl border-8 border-tertiary-container">
+<span class="material-symbols-outlined text-tertiary-container text-[120px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-secondary-container mb-4">¡Excelente!</h2>
+<p class="font-body-lg text-body-lg text-on-secondary-container mb-8">Has completado la bandera de Turquía.</p>
+<button class="px-12 py-6 bg-white text-primary font-headline-md text-headline-md rounded-full shadow-xl border-b-[8px] border-surface-variant active:border-b-0 active:translate-y-[8px] transition-all" onclick="closeModal()">
+                Siguiente Aventura
+            </button>
+</div>
+</div>
+<script>
+        let selectedColor = null;
+
+        function selectColor(color, name) {
+            selectedColor = color;
+            console.log("Color selected:", name);
+            
+            // Haptic-like visual feedback on palette
+            document.querySelectorAll('button div').forEach(div => div.classList.remove('ring-primary-container'));
+        }
+
+        function paint(elementId) {
+            if (!selectedColor) {
+                alert("¡Primero elige un color!");
+                return;
+            }
+            const el = document.getElementById(elementId);
+            el.setAttribute('fill', selectedColor);
+            el.setAttribute('stroke', selectedColor);
+        }
+
+        function playAudio(term) {
+            console.log("Playing audio for:", term);
+            // In a real app, this would trigger an MP3
+        }
+
+        const checkBtn = document.getElementById('check-btn');
+        const modal = document.getElementById('success-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        checkBtn.addEventListener('click', () => {
+            const bg = document.getElementById('flag-bg').getAttribute('fill');
+            const moon = document.getElementById('flag-moon').getAttribute('fill');
+            const star = document.getElementById('flag-star').getAttribute('fill');
+
+            // Simplified check logic for Level 5
+            if (bg === '#ba1a1a' && moon === '#ffffff' && star === '#ffffff') {
+                showSuccess();
+            } else {
+                alert("¡Casi lo tienes! Recuerda: Fondo Rojo, Luna y Estrella Blancas.");
+            }
+        });
+
+        function showSuccess() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-0');
+                modalContent.classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeModal() {
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                location.reload(); // Reset for next play
+            }, 300);
+        }
+    </script>
+
+
+</body></html>

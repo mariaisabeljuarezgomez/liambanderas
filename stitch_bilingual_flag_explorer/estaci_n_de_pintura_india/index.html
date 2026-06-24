@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>¡Pinta la Bandera de la India!</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#2b6c00",
+                    "surface-container-highest": "#dee3e9",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-on-surface": "#edf1f8",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "primary-fixed-dim": "#90cdff",
+                    "surface": "#f7f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#cbe6ff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#1a4600",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-primary-fixed-variant": "#004b71",
+                    "inverse-primary": "#90cdff",
+                    "surface-container": "#eaeef5",
+                    "primary": "#006495",
+                    "surface-dim": "#d6dae1",
+                    "surface-variant": "#dee3e9",
+                    "on-secondary-container": "#6d5700",
+                    "error": "#ba1a1a",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary-container": "#59be1b",
+                    "outline": "#6e7882",
+                    "on-surface-variant": "#3e4851",
+                    "outline-variant": "#bec8d3",
+                    "secondary-fixed": "#ffe084",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed": "#082100",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#92fc58",
+                    "secondary-container": "#fccc00",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#171c21",
+                    "background": "#f7f9ff",
+                    "on-background": "#171c21",
+                    "surface-container-low": "#f0f4fb",
+                    "surface-tint": "#006495",
+                    "on-primary-container": "#004163",
+                    "surface-bright": "#f7f9ff",
+                    "on-primary-fixed": "#001e30",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "flag-orange": "#FF9933",
+                    "flag-green": "#138808",
+                    "flag-blue": "#000080"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chunky-button {
+            transition: all 0.1s ease;
+            box-shadow: 0 6px 0 0 rgba(0,0,0,0.1);
+        }
+        .chunky-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+        }
+        .paint-section {
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .audio-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f00;
+            border-radius: 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation -->
+<header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
+<button onclick="window.location.href='../world_map_hub/index.html'" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:translate-y-1">
+<span class="material-symbols-outlined text-primary text-3xl">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">India</h1>
+<span class="font-label-bold text-label-bold text-on-surface-variant">Estación de Pintura</span>
+</div>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container chunky-button audio-pulse" onclick="speakCountry()">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+</button>
+</header>
+<main class="max-w-4xl mx-auto px-gutter py-8 mb-24">
+<!-- Instruction Section -->
+<section class="text-center mb-10">
+<div class="inline-flex items-center gap-4 bg-surface-container-low px-6 py-4 rounded-xl border-2 border-dashed border-primary/30">
+<span class="material-symbols-outlined text-primary text-4xl">palette</span>
+<p class="font-headline-md text-headline-md text-on-surface">¡Pinta la bandera de <span class="text-primary">India</span>!</p>
+</div>
+</section>
+<!-- Flag Canvas -->
+<div class="relative bg-white rounded-lg p-6 shadow-xl border-4 border-surface-container-highest overflow-hidden select-none">
+<!-- India Silhouette Structure -->
+<div class="aspect-[3/2] flex flex-col border-2 border-outline-variant rounded-md overflow-hidden bg-surface-container-lowest">
+<!-- Top Stripe: Saffron -->
+<div class="paint-section flex-1 border-b-2 border-outline-variant flex items-center justify-center cursor-pointer hover:brightness-95" id="stripe-top" onclick="paintArea('stripe-top')">
+<span class="text-outline/20 font-headline-lg select-none">Naranja</span>
+</div>
+<!-- Middle Stripe: White -->
+<div class="paint-section flex-1 border-b-2 border-outline-variant relative flex items-center justify-center cursor-pointer hover:brightness-95" id="stripe-middle" onclick="paintArea('stripe-middle')">
+<!-- Ashoka Chakra -->
+<div class="paint-section w-32 h-32 rounded-full border-2 border-outline-variant flex items-center justify-center relative z-10 hover:scale-110 transition-transform bg-transparent" id="chakra" onclick="event.stopPropagation(); paintArea('chakra')">
+<div class="absolute inset-0 flex items-center justify-center opacity-30">
+<span class="material-symbols-outlined text-6xl">settings</span>
+</div>
+</div>
+<span class="text-outline/20 font-headline-lg select-none absolute left-8">Blanco</span>
+</div>
+<!-- Bottom Stripe: Green -->
+<div class="paint-section flex-1 flex items-center justify-center cursor-pointer hover:brightness-95" id="stripe-bottom" onclick="paintArea('stripe-bottom')">
+<span class="text-outline/20 font-headline-lg select-none">Verde</span>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -left-12 -bottom-12 w-48 h-48 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
+</div>
+<!-- Palette / Color Picker -->
+<section class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Naranja Button -->
+<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#CC7A29] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="selectColor('naranja', '#FF9933')">
+<div class="w-20 h-20 bg-flag-orange rounded-full shadow-inner border-4 border-white"></div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md">Naranja</span>
+<span class="material-symbols-outlined text-secondary-container bg-on-surface p-1 rounded-full text-xl hover:scale-110 transition-transform cursor-pointer" onclick="event.stopPropagation(); playAudio('Naranja')">volume_up</span>
+</div>
+<div class="hidden absolute -top-4 -right-4 bg-tertiary-container text-on-tertiary p-2 rounded-full shadow-lg" id="check-naranja">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</button>
+<!-- Blanco Button -->
+<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#C0C8D0] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="selectColor('blanco', '#FFFFFF')">
+<div class="w-20 h-20 bg-white rounded-full shadow-inner border-4 border-surface-container-highest"></div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md">Blanco</span>
+<span class="material-symbols-outlined text-secondary-container bg-on-surface p-1 rounded-full text-xl hover:scale-110 transition-transform cursor-pointer" onclick="event.stopPropagation(); playAudio('Blanco')">volume_up</span>
+</div>
+<div class="hidden absolute -top-4 -right-4 bg-tertiary-container text-on-tertiary p-2 rounded-full shadow-lg" id="check-blanco">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</button>
+<!-- Verde Button -->
+<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#0E6606] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="selectColor('verde', '#138808')">
+<div class="w-20 h-20 bg-flag-green rounded-full shadow-inner border-4 border-white"></div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md">Verde</span>
+<span class="material-symbols-outlined text-secondary-container bg-on-surface p-1 rounded-full text-xl hover:scale-110 transition-transform cursor-pointer" onclick="event.stopPropagation(); playAudio('Verde')">volume_up</span>
+</div>
+<div class="hidden absolute -top-4 -right-4 bg-tertiary-container text-on-tertiary p-2 rounded-full shadow-lg" id="check-verde">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</button>
+</section>
+<!-- Completion Progress -->
+<div class="mt-12">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-label-bold text-primary">Progreso</span>
+<span class="font-headline-md text-headline-md text-primary" id="progress-text">0%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-6 rounded-full overflow-hidden shadow-inner">
+<div class="h-full bg-tertiary-container w-0 transition-all duration-500 rounded-full" id="progress-bar" style="box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1)"></div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest shadow-lg z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 shadow-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center bg-on-surface/50 backdrop-blur-sm hidden" id="success-modal">
+<div class="bg-surface-container-lowest p-8 rounded-xl max-w-sm w-full mx-4 text-center border-b-8 border-tertiary-container shadow-2xl scale-90 transition-transform">
+<div class="w-24 h-24 bg-secondary-container mx-auto rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-secondary-container text-6xl">stars</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">¡Excelente!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">Has pintado la bandera de India correctamente.</p>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline-md chunky-button border-b-4 border-[#004163]" onclick="location.reload()">
+                ¡Jugar otra vez!
+            </button>
+</div>
+</div>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            playSynth(freq, type, dur, vol) {
+                try {
+                    this.initContext();
+                    const osc = this.ctx.createOscillator(), g = this.ctx.createGain();
+                    osc.type = type; osc.frequency.value = freq;
+                    g.gain.setValueAtTime(vol, this.ctx.currentTime);
+                    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur);
+                    osc.connect(g); g.connect(this.ctx.destination);
+                    osc.start(); osc.stop(this.ctx.currentTime + dur + 0.05);
+                } catch(e) {}
+            },
+            boing() { this.playSynth(150,'sine',0.3,0.2); },
+            sparkle() { [880,1100,1320].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'triangle',0.15,0.07),i*60)); },
+            victory() { [261.63,329.63,392,523.25,659.25,783.99,1046.5].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'sine',0.4,0.1),i*120)); },
+            alarm() {
+                try {
+                    this.initContext(); const c=this.ctx;
+                    for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95;
+                    u.onend = () => { const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
+        };
+        function speakCountry() { AudioController.speakBilingual('India','India'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de India!','India Alarm!'),750); }
+
+        let selectedColor = null;
+        let selectedHex = null;
+        let paintedParts = {
+            'stripe-top': false,
+            'stripe-middle': false,
+            'stripe-bottom': false,
+            'chakra': false
+        };
+
+        const correctColors = {
+            'stripe-top': 'naranja',
+            'stripe-middle': 'blanco',
+            'stripe-bottom': 'verde',
+            'chakra': 'blanco' // Chakra is technically blue, but for this simplified UI we focus on the tri-color and general Blanco background. 
+            // Simplified logic: Chakra is painted separately if needed, but let's assume it should be blue if we had a blue button.
+            // Let's adjust to auto-color chakra blue when the middle is white for a better user experience.
+        };
+
+        function selectColor(colorName, hex) {
+            selectedColor = colorName;
+            selectedHex = hex;
+            
+            // UI feedback for selection
+            ['naranja', 'blanco', 'verde'].forEach(c => {
+                const check = document.getElementById(`check-${c}`);
+                if (c === colorName) {
+                    check.classList.remove('hidden');
+                } else {
+                    check.classList.add('hidden');
+                }
+            });
+
+            // Sparkle effect on button
+            createParticles(event.pageX, event.pageY);
+        }
+
+        function paintArea(id) {
+            if (!selectedHex) {
+                alert("¡Primero selecciona un color abajo!");
+                return;
+            }
+
+            const area = document.getElementById(id);
+            area.style.backgroundColor = selectedHex;
+            area.innerHTML = ''; // Clear label text
+            
+            if (id === 'chakra' && selectedColor === 'blanco') {
+                // Special case for chakra, let's make it look authentic
+                area.style.borderColor = '#000080';
+                area.innerHTML = '<span class="material-symbols-outlined text-6xl text-[#000080]" style="font-variation-settings: \'opsz\' 48">settings</span>';
+            }
+
+            paintedParts[id] = true;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = Object.keys(paintedParts).length;
+            const painted = Object.values(paintedParts).filter(v => v).length;
+            const percentage = Math.round((painted / total) * 100);
+            
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('progress-text').innerText = percentage + '%';
+
+            if (percentage === 100) {
+                setTimeout(showSuccess, 500);
+            }
+        }
+
+        function showSuccess() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.querySelector('div').classList.remove('scale-90');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 10);
+            
+            // Confetti burst
+            for(let i=0; i<50; i++) {
+                setTimeout(() => createParticles(window.innerWidth/2, window.innerHeight/2), i * 20);
+            }
+        }
+
+        function playAudio(text) {
+            const labels = { 'India':['India','India'], 'Naranja':['Naranja','Orange'], 'Blanco':['Blanco','White'], 'Verde':['Verde','Green'] };
+            const pair = labels[text] || [text, text];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        function createParticles(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const p = document.createElement('div');
+                p.className = 'confetti fixed z-[100] pointer-events-none';
+                p.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                p.style.left = x + 'px';
+                p.style.top = y + 'px';
+                document.body.appendChild(p);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 2 + Math.random() * 4;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+                
+                let posX = x;
+                let posY = y;
+                let opacity = 1;
+
+                const animate = () => {
+                    posX += dx;
+                    posY += dy;
+                    opacity -= 0.02;
+                    p.style.left = posX + 'px';
+                    p.style.top = posY + 'px';
+                    p.style.opacity = opacity;
+
+                    if (opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        p.remove();
+                    }
+                };
+                requestAnimationFrame(animate);
+            }
+        }
+    </script>
+</body></html>

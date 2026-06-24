@@ -1,0 +1,280 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Estación de Pintura (Perú)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-shadow-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-shadow-primary:active {
+            box-shadow: 0 0 0 0 #004b71;
+            transform: translateY(6px);
+        }
+        .chunky-shadow-secondary {
+            box-shadow: 0 6px 0 0 #dee3e9;
+        }
+        .chunky-shadow-secondary:active {
+            box-shadow: 0 0 0 0 #dee3e9;
+            transform: translateY(6px);
+        }
+        .chunky-shadow-yellow {
+            box-shadow: 0 6px 0 0 #b38f00;
+        }
+        .chunky-shadow-yellow:active {
+            box-shadow: 0 0 0 0 #b38f00;
+            transform: translateY(6px);
+        }
+        .flag-band {
+            transition: background-color 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "surface-variant": "#dee3e9",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "outline": "#6e7882",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "inverse-surface": "#2c3136",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1",
+                    "inverse-primary": "#90cdff",
+                    "outline-variant": "#bec8d3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "surface-container-low": "#f0f4fb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px",
+                    "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col pb-24">
+<!-- Top Navigation -->
+<header class="w-full top-0 sticky z-40 bg-surface-container-low flex items-center justify-between px-container-margin py-unit transition-all duration-100">
+<div class="flex items-center gap-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Estación de Pintura (Perú)</h1>
+</div>
+<div class="flex gap-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary">volume_up</span>
+</button>
+</div>
+<button class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<main class="flex-grow px-container-margin pt-unit flex flex-col gap-6">
+<!-- Instruction Section -->
+<section class="flex flex-col items-center text-center gap-2 mt-4">
+<p class="font-headline-md text-primary">¡Pinta la bandera de Perú!</p>
+<p class="text-on-surface-variant text-body-md">Toca los botes de pintura para colorear cada parte.</p>
+</section>
+<!-- Interactive Flag Canvas -->
+<div class="relative w-full max-w-md mx-auto aspect-[3/2] bg-white rounded-lg border-4 border-surface-variant p-4 chunky-shadow-secondary overflow-hidden">
+<div class="w-full h-full flex border-2 border-outline-variant rounded-sm" id="flag-container">
+<!-- Left Red Band -->
+<button class="flag-band flex-1 h-full bg-surface-container-highest cursor-pointer hover:opacity-90 active:scale-95 transition-transform" data-correct-color="bg-[#D91023]" onclick="paintBand(this)"></button>
+<!-- Middle White Band -->
+<button class="flag-band flex-1 h-full bg-surface-container-highest border-x border-outline-variant cursor-pointer hover:opacity-90 active:scale-95 transition-transform" data-correct-color="bg-white" onclick="paintBand(this)"></button>
+<!-- Right Red Band -->
+<button class="flag-band flex-1 h-full bg-surface-container-highest cursor-pointer hover:opacity-90 active:scale-95 transition-transform" data-correct-color="bg-[#D91023]" onclick="paintBand(this)"></button>
+</div>
+<!-- Confetti Overlay (Hidden) -->
+<div class="absolute inset-0 pointer-events-none opacity-0 flex items-center justify-center transition-opacity duration-500" id="celebration">
+<span class="material-symbols-outlined text-6xl text-secondary-container" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+<!-- Tool Palette & Audio -->
+<div class="flex flex-col gap-8 items-center mt-4">
+<!-- Color Pickers -->
+<div class="flex gap-6 items-end">
+<div class="flex flex-col items-center gap-3">
+<button class="w-20 h-24 bg-[#D91023] rounded-t-full rounded-b-lg border-x-4 border-b-8 border-[#9a0b19] flex items-end justify-center pb-2 active:translate-y-1 active:border-b-4 transition-all" id="paint-red" onclick="selectColor('bg-[#D91023]')">
+<span class="material-symbols-outlined text-white text-3xl">format_paint</span>
+</button>
+<button class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-yellow text-on-secondary-container animate-pulse-soft" onclick="playAudio('rojo')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<span class="font-label-bold text-on-surface">Rojo</span>
+</div>
+<div class="flex flex-col items-center gap-3">
+<button class="w-20 h-24 bg-white rounded-t-full rounded-b-lg border-x-4 border-b-8 border-surface-variant flex items-end justify-center pb-2 active:translate-y-1 active:border-b-4 transition-all" id="paint-white" onclick="selectColor('bg-white')">
+<span class="material-symbols-outlined text-primary text-3xl">format_paint</span>
+</button>
+<button class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-yellow text-on-secondary-container animate-pulse-soft" onclick="playAudio('blanco')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<span class="font-label-bold text-on-surface">Blanco</span>
+</div>
+</div>
+<!-- Fun Fact Card -->
+<div class="w-full bg-tertiary-container/10 border-2 border-tertiary-container rounded-lg p-card-padding flex items-center gap-4">
+<div class="w-16 h-16 shrink-0 rounded-full bg-white border-2 border-tertiary shadow-sm flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A cute, friendly cartoon llama with large expressive eyes and a colorful Peruvian woven collar. The art style is chunky, bright, and child-friendly with soft lighting and a cheerful blue sky background. The llama looks happy and approachable, designed for an educational children's application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARpr31cGlfktTDBX7K-ncChaXL97qgwG0AeuX_P6fJK0FVHSTUvfJQJGsyH9E14NVqmLTe1kmxAkpeGkoDqPdOv3IK3nY9-qMq7LJfVIC28GeiB5rA4xD3VXaSJ-oiRofrX383MG_6ncD3iCr2G5VmDIf2VKXZOIxIhjnGbGCXpU_3HGNeNbh5Eh-hGtkBr88tiRFRNiu68QtO17lgyNKjPd8iivnCZDpov41NbpFQP8WXL2Jk0UQmtVrNXy9ozSSZZbr3Xm7FWNE">
+</div>
+<div class="flex-1">
+<p class="font-label-bold text-tertiary">¿Sabías que...?</p>
+<p class="text-on-tertiary-container text-body-md">En Perú viven las simpáticas llamas.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Navigation Shell -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<script>
+        let selectedColorClass = '';
+
+        function selectColor(colorClass) {
+            selectedColorClass = colorClass;
+            // Visual feedback for selection
+            document.querySelectorAll('[id^="paint-"]').forEach(btn => {
+                btn.style.transform = 'translateY(0)';
+            });
+            event.currentTarget.style.transform = 'translateY(4px)';
+        }
+
+        function paintBand(element) {
+            if (!selectedColorClass) {
+                alert("¡Primero elige un color de los botes!");
+                return;
+            }
+            
+            // Remove previous bg classes
+            element.className = element.className.replace(/\bbg-\S+/g, '');
+            element.classList.add(selectedColorClass);
+
+            checkWinCondition();
+        }
+
+        function playAudio(word) {
+            console.log("Playing audio for: " + word);
+            // In a real app, this would trigger an audio file
+            // For now, visual feedback
+            const utter = new SpeechSynthesisUtterance(word);
+            utter.lang = 'es-PE';
+            window.speechSynthesis.speak(utter);
+        }
+
+        function checkWinCondition() {
+            const bands = document.querySelectorAll('.flag-band');
+            let allCorrect = true;
+            
+            bands.forEach(band => {
+                const correct = band.getAttribute('data-correct-color');
+                if (!band.classList.contains(correct)) {
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                const celebration = document.getElementById('celebration');
+                celebration.classList.remove('opacity-0');
+                celebration.classList.add('opacity-100');
+                
+                // Audio feedback
+                setTimeout(() => {
+                    const winMsg = new SpeechSynthesisUtterance("¡Excelente! Has pintado la bandera de Perú.");
+                    winMsg.lang = 'es-PE';
+                    window.speechSynthesis.speak(winMsg);
+                }, 500);
+            }
+        }
+    </script>
+
+
+</body></html>

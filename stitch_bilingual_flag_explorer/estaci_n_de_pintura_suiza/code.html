@@ -1,0 +1,256 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Paint Adventure - Switzerland</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline": "#6e7882",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-container": "#6d5700",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#006495",
+                    "on-surface-variant": "#3e4851",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container": "#eaeef5",
+                    "surface-container-highest": "#dee3e9",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-tertiary-fixed": "#082100",
+                    "on-surface": "#171c21",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "background": "#f7f9ff",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary-container": "#2bb1ff",
+                    "on-secondary-fixed": "#231b00",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-container": "#59be1b",
+                    "outline-variant": "#bec8d3",
+                    "primary": "#006495",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "secondary": "#735c00",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-surface": "#2c3136",
+                    "surface": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-button-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #004b71;
+        }
+        .chunky-button-secondary {
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .chunky-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #bec8d3;
+        }
+        .chunky-card {
+            box-shadow: 0 8px 0 0 #e4e8ef;
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .canvas-bg {
+            background-image: radial-gradient(#bec8d3 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Top AppBar -->
+<header class="flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 bg-surface fixed top-0 docked full-width">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary active:translate-y-1 transition-all duration-100 p-2 rounded-full hover:bg-primary-container">arrow_back</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Paint Adventure</h1>
+</div>
+<button class="flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-bold text-label-bold active:translate-y-1 transition-all duration-100 shadow-md"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="">¡Alarma! / Sound Alarm</span></button><button class="material-symbols-outlined text-primary active:translate-y-1 transition-all duration-100 p-2 rounded-full hover:bg-primary-container">volume_up</button>
+</header>
+<main class="flex-grow pt-20 pb-24 px-container-margin max-w-4xl mx-auto w-full">
+<!-- Switzerland Intro Section -->
+<div class="mb-8 flex flex-col md:flex-row items-center gap-6">
+<div class="w-full md:w-1/3">
+<div class="aspect-square rounded-lg bg-surface-container-lowest chunky-card p-4 flex items-center justify-center relative overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="A friendly, chunky 3D illustration of a Swiss mountain dog wearing a small bell, sitting next to a giant bar of chocolate with the snow-capped Alps in the background. The style is bright, clean, and cheerful for young children, with soft rounded edges and vibrant primary colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt70yjhCAoSbiY5Vy7YFSn3qQBA9GNM2rhzxYPqvQ-o3YbrtfctDVrMK28tLpno0Cr8juuUVyRYsp33SgNQ7DYI46PYtYoctyrcvyVVDC0hEesSVo9sddZ7vPoX4zbzHuRN-8Z-O8n0z8WUhjSFSkDAW52REjX12Cn_dkdd8SSz_9c3yZb3OnIwVfWaT4a3pFOQaCfNe8hppNCoJiGSSHy-tQ_6Lzoz6uyf0QaD8abf7m5m5lVCReVHfv-GkEHYrG9w3UcvoNEzWQ">
+</div>
+</div>
+<div class="w-full md:w-2/3 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Suiza / Switzerland</h2>
+<button class="bg-secondary-container p-3 rounded-full flex items-center justify-center pulse-animation shadow-md active:translate-y-1" onclick="this.classList.remove('pulse-animation')">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+                    Suiza es famosa por sus montañas nevadas y chocolates.
+                </p>
+</div>
+</div>
+<!-- The Painting Canvas Area -->
+<div class="relative mb-10">
+<div class="bg-white rounded-lg p-6 chunky-card canvas-bg border-2 border-surface-variant">
+<div class="aspect-[4/3] w-full max-w-md mx-auto bg-surface-container-lowest rounded-md flex items-center justify-center relative shadow-inner overflow-hidden border-4 border-white">
+<!-- Flag Visualization -->
+<div class="w-64 h-64 relative bg-slate-100 flex items-center justify-center transition-colors duration-500" id="flag-container">
+<!-- Vertical Bar of the Cross -->
+<div class="absolute bg-white w-12 h-40 transition-colors duration-300" id="cross-v"></div>
+<!-- Horizontal Bar of the Cross -->
+<div class="absolute bg-white w-40 h-12 transition-colors duration-300" id="cross-h"></div>
+</div>
+</div>
+<!-- Painting Tools / Palette -->
+<div class="mt-8 flex justify-center gap-8">
+<!-- Red Tool -->
+<button class="group flex flex-col items-center gap-2" onclick="applyColor('red')">
+<div class="w-20 h-20 bg-[#D52B1E] rounded-full ring-4 ring-offset-4 ring-transparent group-active:ring-primary transition-all chunky-button-secondary"></div>
+<span class="font-label-bold text-label-bold text-on-surface">Rojo</span>
+<div class="bg-secondary-container p-2 rounded-full flex items-center justify-center scale-75 shadow-sm">
+<span class="material-symbols-outlined text-on-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</div>
+</button>
+<!-- White Tool -->
+<button class="group flex flex-col items-center gap-2" onclick="applyColor('white')">
+<div class="w-20 h-20 bg-white border-2 border-surface-variant rounded-full ring-4 ring-offset-4 ring-transparent group-active:ring-primary transition-all chunky-button-secondary"></div>
+<span class="font-label-bold text-label-bold text-on-surface">Blanco</span>
+<div class="bg-secondary-container p-2 rounded-full flex items-center justify-center scale-75 shadow-sm">
+<span class="material-symbols-outlined text-on-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Success Hint -->
+<div class="hidden absolute -top-4 -right-4 bg-tertiary-container text-on-tertiary p-4 rounded-full shadow-lg rotate-12 flex items-center gap-2 border-4 border-white" id="success-badge">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-bold text-label-bold">¡Perfecto!</span>
+</div>
+</div>
+<!-- Fun Progress / Fact Card -->
+<div class="bg-primary-container/10 border-2 border-dashed border-primary-container p-card-padding rounded-lg flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-container text-4xl">lightbulb</span>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-primary-container mb-1">Did you know?</h3>
+<p class="text-body-md text-on-surface-variant">The Swiss flag is one of only two square national flags in the world! (The other one is Vatican City).</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all duration-100" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-label-bold text-label-bold">World Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all duration-100" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label-bold text-label-bold">My Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 active:translate-y-1 transition-all duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all duration-100" href="#">
+<span class="material-symbols-outlined">stars</span>
+<span class="font-label-bold text-label-bold">Awards</span>
+</a>
+</nav>
+<!-- Audio Interaction Layer (Visual Feedback Only) -->
+<script>
+        function applyColor(color) {
+            const container = document.getElementById('flag-container');
+            const successBadge = document.getElementById('success-badge');
+            
+            if (color === 'red') {
+                container.style.backgroundColor = '#D52B1E';
+                // Trigger celebratory check
+                setTimeout(() => {
+                    successBadge.classList.remove('hidden');
+                    successBadge.classList.add('animate-bounce');
+                }, 400);
+            } else if (color === 'white') {
+                // In this simplified version, white is for the cross
+                // But typically user would "paint" the background red first
+                container.style.backgroundColor = '#f8fafc';
+                successBadge.classList.add('hidden');
+            }
+            
+            // Visual feedback for "painting"
+            container.classList.add('scale-105');
+            setTimeout(() => container.classList.remove('scale-105'), 200);
+        }
+
+        // Handle simple navigation logic for "Active" states as per instructions
+        // In this case "Play" is active because we are in a paint activity.
+    </script>
+
+
+</body></html>

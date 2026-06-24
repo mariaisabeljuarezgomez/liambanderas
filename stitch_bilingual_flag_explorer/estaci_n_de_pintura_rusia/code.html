@@ -1,0 +1,273 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#2b6c00",
+                    "surface-container-highest": "#dee3e9",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-on-surface": "#edf1f8",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "primary-fixed-dim": "#90cdff",
+                    "surface": "#f7f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#cbe6ff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#1a4600",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-primary-fixed-variant": "#004b71",
+                    "inverse-primary": "#90cdff",
+                    "surface-container": "#eaeef5",
+                    "primary": "#006495",
+                    "surface-dim": "#d6dae1",
+                    "surface-variant": "#dee3e9",
+                    "on-secondary-container": "#6d5700",
+                    "error": "#ba1a1a",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary-container": "#59be1b",
+                    "outline": "#6e7882",
+                    "on-surface-variant": "#3e4851",
+                    "outline-variant": "#bec8d3",
+                    "secondary-fixed": "#ffe084",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed": "#082100",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#92fc58",
+                    "secondary-container": "#fccc00",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#171c21",
+                    "background": "#f7f9ff",
+                    "on-background": "#171c21",
+                    "surface-container-low": "#f0f4fb",
+                    "surface-tint": "#006495",
+                    "on-primary-container": "#004163",
+                    "surface-bright": "#f7f9ff",
+                    "on-primary-fixed": "#001e30",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .tactile-button {
+            transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tactile-button:active {
+            transform: translateY(4px);
+            border-bottom-width: 0px !important;
+        }
+        .paint-active {
+            outline: 6px solid #2bb1ff;
+            outline-offset: 4px;
+        }
+        .pulse-animation {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .canvas-stripe {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
+<button class="material-symbols-outlined text-primary p-2 active:scale-95 transition-transform" style="font-size: 32px;">arrow_back</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Rusia / Russia</h1>
+</div>
+<button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-secondary active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center tactile-button border-b-4 border-secondary shadow-sm" id="main-audio">
+<span class="material-symbols-outlined text-on-secondary-container">volume_up</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col items-center px-container-margin py-6 gap-8 pb-32">
+<!-- Progress Bar -->
+<div class="w-full max-w-md bg-surface-container-highest h-4 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full w-1/3 transition-all duration-500 rounded-full" id="progress-fill"></div>
+</div>
+<!-- The Flag Canvas (Interactive) -->
+<div class="w-full max-w-xl aspect-[3/2] bg-white rounded-lg border-2 border-outline-variant shadow-xl overflow-hidden flex flex-col relative group">
+<div class="canvas-stripe flex-1 border-b border-surface-container-highest bg-surface-container-lowest flex items-center justify-center" id="stripe-0" onclick="paintStripe(0)">
+<span class="text-surface-dim font-headline-md opacity-20 pointer-events-none">Blanco</span>
+</div>
+<div class="canvas-stripe flex-1 border-b border-surface-container-highest bg-surface-container-lowest flex items-center justify-center" id="stripe-1" onclick="paintStripe(1)">
+<span class="text-surface-dim font-headline-md opacity-20 pointer-events-none">Azul</span>
+</div>
+<div class="canvas-stripe flex-1 bg-surface-container-lowest flex items-center justify-center" id="stripe-2" onclick="paintStripe(2)">
+<span class="text-surface-dim font-headline-md opacity-20 pointer-events-none">Rojo</span>
+</div>
+<!-- Atmosphere Decoration -->
+<div class="absolute -top-6 -right-6 w-24 h-24 bg-secondary-container opacity-20 rounded-full blur-2xl"></div>
+</div>
+<!-- Color Palette Picker -->
+<div class="grid grid-cols-3 gap-6 w-full max-w-md">
+<!-- White Button -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-20 h-20 rounded-full bg-white border-2 border-outline-variant shadow-[0_6px_0_#dee3e9] tactile-button paint-active" id="btn-white" onclick="selectColor('#FFFFFF', 'Blanco')">
+<div class="w-full h-full rounded-full bg-white"></div>
+</button>
+<div class="flex items-center gap-2">
+<span class="font-label-bold text-label-bold text-on-surface">Blanco</span>
+<span class="material-symbols-outlined text-primary text-[20px] cursor-pointer" onclick="speak('Blanco')">volume_up</span>
+</div>
+</div>
+<!-- Blue Button -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-20 h-20 rounded-full bg-[#0039A6] shadow-[0_6px_0_#002160] tactile-button" id="btn-blue" onclick="selectColor('#0039A6', 'Azul')">
+</button>
+<div class="flex items-center gap-2">
+<span class="font-label-bold text-label-bold text-on-surface">Azul</span>
+<span class="material-symbols-outlined text-primary text-[20px] cursor-pointer" onclick="speak('Azul')">volume_up</span>
+</div>
+</div>
+<!-- Red Button -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-20 h-20 rounded-full bg-[#D52B1E] shadow-[0_6px_0_#7b1912] tactile-button" id="btn-red" onclick="selectColor('#D52B1E', 'Rojo')">
+</button>
+<div class="flex items-center gap-2">
+<span class="font-label-bold text-label-bold text-on-surface">Rojo</span>
+<span class="material-symbols-outlined text-primary text-[20px] cursor-pointer" onclick="speak('Rojo')">volume_up</span>
+</div>
+</div>
+</div>
+<!-- Instruction Text -->
+<div class="bg-primary-container/20 p-card-padding rounded-xl border-2 border-primary-container text-center max-w-sm">
+<p class="font-body-lg text-on-primary-container">¡Pintemos la bandera! Toca un color y luego una franja.</p>
+</div>
+</main>
+<!-- Celebration Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6" id="celebration">
+<div class="absolute inset-0 bg-secondary/80 backdrop-blur-sm"></div>
+
+<div class="relative bg-surface rounded-lg p-8 shadow-2xl flex flex-col items-center text-center max-w-md border-t-8 border-secondary-container">
+<div class="w-24 h-24 bg-tertiary-container rounded-full flex items-center justify-center mb-6 shadow-lg">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">¡Excelente!</h2>
+<p class="font-body-lg text-on-surface-variant mb-8">Has pintado la bandera de Rusia perfectamente.</p>
+<button class="w-full py-4 rounded-xl bg-primary text-white font-headline-md tactile-button border-b-6 border-on-primary-fixed-variant" onclick="window.location.reload()">
+                ¡Jugar de nuevo!
+            </button>
+</div>
+</div>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest shadow-lg z-50">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-xl active:scale-95">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 shadow-md">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-xl active:scale-95">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</div>
+</nav>
+<script>
+        let currentColor = '#FFFFFF';
+        let paintedStripes = [false, false, false];
+        const correctColors = ['#FFFFFF', '#0039A6', '#D52B1E'];
+
+        function selectColor(color, name) {
+            currentColor = color;
+            // UI Updates for active button
+            document.querySelectorAll('.tactile-button').forEach(btn => btn.classList.remove('paint-active'));
+            if(name === 'Blanco') document.getElementById('btn-white').classList.add('paint-active');
+            if(name === 'Azul') document.getElementById('btn-blue').classList.add('paint-active');
+            if(name === 'Rojo') document.getElementById('btn-red').classList.add('paint-active');
+            speak(name);
+        }
+
+        function paintStripe(index) {
+            const stripe = document.getElementById(`stripe-${index}`);
+            stripe.style.backgroundColor = currentColor;
+            stripe.innerHTML = ''; // Clear helper text
+            
+            if (currentColor.toLowerCase() === correctColors[index].toLowerCase()) {
+                paintedStripes[index] = true;
+                updateProgress();
+            } else {
+                paintedStripes[index] = false;
+                updateProgress();
+            }
+
+            checkWin();
+        }
+
+        function updateProgress() {
+            const count = paintedStripes.filter(Boolean).length;
+            const progress = (count / 3) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+        }
+
+        function checkWin() {
+            if (paintedStripes.every(Boolean)) {
+                setTimeout(() => {
+                    document.getElementById('celebration').classList.remove('hidden');
+                    speak("¡Felicidades! Has completado Rusia");
+                }, 500);
+            }
+        }
+
+        function speak(text) {
+            // Placeholder for text-to-speech interaction
+            console.log("Speaking: " + text);
+            // In a real app: window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+        }
+
+        // Initial visual hint
+        document.getElementById('main-audio').addEventListener('click', () => speak("Rusia"));
+    </script>
+
+
+</body></html>

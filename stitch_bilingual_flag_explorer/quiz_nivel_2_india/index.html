@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flag Adventure - Quiz Level 2</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#2b6c00",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#dee3e9",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#6d5700",
+                    "background": "#f7f9ff",
+                    "on-tertiary-fixed": "#082100",
+                    "primary": "#006495",
+                    "surface-container-low": "#f0f4fb",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-primary": "#90cdff",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#6e7882",
+                    "on-secondary-fixed": "#231b00",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e4e8ef",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed": "#cbe6ff",
+                    "surface": "#f7f9ff",
+                    "tertiary-fixed": "#92fc58",
+                    "primary-container": "#2bb1ff",
+                    "secondary": "#735c00",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-primary-fixed-variant": "#004b71",
+                    "on-primary-container": "#004163",
+                    "surface-dim": "#d6dae1",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#171c21",
+                    "tertiary-container": "#59be1b",
+                    "outline-variant": "#bec8d3",
+                    "surface-container": "#eaeef5",
+                    "surface-bright": "#f7f9ff",
+                    "secondary-fixed": "#ffe084",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-highest": "#dee3e9",
+                    "on-surface": "#171c21",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-tint": "#006495",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-surface-variant": "#3e4851"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "unit": "8px",
+                    "card-padding": "20px",
+                    "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .tactile-btn {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
+            transition: all 0.1s ease;
+        }
+        .tactile-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);
+        }
+        .flag-card {
+            box-shadow: 0 6px 0 0 #e4e8ef;
+            transition: all 0.1s ease;
+        }
+        .flag-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #e4e8ef;
+        }
+        .audio-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface-container-low w-full top-0 sticky z-40 flex items-center justify-between px-container-margin py-unit h-16">
+<div class="flex items-center gap-4">
+<button class="active:translate-y-1 transition-all duration-100 text-primary">
+<span class="material-symbols-outlined text-headline-md">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary">Flag Adventure</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-bold text-label-bold text-on-surface-variant">LVL 2</span>
+<button class="active:translate-y-1 transition-all duration-100 text-primary">
+<span class="material-symbols-outlined text-headline-md">volume_up</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow container mx-auto px-container-margin pt-4 pb-24 max-w-lg">
+<!-- Progress Bar Section -->
+<div class="mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-label-bold text-on-surface-variant">Quest Progress</span>
+<span class="font-label-bold text-label-bold text-primary">4/10</span>
+</div>
+<div class="h-4 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[40%] rounded-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Question Section -->
+<section class="text-center mb-8 space-y-4">
+<div class="relative inline-block mb-4">
+<button class="audio-pulse w-20 h-20 rounded-full bg-secondary-container flex items-center justify-center tactile-btn text-on-secondary-container" onclick="playAudioPrompt()">
+<span class="material-symbols-outlined !text-4xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">¿Cuál es la bandera de la India?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant italic">Which is the flag of India?</p>
+</div>
+</section>
+<!-- Options Grid -->
+<div class="grid grid-cols-1 gap-6 mb-12">
+<!-- Option A: Argentina -->
+<button class="flag-card group bg-surface-container-lowest border-2 border-surface-variant rounded-lg p-card-padding flex items-center gap-6 text-left" onclick="selectOption('wrong')">
+<div class="w-32 h-20 rounded-md overflow-hidden bg-surface-container shrink-0">
+<img class="w-full h-full object-cover" data-alt="The national flag of Argentina, featuring three equal horizontal bands of light blue and white, with a centered golden Sun of May with a human face and thirty-two rays. The style is clean, vibrant, and educational with a soft matte finish against a neutral studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhj7c6SDkjPy7WxzG6llJzuIOTUKTCV3VcZHAE7ovrFopebOzqnu0bvRtqy5ipTOHbfF1holvV2PzWd3J8Ai6qVFA8Ob6zXE-6K579cjL84QC78sWSAe0lrTmYXsQJ-aSKXcrvSUUXOedbJxQJCQebcEHQuCP56oEdhOw3okgz4lRywtSPZ8eYj6XKB8YWRkbSDlMvh7hbUxFfBHiTyREew1tFEfQSXaEO3_Qzt8Rrg4RiQKGxMQ95GHHTFKPCqWXf4TWUbvxzpXg"/>
+</div>
+<span class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Argentina</span>
+</button>
+<!-- Option B: India (Correct) -->
+<button class="flag-card group bg-surface-container-lowest border-2 border-primary-container rounded-lg p-card-padding flex items-center gap-6 text-left" onclick="selectOption('correct')">
+<div class="w-32 h-20 rounded-md overflow-hidden bg-surface-container shrink-0">
+<img class="w-full h-full object-cover" data-alt="The national flag of India, a horizontal tricolor of saffron at the top, white in the middle, and green at the bottom. In the center is the navy blue Ashoka Chakra, a wheel with 24 spokes. High-quality children's educational illustration style, bright colors, and soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVW6yOI4mGz3aohJAUj8MCO0MHiUa1z3aFXDBTDTDczL0kKW4duvA_pVg0XGDO_1uiudDqwXIkcG6P6wiUbyx8EYnDwqTgfU3dYYu_eksJcX7PJdwt8pUG6PfVHiCokQitxuZM8UoMJW6y8BmoDvED6mOLc6dvjsqJsl3rFsgDYiRs8AK6qSiRHjHZXBOuZkYvGcC5567G-EMNpHjExlHrdnTYl6UzhoIVnz2SHqLL3tyal_BNNzjFkp56whgkKs94y9HMlZWRwAw"/>
+</div>
+<span class="font-headline-md-mobile text-headline-md-mobile text-on-surface">India</span>
+</button>
+<!-- Option C: South Africa -->
+<button class="flag-card group bg-surface-container-lowest border-2 border-surface-variant rounded-lg p-card-padding flex items-center gap-6 text-left" onclick="selectOption('wrong')">
+<div class="w-32 h-20 rounded-md overflow-hidden bg-surface-container shrink-0">
+<img class="w-full h-full object-cover" data-alt="The national flag of South Africa, featuring a horizontal Y-shape in green, with red on top and blue below. It has a black triangle at the hoist side separated by a yellow band, and white bands bordering the green Y. Modern flat design, rich saturation, educational context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdHyGVVKKk36vESwRHguXH9_UThJuJlb3BqtZX0zTM6ysirYazcQjGl1CVwaOwXk4mqOEmLa9weNVho2dTfoQkZ9a6GuRs2VZIX5qJXYDYMBCWOhmqBYKeMie99w85-aq-eoKBS9A_fa8r7ggEDI0ia3_gQm4pmIHmEbHDhEKT6jGLuoi1v81kYBAv0a7TE4lW0kfU3AJrcDhLkvTXBnfCznp-5XWR7AMbp57BXw8ySgWv8g1NqkHF9VXjei5iGfH1RWvToDJTeaA"/>
+</div>
+<span class="font-headline-md-mobile text-headline-md-mobile text-on-surface">South Africa</span>
+</button>
+</div>
+<!-- Performance Stars -->
+<div class="flex justify-center items-center gap-4 py-4 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined !text-4xl text-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined !text-5xl text-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined !text-4xl text-outline-variant" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-container-lowest flex justify-around items-center px-4 pb-4 pt-2 shadow-lg rounded-t-lg border-t-4 border-surface-variant">
+<!-- Explore -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</button>
+<!-- Passport -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</button>
+<!-- Play (Active) -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</button>
+</nav>
+<!-- Correct/Wrong Micro-interactions -->
+<div class="fixed inset-0 pointer-events-none flex items-center justify-center z-[60] opacity-0 transition-opacity duration-300" id="feedback-overlay">
+<div class="p-8 rounded-full bg-white shadow-2xl scale-50 transition-transform duration-500" id="feedback-content">
+<span class="material-symbols-outlined !text-9xl" id="feedback-icon"></span>
+</div>
+</div>
+<script>
+        function showCustomFeedback(isSuccess, titleEs, subtitleEn) {
+            const modal = document.getElementById('quiz-feedback-modal');
+            const modalContent = document.getElementById('quiz-modal-content');
+            const iconBg = document.getElementById('quiz-modal-icon-bg');
+            const icon = document.getElementById('quiz-modal-icon');
+            const title = document.getElementById('quiz-modal-title');
+            const subtitle = document.getElementById('quiz-modal-subtitle');
+            
+            modal.classList.replace('hidden', 'flex');
+            
+            title.innerText = titleEs;
+            subtitle.innerText = subtitleEn;
+            
+            if (isSuccess) {
+                iconBg.className = "w-24 h-24 rounded-full bg-tertiary-container flex items-center justify-center mb-2 animate-bounce";
+                icon.innerText = "celebration";
+                modalContent.style.borderColor = "#59be1b";
+                QuizAudioController.playSuccess();
+                QuizAudioController.speakBilingual(titleEs, subtitleEn);
+            } else {
+                iconBg.className = "w-24 h-24 rounded-full bg-error-container flex items-center justify-center mb-2";
+                icon.innerText = "refresh";
+                icon.classList.add("text-error");
+                modalContent.style.borderColor = "#ba1a1a";
+                QuizAudioController.playError();
+            }
+        }
+
+        function selectOption(type) {
+            const overlay = document.getElementById('feedback-overlay');
+            const content = document.getElementById('feedback-content');
+            const icon = document.getElementById('feedback-icon');
+            
+            overlay.classList.remove('opacity-0');
+            content.classList.remove('scale-50');
+            content.classList.add('scale-100');
+
+            if(type === 'correct') {
+                icon.innerText = 'check_circle';
+                icon.className = 'material-symbols-outlined !text-9xl text-tertiary-container';
+                // Success Audio Trigger Simulation
+            } else {
+                icon.innerText = 'cancel';
+                icon.className = 'material-symbols-outlined !text-9xl text-error';
+            }
+
+            setTimeout(() => {
+                overlay.classList.add('opacity-0');
+                content.classList.add('scale-50');
+                content.classList.remove('scale-100');
+            }, 1000);
+        }
+
+        function playAudioPrompt() {
+            QuizAudioController.speakBilingual("¿Cuál es la bandera?", "Which is the flag?");
+            // Add a temporary animation effect to show audio is "playing"
+            const btn = document.querySelector('.audio-pulse');
+            btn.classList.remove('audio-pulse');
+            void btn.offsetWidth; // trigger reflow
+            btn.classList.add('audio-pulse');
+        }
+    </script>
+
+    <!-- Custom Feedback Modal -->
+    <div id="quiz-feedback-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex-col items-center justify-center p-6 backdrop-blur-sm transition-all">
+        <div id="quiz-modal-content" class="bg-surface-container-lowest p-8 rounded-3xl w-full max-w-sm flex flex-col items-center text-center gap-6 transform transition-transform scale-95 border-b-8 border-primary-container shadow-2xl">
+            <div id="quiz-modal-icon-bg" class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-2 animate-bounce">
+                <span id="quiz-modal-icon" class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <div>
+                <h2 id="quiz-modal-title" class="font-headline-lg text-primary mb-2">¡Excelente!</h2>
+                <p id="quiz-modal-subtitle" class="font-body-lg text-on-surface-variant">Great job!</p>
+            </div>
+            <button onclick="document.getElementById('quiz-feedback-modal').classList.replace('flex', 'hidden');" class="w-full py-4 bg-primary text-white font-label-bold rounded-full active:scale-95 transition-transform mt-2 border-b-4 border-on-primary-container">
+                CONTINUAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const QuizAudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+            playSuccess() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, this.ctx.currentTime + 0.3); // C6
+                
+                gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.5);
+            },
+            playError() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.3);
+                
+                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            alarm() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime + 0.5);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.75);
+                
+                gain.gain.value = 0.1;
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 1.0);
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { window.speechSynthesis.cancel(); } catch(e) {}
+                
+                setTimeout(() => {
+                    const uEs = new SpeechSynthesisUtterance(es);
+                    uEs.lang = 'es-ES';
+                    uEs.rate = 0.95;
+                    
+                    uEs.onend = () => {
+                        const uEn = new SpeechSynthesisUtterance(en);
+                        uEn.lang = 'en-US';
+                        uEn.rate = 0.95;
+                        window.speechSynthesis.speak(uEn);
+                    };
+                    window.speechSynthesis.speak(uEs);
+                }, 80);
+            }
+        };
+    </script>
+
+</body></html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Estación de Pintura: Japón</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6e7882",
+                    "on-secondary-fixed": "#231b00",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container-high": "#e4e8ef",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed": "#cbe6ff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "surface-variant": "#dee3e9",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#2b6c00",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#082100",
+                    "background": "#f7f9ff",
+                    "on-secondary-container": "#6d5700",
+                    "primary-fixed-dim": "#90cdff",
+                    "surface-container-low": "#f0f4fb",
+                    "on-primary-fixed": "#001e30",
+                    "primary": "#006495",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-primary": "#90cdff",
+                    "tertiary-container": "#59be1b",
+                    "surface-container": "#eaeef5",
+                    "outline-variant": "#bec8d3",
+                    "surface-bright": "#f7f9ff",
+                    "secondary-fixed": "#ffe084",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "on-surface-variant": "#3e4851",
+                    "surface-tint": "#006495",
+                    "secondary-fixed-dim": "#efc200",
+                    "surface-container-highest": "#dee3e9",
+                    "on-surface": "#171c21",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface": "#f7f9ff",
+                    "secondary": "#735c00",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary-container": "#2bb1ff",
+                    "tertiary-fixed": "#92fc58",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "on-primary-container": "#004163"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-shadow {
+            box-shadow: 0 6px 0 0 rgba(0,0,0,0.1);
+        }
+        .active-press:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+        }
+        .flag-circle-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); stroke-width: 2; }
+            50% { transform: scale(1.02); stroke-width: 4; }
+            100% { transform: scale(1); stroke-width: 2; }
+        }
+        .celebration-bg {
+            background: radial-gradient(circle, #fccc00 0%, #ffe084 100%);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<nav class="w-full top-0 sticky bg-surface flex justify-between items-center px-container-margin py-unit h-touch-target-min z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-md" data-icon="language">language</span>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">Explorador de Banderas</h1>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Audio instructions" class="p-2 hover:bg-surface-container-high rounded-full active:translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="volume_up">volume_up</span>
+</button>
+<button aria-label="Close" class="p-2 hover:bg-surface-container-high rounded-full active:translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="close">close</span>
+</button>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col items-center px-container-margin py-unit gap-6 max-w-4xl mx-auto w-full">
+<!-- Header Bubble -->
+<header class="w-full flex justify-center mt-2">
+<div class="bg-surface-container-lowest px-xl py-6 rounded-xl border-4 border-primary-container flex items-center shadow-lg gap-12">
+<div class="flex flex-col">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Japón</span>
+<span class="font-body-lg text-body-lg text-outline">Japan</span>
+</div>
+<button class="w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center border-b-8 border-on-secondary-container active-press transition-all" id="audio-name">
+<span class="material-symbols-outlined text-headline-md" data-icon="volume_up" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<button class="w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full flex flex-col items-center justify-center border-b-8 border-on-secondary-container active-press transition-all group relative" id="alarm-button" aria-label="Sound Alarm"><span class="material-symbols-outlined text-headline-md" data-icon="notifications_active">notifications_active</span><span class="absolute -bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap font-label-bold text-on-surface text-[12px] leading-tight text-center">¡Alarma!<br>Sound Alarm</span></button></div>
+</header>
+<!-- Flag Canvas -->
+<div class="relative w-full flex-1 max-h-[400px] flex items-center justify-center mt-4">
+<div class="w-full aspect-[3/2] bg-white rounded-lg border-8 border-surface-variant shadow-xl relative overflow-hidden flex items-center justify-center p-8">
+<!-- Guide lines for kids -->
+<div class="absolute inset-0 border-[1px] border-dashed border-outline-variant opacity-20 pointer-events-none"></div>
+<!-- The Circle (Paintable Area) -->
+<button class="relative z-10 w-1/2 aspect-square rounded-full border-4 border-dashed border-primary transition-all duration-500 hover:scale-105 active:scale-95 bg-surface-container-low flex items-center justify-center group" id="flag-circle">
+<span class="font-label-bold text-label-bold text-primary group-hover:hidden transition-opacity" id="circle-label">¡PINTA AQUÍ!</span>
+<div class="absolute inset-0 rounded-full scale-0 transition-transform duration-700 bg-[#BC002D]" id="paint-fill"></div>
+</button>
+</div>
+</div>
+<!-- Instructions -->
+<section class="text-center space-y-1">
+<h2 class="font-headline-md text-headline-md-mobile text-primary uppercase tracking-wide">¡ELIGE UN COLOR!</h2>
+<p class="font-body-lg text-body-lg text-outline">PICK A COLOR!</p>
+</section>
+<!-- Paint Palette -->
+<section class="w-full flex justify-center gap-12 pb-12">
+<!-- White Paint -->
+<button class="palette-item group flex flex-col items-center gap-3" data-color="white">
+<div class="w-24 h-24 bg-white rounded-full border-4 border-outline-variant border-b-8 shadow-xl flex items-center justify-center active-press transition-all hover:scale-110">
+<div class="w-16 h-16 rounded-full border-2 border-surface-variant opacity-20"></div>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Blanco / White</span>
+</button>
+<!-- Red Paint -->
+<button class="palette-item group flex flex-col items-center gap-3" data-color="red">
+<div class="w-24 h-24 bg-[#BC002D] rounded-full border-4 border-[#8B0000] border-b-8 shadow-xl flex items-center justify-center active-press transition-all hover:scale-110 ring-8 ring-transparent group-[.selected]:ring-secondary-container">
+<span class="material-symbols-outlined text-white text-headline-md opacity-0 group-[.selected]:opacity-100" data-icon="brush">brush</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Rojo / Red</span>
+</button>
+</section>
+</main>
+<!-- Celebration Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] celebration-bg hidden flex-col items-center justify-center p-container-margin text-center" id="celebration">
+<div class="relative">
+<span class="material-symbols-outlined text-[120px] text-white animate-bounce" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<div class="absolute inset-0 bg-white opacity-20 blur-3xl animate-pulse"></div>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-white mt-8">¡EXCELENTE!</h2>
+<p class="font-body-lg text-body-lg text-on-secondary-container mt-2">The flag of Japan is complete!</p>
+<button class="mt-12 bg-white text-primary font-headline-md px-12 py-4 rounded-full border-b-8 border-surface-variant active-press transition-all" id="btn-next">
+            ¡Siguiente!
+        </button>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const circle = document.getElementById('flag-circle');
+            const paintFill = document.getElementById('paint-fill');
+            const circleLabel = document.getElementById('circle-label');
+            const paletteItems = document.querySelectorAll('.palette-item');
+            const celebration = document.getElementById('celebration');
+            const btnNext = document.getElementById('btn-next');
+            
+            let selectedColor = null;
+
+            paletteItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Visual feedback for selection
+                    paletteItems.forEach(p => p.classList.remove('selected'));
+                    item.classList.add('selected');
+                    selectedColor = item.getAttribute('data-color');
+                    
+                    // Simple haptic-like effect
+                    item.style.transform = 'scale(0.9)';
+                    setTimeout(() => item.style.transform = '', 100);
+                });
+            });
+
+            circle.addEventListener('click', () => {
+                if (selectedColor === 'red') {
+                    // Correct!
+                    paintFill.classList.remove('scale-0');
+                    paintFill.classList.add('scale-100');
+                    circleLabel.style.display = 'none';
+                    circle.classList.remove('border-dashed', 'border-primary');
+                    circle.classList.add('border-transparent');
+                    
+                    // Trigger success
+                    setTimeout(() => {
+                        celebration.classList.remove('hidden');
+                        celebration.classList.add('flex');
+                    }, 800);
+                } else if (selectedColor === 'white') {
+                    // Already white, maybe a giggle or hint?
+                    circle.style.animation = 'none';
+                    circle.offsetHeight; // trigger reflow
+                    circle.classList.add('shake');
+                    // Simple shake class added via script if needed or inline
+                    circle.style.transition = '0.1s';
+                    circle.style.marginLeft = '10px';
+                    setTimeout(() => circle.style.marginLeft = '-10px', 50);
+                    setTimeout(() => circle.style.marginLeft = '0', 100);
+                } else {
+                    // No color selected hint
+                    circle.classList.add('flag-circle-pulse');
+                }
+            });
+
+            btnNext.addEventListener('click', () => {
+                location.reload(); // Restart for demo
+            });
+
+            // Audio button visual feedback
+            const audioBtn = document.getElementById('audio-name');
+            audioBtn.addEventListener('click', () => {
+                audioBtn.classList.add('scale-110');
+                setTimeout(() => audioBtn.classList.remove('scale-110'), 200);
+            });
+        });
+    </script>
+
+
+</body></html>

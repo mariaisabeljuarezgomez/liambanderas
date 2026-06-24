@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#2b6c00",
+                    "surface-container-highest": "#dee3e9",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-on-surface": "#edf1f8",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "primary-fixed-dim": "#90cdff",
+                    "surface": "#f7f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#cbe6ff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#1a4600",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-primary-fixed-variant": "#004b71",
+                    "inverse-primary": "#90cdff",
+                    "surface-container": "#eaeef5",
+                    "primary": "#006495",
+                    "surface-dim": "#d6dae1",
+                    "surface-variant": "#dee3e9",
+                    "on-secondary-container": "#6d5700",
+                    "error": "#ba1a1a",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary-container": "#59be1b",
+                    "outline": "#6e7882",
+                    "on-surface-variant": "#3e4851",
+                    "outline-variant": "#bec8d3",
+                    "secondary-fixed": "#ffe084",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed": "#082100",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#92fc58",
+                    "secondary-container": "#fccc00",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#171c21",
+                    "background": "#f7f9ff",
+                    "on-background": "#171c21",
+                    "surface-container-low": "#f0f4fb",
+                    "surface-tint": "#006495",
+                    "on-primary-container": "#004163",
+                    "surface-bright": "#f7f9ff",
+                    "on-primary-fixed": "#001e30",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; }
+        
+        .tactile-button {
+            transition: all 0.1s ease;
+            box-shadow: 0 6px 0 0 rgba(0,0,0,0.1);
+        }
+        .tactile-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+        }
+
+        .flag-stroke {
+            stroke: #bec8d3;
+            stroke-width: 2px;
+            fill: #ffffff;
+            transition: fill 0.3s ease;
+        }
+
+        .star-stroke {
+            stroke: #bec8d3;
+            stroke-width: 1px;
+            fill: #ffffff;
+            transition: fill 0.3s ease;
+        }
+
+        .color-selected {
+            ring: 6px solid #2bb1ff;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse-audio {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .animate-audio {
+            animation: pulse-audio 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Anchor (Shared Component: TopAppBar) -->
+<header class="w-full top-0 sticky bg-background dark:bg-on-background border-b-4 border-surface-container-highest dark:border-inverse-surface z-40">
+<div class="flex items-center justify-between px-container-margin py-unit w-full">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:opacity-80 active:translate-y-1 active:border-b-0 transition-all text-headline-lg-mobile" data-icon="arrow_back">arrow_back</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim">China</h1>
+</div>
+<button onclick="speakCountry()" class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:opacity-80 active:translate-y-1 active:border-b-0 transition-all text-headline-lg-mobile" aria-label="Escuchar nombre">volume_up</button>
+<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></div>
+</header>
+<main class="flex-grow container mx-auto px-container-margin py-8 flex flex-col items-center">
+<!-- Header Info -->
+<div class="w-full max-w-2xl flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<button class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center tactile-button animate-audio text-on-secondary-container" onclick="speakCountry()">
+<span class="material-symbols-outlined text-4xl" data-icon="volume_up">volume_up</span>
+</button>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Pintamos China</h2>
+</div>
+<div class="bg-surface-container-high px-6 py-2 rounded-full font-label-bold text-label-bold text-primary">
+                1 / 5 Estrellas
+            </div>
+</div>
+<!-- Flag Canvas -->
+<div class="relative w-full max-w-3xl aspect-[3/2] bg-surface-container-lowest rounded-lg border-4 border-surface-container-highest p-4 mb-10 shadow-inner flex items-center justify-center">
+<svg class="w-full h-full drop-shadow-md" id="china-flag" viewBox="0 0 30 20">
+<!-- Red Field -->
+<rect class="flag-stroke cursor-pointer" height="20" id="field" onclick="paintElement('field')" width="30" x="0" y="0"></rect>
+<!-- Main Large Star -->
+<path class="star-stroke cursor-pointer" d="M5,2 L5.58,3.81 L7.45,3.81 L5.93,4.92 L6.51,6.73 L5,5.62 L3.49,6.73 L4.07,4.92 L2.55,3.81 L4.42,3.81 Z" id="star1" onclick="paintElement('star1')"></path>
+<!-- 4 Smaller Stars -->
+<path class="star-stroke cursor-pointer" d="M10,2 L10.3,2.9 L11.2,2.9 L10.4,3.5 L10.7,4.4 L10,3.8 L9.3,4.4 L9.6,3.5 L8.8,2.9 L9.7,2.9 Z" id="star2" onclick="paintElement('star2')"></path>
+<path class="star-stroke cursor-pointer" d="M12,4 L12.3,4.9 L13.2,4.9 L12.4,5.5 L12.7,6.4 L12,5.8 L11.3,6.4 L11.6,5.5 L10.8,4.9 L11.7,4.9 Z" id="star3" onclick="paintElement('star3')"></path>
+<path class="star-stroke cursor-pointer" d="M12,7 L12.3,7.9 L13.2,7.9 L12.4,8.5 L12.7,9.4 L12,8.8 L11.3,9.4 L11.6,8.5 L10.8,7.9 L11.7,7.9 Z" id="star4" onclick="paintElement('star4')"></path>
+<path class="star-stroke cursor-pointer" d="M10,9 L10.3,9.9 L11.2,9.9 L10.4,10.5 L10.7,11.4 L10,10.8 L9.3,11.4 L9.6,10.5 L8.8,9.9 L9.7,9.9 Z" id="star5" onclick="paintElement('star5')"></path>
+</svg>
+<div class="absolute -top-4 -right-4">
+<div class="w-32 h-32 bg-cover bg-center rounded-full border-4 border-white shadow-lg" data-alt="A cute, friendly 3D cartoon panda mascot smiling warmly and holding a paintbrush. The character is rendered in a soft, premium educational style with rounded features and vibrant textures. The background is a clean, bright minimalist studio with soft daylight, perfectly complementing the kid-friendly UI theme." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAOcBtufX1ZQNbNaG_g4uKdyy-yeNWzEiDKd6BKGnB3tRsXgNupeEksKKRpEWpH9kLihVaxRa9nqEKQ5LnVViUgeI0jATGTQUlLgGEasnf5E_ioZgRd_6wSWaOFqIBCAyoQvUDOh9nWn6Z2Npw5CjMxIBdMa_7FpRmP_kO7E_jK7uAqtFnxiqRUImjItZCOJMKHfLUPv693JKbF_2-uI0KkmxGPHKIiEl_9PvuAh9WfpONecLs61OxNJrlu1Leqbr8ZB4wNqBgV9zs')"></div>
+</div>
+</div>
+<!-- Color Palette -->
+<div class="flex flex-wrap justify-center gap-8 mb-12">
+<!-- Rojo Button -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-24 h-24 rounded-full bg-error border-b-[8px] border-red-900 transition-all active:translate-y-[4px] active:border-b-[4px] ring-offset-4 ring-4 ring-primary-container" id="btn-rojo" onclick="selectColor('#ba1a1a', 'rojo')" title="Rojo">
+</button>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary active:scale-90 transition-transform" onclick="playAudio('Rojo')">
+<span class="material-symbols-outlined text-xl" data-icon="volume_up">volume_up</span>
+</button>
+<span class="font-label-bold text-label-bold text-on-surface">Rojo</span>
+</div>
+</div>
+<!-- Amarillo Button -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-24 h-24 rounded-full bg-secondary-container border-b-[8px] border-yellow-700 transition-all active:translate-y-[4px] active:border-b-[4px] ring-offset-4" id="btn-amarillo" onclick="selectColor('#fccc00', 'amarillo')" title="Amarillo">
+</button>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary active:scale-90 transition-transform" onclick="playAudio('Amarillo')">
+<span class="material-symbols-outlined text-xl" data-icon="volume_up">volume_up</span>
+</button>
+<span class="font-label-bold text-label-bold text-on-surface">Amarillo</span>
+</div>
+</div>
+<!-- Borrador -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-24 h-24 rounded-full bg-white border-2 border-outline-variant border-b-[8px] border-surface-container-highest transition-all active:translate-y-[4px] active:border-b-[4px] flex items-center justify-center ring-offset-4" id="btn-eraser" onclick="selectColor('#ffffff', 'eraser')">
+<span class="material-symbols-outlined text-4xl text-outline" data-icon="ink_eraser">ink_eraser</span>
+</button>
+<span class="font-label-bold text-label-bold text-on-surface">Borrador</span>
+</div>
+</div>
+<!-- Success Message (Initially Hidden) -->
+<div class="hidden text-center scale-0 transition-transform duration-500 ease-out" id="celebration">
+<h3 class="font-headline-lg text-headline-lg text-tertiary mb-2">¡Excelente!</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Has pintado la bandera de China</p>
+</div>
+</main>
+<!-- Bottom Navigation (Shared Component: BottomNavBar) -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface z-50 rounded-t-lg border-t-4 border-surface-container-highest dark:border-inverse-surface shadow-lg md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-xl px-4 py-2 translate-y-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="videogame_asset">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            playSynth(freq, type, dur, vol) {
+                try {
+                    this.initContext();
+                    const osc = this.ctx.createOscillator(), g = this.ctx.createGain();
+                    osc.type = type; osc.frequency.value = freq;
+                    g.gain.setValueAtTime(vol, this.ctx.currentTime);
+                    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur);
+                    osc.connect(g); g.connect(this.ctx.destination);
+                    osc.start(); osc.stop(this.ctx.currentTime + dur + 0.05);
+                } catch(e) {}
+            },
+            boing() { this.playSynth(150,'sine',0.3,0.2); },
+            sparkle() { [880,1100,1320].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'triangle',0.15,0.07),i*60)); },
+            victory() { [261.63,329.63,392,523.25,659.25,783.99,1046.5].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'sine',0.4,0.1),i*120)); },
+            alarm() {
+                try {
+                    this.initContext(); const c=this.ctx;
+                    for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95;
+                    u.onend = () => { const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
+        };
+        function speakCountry() { AudioController.speakBilingual('China','China'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de China!','China Alarm!'),750); }
+
+        let currentColor = '#ba1a1a';
+        let activeSelection = 'rojo';
+
+        function selectColor(color, name) {
+            currentColor = color;
+            activeSelection = name;
+            
+            // Remove active styles
+            document.querySelectorAll('[id^="btn-"]').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-primary-container');
+            });
+            
+            // Add active style to selected
+            document.getElementById(`btn-${name}`).classList.add('ring-4', 'ring-primary-container');
+            
+            console.log('Selected color:', name);
+        }
+
+        function paintElement(id) {
+            const el = document.getElementById(id);
+            el.style.fill = currentColor;
+            el.style.stroke = 'none';
+            
+            checkProgress();
+        }
+
+        function playAudio(text) {
+            const labels = { 'China':['China','China'], 'Rojo':['Rojo','Red'], 'Amarillo':['Amarillo','Yellow'] };
+            const pair = labels[text] || [text, text];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        function checkProgress() {
+            const field = document.getElementById('field').style.fill;
+            const s1 = document.getElementById('star1').style.fill;
+            const s2 = document.getElementById('star2').style.fill;
+            const s3 = document.getElementById('star3').style.fill;
+            const s4 = document.getElementById('star4').style.fill;
+            const s5 = document.getElementById('star5').style.fill;
+
+            // Simplified check: Field is red and stars are yellow
+            // Using RGB because style.fill returns rgb()
+            const isRed = (c) => c === 'rgb(186, 26, 26)' || c === '#ba1a1a';
+            const isYellow = (c) => c === 'rgb(252, 204, 0)' || c === '#fccc00';
+
+            if (isRed(field) && isYellow(s1) && isYellow(s2) && isYellow(s3) && isYellow(s4) && isYellow(s5)) {
+                showCelebration();
+            }
+        }
+
+        function showCelebration() {
+            const celeb = document.getElementById('celebration');
+            celeb.classList.remove('hidden');
+            setTimeout(() => {
+                celeb.classList.add('scale-100');
+            }, 10);
+            
+            // Haptic-like visual shake for buttons
+            document.body.style.overflow = 'hidden';
+            playAudio("¡Increíble! ¡Has completado la bandera!");
+        }
+
+        // Initialize first color
+        window.onload = () => {
+            selectColor('#ba1a1a', 'rojo');
+        }
+    </script>
+
+
+</body></html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Paint Adventure - Morocco</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline": "#6e7882",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-container": "#6d5700",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#006495",
+                    "on-surface-variant": "#3e4851",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container": "#eaeef5",
+                    "surface-container-highest": "#dee3e9",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-tertiary-fixed": "#082100",
+                    "on-surface": "#171c21",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "background": "#f7f9ff",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary-container": "#2bb1ff",
+                    "on-secondary-fixed": "#231b00",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-container": "#59be1b",
+                    "outline-variant": "#bec8d3",
+                    "primary": "#006495",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "secondary": "#735c00",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-surface": "#2c3136",
+                    "surface": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        .chunky-button-primary {
+            @apply relative transition-all duration-100 active:translate-y-1;
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-button-primary:active { box-shadow: 0 0px 0 0 #004b71; }
+
+        .chunky-button-secondary {
+            @apply relative transition-all duration-100 active:translate-y-1;
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .chunky-button-secondary:active { box-shadow: 0 0px 0 0 #bec8d3; }
+
+        .chunky-button-yellow {
+            @apply relative transition-all duration-100 active:translate-y-1;
+            box-shadow: 0 6px 0 0 #6d5700;
+        }
+        .chunky-button-yellow:active { box-shadow: 0 0px 0 0 #6d5700; }
+
+        .flag-canvas {
+            cursor: url('https://fonts.gstatic.com/s/i/materialsymbolsoutlined/brush/v1/24px.svg'), auto;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse-audio { animation: pulse-slow 2s infinite ease-in-out; }
+
+        .scribble-texture {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 Q 20 5 30 15 T 50 10' fill='none' stroke='%230002' stroke-width='1'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 bg-surface dark:bg-surface sticky top-0">
+<div class="flex items-center gap-4">
+<button class="active:translate-y-1 transition-all duration-100 p-2 rounded-full hover:bg-primary-container">
+<span class="material-symbols-outlined text-primary font-headline-md">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Paint Adventure</h1>
+</div>
+<button class="active:translate-y-1 transition-all duration-100 p-2 rounded-full hover:bg-primary-container">
+<span class="material-symbols-outlined text-primary font-headline-md">volume_up</span>
+</button>
+</header>
+<main class="max-w-4xl mx-auto px-container-margin py-8">
+<!-- Morocco Flag Hero Area -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Panel: Learning & Audio -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface-container-lowest p-card-padding rounded-lg shadow-lg border-b-8 border-surface-container-highest">
+<h2 class="font-headline-md text-headline-md text-primary mb-2">Marruecos</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6">Morocco</p>
+<button class="chunky-button-yellow bg-secondary-container text-on-secondary-container w-full py-4 rounded-lg flex items-center justify-center gap-3 mb-4 pulse-audio" onclick="playAudio('Marruecos / Morocco')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<span class="font-label-bold text-label-bold">Listen Name</span>
+</button><button class="chunky-button-yellow bg-secondary-container text-on-secondary-container w-full py-4 rounded-lg flex items-center justify-center gap-3 mb-4" onclick="playAudio('¡Alarma! / Sound Alarm')"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-label-bold">¡Alarma! / Sound Alarm</span></button>
+</div>
+<div class="bg-surface-container-lowest p-card-padding rounded-lg shadow-lg border-b-8 border-surface-container-highest">
+<p class="font-body-md text-body-md text-on-surface italic mb-4 leading-relaxed">
+                        "Marruecos tiene desiertos y camellos muy simpáticos."
+                    </p>
+<div class="w-full h-32 rounded-lg bg-cover bg-center" data-alt="A friendly, cartoon-style illustration of a smiling camel wearing a colorful saddle, standing against a backdrop of golden Saharan sand dunes under a bright blue sky. The visual style is premium educational with soft gradients and clean, chunky outlines, matching a child-friendly interface. Warm golden lighting highlights the sandy textures." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB7sVfecVorhO2HUXftOf71_h4kTxtokJB2FyYm_o5F40eZch6OUHe_FuU6z64S3K1V3S45tOUF8EfpxoJEFHeF6QNYsGpZJ_TZxJr2ERtxc-ddL1U_xngAOMbxIFwrjXi2LOqD0BNf_km5OF823UQ7r7t5M6S6wWLrRtevQZthaEEkWG4mnUIA1BVcsIfgIkGnN6qfZze4_IydHmVnrY8fhkXUhzqHFGXYJJdJxkkeT1eJWIGrSwp9P5fcbV_NMhcm8TckT4SvROk')"></div>
+</div>
+</div>
+<!-- Right Panel: Painting Canvas -->
+<div class="md:col-span-8">
+<div class="bg-surface-container-lowest rounded-lg shadow-lg p-card-padding border-b-8 border-surface-container-highest relative overflow-hidden">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-label-bold text-label-bold text-outline">Paint the Flag!</h3>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full bg-surface-container border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">undo</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">delete</span>
+</button>
+</div>
+</div>
+<!-- Flag Interactive Area -->
+<div class="flag-canvas aspect-[3/2] bg-white border-2 border-outline-variant rounded-lg relative flex items-center justify-center overflow-hidden" id="paint-canvas">
+<!-- Flag Background (Base) -->
+<div class="absolute inset-0 transition-colors duration-500 bg-surface-variant scribble-texture" id="flag-bg"></div>
+<!-- Moroccan Star (Masked) -->
+<svg class="w-1/2 z-10 transition-all duration-500 text-surface-container" fill="none" stroke="currentColor" stroke-width="4" viewBox="0 0 100 100">
+<path d="M50 5 L63 40 H95 L68 60 L78 95 L50 75 L22 95 L32 60 L5 40 H37 Z" id="flag-star"></path>
+</svg>
+<!-- Success Overlay (Hidden) -->
+<div class="absolute inset-0 z-20 bg-secondary-container/90 hidden flex-col items-center justify-center text-center p-6 animate-fade-in" id="success-overlay">
+<span class="material-symbols-outlined text-6xl text-on-secondary-container mb-4" style="font-variation-settings: 'FILL' 1;">stars</span>
+<h4 class="font-headline-md text-headline-md text-on-secondary-container">¡Excelente!</h4>
+<p class="font-body-lg text-body-lg text-on-secondary-container">You painted Morocco!</p>
+</div>
+</div>
+<!-- Color Palette -->
+<div class="flex justify-center gap-container-margin mt-8">
+<div class="flex flex-col items-center gap-2">
+<button class="w-16 h-16 rounded-full bg-[#C1272D] border-4 border-white shadow-lg active:scale-95 transition-transform" onclick="selectColor('red')"></button>
+<span class="font-label-bold text-label-bold text-outline">Rojo</span>
+<button class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shadow-sm" onclick="playAudio('Rojo')">
+<span class="material-symbols-outlined text-on-secondary-container text-sm">volume_up</span>
+</button>
+</div>
+<div class="flex flex-col items-center gap-2">
+<button class="w-16 h-16 rounded-full bg-[#006233] border-4 border-white shadow-lg active:scale-95 transition-transform" onclick="selectColor('green')"></button>
+<span class="font-label-bold text-label-bold text-outline">Verde</span>
+<button class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shadow-sm" onclick="playAudio('Verde')">
+<span class="material-symbols-outlined text-on-secondary-container text-sm">volume_up</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Indicator -->
+<div class="mt-12 max-w-md mx-auto">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-label-bold text-primary">Map Progress</span>
+<span class="font-label-bold text-label-bold text-primary">12/50</span>
+</div>
+<div class="h-4 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[24%] rounded-full transition-all duration-1000"></div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-label-bold text-label-bold">World Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label-bold text-label-bold">My Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 active:translate-y-1 transition-all duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">stars</span>
+<span class="font-label-bold text-label-bold">Awards</span>
+</a>
+</nav>
+<script>
+        let selectedColor = null;
+        let paintedBg = false;
+        let paintedStar = false;
+
+        function selectColor(color) {
+            selectedColor = color;
+            // Visual feedback on selected color
+            document.querySelectorAll('.flex-col.items-center button').forEach(btn => {
+                btn.style.transform = 'scale(1)';
+                btn.style.boxShadow = '0 10px 15px -3px rgb(0 0 0 / 0.1)';
+            });
+            event.target.style.transform = 'scale(1.2)';
+            event.target.style.boxShadow = '0 0 0 4px #006495';
+        }
+
+        const canvas = document.getElementById('paint-canvas');
+        const flagBg = document.getElementById('flag-bg');
+        const flagStar = document.getElementById('flag-star').parentElement;
+        const success = document.getElementById('success-overlay');
+
+        canvas.addEventListener('click', (e) => {
+            if (!selectedColor) return;
+
+            // Simple hit detection for background vs star
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Check if clicking near the center (the star)
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+
+            if (distance < rect.width * 0.15) {
+                // Clicked on star
+                if (selectedColor === 'green') {
+                    flagStar.classList.remove('text-surface-container');
+                    flagStar.classList.add('text-[#006233]');
+                    paintedStar = true;
+                    playAudio('Verde');
+                }
+            } else {
+                // Clicked on background
+                if (selectedColor === 'red') {
+                    flagBg.style.backgroundColor = '#C1272D';
+                    flagBg.classList.remove('scribble-texture');
+                    paintedBg = true;
+                    playAudio('Rojo');
+                }
+            }
+
+            checkWin();
+        });
+
+        function checkWin() {
+            if (paintedBg && paintedStar) {
+                setTimeout(() => {
+                    success.classList.remove('hidden');
+                    success.classList.add('flex');
+                    playAudio('Victory');
+                }, 500);
+            }
+        }
+
+        function playAudio(text) {
+            console.log("Playing audio for: " + text);
+            // In a real app, this would trigger a SpeechSynthesis or play a sound file
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = text.includes('/') ? 'en-US' : 'es-ES';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+    </script>
+
+
+</body></html>

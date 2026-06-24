@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Paint Adventure - Saudi Arabia</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline": "#6e7882",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-container": "#6d5700",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#006495",
+                    "on-surface-variant": "#3e4851",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container": "#eaeef5",
+                    "surface-container-highest": "#dee3e9",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-tertiary-fixed": "#082100",
+                    "on-surface": "#171c21",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "background": "#f7f9ff",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary-container": "#2bb1ff",
+                    "on-secondary-fixed": "#231b00",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-container": "#59be1b",
+                    "outline-variant": "#bec8d3",
+                    "primary": "#006495",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "secondary": "#735c00",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-surface": "#2c3136",
+                    "surface": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; background-color: #f7f9ff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        
+        /* Tactile Button Styles */
+        .btn-tactile-primary {
+            @apply bg-primary-container text-on-primary-container font-label-bold text-label-bold px-6 py-3 rounded-lg transition-all duration-100;
+            box-shadow: 0 6px 0px 0px #004b71;
+        }
+        .btn-tactile-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px 0px #004b71;
+        }
+
+        .btn-tactile-secondary {
+            @apply bg-surface-container-lowest text-primary font-label-bold text-label-bold px-6 py-3 rounded-lg transition-all duration-100 border-2 border-primary-container;
+            box-shadow: 0 6px 0px 0px #bec8d3;
+        }
+        .btn-tactile-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px 0px #bec8d3;
+        }
+
+        .audio-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .flag-canvas {
+            aspect-ratio: 3 / 2;
+            background: #ffffff;
+            border: 8px solid #dee3e9;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .brush-active {
+            transform: scale(1.1) translateY(-8px);
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- Top Navigation (Shared Component Integration) -->
+<header class="bg-surface-container-low flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 fixed top-0 left-0">
+<div class="flex items-center gap-4">
+<button class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container">
+<span class="material-symbols-outlined text-primary text-headline-md">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Paint Adventure</h1>
+</div>
+<button class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container" title="¡Alarma! / Sound Alarm">
+  <span class="material-symbols-outlined text-headline-md">notifications_active</span>
+</button><button class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container">
+<span class="material-symbols-outlined text-primary text-headline-md">volume_up</span>
+</button>
+</header>
+<main class="pt-20 px-container-margin max-w-4xl mx-auto">
+<!-- Header & Audio Station -->
+<section class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+<div class="text-center md:text-left">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Saudi Arabia</h2>
+<div class="flex items-center gap-3 justify-center md:justify-start">
+<span class="px-4 py-1 bg-tertiary-container text-on-tertiary-container rounded-full font-label-bold text-label-bold">Kingdom</span>
+<button class="audio-pulse w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-lg active:translate-y-1 transition-all" onclick="playAudio('saudi')">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</div>
+<div class="bg-primary-container/10 p-4 rounded-lg border-l-4 border-primary-container">
+<p class="font-body-md text-body-md italic text-on-surface-variant max-w-xs">
+                    "En Arabia Saudita hay dunas de arena gigantes."
+                </p>
+</div>
+</section>
+<!-- Main Paint Canvas Area -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left: Brush Tools (Bento Style) -->
+<div class="lg:col-span-3 flex lg:flex-col gap-4 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
+<button class="brush-active flex-shrink-0 flex flex-col items-center gap-2 p-4 bg-surface-container-highest rounded-lg transition-all border-b-8 border-green-800" id="brush-green" onclick="selectColor('green')">
+<div class="w-16 h-16 rounded-full bg-[#006C35] border-4 border-white shadow-inner"></div>
+<span class="font-label-bold text-label-bold">Verde</span>
+<span class="material-symbols-outlined text-primary">volume_up</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center gap-2 p-4 bg-surface-container-highest rounded-lg transition-all border-b-8 border-gray-300" id="brush-white" onclick="selectColor('white')">
+<div class="w-16 h-16 rounded-full bg-white border-4 border-surface-variant shadow-inner"></div>
+<span class="font-label-bold text-label-bold">Blanco</span>
+<span class="material-symbols-outlined text-primary">volume_up</span>
+</button>
+<div class="hidden lg:flex flex-col items-center gap-2 p-4 bg-secondary-fixed rounded-lg border-b-8 border-secondary-fixed-dim">
+<span class="material-symbols-outlined text-4xl text-on-secondary-fixed">auto_fix_high</span>
+<p class="text-center font-label-bold text-[12px] text-on-secondary-fixed">Magic Fill</p>
+</div>
+</div>
+<!-- Center: The Flag Canvas -->
+<div class="lg:col-span-9">
+<div class="flag-canvas rounded-lg overflow-hidden relative cursor-crosshair group">
+<!-- Base Template (Kids usually color inside the lines) -->
+<svg class="w-full h-full" id="flag-svg" viewBox="0 0 300 200">
+<rect class="transition-colors duration-500" fill="#f0f4fb" height="200" id="flag-bg" width="300"></rect>
+<!-- Outline of script and sword for kids to follow -->
+<g class="opacity-100 transition-all duration-300" fill="none" id="flag-elements" stroke="#bec8d3" stroke-width="2">
+<!-- Simplified Saudi Script Outline -->
+<path d="M100,80 C120,70 180,70 200,80 M100,100 C120,90 180,90 200,100"></path>
+<!-- Simplified Sword Outline -->
+<path d="M90,130 L210,130 M210,130 L205,125 M210,130 L205,135 M90,130 L95,135 M90,130 L95,125"></path>
+</g>
+</svg>
+<!-- Decorative Overlay for feedback -->
+<div class="absolute inset-0 bg-white/0 pointer-events-none flex items-center justify-center transition-all duration-500" id="success-overlay">
+<span class="material-symbols-outlined text-secondary-container text-9xl scale-0 transition-transform duration-500" id="star-icon">stars</span>
+</div>
+</div>
+<div class="mt-6 flex justify-between items-center">
+<button class="btn-tactile-secondary flex items-center gap-2">
+<span class="material-symbols-outlined">restart_alt</span>
+                        Start Over
+                    </button>
+<button class="btn-tactile-primary flex items-center gap-2" onclick="completeFlag()">
+<span class="material-symbols-outlined">check_circle</span>
+                        Finish Painting
+                    </button>
+</div>
+</div>
+</div>
+<!-- Educational Bento Section -->
+<section class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-surface-container-high p-card-padding rounded-lg flex flex-col gap-4">
+<div class="w-full h-40 rounded-lg overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="A cinematic, vibrant photo of massive, undulating golden sand dunes in the Arabian desert under a bright, high-contrast blue sky. The lighting is warm and golden hour, highlighting the textures of the sand ripples. Minimalist and clean composition that feels like a travel adventure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAS2d5-38rE5Nlo9K7q4wSzP8lE8TUESjeezB7wZk5WxlGowf6sxbqD2LgZ4CoVndjfgEqfcCwTNLuJrIU63qquaGZ86RRVWiSJJupi8Jm33IhZFr9xLSl8B8FmIXdjIDbloWoa5aqDBQ75bbimkpD2_i-Ta14PM0OeDhpjxlpV79QVcMIW7wD5UGF6yp-XiCmTuctP4FVLb1yUiEp2Q5BO0akffBuhs6CFm-rqzInBmZAANbkPiZgI1spqPdryqBjy7yj3xq-OaY">
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Huge Sand Dunes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">The "Rub' al Khali" is the largest sand desert in the world!</p>
+</div>
+<div class="bg-secondary-container/20 p-card-padding rounded-lg flex flex-col justify-center items-center text-center gap-4">
+<div class="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-6xl text-secondary">explore</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-secondary">Geography Quiz</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Can you find the Red Sea on the map?</p>
+<button class="btn-tactile-secondary w-full">Let's Go!</button>
+</div>
+<div class="bg-surface-container-highest p-card-padding rounded-lg relative overflow-hidden">
+<div class="absolute -right-10 -bottom-10 opacity-10">
+<span class="material-symbols-outlined text-[160px]">palette</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Color Meaning</h3>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#006C35]"></div>
+<span class="font-body-md text-body-md">Green: Growth &amp; Peace</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-white border border-outline-variant"></div>
+<span class="font-body-md text-body-md">White: Purity &amp; Truth</span>
+</li>
+</ul>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (Shared Component Integration) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-label-bold text-label-bold">World Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label-bold text-label-bold">My Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 active:translate-y-1 transition-all duration-100" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">stars</span>
+<span class="font-label-bold text-label-bold">Awards</span>
+</a>
+</nav>
+<!-- Floating Action Button (Only on Home/Relevant Hubs - Suppressed here for focus as per guidelines) -->
+<script>
+        let currentColor = 'green';
+
+        function selectColor(color) {
+            currentColor = color;
+            document.querySelectorAll('[id^="brush-"]').forEach(btn => {
+                btn.classList.remove('brush-active');
+            });
+            document.getElementById(`brush-${color}`).classList.add('brush-active');
+            
+            // Bilingual Audio Playback logic (Mock)
+            const words = {
+                'green': 'Verde',
+                'white': 'Blanco'
+            };
+            console.log(`Playing audio for: ${words[color]}`);
+        }
+
+        // Handle Canvas Interaction
+        const canvas = document.getElementById('flag-svg');
+        const flagBg = document.getElementById('flag-bg');
+        const flagElements = document.getElementById('flag-elements');
+
+        canvas.addEventListener('mousedown', () => {
+            if (currentColor === 'green') {
+                flagBg.setAttribute('fill', '#006C35');
+                playAudio('verde');
+            } else if (currentColor === 'white') {
+                flagElements.setAttribute('fill', '#ffffff');
+                flagElements.setAttribute('stroke', '#ffffff');
+                flagElements.classList.remove('opacity-20');
+                playAudio('blanco');
+            }
+        });
+
+        function completeFlag() {
+            const overlay = document.getElementById('success-overlay');
+            const star = document.getElementById('star-icon');
+            
+            overlay.classList.remove('bg-white/0');
+            overlay.classList.add('bg-white/60');
+            star.classList.remove('scale-0');
+            star.classList.add('scale-100');
+
+            setTimeout(() => {
+                alert("¡Felicidades! You painted the flag of Saudi Arabia.");
+                overlay.classList.add('bg-white/0');
+                overlay.classList.remove('bg-white/60');
+                star.classList.add('scale-0');
+                star.classList.remove('scale-100');
+            }, 2000);
+        }
+
+        function playAudio(term) {
+            // Virtual audio feedback
+            const feedback = {
+                'saudi': 'Arabia Saudita / Saudi Arabia',
+                'verde': 'Verde',
+                'blanco': 'Blanco'
+            };
+            console.log("Audio Playback:", feedback[term]);
+        }
+    </script>
+
+
+</body></html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Flag Adventure - México</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-fixed": "#cbe6ff",
+                "surface-tint": "#006495",
+                "primary-fixed-dim": "#90cdff",
+                "on-background": "#171c21",
+                "surface-variant": "#dee3e9",
+                "error-container": "#ffdad6",
+                "tertiary-container": "#59be1b",
+                "primary-container": "#2bb1ff",
+                "surface-container-high": "#e4e8ef",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#6d5700",
+                "secondary": "#735c00",
+                "on-secondary-fixed": "#231b00",
+                "outline": "#6e7882",
+                "secondary-container": "#fccc00",
+                "on-primary-fixed-variant": "#004b71",
+                "secondary-fixed": "#ffe084",
+                "on-tertiary-fixed": "#082100",
+                "primary": "#006495",
+                "on-surface": "#171c21",
+                "on-surface-variant": "#3e4851",
+                "on-tertiary-container": "#1a4600",
+                "error": "#ba1a1a",
+                "tertiary-fixed": "#92fc58",
+                "on-tertiary-fixed-variant": "#1f5100",
+                "surface-bright": "#f7f9ff",
+                "surface-container-low": "#f0f4fb",
+                "tertiary-fixed-dim": "#77de3d",
+                "on-secondary-fixed-variant": "#574500",
+                "on-primary-container": "#004163",
+                "tertiary": "#2b6c00",
+                "surface-container": "#eaeef5",
+                "on-primary": "#ffffff",
+                "on-primary-fixed": "#001e30",
+                "surface": "#f7f9ff",
+                "background": "#f7f9ff",
+                "secondary-fixed-dim": "#efc200",
+                "on-secondary": "#ffffff",
+                "on-error-container": "#93000a",
+                "on-tertiary": "#ffffff",
+                "inverse-surface": "#2c3136",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#bec8d3",
+                "inverse-primary": "#90cdff",
+                "surface-container-highest": "#dee3e9",
+                "inverse-on-surface": "#edf1f8",
+                "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "container-margin": "24px",
+                "card-padding": "20px",
+                "gutter": "16px",
+                "touch-target-min": "48px",
+                "unit": "8px"
+            },
+            "fontFamily": {
+                "body-md": ["Quicksand"],
+                "headline-lg-mobile": ["Quicksand"],
+                "headline-lg": ["Quicksand"],
+                "label-bold": ["Quicksand"],
+                "headline-md": ["Quicksand"],
+                "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .chunky-shadow-primary { box-shadow: 0 6px 0 0 #004b71; }
+        .chunky-shadow-primary:active { transform: translateY(4px); box-shadow: 0 2px 0 0 #004b71; }
+        
+        .chunky-shadow-secondary { box-shadow: 0 6px 0 0 #dee3e9; }
+        .chunky-shadow-secondary:active { transform: translateY(4px); box-shadow: 0 2px 0 0 #dee3e9; }
+
+        .chunky-shadow-tertiary { box-shadow: 0 6px 0 0 #1f5100; }
+        .chunky-shadow-tertiary:active { transform: translateY(4px); box-shadow: 0 2px 0 0 #1f5100; }
+
+        .chunky-shadow-yellow { box-shadow: 0 6px 0 0 #b38f00; }
+        .chunky-shadow-yellow:active { transform: translateY(4px); box-shadow: 0 2px 0 0 #b38f00; }
+
+        .chunky-shadow-error { box-shadow: 0 6px 0 0 #93000a; }
+        .chunky-shadow-error:active { transform: translateY(4px); box-shadow: 0 2px 0 0 #93000a; }
+
+        .flag-canvas {
+            aspect-ratio: 1.6 / 1;
+            background: #ffffff;
+            border: 4px solid #dee3e9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pulse-audio { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .confetti-piece { position: absolute; width: 10px; height: 10px; border-radius: 50%; opacity: 0; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface-container-low flex items-center justify-between px-container-margin py-unit h-16">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary tracking-tight">México</h1><button class="group flex items-center gap-2 bg-secondary-container px-4 py-2 rounded-full chunky-shadow-yellow active:translate-y-1 transition-all duration-100">
+  <span class="material-symbols-outlined text-on-secondary-container" data-icon="notifications_active">notifications_active</span>
+  <span class="font-label-bold text-label-bold text-on-secondary-container">¡Alarma!</span>
+</button><button class="flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full chunky-shadow-yellow active:translate-y-1 transition-all duration-100 hover:bg-surface-variant group">
+  <span class="material-symbols-outlined text-2xl" data-icon="notifications_active">notifications_active</span>
+  <div class="flex flex-col items-start leading-none">
+    <span class="font-label-bold text-[12px]">¡Alarma!</span>
+    <span class="font-body-md text-[10px] opacity-80">Sound Alarm</span>
+  </div>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined text-primary" data-icon="volume_up">volume_up</span>
+</button>
+</header>
+<main class="max-w-4xl mx-auto px-container-margin pt-gutter flex flex-col gap-8">
+<!-- Level & Progress Section -->
+<div class="flex items-center justify-between bg-surface-container rounded-lg p-card-padding">
+<div class="flex flex-col">
+<span class="font-label-bold text-label-bold text-on-surface-variant">Level 5</span>
+<span class="font-headline-md text-headline-md text-primary">Master Painter</span>
+</div>
+<div class="w-48 bg-outline-variant h-4 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full w-4/5 rounded-full"></div>
+</div>
+</div>
+<!-- Main Workspace: Asymmetric Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Side: Paint & Mascot -->
+<div class="lg:col-span-4 flex flex-col gap-6 order-2 lg:order-1">
+<!-- Mascot Area -->
+<div class="bg-primary-fixed rounded-lg p-card-padding flex items-center gap-4 relative overflow-hidden">
+<img class="w-24 h-24 object-contain z-10" data-alt="A cute, friendly panda mascot with large expressive eyes, wearing a tiny red beret and holding a colorful paintbrush. The style is 3D-claymorphism with soft, rounded edges and vibrant saturated colors, standing in a studio with soft studio lighting. Minimalist clean background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqx2L1TaoN_odIkWwvzsmWFQCOLoNxXOeC2r-OnDBPiLVlXHe18Bw1i3lyQUhwrTem8npBFHX9YumT4Y6wjZJAxly_-YBC2zONrXgI1TCzp_nkNieScvGfsbejapFYgjXReX_uqKyf-3bHjUq50GlB2525_o_UtZ1oMY5nW0O8lve1ifPAn1csZ5hqK9anFXKV6rf3QI8iDi7p6Zb3gHmEmJVNaF0XDd4bKDG6j3iSIijnt6WNDjQCNq36hdZ61ADFPEnZp3PTUfY">
+<div class="flex flex-col z-10">
+<p class="font-body-md text-body-md text-on-primary-fixed-variant leading-tight">¡Hola! Let's paint the flag!</p>
+</div>
+<!-- Decorative background shapes -->
+<div class="absolute -right-4 -bottom-4 w-16 h-16 bg-primary-container opacity-30 rounded-full"></div>
+</div>
+<!-- Palette Section -->
+<div class="flex flex-col gap-4">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant px-2">Choose a color:</h3>
+<div class="grid grid-cols-1 gap-4">
+<!-- Verde -->
+<button class="group flex items-center justify-between bg-white p-4 rounded-lg border-2 border-surface-variant chunky-shadow-secondary transition-all" id="btn-verde">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#006847] border-2 border-on-surface-variant"></div>
+<span class="font-headline-md text-headline-md text-[#006847]">Verde</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center pulse-audio chunky-shadow-yellow group-active:translate-y-1">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="volume_up">volume_up</span>
+</div>
+</button>
+<!-- Blanco -->
+<button class="group flex items-center justify-between bg-white p-4 rounded-lg border-2 border-surface-variant chunky-shadow-secondary transition-all" id="btn-blanco">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white border-2 border-surface-variant"></div>
+<span class="font-headline-md text-headline-md text-on-surface-variant">Blanco</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center pulse-audio chunky-shadow-yellow group-active:translate-y-1">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="volume_up">volume_up</span>
+</div>
+</button>
+<!-- Rojo -->
+<button class="group flex items-center justify-between bg-white p-4 rounded-lg border-2 border-surface-variant chunky-shadow-secondary transition-all" id="btn-rojo">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#CE1126] border-2 border-on-surface-variant"></div>
+<span class="font-headline-md text-headline-md text-[#CE1126]">Rojo</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center pulse-audio chunky-shadow-yellow group-active:translate-y-1">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="volume_up">volume_up</span>
+</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Side: Flag Canvas -->
+<div class="lg:col-span-8 flex flex-col gap-6 order-1 lg:order-2">
+<div class="flag-canvas rounded-lg shadow-xl" id="flag-station">
+<div class="grid grid-cols-3 h-full">
+<!-- Left Panel (Green) -->
+<div class="h-full border-r-2 border-surface-variant flex items-center justify-center cursor-pointer transition-colors duration-300" id="panel-left">
+<span class="material-symbols-outlined text-surface-variant text-6xl opacity-20" data-icon="brush">brush</span>
+</div>
+<!-- Center Panel (White) -->
+<div class="h-full border-r-2 border-surface-variant flex items-center justify-center cursor-pointer relative transition-colors duration-300" id="panel-center">
+<img class="w-24 h-24 object-contain opacity-20 transition-opacity" data-alt="A stylized, simplified heraldic eagle perched on a cactus with a snake in its beak, representing the national coat of arms of Mexico. Flat design, bold outlines, minimalist educational style for children. Vibrant colors with soft shadows." id="eagle-seal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmfV_XDDI1BbsDoYEcA__TMp3s3ovs0Ww4jngphIJzafyaAREyIV-gueRIn20WbBvCN6HxmffUH_ufDR80j7mpN2Dx5QBytfJNkuawtKly2J71koFRhldox6Ajt3TJ5iYqngz14t-xHXKAYO3_Z6EfeSh0qA-jY1WjeTafySUJDspgz5Tjnpz00RiVUAyXmaDyE0Li1JQfoF8caD4PhqsKfA2C4L4QukdsweD8vIyJqrMtSt6acp6Vs7hSACFbZ-21s1-G2BuYYa8">
+</div>
+<!-- Right Panel (Red) -->
+<div class="h-full flex items-center justify-center cursor-pointer transition-colors duration-300" id="panel-right">
+<span class="material-symbols-outlined text-surface-variant text-6xl opacity-20" data-icon="brush">brush</span>
+</div>
+</div>
+</div>
+<!-- Fact Card -->
+<div class="bg-secondary-fixed rounded-lg p-card-padding flex gap-4 items-start border-b-8 border-secondary-fixed-dim">
+<div class="bg-white p-2 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="lightbulb">lightbulb</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-bold text-label-bold text-on-secondary-fixed">Fun Fact!</span>
+<p class="font-body-lg text-body-lg text-on-secondary-fixed-variant leading-tight">"El águila en la bandera vive en las montañas."</p>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-6 bg-primary rounded-lg text-white font-headline-md chunky-shadow-primary flex items-center justify-center gap-3" id="finish-btn">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Ready to Fly!
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant rounded-t-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 hover:bg-surface-variant transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</div>
+</nav>
+<script>
+        let selectedColor = null;
+        let panelsColored = { left: false, center: false, right: false };
+
+        const colors = {
+            verde: '#006847',
+            blanco: '#FFFFFF',
+            rojo: '#CE1126'
+        };
+
+        const buttons = {
+            verde: document.getElementById('btn-verde'),
+            blanco: document.getElementById('btn-blanco'),
+            rojo: document.getElementById('btn-rojo')
+        };
+
+        const panels = {
+            left: document.getElementById('panel-left'),
+            center: document.getElementById('panel-center'),
+            right: document.getElementById('panel-right')
+        };
+
+        const seal = document.getElementById('eagle-seal');
+
+        // Color selection logic
+        Object.keys(buttons).forEach(color => {
+            buttons[color].addEventListener('click', () => {
+                selectedColor = color;
+                // Reset visual state of all buttons
+                Object.values(buttons).forEach(btn => btn.classList.replace('chunky-shadow-yellow', 'chunky-shadow-secondary'));
+                // Highlight active
+                buttons[color].classList.replace('chunky-shadow-secondary', 'chunky-shadow-yellow');
+                
+                // Play hypothetical audio feedback
+                console.log(`Playing audio for: ${color}`);
+            });
+        });
+
+        // Panel painting logic
+        panels.left.addEventListener('click', () => {
+            if (selectedColor === 'verde') {
+                panels.left.style.backgroundColor = colors.verde;
+                panels.left.innerHTML = '';
+                panelsColored.left = true;
+                checkCompletion();
+            }
+        });
+
+        panels.center.addEventListener('click', () => {
+            if (selectedColor === 'blanco') {
+                panels.center.style.backgroundColor = colors.blanco;
+                seal.classList.remove('opacity-20');
+                seal.classList.add('opacity-100');
+                panelsColored.center = true;
+                checkCompletion();
+            }
+        });
+
+        panels.right.addEventListener('click', () => {
+            if (selectedColor === 'rojo') {
+                panels.right.style.backgroundColor = colors.rojo;
+                panels.right.innerHTML = '';
+                panelsColored.right = true;
+                checkCompletion();
+            }
+        });
+
+        function checkCompletion() {
+            if (panelsColored.left && panelsColored.center && panelsColored.right) {
+                const finishBtn = document.getElementById('finish-btn');
+                finishBtn.classList.replace('bg-primary', 'bg-tertiary-container');
+                finishBtn.classList.add('chunky-shadow-tertiary');
+                createConfetti();
+            }
+        }
+
+        function createConfetti() {
+            const container = document.getElementById('flag-station');
+            for(let i=0; i<30; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti-piece';
+                conf.style.left = Math.random() * 100 + '%';
+                conf.style.top = Math.random() * 100 + '%';
+                conf.style.backgroundColor = ['#006847', '#FFFFFF', '#CE1126', '#FCCC00'][Math.floor(Math.random()*4)];
+                container.appendChild(conf);
+                
+                conf.animate([
+                    { transform: 'translateY(0) rotate(0)', opacity: 1 },
+                    { transform: `translateY(-${Math.random()*100 + 50}px) rotate(${Math.random()*360}deg)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random()*1000,
+                    easing: 'ease-out'
+                });
+            }
+        }
+    </script>
+
+
+</body></html>

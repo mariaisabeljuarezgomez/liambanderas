@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flag Adventure - Quiz Level 4</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "outline": "#6e7882",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-low": "#f0f4fb",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bec8d3",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        
+        /* Tactical Skeuomorphic Buttons */
+        .btn-chunky-primary {
+            @apply relative bg-primary-container text-on-primary-container font-label-bold text-label-bold py-4 px-8 rounded-lg transition-all duration-100;
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .btn-chunky-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #004b71;
+        }
+
+        .btn-chunky-secondary {
+            @apply relative bg-surface-container-lowest text-primary font-label-bold text-label-bold py-4 px-8 rounded-lg transition-all duration-100 border border-outline-variant;
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .btn-chunky-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #bec8d3;
+        }
+
+        /* Quiz Card Interaction */
+        .quiz-card {
+            @apply relative bg-surface-container-lowest p-card-padding rounded-lg transition-all duration-100 cursor-pointer border-2 border-transparent;
+            box-shadow: 0 8px 0 0 #dee3e9;
+        }
+        .quiz-card:hover { @apply border-primary-container; }
+        .quiz-card:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 0 #dee3e9;
+        }
+
+        /* Pulse Animation for Audio */
+        @keyframes soft-pulse {
+            0% { transform: scale(1); box-shadow: 0 6px 0 0 #b38f00; }
+            50% { transform: scale(1.05); box-shadow: 0 8px 12px 0 rgba(115, 92, 0, 0.3); }
+            100% { transform: scale(1); box-shadow: 0 6px 0 0 #b38f00; }
+        }
+        .audio-pulse {
+            animation: soft-pulse 2s infinite ease-in-out;
+            background-color: #fccc00;
+            box-shadow: 0 6px 0 0 #b38f00;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface-container-low flex items-center justify-between px-container-margin py-unit">
+<div class="flex items-center gap-4">
+<button class="active:translate-y-1 transition-all duration-100 text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Flag Adventure</h1>
+</div>
+<div class="flex items-center gap-2 bg-secondary-container rounded-full px-3 py-1">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-bold text-on-secondary-container">120</span>
+</div>
+<button class="active:translate-y-1 transition-all duration-100 text-primary">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</header>
+<main class="flex-1 px-container-margin pt-gutter pb-32 max-w-2xl mx-auto w-full">
+<!-- Progress Bar Section -->
+<div class="mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-primary">Level 4</span>
+<span class="font-label-bold text-on-surface-variant">70% Complete</span>
+</div>
+<div class="h-4 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full transition-all duration-500 shadow-inner" style="width: 70%"></div>
+</div>
+</div>
+<!-- Question Section -->
+<div class="text-center mb-10">
+<div class="mb-6 flex justify-center">
+<button aria-label="Listen to question" class="audio-pulse w-24 h-24 rounded-full flex items-center justify-center transition-transform active:scale-95">
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<h2 class="font-headline-md text-headline-md mb-2">¿Cuál es la bandera de Nueva Zelanda?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Which is the flag of New Zealand?</p>
+</div>
+<!-- Quiz Options (Bento Style Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- New Zealand (Correct) -->
+<div class="quiz-card flex flex-col items-center gap-4 group" onclick="selectOption(this)">
+<div class="w-full aspect-video rounded-lg overflow-hidden border border-outline-variant bg-white">
+<img class="w-full h-full object-cover" data-alt="The flag of New Zealand, featuring a deep blue field with the Union Jack in the upper left corner and four red five-pointed stars outlined in white on the right side. The style is clean, vibrant, and educational with soft lighting to emphasize the texture of the fabric. The overall aesthetic is premium and minimalist against a soft grey studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYAMid8yOMwT5mxqL6vZ-RblKGCknnAGOHmdo6BZNnAx27JOxAxjFycgu7PLCOue7vcUOA5J4ldgS6P4tDtwYqi4PoJUm_HcvF1WmNZdxsONVkPrALWmIxf_YFri74SjrQgNmmCBJIoLn_TXsr66LsP7DkgLFpqKEayCx2nsy-ERBaONqXoHbfMc5pG2TKTRyKfrb7_0zwvugi9DBGMmrRTI8aLuqhtHFrm6FQwgRFefwtIDfBRzE9Pj5kdoQxill7AnTBXnttJyw"/>
+</div>
+<span class="font-label-bold text-on-surface-variant text-lg">New Zealand</span>
+</div>
+<!-- Australia -->
+<div class="quiz-card flex flex-col items-center gap-4 group" onclick="selectOption(this)">
+<div class="w-full aspect-video rounded-lg overflow-hidden border border-outline-variant bg-white">
+<img class="w-full h-full object-cover" data-alt="The flag of Australia, showing a deep blue field with the Union Jack in the canton, a large white seven-pointed star below it, and five white stars representing the Southern Cross on the right. The image is rendered in a high-fidelity, educational style with vibrant saturation and soft shadows. The lighting is balanced and modern, fitting a premium children's learning interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsyZ6hrT4hlzfsczip0Pm94WCtLSqdtt3O5V5_IF9VX3gElvbK7Q6ETE2EipbCIOFp77NUIGssOWA6A2MoxO044ukLiEyciH30RbvUHv5eLL3P2pvI-4zekCmRrakEn4tR6vnEoOggj8PdL2iZwHt9Y4dEMsqkiER62wo0oBHUmFrX-OrdCy5QgNXDMoCg7CHcrLTt5pvm59MNRFdTAIEdeWwq_8tsIpvckiXwLeONXzQ457GZf-1po9DbBkGNn2LxR7yj9DuJbmA"/>
+</div>
+<span class="font-label-bold text-on-surface-variant text-lg">Australia</span>
+</div>
+<!-- United Kingdom -->
+<div class="quiz-card flex flex-col items-center gap-4 group" onclick="selectOption(this)">
+<div class="w-full aspect-video rounded-lg overflow-hidden border border-outline-variant bg-white">
+<img class="w-full h-full object-cover" data-alt="The Union Jack flag of the United Kingdom, featuring overlapping red and white crosses on a blue background. The colors are bold and saturated for high legibility for young learners. The visual style is tactile and clean, presented as a high-quality physical learning card with rounded corners and premium texture. The setting is bright and cheerful." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0iBd0x3tliPWsNB6K1UnMpSVF7yhO37yYjOuuTZj9eHs3IOObC-aGqXc6RFDvPBPEv9jWsEqXAC04QL_bwruCbadK0XgTxKs21DGpibFcPjt8q1NuYrEU5KlypxHt6jsYh6p-IRBI3yzmAZgQndCV5JzvQEZ7H_zlHBCn9DFkRmCTq2V9A9Rkm4CAbMo3z-f8b4ceN5BORrgrhMgJJR4Uld1ZItY_dFCA2mljWWe4GA8xHgunIlQq6sx5hqak1I4h3n1o59GzyhY"/>
+</div>
+<span class="font-label-bold text-on-surface-variant text-lg">United Kingdom</span>
+</div>
+</div>
+<!-- Action Button -->
+<div class="mt-12 flex justify-center">
+<button class="btn-chunky-primary w-full max-w-sm">
+                COMPROBAR / CHECK
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<script>
+        function showCustomFeedback(isSuccess, titleEs, subtitleEn) {
+            const modal = document.getElementById('quiz-feedback-modal');
+            const modalContent = document.getElementById('quiz-modal-content');
+            const iconBg = document.getElementById('quiz-modal-icon-bg');
+            const icon = document.getElementById('quiz-modal-icon');
+            const title = document.getElementById('quiz-modal-title');
+            const subtitle = document.getElementById('quiz-modal-subtitle');
+            
+            modal.classList.replace('hidden', 'flex');
+            
+            title.innerText = titleEs;
+            subtitle.innerText = subtitleEn;
+            
+            if (isSuccess) {
+                iconBg.className = "w-24 h-24 rounded-full bg-tertiary-container flex items-center justify-center mb-2 animate-bounce";
+                icon.innerText = "celebration";
+                modalContent.style.borderColor = "#59be1b";
+                QuizAudioController.playSuccess();
+                QuizAudioController.speakBilingual(titleEs, subtitleEn);
+            } else {
+                iconBg.className = "w-24 h-24 rounded-full bg-error-container flex items-center justify-center mb-2";
+                icon.innerText = "refresh";
+                icon.classList.add("text-error");
+                modalContent.style.borderColor = "#ba1a1a";
+                QuizAudioController.playError();
+            }
+        }
+
+        function selectOption(el) {
+            // Remove selection from others
+            document.querySelectorAll('.quiz-card').forEach(card => {
+                card.classList.remove('border-primary-container', 'bg-primary-fixed');
+                card.style.borderColor = 'transparent';
+            });
+            // Highlight selected
+            el.classList.add('bg-primary-fixed');
+            el.style.borderColor = '#2bb1ff';
+        }
+
+        // Simple audio feedback simulation
+        const audioBtn = document.querySelector('.audio-pulse');
+        audioBtn.addEventListener('click', () => {
+            audioBtn.style.transform = 'scale(0.9)';
+            setTimeout(() => { audioBtn.style.transform = 'scale(1)'; }, 100);
+            QuizAudioController.speakBilingual("¿Cuál es la bandera?", "Which is the flag?");
+        });
+    </script>
+
+    <!-- Custom Feedback Modal -->
+    <div id="quiz-feedback-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex-col items-center justify-center p-6 backdrop-blur-sm transition-all">
+        <div id="quiz-modal-content" class="bg-surface-container-lowest p-8 rounded-3xl w-full max-w-sm flex flex-col items-center text-center gap-6 transform transition-transform scale-95 border-b-8 border-primary-container shadow-2xl">
+            <div id="quiz-modal-icon-bg" class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-2 animate-bounce">
+                <span id="quiz-modal-icon" class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <div>
+                <h2 id="quiz-modal-title" class="font-headline-lg text-primary mb-2">¡Excelente!</h2>
+                <p id="quiz-modal-subtitle" class="font-body-lg text-on-surface-variant">Great job!</p>
+            </div>
+            <button onclick="document.getElementById('quiz-feedback-modal').classList.replace('flex', 'hidden');" class="w-full py-4 bg-primary text-white font-label-bold rounded-full active:scale-95 transition-transform mt-2 border-b-4 border-on-primary-container">
+                CONTINUAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const QuizAudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+            playSuccess() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, this.ctx.currentTime + 0.3); // C6
+                
+                gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.5);
+            },
+            playError() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.3);
+                
+                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            alarm() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime + 0.5);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.75);
+                
+                gain.gain.value = 0.1;
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 1.0);
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { window.speechSynthesis.cancel(); } catch(e) {}
+                
+                setTimeout(() => {
+                    const uEs = new SpeechSynthesisUtterance(es);
+                    uEs.lang = 'es-ES';
+                    uEs.rate = 0.95;
+                    
+                    uEs.onend = () => {
+                        const uEn = new SpeechSynthesisUtterance(en);
+                        uEn.lang = 'en-US';
+                        uEn.rate = 0.95;
+                        window.speechSynthesis.speak(uEn);
+                    };
+                    window.speechSynthesis.speak(uEs);
+                }, 80);
+            }
+        };
+    </script>
+
+</body></html>

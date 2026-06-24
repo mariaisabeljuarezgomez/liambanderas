@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Estación de Pintura (Nigeria)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "surface-variant": "#dee3e9",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "outline": "#6e7882",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "inverse-surface": "#2c3136",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1",
+                    "inverse-primary": "#90cdff",
+                    "outline-variant": "#bec8d3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "surface-container-low": "#f0f4fb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px",
+                    "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; }
+        
+        .tactile-button {
+            transition: all 0.1s ease;
+        }
+        .tactile-button:active {
+            transform: translateY(4px);
+            box-shadow: none !important;
+        }
+
+        .flag-card {
+            box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .brush-active {
+            transform: scale(1.1) translateY(-4px);
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .audio-pulse {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top Navigation -->
+<header class="w-full top-0 sticky bg-surface-container-low flex items-center justify-between px-container-margin py-unit z-50">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-full tactile-button bg-white border-b-4 border-surface-variant text-primary active:border-b-0">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-extrabold tracking-tight">Estación de Pintura (Nigeria)</h1>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full tactile-button bg-white border-b-4 border-surface-variant text-primary active:border-b-0">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+<button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<main class="max-w-md mx-auto px-container-margin pt-unit space-y-6">
+<!-- Interactive Flag Canvas -->
+<section class="relative">
+<div class="flag-card bg-white rounded-lg p-card-padding border-2 border-surface-variant overflow-hidden">
+<div class="aspect-[3/2] flex w-full border-4 border-surface-dim rounded-lg overflow-hidden cursor-crosshair" id="flag-canvas">
+<div class="flex-1 bg-surface-container-low transition-colors duration-300 flex items-center justify-center" id="band-1" onclick="paintBand('band-1')">
+<span class="material-symbols-outlined text-surface-variant opacity-30 text-6xl">format_paint</span>
+</div>
+<div class="flex-1 bg-surface-container-low transition-colors duration-300 border-x-2 border-surface-variant/20 flex items-center justify-center" id="band-2" onclick="paintBand('band-2')">
+<span class="material-symbols-outlined text-surface-variant opacity-30 text-6xl">format_paint</span>
+</div>
+<div class="flex-1 bg-surface-container-low transition-colors duration-300 flex items-center justify-center" id="band-3" onclick="paintBand('band-3')">
+<span class="material-symbols-outlined text-surface-variant opacity-30 text-6xl">format_paint</span>
+</div>
+</div>
+</div>
+<!-- Audio Assistance -->
+<div class="absolute -right-4 -top-4">
+<button class="w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center tactile-button shadow-[0_6px_0_0_#6d5700] active:shadow-none audio-pulse" onclick="playAudio('instruction')">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+</section>
+<!-- Tool Palette -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Green Tool -->
+<button class="color-tool relative bg-white border-2 border-surface-variant rounded-lg p-4 tactile-button shadow-[0_6px_0_0_#dee3e9] flex flex-col items-center gap-2 group" onclick="selectColor('#2b6c00', this)">
+<div class="w-16 h-16 rounded-full bg-tertiary shadow-inner border-4 border-white"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold">Verde</span>
+<span class="material-symbols-outlined text-primary text-xl" data-icon="volume_up" onclick="event.stopPropagation(); playAudio('verde')">volume_up</span>
+</div>
+</button>
+<!-- White Tool -->
+<button class="color-tool relative bg-white border-2 border-surface-variant rounded-lg p-4 tactile-button shadow-[0_6px_0_0_#dee3e9] flex flex-col items-center gap-2" onclick="selectColor('#ffffff', this)">
+<div class="w-16 h-16 rounded-full bg-white shadow-inner border-4 border-surface-variant"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold">Blanco</span>
+<span class="material-symbols-outlined text-primary text-xl" data-icon="volume_up" onclick="event.stopPropagation(); playAudio('blanco')">volume_up</span>
+</div>
+</button>
+</section>
+<!-- Fun Fact Card -->
+<section class="bg-primary-container/20 rounded-lg p-card-padding border-2 border-dashed border-primary flex items-start gap-4">
+<div class="w-12 h-12 bg-primary rounded-xl flex-shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-primary-container mb-1">¿Sabías que...?</h3>
+<p class="font-body-md text-body-md text-on-primary-container">Nigeria es un país con mucha selva y animales.</p>
+</div>
+</section>
+<!-- Contextual Activity Image -->
+<section class="rounded-lg overflow-hidden border-2 border-surface-variant h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A whimsical digital illustration for children showing a lush Nigerian jungle with vibrant green foliage, colorful tropical birds, and a friendly-looking elephant. The style is soft-edged with high-key lighting, bright primary colors, and a clean, minimalist layout consistent with a high-end educational app for kids. The background is a soft sky blue." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQmD81zp8of4yIK5JL-22xh7ZARXpqm-DJEWGQ9VmXBaeeAPB22g2epmfQnPXUAD1C3PterAiiNYlRux4VFhFUU2By02uYddmbg32fMx0IZYiwp0lxLCqILsiyLcaLkLFRGfddUAUKNLqDq2uOY9J14qgJTw362pGkzALHCGhBkXXiRouU718Q3qKZcgfMgZRT1U59Z8ifz1T1UlkWapzoQ-DGykZ8X-_ynhWwWk38I2lezDJPX6ZcbsjhePBTwNyGRwe2V7j83oY">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<div class="absolute bottom-3 left-4 text-white font-label-bold flex items-center gap-2">
+<span class="material-symbols-outlined">park</span>
+                Selva Tropical
+            </div>
+</section>
+</main>
+<!-- Bottom Navigation Component -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</button>
+</nav>
+<script>
+        let selectedColor = null;
+
+        function selectColor(color, element) {
+            selectedColor = color;
+            // Clear previous selection styles
+            document.querySelectorAll('.color-tool').forEach(tool => {
+                tool.classList.remove('ring-4', 'ring-primary', 'brush-active');
+            });
+            // Apply new selection
+            element.classList.add('ring-4', 'ring-primary', 'brush-active');
+        }
+
+        function paintBand(id) {
+            if (!selectedColor) return;
+            const band = document.getElementById(id);
+            band.style.backgroundColor = selectedColor;
+            band.innerHTML = ''; // Remove the paint icon
+            
+            checkCompletion();
+        }
+
+        function checkCompletion() {
+            const b1 = document.getElementById('band-1').style.backgroundColor;
+            const b2 = document.getElementById('band-2').style.backgroundColor;
+            const b3 = document.getElementById('band-3').style.backgroundColor;
+
+            // Simple validation (Green: #2b6c00, White: #ffffff)
+            // Note: color strings might return as rgb()
+            if (b1 && b2 && b3) {
+                // If all painted, show a mini celebration effect or audio
+                console.log("¡Bandera pintada!");
+            }
+        }
+
+        function playAudio(term) {
+            console.log("Reproduciendo audio para: " + term);
+            // In a real app, this would trigger a speech synthesis or audio file
+            // Let's add a visual feedback for children
+            const ripple = document.createElement('div');
+            ripple.className = 'fixed inset-0 pointer-events-none flex items-center justify-center z-[100]';
+            ripple.innerHTML = `<div class="bg-white/30 rounded-full p-10 animate-ping"><span class="material-symbols-outlined text-6xl text-primary">volume_up</span></div>`;
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 1000);
+        }
+    </script>
+
+
+</body></html>

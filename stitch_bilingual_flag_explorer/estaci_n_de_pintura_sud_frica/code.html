@@ -1,0 +1,327 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#2b6c00",
+                    "surface-container-highest": "#dee3e9",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-on-surface": "#edf1f8",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "primary-fixed-dim": "#90cdff",
+                    "surface": "#f7f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#cbe6ff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#1a4600",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-primary-fixed-variant": "#004b71",
+                    "inverse-primary": "#90cdff",
+                    "surface-container": "#eaeef5",
+                    "primary": "#006495",
+                    "surface-dim": "#d6dae1",
+                    "surface-variant": "#dee3e9",
+                    "on-secondary-container": "#6d5700",
+                    "error": "#ba1a1a",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary-container": "#59be1b",
+                    "outline": "#6e7882",
+                    "on-surface-variant": "#3e4851",
+                    "outline-variant": "#bec8d3",
+                    "secondary-fixed": "#ffe084",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed": "#082100",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#92fc58",
+                    "secondary-container": "#fccc00",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#171c21",
+                    "background": "#f7f9ff",
+                    "on-background": "#171c21",
+                    "surface-container-low": "#f0f4fb",
+                    "surface-tint": "#006495",
+                    "on-primary-container": "#004163",
+                    "surface-bright": "#f7f9ff",
+                    "on-primary-fixed": "#001e30",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .chunky-shadow-primary {
+            box-shadow: 0 6px 0 0 #004163;
+        }
+        .chunky-shadow-secondary {
+            box-shadow: 0 6px 0 0 #d6dae1;
+        }
+        .chunky-shadow-yellow {
+            box-shadow: 0 6px 0 0 #6d5700;
+        }
+        
+        .flag-path {
+            transition: fill 0.3s ease;
+            cursor: pointer;
+            stroke: #dee3e9;
+            stroke-width: 2;
+        }
+        
+        .active-brush {
+            transform: scale(1.1) translateY(-8px);
+            border: 4px solid #006495 !important;
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse-audio {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24 overflow-x-hidden">
+<!-- Top Navigation Bar (from Shared Components) -->
+<header class="w-full top-0 sticky z-40 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit h-16">
+<button aria-label="Volver" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:opacity-80 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Sudáfrica</h1>
+<button class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center chunky-shadow-yellow pulse-audio active:translate-y-1 active:shadow-none transition-all" onclick="playAudio('Sudáfrica')">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<button class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:opacity-80 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl">help_outline</span>
+</button>
+</header>
+<main class="max-w-4xl mx-auto px-container-margin py-8">
+<!-- Progress Bar -->
+<div class="mb-8 px-4">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-label-bold text-tertiary">¡Casi listo!</span>
+<span class="font-label-bold text-label-bold text-on-surface-variant">3 / 6 colores</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden border-2 border-surface-container-highest">
+<div class="h-full bg-tertiary-container w-1/2 transition-all duration-500 rounded-full"></div>
+</div>
+</div>
+<!-- Flag Canvas Section -->
+<div class="relative bg-surface-container-lowest rounded-lg p-card-padding border-2 border-surface-container-high shadow-xl mb-10 overflow-hidden">
+<div class="absolute top-4 left-4 flex gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-sm">palette</span>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Pinta la bandera</p>
+</div>
+<!-- SVG Flag Outline for South Africa (Y-shape) -->
+<div class="aspect-[3/2] w-full max-w-2xl mx-auto mt-8 relative">
+<svg class="w-full h-full drop-shadow-md" id="flag-svg" viewBox="0 0 900 600">
+<!-- Red Top -->
+<path class="flag-path" d="M0 0h900v200H300L200 100 100 0H0z" data-color-target="Rojo" fill="#f0f4fb" onclick="paint(this)"></path>
+<!-- Blue Bottom -->
+<path class="flag-path" d="M0 600h900V400H300l-100 100-100 100H0z" data-color-target="Azul" fill="#f0f4fb" onclick="paint(this)"></path>
+<!-- Green Y-Shape -->
+<path class="flag-path" d="M0 100v400l100-100h100l200-200H100L0 100z M200 300l100 100h600V200H300L200 300z" data-color-target="Verde" fill="#f0f4fb" onclick="paint(this)"></path>
+<!-- Yellow Triangle Border -->
+<path class="flag-path" d="M0 100l200 200L0 500V100z" data-color-target="Amarillo" fill="#f0f4fb" onclick="paint(this)"></path>
+<!-- Black Triangle -->
+<path class="flag-path" d="M0 150l150 150L0 450V150z" data-color-target="Negro" fill="#f0f4fb" onclick="paint(this)"></path>
+<!-- White Borders (represented as part of the fillable logic or static) -->
+<path class="flag-path" d="M0 0v100l200 200L0 500v100h100l300-300L100 0H0z" data-color-target="Blanco" fill="#f0f4fb" onclick="paint(this)"></path>
+</svg>
+</div>
+<!-- Floating Decorative Stars -->
+<div class="absolute -bottom-4 -right-4 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-8xl text-secondary">grade</span>
+</div>
+</div>
+<!-- Color Palette Picker -->
+<div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-12">
+<!-- Verde -->
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#2b6c00', 'Verde', this)">
+<div class="w-16 h-16 rounded-full bg-[#2b6c00] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Verde</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</div>
+</button>
+<!-- Amarillo -->
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#fccc00', 'Amarillo', this)">
+<div class="w-16 h-16 rounded-full bg-[#fccc00] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Amarillo</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</div>
+</button>
+<!-- Blanco -->
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#ffffff', 'Blanco', this)">
+<div class="w-16 h-16 rounded-full bg-[#ffffff] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Blanco</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</div>
+</button>
+<!-- Rojo -->
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#ba1a1a', 'Rojo', this)">
+<div class="w-16 h-16 rounded-full bg-[#ba1a1a] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Rojo</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</div>
+</button>
+<!-- Azul -->
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#006495', 'Azul', this)">
+<div class="w-16 h-16 rounded-full bg-[#006495] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Azul</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</div>
+</button>
+<!-- Negro -->
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#171c21', 'Negro', this)">
+<div class="w-16 h-16 rounded-full bg-[#171c21] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold text-on-surface">Negro</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</div>
+</button>
+</div>
+<!-- Instructions Section -->
+<div class="bg-primary-container/20 rounded-lg p-6 border-2 border-primary-container flex items-start gap-4 mb-8">
+<div class="w-12 h-12 shrink-0 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-lg">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-primary-container">¿Sabías que...?</h3>
+<p class="text-on-surface-variant font-body-md">La bandera de Sudáfrica tiene 6 colores. La forma de "Y" significa que muchas personas se unen para vivir en paz.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Fixed but distinct from Nav) -->
+<div class="fixed bottom-20 left-0 w-full px-container-margin z-30">
+<button class="w-full h-16 bg-primary text-on-primary font-headline-md text-headline-md rounded-lg chunky-shadow-primary flex items-center justify-center gap-3 active:translate-y-1 active:shadow-none transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            ¡He terminado!
+        </button>
+</div>
+<!-- Bottom Nav Bar (from Shared Components) -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest shadow-lg z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-2xl">explore</span>
+<span class="font-label-bold text-[10px]">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+<span class="font-label-bold text-[10px]">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-[10px]">Jugar</span>
+</a>
+</nav>
+<script>
+        let currentColor = null;
+        let colorName = "";
+
+        function selectColor(hex, name, btn) {
+            currentColor = hex;
+            colorName = name;
+            
+            // UI feedback for selection
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active-brush', 'bg-white', 'shadow-inner'));
+            btn.classList.add('active-brush', 'bg-white', 'shadow-inner');
+            
+            playAudio(name);
+        }
+
+        function paint(element) {
+            if (!currentColor) {
+                // Shake or feedback to pick a color first
+                element.classList.add('animate-pulse');
+                setTimeout(() => element.classList.remove('animate-pulse'), 500);
+                return;
+            }
+            
+            const target = element.getAttribute('data-color-target');
+            
+            // Simple logic for kids: if they pick the right color for the right area
+            // In a real app, we might allow any color but praise for the right one
+            element.style.fill = currentColor;
+            
+            // Celebration effect for specific touch
+            createSparkle(element);
+        }
+
+        function playAudio(text) {
+            console.log("Playing audio for: " + text);
+            // In a real implementation, this triggers speech synthesis
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES';
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function createSparkle(target) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'absolute pointer-events-none text-secondary text-2xl animate-ping';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = '50%';
+            sparkle.style.top = '50%';
+            target.parentElement.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+    </script>
+
+
+</body></html>

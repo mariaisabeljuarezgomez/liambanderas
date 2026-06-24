@@ -1,0 +1,336 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Paint Adventure - Vietnam</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .tactile-primary {
+            box-shadow: 0 4px 0 0 #004b71;
+        }
+        .tactile-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 #004b71;
+        }
+        .tactile-secondary {
+            box-shadow: 0 4px 0 0 #bec8d3;
+        }
+        .tactile-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 #bec8d3;
+        }
+        .tactile-yellow {
+            box-shadow: 0 4px 0 0 #b38f00;
+        }
+        .tactile-yellow:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 #b38f00;
+        }
+        .flag-container {
+            aspect-ratio: 3 / 2;
+        }
+        @keyframes pulse-audio {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .pulse-animation {
+            animation: pulse-audio 2s infinite ease-in-out;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#dee3e9",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#92fc58",
+                        "outline": "#6e7882",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e4e8ef",
+                        "on-secondary-container": "#6d5700",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#006495",
+                        "on-surface-variant": "#3e4851",
+                        "secondary-fixed-dim": "#efc200",
+                        "on-primary-fixed": "#001e30",
+                        "primary-fixed": "#cbe6ff",
+                        "secondary-container": "#fccc00",
+                        "primary-fixed-dim": "#90cdff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container": "#eaeef5",
+                        "surface-container-highest": "#dee3e9",
+                        "tertiary-fixed-dim": "#77de3d",
+                        "on-tertiary-fixed": "#082100",
+                        "on-surface": "#171c21",
+                        "on-tertiary-fixed-variant": "#1f5100",
+                        "background": "#f7f9ff",
+                        "surface-bright": "#f7f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffe084",
+                        "on-primary-fixed-variant": "#004b71",
+                        "primary-container": "#2bb1ff",
+                        "on-secondary-fixed": "#231b00",
+                        "on-background": "#171c21",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#90cdff",
+                        "on-primary-container": "#004163",
+                        "tertiary": "#2b6c00",
+                        "surface-container-low": "#f0f4fb",
+                        "inverse-on-surface": "#edf1f8",
+                        "tertiary-container": "#59be1b",
+                        "outline-variant": "#bec8d3",
+                        "primary": "#006495",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d6dae1",
+                        "secondary": "#735c00",
+                        "on-tertiary-container": "#1a4600",
+                        "inverse-surface": "#2c3136",
+                        "surface": "#f7f9ff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-margin": "24px",
+                        "touch-target-min": "48px",
+                        "gutter": "16px",
+                        "card-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "headline-lg-mobile": ["Quicksand"],
+                        "label-bold": ["Quicksand"],
+                        "headline-md": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 fixed top-0 bg-surface-container-low dark:bg-surface-container-low">
+<button onclick="window.location.href='../world_map_hub/index.html'" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary dark:text-primary-fixed-dim active:translate-y-1 transition-all duration-100" aria-label="Volver">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Paint Adventure</h1>
+<div class="flex">
+<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg mr-2" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma!</span></button>
+<button onclick="speakCountry()" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary dark:text-primary-fixed-dim active:translate-y-1 transition-all duration-100" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas Area -->
+<main class="flex-grow pt-20 pb-28 px-container-margin max-w-4xl mx-auto w-full">
+<!-- Learning & Title Section -->
+<section class="mb-gutter text-center">
+<div class="flex items-center justify-center gap-4 mb-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">Vietnam</h2>
+<button class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center tactile-yellow pulse-animation" onclick="playAudio('Vietnam')">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container-highest rounded-full h-4 mb-gutter">
+<div class="bg-tertiary-container h-4 rounded-full" style="width: 60%;"></div>
+</div>
+</section>
+<!-- The Painting Station -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Interactive Flag Canvas -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-lg border-2 border-outline-variant p-4 flex items-center justify-center relative overflow-hidden shadow-sm">
+<div class="flag-container w-full max-w-[500px] bg-white border-2 border-surface-variant rounded-sm relative cursor-pointer group transition-transform active:scale-95" id="flag-canvas">
+<!-- The Background (Red to be painted) -->
+<div class="absolute inset-0 transition-colors duration-500 bg-surface-variant" id="flag-bg"></div>
+<!-- The Star (Yellow to be painted) -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none" id="flag-star">
+<span class="material-symbols-outlined text-[160px] text-surface-variant transition-colors duration-500" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<!-- Paint Drop Visual Hint -->
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-outline text-6xl">format_paint</span>
+</div>
+</div>
+</div>
+<!-- Palette & Audio Controls -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Color Options -->
+<div class="bg-surface-container-high rounded-lg p-card-padding flex flex-col gap-4">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider">Colores</h3>
+<!-- Color Button: Red -->
+<button class="w-full flex items-center gap-4 bg-surface-container-lowest p-3 rounded-lg border-2 border-outline-variant transition-all hover:bg-white active:translate-y-1 tactile-secondary" id="btn-red" onclick="selectColor('red')">
+<div class="w-12 h-12 rounded-full bg-red-600 border-4 border-white shadow-sm"></div>
+<div class="text-left">
+<p class="font-label-bold text-label-bold">Rojo</p>
+<span class="text-sm text-outline">Pinta el fondo</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-secondary" onclick="event.stopPropagation(); playAudio('Rojo')">volume_up</span>
+</button>
+<!-- Color Button: Yellow -->
+<button class="w-full flex items-center gap-4 bg-surface-container-lowest p-3 rounded-lg border-2 border-outline-variant transition-all hover:bg-white active:translate-y-1 tactile-secondary" id="btn-yellow" onclick="selectColor('yellow')">
+<div class="w-12 h-12 rounded-full bg-secondary-container border-4 border-white shadow-sm"></div>
+<div class="text-left">
+<p class="font-label-bold text-label-bold">Amarillo</p>
+<span class="text-sm text-outline">Pinta la estrella</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-secondary" onclick="event.stopPropagation(); playAudio('Amarillo')">volume_up</span>
+</button>
+<button class="w-full flex items-center gap-4 bg-surface-container-lowest p-3 rounded-lg border-2 border-outline-variant transition-all hover:bg-white active:translate-y-1 tactile-yellow" id="btn-alarm" onclick="playAudio('Alarma')">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center border-4 border-white shadow-sm">
+<span class="material-symbols-outlined text-on-secondary-container">notifications_active</span>
+</div>
+<div class="text-left">
+<p class="font-label-bold text-label-bold">¡Alarma!</p>
+<span class="text-sm text-outline">Sound Alarm</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-secondary">volume_up</span>
+</button></div>
+<!-- Fun Fact Card -->
+<div class="bg-primary-container text-on-primary-container rounded-lg p-card-padding relative overflow-hidden tactile-primary">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined">lightbulb</span>
+<span class="font-label-bold">¿Sabías que?</span>
+</div>
+<p class="font-body-md italic leading-tight text-on-primary-container">"Vietnam tiene hermosas bahías y sombreros de paja."</p>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-8xl opacity-20 rotate-12">beach_access</span>
+</div>
+</div>
+</div>
+<!-- Success Message (Hidden by default) -->
+<div class="fixed inset-0 z-[60] hidden pointer-events-none flex items-center justify-center" id="celebration">
+<div class="bg-secondary-container p-8 rounded-xl shadow-2xl text-center transform scale-150 animate-bounce pointer-events-auto">
+<span class="material-symbols-outlined text-6xl text-on-secondary-container">stars</span>
+<h2 class="text-headline-md font-bold mt-2">¡Excelente!</h2>
+<p class="">¡Has creado la bandera de Vietnam!</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest dark:bg-surface-container-lowest shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all active:translate-y-1" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-label-bold text-label-bold">World Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all active:translate-y-1" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label-bold text-label-bold">My Gallery</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 transition-all active:translate-y-1" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all active:translate-y-1" href="#">
+<span class="material-symbols-outlined">stars</span>
+<span class="font-label-bold text-label-bold">Awards</span>
+</a>
+</nav>
+<!-- Background Decorative Scene -->
+<div class="fixed inset-0 -z-10 opacity-30 pointer-events-none">
+<div class="absolute top-20 left-10 w-32 h-32 bg-primary opacity-10 rounded-full blur-3xl"></div>
+<div class="absolute bottom-40 right-10 w-48 h-48 bg-secondary-container opacity-20 rounded-full blur-3xl"></div>
+</div>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Vietnam','Vietnam'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Vietnam!','Vietnam Alarm!'),750); }
+
+        let selectedColor = null;
+        let paintedRed = false;
+        let paintedYellow = false;
+
+        function selectColor(color) {
+            selectedColor = color;
+            
+            // UI Feedback for selection
+            document.getElementById('btn-red').classList.remove('border-primary', 'bg-primary-fixed');
+            document.getElementById('btn-yellow').classList.remove('border-primary', 'bg-primary-fixed');
+            
+            if (color === 'red') {
+                document.getElementById('btn-red').classList.add('border-primary', 'bg-primary-fixed');
+            } else {
+                document.getElementById('btn-yellow').classList.add('border-primary', 'bg-primary-fixed');
+            }
+        }
+
+        const flagCanvas = document.getElementById('flag-canvas');
+        const flagBg = document.getElementById('flag-bg');
+        const flagStar = document.getElementById('flag-star').querySelector('span');
+
+        flagCanvas.addEventListener('click', () => {
+            if (!selectedColor) {
+                alert("¡Primero elige un color!");
+                return;
+            }
+
+            if (selectedColor === 'red') {
+                flagBg.classList.remove('bg-surface-variant');
+                flagBg.classList.add('bg-red-600');
+                paintedRed = true;
+            } else if (selectedColor === 'yellow') {
+                flagStar.classList.remove('text-surface-variant');
+                flagStar.classList.add('text-secondary-container');
+                paintedYellow = true;
+            }
+
+            checkSuccess();
+        });
+
+        function checkSuccess() {
+            if (paintedRed && paintedYellow) {
+                const celebration = document.getElementById('celebration');
+                celebration.classList.remove('hidden');
+                setTimeout(() => {
+                    celebration.classList.add('hidden');
+                }, 3000);
+            }
+        }
+
+        function playAudio(word) {
+            if (word === 'Alarma') { triggerAlarm(); return; }
+            if (word === 'Vietnam') { speakCountry(); return; }
+            
+            const labels = { 'Rojo':['Rojo','Red'], 'Amarillo':['Amarillo','Yellow'] };
+            const pair = labels[word] || [word, word];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+    </script>
+
+
+</body></html>

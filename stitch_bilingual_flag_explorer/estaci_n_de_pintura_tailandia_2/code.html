@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Flag Adventure - Tailandia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-fixed": "#cbe6ff",
+                "surface-tint": "#006495",
+                "primary-fixed-dim": "#90cdff",
+                "on-background": "#171c21",
+                "surface-variant": "#dee3e9",
+                "error-container": "#ffdad6",
+                "tertiary-container": "#59be1b",
+                "primary-container": "#2bb1ff",
+                "surface-container-high": "#e4e8ef",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#6d5700",
+                "secondary": "#735c00",
+                "on-secondary-fixed": "#231b00",
+                "outline": "#6e7882",
+                "secondary-container": "#fccc00",
+                "on-primary-fixed-variant": "#004b71",
+                "secondary-fixed": "#ffe084",
+                "on-tertiary-fixed": "#082100",
+                "primary": "#006495",
+                "on-surface": "#171c21",
+                "on-surface-variant": "#3e4851",
+                "on-tertiary-container": "#1a4600",
+                "error": "#ba1a1a",
+                "tertiary-fixed": "#92fc58",
+                "on-tertiary-fixed-variant": "#1f5100",
+                "surface-bright": "#f7f9ff",
+                "surface-container-low": "#f0f4fb",
+                "tertiary-fixed-dim": "#77de3d",
+                "on-secondary-fixed-variant": "#574500",
+                "on-primary-container": "#004163",
+                "tertiary": "#2b6c00",
+                "surface-container": "#eaeef5",
+                "on-primary": "#ffffff",
+                "on-primary-fixed": "#001e30",
+                "surface": "#f7f9ff",
+                "background": "#f7f9ff",
+                "secondary-fixed-dim": "#efc200",
+                "on-secondary": "#ffffff",
+                "on-error-container": "#93000a",
+                "on-tertiary": "#ffffff",
+                "inverse-surface": "#2c3136",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#bec8d3",
+                "inverse-primary": "#90cdff",
+                "surface-container-highest": "#dee3e9",
+                "inverse-on-surface": "#edf1f8",
+                "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "container-margin": "24px",
+                "card-padding": "20px",
+                "gutter": "16px",
+                "touch-target-min": "48px",
+                "unit": "8px"
+            },
+            "fontFamily": {
+                "body-md": ["Quicksand"],
+                "headline-lg-mobile": ["Quicksand"],
+                "headline-lg": ["Quicksand"],
+                "label-bold": ["Quicksand"],
+                "headline-md": ["Quicksand"],
+                "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        
+        .chunky-button-primary {
+            @apply bg-primary-container text-on-primary-container font-label-bold text-label-bold py-4 px-8 rounded-lg active:translate-y-1 transition-all duration-100;
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-button-primary:active {
+            box-shadow: 0 0px 0 0 #004b71;
+        }
+
+        .chunky-button-secondary {
+            @apply bg-surface-container-lowest text-primary font-label-bold text-label-bold py-4 px-8 rounded-lg active:translate-y-1 transition-all duration-100;
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .chunky-button-secondary:active {
+            box-shadow: 0 0px 0 0 #bec8d3;
+        }
+
+        .color-well {
+            @apply w-20 h-20 rounded-full cursor-pointer flex items-center justify-center transition-transform duration-200;
+            box-shadow: 0 8px 0 0 rgba(0,0,0,0.2);
+        }
+        .color-well:active {
+            @apply translate-y-1;
+            box-shadow: 0 0px 0 0 rgba(0,0,0,0.2);
+        }
+        .color-well.selected {
+            @apply ring-4 ring-primary ring-offset-4 scale-110;
+        }
+
+        .flag-stripe {
+            @apply border-2 border-surface-variant flex-1 transition-colors duration-300 cursor-pointer;
+        }
+        .flag-stripe-double {
+            @apply flex-[2];
+        }
+
+        .audio-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface-container-low w-full top-0 sticky z-40 flex items-center justify-between px-container-margin py-unit h-16 shadow-none">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-primary-container rounded-lg active:translate-y-1 transition-all duration-100">menu</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary">Flag Adventure</h1>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-primary-container rounded-lg active:translate-y-1 transition-all duration-100">volume_up</button>
+<button class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<main class="flex-1 px-container-margin pb-32 pt-6">
+<!-- Level & Progress -->
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-bold text-label-bold">NIVEL 5</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Tailandia</h2>
+</div>
+<button class="flex flex-col items-center justify-center gap-1 mr-2">
+  <div class="w-16 h-16 bg-tertiary-container rounded-full flex items-center justify-center audio-pulse border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all">
+    <span class="material-symbols-outlined text-on-tertiary-container" style="font-size: 32px;">notifications_active</span>
+  </div>
+  <span class="text-label-bold font-label-bold text-primary text-[10px] uppercase tracking-tighter">¡Alarma!</span>
+</button><div class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center audio-pulse border-b-4 border-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-size: 32px;">volume_up</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-high h-4 rounded-full mb-8 overflow-hidden">
+<div class="w-4/5 h-full bg-tertiary-container rounded-full"></div>
+</div>
+<!-- Interactive Canvas Card -->
+<div class="bg-surface-container-lowest rounded-lg p-card-padding shadow-none border-b-8 border-surface-variant mb-8 flex flex-col items-center">
+<div class="w-full aspect-[3/2] flex flex-col rounded-lg overflow-hidden border-2 border-outline-variant bg-white mb-6" id="flag-canvas">
+<!-- Thailand Flag Structure: 5 stripes (1-1-2-1-1 ratio) -->
+<div class="flag-stripe bg-white" data-index="0" onclick="paintStripe(this)"></div>
+<div class="flag-stripe bg-white" data-index="1" onclick="paintStripe(this)"></div>
+<div class="flag-stripe flag-stripe-double bg-white" data-index="2" onclick="paintStripe(this)"></div>
+<div class="flag-stripe bg-white" data-index="3" onclick="paintStripe(this)"></div>
+<div class="flag-stripe bg-white" data-index="4" onclick="paintStripe(this)"></div>
+</div>
+<p class="text-center font-body-md text-on-surface-variant mb-6 px-4">
+                ¡Pinta la bandera de Tailandia con los colores correctos!
+            </p>
+<!-- Color Palette -->
+<div class="flex gap-gutter mb-6">
+<div class="color-well selected" onclick="selectColor('#ba1a1a', this)" style="background-color: #ba1a1a;">
+<span class="text-white font-label-bold">Rojo</span>
+</div>
+<div class="color-well" onclick="selectColor('#ffffff', this)" style="background-color: #ffffff; border: 2px solid #bec8d3;">
+<span class="text-on-surface-variant font-label-bold">Blanco</span>
+</div>
+<div class="color-well" onclick="selectColor('#004163', this)" style="background-color: #004163;">
+<span class="text-white font-label-bold">Azul</span>
+</div>
+</div>
+</div>
+<!-- Fun Fact Section -->
+<div class="flex gap-gutter items-start bg-secondary-fixed rounded-lg p-card-padding border-b-8 border-on-secondary-fixed-variant">
+<div class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-secondary-fixed mb-1">¿Sabías que...?</h3>
+<p class="font-body-md text-on-secondary-fixed-variant">En Tailandia hay templos muy brillantes.</p>
+</div>
+</div>
+<!-- Contextual Image -->
+<div class="mt-8 rounded-lg overflow-hidden border-b-8 border-surface-variant">
+<div class="w-full h-48 bg-cover bg-center" data-alt="A cinematic, vibrant digital illustration of a golden Thai temple glistening under a warm tropical sun. The architecture is intricate with tiered roofs and ornate carvings, reflecting light in a premium educational style. The background features lush green palms and a soft blue sky. The overall mood is peaceful, bright, and inviting for children, utilizing the primary blue and secondary yellow tones from the palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgImgH84odyI4q_FtBvxgzUO_IHd6tf88e0SLPEuptnTUIqH5Qf-6bOnrVxz3sCF3fkAHrlpA-IM6l4LXEX7uxZ1HhFgUTcQbjQ-NP072Lic-iTgF7HKhJfYOtDGawG2c1jIYOs3A4woWeSBauHyMLT2krIUbvqNWAhSVBPSc1Cv4r-C8yhSW9xIgiumy95_VTWFdGprj289HL17CEWj2SZMu-w-E0Vbe75gEFohQtCv9eyWEyxvZ7MEJaU45QLUh60BqGwCvOuwk')"></div>
+</div>
+<div class="mt-10 flex flex-col gap-4">
+<button class="chunky-button-primary w-full" onclick="checkFlag()">¡LISTO!</button>
+<button class="chunky-button-secondary w-full" onclick="resetFlag()">REPETIR</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</button>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-container-margin" id="success-modal">
+<div class="absolute inset-0 bg-primary opacity-60 backdrop-blur-sm"></div>
+<div class="relative bg-surface-container-lowest w-full max-w-sm rounded-lg p-card-padding text-center border-b-8 border-tertiary-container">
+<div class="w-32 h-32 bg-secondary-container rounded-full mx-auto mb-6 flex items-center justify-center border-b-8 border-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-size: 64px; font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">¡Increíble!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">Has completado la bandera de Tailandia. ¡Eres un experto!</p>
+<button class="chunky-button-primary w-full" onclick="closeModal()">SIGUIENTE AVENTURA</button>
+</div>
+</div>
+<script>
+        let currentColor = null;
+        const correctPattern = ['#ba1a1a', '#ffffff', '#004163', '#ffffff', '#ba1a1a'];
+
+        function selectColor(color, element) {
+            currentColor = color;
+            document.querySelectorAll('.color-well').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function paintStripe(stripe) {
+            if (currentColor) {
+                stripe.style.backgroundColor = currentColor;
+                stripe.classList.remove('bg-white');
+                
+                // Interaction feedback
+                stripe.animate([
+                    { transform: 'scale(1)', opacity: 0.8 },
+                    { transform: 'scale(1.02)', opacity: 1 },
+                    { transform: 'scale(1)', opacity: 1 }
+                ], { duration: 200 });
+            }
+        }
+
+        function resetFlag() {
+            const stripes = document.querySelectorAll('.flag-stripe');
+            stripes.forEach(s => {
+                s.style.backgroundColor = '#ffffff';
+                s.classList.add('bg-white');
+            });
+        }
+
+        function checkFlag() {
+            const stripes = document.querySelectorAll('.flag-stripe');
+            let isCorrect = true;
+            
+            stripes.forEach((stripe, index) => {
+                const bg = stripe.style.backgroundColor;
+                // Basic check logic (convert RGB to Hex for simplicity)
+                if (!bg || bg === 'white' || bg === 'rgb(255, 255, 255)') {
+                    isCorrect = false;
+                }
+            });
+
+            if (isCorrect) {
+                document.getElementById('success-modal').classList.remove('hidden');
+                triggerConfetti();
+            } else {
+                alert("¡Casi! Sigue pintando hasta llenar todas las franjas.");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
+
+        function triggerConfetti() {
+            // Minimalist visual feedback for children
+            console.log("Confetti triggered!");
+        }
+
+        // Initialize with first color
+        window.onload = () => {
+            selectColor('#ba1a1a', document.querySelector('.color-well'));
+        }
+    </script>
+
+
+
+
+</body></html>

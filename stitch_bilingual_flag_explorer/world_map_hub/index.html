@@ -1,0 +1,544 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Flag Explorer - World Map Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden; /* Prevent scrolling for the map experience */
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        /* Tactile Elevation Utility */
+        .flat-tactile {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .chunky-shadow-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+
+        .chunky-shadow-secondary {
+            box-shadow: 0 6px 0 0 #d6dae1;
+        }
+
+        .chunky-shadow-tertiary {
+            box-shadow: 0 6px 0 0 #1a4600;
+        }
+
+        .active-press:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 0 transparent;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Custom Clip Path for speech bubble */
+        .speech-bubble-tail {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#004b71",
+                        "on-surface": "#171c21",
+                        "inverse-primary": "#90cdff",
+                        "tertiary-fixed-dim": "#77de3d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#fccc00",
+                        "secondary": "#735c00",
+                        "surface-container-highest": "#dee3e9",
+                        "secondary-fixed-dim": "#efc200",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#2b6c00",
+                        "surface": "#f7f9ff",
+                        "on-tertiary-fixed": "#082100",
+                        "on-surface-variant": "#3e4851",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2c3136",
+                        "on-primary-container": "#004163",
+                        "surface-container-high": "#e4e8ef",
+                        "surface-variant": "#dee3e9",
+                        "primary-fixed": "#cbe6ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#006495",
+                        "tertiary-container": "#59be1b",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-secondary-container": "#6d5700",
+                        "surface-container-low": "#f0f4fb",
+                        "surface-dim": "#d6dae1",
+                        "on-tertiary-container": "#1a4600",
+                        "outline": "#6e7882",
+                        "inverse-on-surface": "#edf1f8",
+                        "surface-container": "#eaeef5",
+                        "secondary-fixed": "#ffe084",
+                        "on-primary-fixed": "#001e30",
+                        "primary": "#006495",
+                        "on-secondary-fixed": "#231b00",
+                        "on-tertiary-fixed-variant": "#1f5100",
+                        "background": "#f7f9ff",
+                        "outline-variant": "#bec8d3",
+                        "on-background": "#171c21",
+                        "tertiary-fixed": "#92fc58",
+                        "primary-container": "#2bb1ff",
+                        "primary-fixed-dim": "#90cdff",
+                        "surface-bright": "#f7f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "24px",
+                        "touch-target-min": "48px",
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "card-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Quicksand"],
+                        "label-bold": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "headline-lg": ["Quicksand"],
+                        "headline-lg-mobile": ["Quicksand"],
+                        "headline-md": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background select-none">
+<!-- Top AppBar Component -->
+<header class="w-full top-0 sticky z-50 bg-surface flex justify-between items-center px-container-margin py-unit h-touch-target-min border-b-4 border-surface-container-highest flat-tactile"><button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full active:translate-y-1 transition-transform" aria-label="Salir del quiz">
+  <span class="material-symbols-outlined text-[32px]">close</span>
+</button><button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary hover:bg-surface-container-high rounded-full active:translate-y-1 transition-transform" aria-label="Volver al mapa">
+  <span class="material-symbols-outlined text-[32px]">arrow_back</span>
+</button>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full border-2 border-primary-container overflow-hidden flex items-center justify-center bg-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="A colorful, circular digital badge designed for a children's educational app. The badge features a stylized golden compass rose in the center against a soft blue gradient background. 'Beginner' text is elegantly curved at the top. The visual style is playful, premium, and utilizes a glossy finish with vibrant primary colors to signify achievement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkXT3jXJeW-CTpU0yXOan55dUtRJyIo6VDirxnnlQ9qAt3VaZ2Zym2q0MHu780u1tjA-WLpFPR-ruBdxpxSWNH7v2fCqyw0SjXbxjfllv5o3baWCM0XEjSrX8SPv4N6hiVYXnPtJH2syNFlLqFgGv1Wd3qmVYb5oxEhEqibihidShaueITMrEKR5DFMlkFsavqaO391zl9J1uLcBfDQlTNrU_EX8ubqojnu966CkPn7JnMixeCwRuICCtZWCGt1YzqCgv3Zvy63Fw">
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Explorador de Banderas</h1>
+</div>
+<button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center rounded-full bg-surface-container-high text-on-surface-variant hover:scale-105 transition-transform active:translate-y-1 mr-2" title="Salir / Exit">
+  <span class="material-symbols-outlined text-[24px]">lock</span>
+  <span class="text-[8px] font-bold uppercase leading-none">Salir</span>
+</button><button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center rounded-full bg-secondary-container text-on-secondary-container hover:scale-105 transition-transform active:translate-y-1 shadow-[0_4px_0_0_#735c00] mr-2">
+  <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+  <span class="text-[8px] font-bold uppercase leading-none">Alarma</span>
+</button><button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-surface-container-high text-primary hover:scale-105 transition-transform active:translate-y-1 scale-110">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</header>
+<!-- Main Map Canvas -->
+<main class="relative w-full h-[calc(100vh-144px)] overflow-hidden bg-[#e0f4ff]">
+<!-- Animated Background Texture -->
+
+<!-- The Interactive Map -->
+<div class="absolute inset-0 flex items-center justify-center p-8">
+<div class="relative w-full max-w-4xl aspect-[16/9] rounded-xl overflow-visible">
+<!-- Map Illustration -->
+<img class="w-full h-full object-contain filter drop-shadow-xl" data-alt="A whimsical and simplified world map designed for children. Continents are depicted in soft, vibrant shades of grass green and lime green, while the oceans are a calming sky blue with subtle wave patterns. The illustration style is playful and clean, featuring minimalist outlines of major world landmarks like small trees, mountains, and whales in the sea. The lighting is bright and even, creating a joyful exploration mood." data-location="World Map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCm_J63UZqrYalhJ2b50_EpBfWMUOlsz8zOYF8WZ8Vcb3Dmo5SRvYkkg3ULoyf8VgnFFiK0nucjFu7qD2l8Fbmg7j_DSFca1VcESLP_cIFH_10tua6ZaxMfO9E_gsypyfJVOC6CMKeG16o5rgW72yxTlTTc8tcZT7LyQ-FiHmvVE5LKPGU5BK-g1bXzrc_8NAsjyhcj5-A1eYYKxIqBG92s7wKe70TeP3r7kx7W04W8CFkhQRmvMROKyZj8MEdHLYYJ5Alu2qcqfE">
+<!-- Level 1 Country Pins -->
+<!-- Mexico Pin (Existing) -->
+<div class="country-pin absolute top-[40%] left-[18%] z-20 group cursor-pointer active-press" data-href="../flag_paint_station_mexico/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEZ5OIuNzo550YG-prkLojh-xyGyLb0eAtRCtGTd_-PHHbhpreLhmuA8CNJ2LW7ZJASUyW8kKxirEyLjv4bk43XyirLvMR76e2tCU7eLrlOm2TyZrYDdohS49mp6-MFdwbmB_xutit8Fz6uJXkh3Fio9d79ztMcTHqweZsVB230cQl5g3gloDnOEOxxFt2i1eclE2UeCoaGgu3S1_PJeTVvAF3nGuxJ5PeTl6AiuOOvRDmmOhkoyLXkDCDfarCr8fFD7aTgshXm0s" alt="Mexico">
+        </div>
+    </div>
+</div>
+
+<!-- USA Pin -->
+<div class="country-pin absolute top-[28%] left-[15%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_ee._uu/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDqKcq-nEh6u3DK5Kgqr4oSE3iVPgG0np-3U2N2W7U-A_r5eHjCXlsnTSmQXEp81xmCxqUh7AbDgX4pafZHhBep9DZuWWGw31YrqeEg5d3rP26Exs6KRNSlkZsEefY7yMG6E85ILNQmPZzQFgMZUOICowws9_3z3svd7u1CtCVulREaSsicFpQlspsrhAMK4KepI2XSt78Jm40sQunyqXrnUEbr90EI0Vt0uaSF7T1qoxYXGhDE2ma3WSonyl2pnfep33_5gE-7bk" alt="USA">
+        </div>
+    </div>
+</div>
+
+<!-- Canada Pin -->
+<div class="country-pin absolute top-[18%] left-[12%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_canad_1/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAor3yRIVNgCH25G-t2lWdmbQjxiARO0Cr7icMcNxPQK9MqbyVH9F7mvijuKRYCl_V0zqTvAV3vigMm0gBEUE-ZDxgCgbXRJONRopileC9RR0h0UPHujTEiEt1Pv3m9C9HulG1nDhC4NcEy_8kdWFYbf9yIsl-1jFlMM08oho2p6rAREyeC8aVN-fwr5TfFIXYvqqh1_0kwhJRXZdYb6f7Z7K6OcrubjeW_9p5nH-hiPPA3og2h6k9cSOIqUr0GWaIgeM7ZW9WQ6nQ" alt="Canada">
+        </div>
+    </div>
+</div>
+
+<!-- Brazil Pin -->
+<div class="country-pin absolute top-[62%] left-[28%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_brasil/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC01yG4WcvkcQqJOEAptwrqpq_iA3u1tY_0cwuS9A15j5WGmt7hFZcU4V73W2chMIdRl_4UMqKouLAxwV2ME8TNDRRlcfJshiHUbfsn_jIhYvI1IoFIsajFhfTVBGJJkLjpkg16wdzI4iew_g03hCm_TfhEXbrc2LYA84kvTPdMF7MrilFOTt_BYOmpzK_Gg4j0-BhK1IZMVD0XyJFJMoQj3-RAkT0UfpUTr9ma_KijhTGdUM56LVDKJ9CyRL-OIoK-aM_8CBNxpTk" alt="Brazil">
+        </div>
+    </div>
+</div>
+
+<!-- Spain Pin -->
+<div class="country-pin absolute top-[38%] left-[42%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_espa_a/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc0S0X1Rc1fDG9UO2928xFRejxGPaY-GJLI2m1vda_SxLXRqmvIKWHZbKnHVob8gkqGiMVeacPtdjY3AQzjfp6CqwVKxWV9JIQzyrpb4nYQ3CC1Qx7kBrMcsCiYjYk99eCYqcK1ILB1vT3wJA2nYZDNCVBNmw1eDcqyoV1thc389LLockm7r9WEm0PeFS2P5O3-IG-mQtymgUx8qcQcUTVhC2NQTMz5pIdAKTxkI9JOv4x7d8jM6PTgcgBgikEkbce2B9GVIL57iY" alt="Spain">
+        </div>
+    </div>
+</div>
+
+<!-- France Pin -->
+<div class="country-pin absolute top-[28%] left-[46%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_francia/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAafoujHy4bGMWVRYEl9BZvoEUV8VQZLH2A0jDic73TgFF5jHIBHmlHF2xhLE0dBNUYqw-33jJDCPb5MfJ6JHrdZ2aCNmbi1VjNtf7jyhzYnkWwyOcML9tECZlSXtdD9i2WggvhnTNI4wqDeZJc4BIdXeTlwCEc9CBjN5n8DCvbJWAheJtpOXWZmDLLaOhJugXowqZ4s1UhUHZ8aTuWBl3VTsVu0cjApXNds8-ORTFTKBqvUm1CSQRtodzLlCIC-FOLuD1KIn1zLE" alt="France">
+        </div>
+    </div>
+</div>
+
+<!-- Germany Pin -->
+<div class="country-pin absolute top-[20%] left-[50%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_alemania/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrR-U-sV8DFt8fcTMWlJQQdiwuJ4E6vcZgom1j2tHsRXCxlquZ4SS9aYklk5DCFpy5CdxAj6hLKRkocQDYC95DoVykseHcicNKvJk0TBcvhNqGYKtqQ_XOxwLxvU4vMdOO2n543gZZIzu0BclWPN0gZkrB8JerFGpQfVeOPm5DgRrMy1ni1vNAfAaD1zAvFO4_WSsCmGqK7ypcKo0sYbWjzWsYdUQQK-2jBWeG8kNgRod1dT4YZEJlECAoqQkYxrk7bLoOuBOyfF8" alt="Germany">
+        </div>
+    </div>
+</div>
+
+<!-- Italy Pin -->
+<div class="country-pin absolute top-[38%] left-[53%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_italia/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlDd6FdZBw3Mm-vmEpDOHUgURCVwKrY226juztADE0WQ_3nyzZLXNDTEo97eg6bWutiwyyrkbXkxpebjVle0JOqsKTZdZy4pbcKvMRerj5JnB6U3uURJbbHTm0rUTGcohV_GcPCtk0IXrCfbnazQBtrYB9tAwM3rNRfq_yi2wCNx3qPwvVyUyvpDEWyWtr4zmfA45iezGtcYjnLw20n3HYFk2gq1CTPlxWNge2tMij95bC3lDTgi1MXLnp9mZeTMRHpeDYPhCbmTU" alt="Italy">
+        </div>
+    </div>
+</div>
+
+<!-- Japan Pin -->
+<div class="country-pin absolute top-[40%] left-[81%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_jap_n/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7UHvituZZxmT6IF6H4Bf4iVJ5BFIqReR-LOf2UzUbG1yAUOFvwVdcdKwnTFZMYdDPAO8tCitFFZv7Zq6vOE3nDxcUbg9RWKeqrMiNgil9XFg7EGEhOkdqwBgOwNL68B079uaZFBK-ay3eErS1-ws-lGk9KaV92NruObcyrJePwWBDTxeSdzgapTJWB_AjcB9hVo5SgtilQ05kKJdcXAhsivLrOtM4RorBUnAC2nDf8uiQcL6mYq8sE2LVzW2nWSS6kwGxGzmWqAc" alt="Japan">
+        </div>
+    </div>
+</div>
+
+<!-- Australia Pin -->
+<div class="country-pin absolute top-[75%] left-[82%] z-20 group cursor-pointer active-press" data-href="../estaci_n_de_pintura_australia/index.html">
+    <div class="absolute -inset-8 bg-primary-container opacity-30 rounded-full animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute -inset-4 border-4 border-white/50 rounded-lg blur-sm pointer-events-none"></div>
+    <div class="relative flex flex-col items-center animate-float">
+        <div class="w-12 h-12 bg-error rounded-full border-4 border-white flex items-center justify-center shadow-xl chunky-shadow-secondary">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+        </div>
+        <div class="mt-2 bg-white p-1 rounded-md shadow-lg border-2 border-primary transform -rotate-3 hover:rotate-0 transition-transform">
+            <img class="w-10 h-6 rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGVlepViONNNNR23w47mX_yNdxvrEPZSm-CcpBfN7v0QIdltNnfbGu5yWP6cqdDNsWFLCFe3H54FKvOh3YBUUCZ04moS2fS8KFxw-09xVHItwhxDF9v2fk_gYHAv14Cm5DOf2b9SdEeaV6EzrQE5Rud19BtY4ZtDdFJJRuM7K4WQ-PSslbrqa85z5MOGiXKcfBrEg8SCRly-EKmP5ywW3N5l4zyRi81He8wapohNHlqt6D-ms1vAu8g51V1LriNG1JmdorMMf6Txs" alt="Australia">
+        </div>
+    </div>
+</div>
+
+<!-- Mascot Component -->
+<div class="absolute bottom-4 right-10 z-30 flex items-end gap-2 animate-float" style="animation-delay: 0.5s;">
+<!-- Speech Bubble -->
+<div class="mb-16 mr-[-20px] relative bg-white px-6 py-4 rounded-xl shadow-xl border-4 border-primary-container">
+<p class="font-headline-md text-primary font-bold whitespace-nowrap">¡A explorar!</p>
+<!-- Bubble tail -->
+<div class="absolute bottom-[-16px] right-8 w-8 h-8 bg-white border-r-4 border-b-4 border-primary-container speech-bubble-tail transform rotate-45"></div>
+</div>
+<!-- Parrot Mascot -->
+<div class="w-32 h-32 transform scale-x-[-1]">
+<img class="w-full h-full object-contain" data-alt="A friendly, expressive parrot mascot named 'Paco'. Paco has bright green plumage, a cheerful yellow beak, and a small blue explorer's hat. He is pointing enthusiastically towards the center of the screen with a wing. The style is high-end 2D digital illustration with thick outlines, soft gradients, and large, kind eyes, perfectly tailored for 4-8 year old children." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYaYYfnH8b8yn9GkjUsm15wzicfjutMJnc0Ma1xJTn4mFSJZCJFHIrTJmxtyE2W26o1_SZyvtv1t5ePcDNg2GoU9bsm-WAUwllOu50J-s3EEjBr6I2lCWYX69UFvuc7WFkBIDrr7fSfdUcxHnLIdg-nwsnP8TiXjStrwbPt140o_c25SUFyPUrD6qGkAWu5Rp5gsPsoIhbAJZParYb2r8JZoAu2y_qg1fJUXpDw-g6J6sW-L_2rEQdNVWMzsHDdDCqEd2rsBuMjog">
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (Contextual) -->
+<button class="fixed bottom-24 right-container-margin z-40 bg-tertiary-container text-on-tertiary-container flex items-center gap-2 px-8 py-4 rounded-xl chunky-shadow-tertiary active-press font-label-bold text-label-bold">
+<span class="material-symbols-outlined text-[32px]">play_circle</span>
+<span class="">¡A JUGAR!</span>
+</button>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter pb-4 pt-2 bg-surface-container-lowest border-t-4 border-surface-container-highest shadow-lg rounded-t-lg"><a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant" href="#">
+  <span class="material-symbols-outlined">home</span>
+  <span class="font-label-bold text-label-bold">Home</span>
+</a>
+<!-- Explore (Active) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 translate-y-[-4px] transition-all duration-150 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</button>
+<!-- Passport (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</button>
+<!-- Play (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</button>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Bilingual speaking function
+            function speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                window.speechSynthesis.cancel();
+                const uEs = new SpeechSynthesisUtterance(es);
+                uEs.lang = 'es-ES';
+                uEs.rate = 1.0;
+                uEs.onend = () => {
+                    const uEn = new SpeechSynthesisUtterance(en);
+                    uEn.lang = 'en-US';
+                    uEn.rate = 1.0;
+                    window.speechSynthesis.speak(uEn);
+                };
+                window.speechSynthesis.speak(uEs);
+            }
+
+            function playAlarmSound() {
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const now = ctx.currentTime;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, now);
+                    osc.frequency.linearRampToValueAtTime(800, now + 0.3);
+                    osc.frequency.linearRampToValueAtTime(600, now + 0.6);
+                    osc.frequency.linearRampToValueAtTime(800, now + 0.9);
+                    
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(now + 1.2);
+                } catch(e) {
+                    console.log(e);
+                }
+            }
+
+            // Speak page title when volume button is clicked
+            const volBtn = document.querySelector('header button:last-child');
+            if (volBtn) {
+                volBtn.addEventListener('click', () => {
+                    speakBilingual("Explorador de Banderas, Mapa del Mundo", "Flag Explorer, World Map");
+                });
+            }
+
+            // Hook up alarm button
+            const alarmBtn = document.querySelector('header button:nth-last-child(2)');
+            if (alarmBtn) {
+                alarmBtn.addEventListener('click', () => {
+                    playAlarmSound();
+                    speakBilingual("¡Atención! ¡Alarma del Explorador!", "Attention! Explorer Alarm!");
+                });
+            }
+
+            const pins = document.querySelectorAll('.country-pin');
+            
+            // Map country ids
+            const countryIds = {
+                'mexico': { es: 'México', en: 'Mexico' },
+                'ee._uu': { es: 'Estados Unidos', en: 'United States' },
+                'canad_1': { es: 'Canadá', en: 'Canada' },
+                'brasil': { es: 'Brasil', en: 'Brazil' },
+                'espa_a': { es: 'España', en: 'Spain' },
+                'francia': { es: 'Francia', en: 'France' },
+                'alemania': { es: 'Alemania', en: 'Germany' },
+                'italia': { es: 'Italia', en: 'Italy' },
+                'jap_n': { es: 'Japón', en: 'Japan' },
+                'australia': { es: 'Australia', en: 'Australia' }
+            };
+
+            pins.forEach(pin => {
+                const href = pin.getAttribute('data-href') || '';
+                let key = '';
+                if (href.includes('mexico')) key = 'mexico';
+                else if (href.includes('ee._uu')) key = 'ee._uu';
+                else if (href.includes('canad_1')) key = 'canad_1';
+                else if (href.includes('brasil')) key = 'brasil';
+                else if (href.includes('espa_a')) key = 'espa_a';
+                else if (href.includes('francia')) key = 'francia';
+                else if (href.includes('alemania')) key = 'alemania';
+                else if (href.includes('italia')) key = 'italia';
+                else if (href.includes('jap_n')) key = 'jap_n';
+                else if (href.includes('australia')) key = 'australia';
+
+                const normKey = key.replace('_1', '').replace('ee._uu', 'usa').replace('espa_a', 'spain').replace('jap_n', 'japan');
+                const isCompleted = localStorage.getItem(normKey + '_completed') === 'true';
+
+                if (isCompleted) {
+                    const pinInner = pin.querySelector('.relative.flex.flex-col');
+                    if (pinInner) {
+                        const badge = document.createElement('div');
+                        badge.className = 'absolute -top-2 -right-2 bg-emerald-500 text-white w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-md z-30';
+                        badge.innerHTML = '<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: \'FILL\' 1; color: white;">check_circle</span>';
+                        pinInner.appendChild(badge);
+                    }
+                }
+
+                pin.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (countryIds[key]) {
+                        speakBilingual(countryIds[key].es, countryIds[key].en);
+                    }
+                    pin.style.transform = 'scale(0.9)';
+                    setTimeout(() => {
+                        pin.style.transform = 'scale(1)';
+                        window.location.href = href;
+                    }, 1500);
+                });
+            });
+
+            function isLevel1Complete() {
+                const level1Keys = ['mexico', 'usa', 'canada', 'france', 'italy', 'spain', 'brazil', 'japan', 'germany', 'australia'];
+                return level1Keys.every(k => localStorage.getItem(k + '_completed') === 'true');
+            }
+
+            // Bind bottom navigation links
+            const navButtons = document.querySelectorAll('nav button, nav a');
+            navButtons.forEach(btn => {
+                const text = btn.textContent || btn.innerText;
+                if (text.includes('Pasaporte')) {
+                    btn.addEventListener('click', () => {
+                        window.location.href = '../mi_pasaporte_passport/index.html';
+                    });
+                } else if (text.includes('Jugar')) {
+                    btn.addEventListener('click', () => {
+                        if (isLevel1Complete()) {
+                            window.location.href = '../sesi_n_de_quiz_biling_e/index.html';
+                        } else {
+                            playAlarmSound();
+                            speakBilingual("¡Pinta las diez banderas primero para desbloquear el quiz!", "Paint all ten flags first to unlock the quiz!");
+                        }
+                    });
+                } else if (text.includes('Explorar')) {
+                    btn.addEventListener('click', () => {
+                        window.location.href = '../world_map_hub/index.html';
+                    });
+                }
+            });
+
+            // Bind floating play button
+            const floatPlayBtn = document.querySelector('main button.fixed');
+            if (floatPlayBtn) {
+                floatPlayBtn.addEventListener('click', () => {
+                    if (isLevel1Complete()) {
+                        window.location.href = '../sesi_n_de_quiz_biling_e/index.html';
+                    } else {
+                        playAlarmSound();
+                        speakBilingual("¡Pinta las diez banderas primero para desbloquear el quiz!", "Paint all ten flags first to unlock the quiz!");
+                    }
+                });
+            }
+
+            // Gentle audio icon pulse
+            if (volBtn) {
+                setInterval(() => {
+                    volBtn.classList.add('scale-110');
+                    setTimeout(() => volBtn.classList.remove('scale-110'), 200);
+                }, 5000);
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Flag Adventure - Noruega</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "outline": "#6e7882",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-low": "#f0f4fb",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bec8d3",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        
+        .chunky-button-primary {
+            @apply bg-primary-container text-on-primary-container border-b-[6px] border-primary active:translate-y-[4px] active:border-b-0 transition-all duration-75;
+        }
+        
+        .chunky-card {
+            @apply bg-surface-container-lowest border-2 border-surface-variant border-b-[8px] rounded-lg;
+        }
+
+        .nordic-cross-container {
+            aspect-ratio: 22 / 16;
+            cursor: pointer;
+        }
+
+        .paint-active {
+            filter: drop-shadow(0 0 12px rgba(0, 100, 149, 0.4));
+            transform: scale(1.05);
+        }
+
+        .sparkle-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: fly 0.8s ease-out forwards;
+        }
+
+        @keyframes fly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tw-translate-x), var(--tw-translate-y)) scale(0); opacity: 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <style>
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+            .animate-shake { animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both 2; }
+        </style></head>
+<body class="bg-background font-body-md text-on-background selection:bg-primary-container min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-40 flex items-center justify-between px-container-margin py-unit bg-surface-container-low">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary tracking-tight">Flag Adventure</h1>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</header>
+<main class="max-w-md mx-auto px-container-margin pt-gutter">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-gutter">
+<div>
+<p class="text-tertiary font-label-bold mb-1">Nivel 5</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Noruega</h2>
+</div>
+<div class="bg-secondary-container px-4 py-2 rounded-full border-b-4 border-secondary flex items-center gap-2">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-bold text-on-secondary-container">125</span>
+</div>
+<button class="flex flex-col items-center justify-center gap-1 group active:translate-y-1 transition-all duration-100">
+  <div class="w-touch-target-min h-touch-target-min flex items-center justify-center bg-primary-container text-on-primary-container border-b-4 border-primary rounded-full hover:brightness-95">
+    <span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+  </div>
+  <span class="text-[10px] font-label-bold text-primary uppercase tracking-wider">¡Alarma!</span>
+</button><button class="flex flex-col items-center justify-center gap-1 group active:translate-y-1 transition-all duration-100">
+  <div class="w-touch-target-min h-touch-target-min flex items-center justify-center bg-secondary-container text-on-secondary-container border-b-4 border-secondary rounded-full hover:brightness-95">
+    <span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+  </div>
+  <span class="text-[10px] font-label-bold text-secondary uppercase tracking-wider">¡Alarma! / Sound Alarm</span>
+</button></div>
+<!-- Progress Bar -->
+<div class="w-full h-4 bg-surface-container-highest rounded-full mb-8 overflow-hidden">
+<div class="h-full bg-tertiary-container w-2/3 rounded-full transition-all duration-500"></div>
+</div>
+<!-- Canvas Area -->
+<div class="chunky-card p-card-padding mb-8 bg-white relative overflow-hidden">
+<div class="nordic-cross-container w-full relative border-2 border-surface-variant overflow-hidden rounded-md bg-surface-container-high transition-transform" id="flag-canvas">
+<!-- Norway Flag Structure (Nordic Cross) -->
+<!-- Background (Red Area) -->
+<div class="absolute inset-0 bg-surface-container hover:brightness-95 transition-all" id="part-red" onclick="paintPart(this, 'bg-error')"></div>
+<!-- White Cross -->
+<div class="absolute left-[27%] top-0 bottom-0 w-[18%] bg-surface-container-highest hover:brightness-95 transition-all" id="part-white-v" onclick="paintPart(this, 'bg-white')"></div>
+<div class="absolute top-[37%] left-0 right-0 h-[25%] bg-surface-container-highest hover:brightness-95 transition-all" id="part-white-h" onclick="paintPart(this, 'bg-white')"></div>
+<!-- Blue Inner Cross -->
+<div class="absolute left-[31.5%] top-0 bottom-0 w-[9%] bg-surface-dim hover:brightness-95 transition-all" id="part-blue-v" onclick="paintPart(this, 'bg-primary')"></div>
+<div class="absolute top-[44%] left-0 right-0 h-[12%] bg-surface-dim hover:brightness-95 transition-all" id="part-blue-h" onclick="paintPart(this, 'bg-primary')"></div>
+</div>
+<div class="mt-6 flex justify-center items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="touch_app">touch_app</span>
+<span class="text-label-bold">¡Toca para pintar!</span>
+</div>
+</div>
+<!-- Palette Section -->
+<div class="grid grid-cols-3 gap-gutter mb-8">
+<button class="color-swatch flex flex-col items-center gap-2 group" onclick="selectColor('bg-error', this)">
+<div class="w-16 h-16 rounded-full bg-error border-b-[6px] border-red-900 group-active:translate-y-1 group-active:border-b-0 transition-all outline outline-offset-4 outline-transparent" id="swatch-red"></div>
+<span class="font-label-bold text-on-surface">Rojo</span>
+</button>
+<button class="color-swatch flex flex-col items-center gap-2 group" onclick="selectColor('bg-white', this)">
+<div class="w-16 h-16 rounded-full bg-white border-2 border-surface-variant border-b-[6px] border-surface-dim group-active:translate-y-1 group-active:border-b-0 transition-all outline outline-offset-4 outline-transparent" id="swatch-white"></div>
+<span class="font-label-bold text-on-surface">Blanco</span>
+</button>
+<button class="color-swatch flex flex-col items-center gap-2 group" onclick="selectColor('bg-primary', this)">
+<div class="w-16 h-16 rounded-full bg-primary border-b-[6px] border-primary-container group-active:translate-y-1 group-active:border-b-0 transition-all outline outline-offset-4 outline-transparent" id="swatch-blue"></div>
+<span class="font-label-bold text-on-surface">Azul</span>
+</button>
+</div>
+<!-- Fun Fact Card -->
+<div class="chunky-card bg-primary-fixed p-card-padding flex items-start gap-4 mb-8">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h4 class="font-label-bold text-on-primary-fixed-variant mb-1">¿Sabías que...?</h4>
+<p class="text-body-md text-on-primary-fixed-variant">En Noruega hay montañas gigantes llenas de nieve ¡donde puedes esquiar incluso en verano! 🏔️❄️</p>
+</div>
+</div>
+<!-- Secondary Action -->
+<div class="flex gap-4">
+<button class="flex-1 chunky-button-primary py-4 px-6 rounded-lg font-label-bold flex items-center justify-center gap-2" onclick="checkFlag()">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                ¡LISTO!
+            </button>
+<button class="w-16 h-16 flex items-center justify-center bg-white border-2 border-surface-variant border-b-4 rounded-lg active:translate-y-1 active:border-b-0 transition-all text-primary">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-container-margin" id="success-modal">
+<div class="absolute inset-0 bg-on-background/60 backdrop-blur-sm"></div>
+<div class="relative chunky-card w-full max-w-sm bg-white p-8 text-center flex flex-col items-center gap-6 overflow-hidden">
+<!-- Animated Rays via CSS -->
+<div class="absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(252,204,0,0.2)_0%,transparent_70%)] animate-pulse"></div>
+<div class="w-24 h-24 bg-secondary-container rounded-full flex items-center justify-center border-b-8 border-secondary scale-110">
+<span class="material-symbols-outlined text-on-secondary-container scale-[2.5]" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">¡Increíble!</h3>
+<p class="text-body-lg text-on-surface-variant">Has completado la bandera de Noruega. ¡Eres un experto explorador!</p>
+</div>
+<div class="w-full flex flex-col gap-3">
+<button class="w-full chunky-button-primary py-4 px-6 rounded-lg font-label-bold" onclick="location.reload()">SIGUIENTE AVENTURA</button>
+<button class="w-full py-2 font-label-bold text-primary" onclick="closeModal()">Ver mi obra</button>
+</div>
+</div>
+</div>
+<script>
+        let selectedColor = null;
+
+        function selectColor(colorClass, el) {
+            selectedColor = colorClass;
+            
+            // Visual feedback for palette selection
+            document.querySelectorAll('.color-swatch div').forEach(swatch => {
+                swatch.classList.remove('outline-primary');
+            });
+            el.querySelector('div').classList.add('outline-primary');
+        }
+
+        function paintPart(el, colorClass) {
+            if (!selectedColor) {
+                // Shake if no color selected
+                el.parentElement.classList.add('animate-shake');
+                setTimeout(() => el.parentElement.classList.remove('animate-shake'), 400);
+                return;
+            }
+
+            // Remove existing bg classes
+            const bgClasses = ['bg-surface-container', 'bg-surface-container-highest', 'bg-surface-dim', 'bg-error', 'bg-white', 'bg-primary'];
+            el.classList.remove(...bgClasses);
+            el.classList.add(selectedColor);
+
+            // Visual feedback
+            createSparkles(el);
+            el.classList.add('paint-active');
+            setTimeout(() => el.classList.remove('paint-active'), 300);
+        }
+
+        function createSparkles(el) {
+            for (let i = 0; i < 5; i++) {
+                const sparkle = document.createElement('span');
+                sparkle.className = 'material-symbols-outlined sparkle-particle text-secondary';
+                sparkle.innerText = 'star';
+                sparkle.style.setProperty('--tw-translate-x', `${(Math.random() - 0.5) * 100}px`);
+                sparkle.style.setProperty('--tw-translate-y', `${(Math.random() - 0.5) * 100}px`);
+                sparkle.style.left = '50%';
+                sparkle.style.top = '50%';
+                el.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 800);
+            }
+        }
+
+        function checkFlag() {
+            const red = document.getElementById('part-red').classList.contains('bg-error');
+            const whiteV = document.getElementById('part-white-v').classList.contains('bg-white');
+            const whiteH = document.getElementById('part-white-h').classList.contains('bg-white');
+            const blueV = document.getElementById('part-blue-v').classList.contains('bg-primary');
+            const blueH = document.getElementById('part-blue-h').classList.contains('bg-primary');
+
+            if (red && whiteV && whiteH && blueV && blueH) {
+                document.getElementById('success-modal').classList.remove('hidden');
+                document.getElementById('success-modal').classList.add('flex');
+            } else {
+                alert("¡Casi! Sigue pintando con los colores de Noruega: Rojo, Blanco y Azul.");
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            document.getElementById('success-modal').classList.remove('flex');
+        }
+
+        // Add shake animation style
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+            .animate-shake { animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both 2; }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+
+</body></html>

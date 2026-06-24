@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flag Adventure - Nivel 3</title>
+<!-- Google Fonts: Quicksand for kid-friendly readability -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#90cdff",
+                    "outline": "#6e7882",
+                    "on-background": "#171c21",
+                    "surface-container-low": "#f0f4fb",
+                    "primary-fixed": "#cbe6ff",
+                    "inverse-surface": "#2c3136",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-container": "#1a4600",
+                    "background": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "secondary": "#735c00",
+                    "surface-bright": "#f7f9ff",
+                    "secondary-container": "#fccc00",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "primary": "#006495",
+                    "tertiary-container": "#59be1b",
+                    "on-primary-fixed-variant": "#004b71",
+                    "on-surface-variant": "#3e4851",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bec8d3",
+                    "on-surface": "#171c21",
+                    "on-primary-container": "#004163",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "surface-variant": "#dee3e9",
+                    "secondary-fixed-dim": "#efc200",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed": "#082100",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary": "#2b6c00",
+                    "surface": "#f7f9ff",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-container-highest": "#dee3e9",
+                    "on-secondary-fixed": "#231b00",
+                    "surface-container": "#eaeef5",
+                    "on-primary-fixed": "#001e30",
+                    "surface-tint": "#006495",
+                    "surface-container-high": "#e4e8ef",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "card-padding": "20px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "unit": "8px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "headline-md-mobile": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "headline-md-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        
+        /* Tactical Shadows for Buttons & Cards */
+        .tactile-card {
+            box-shadow: 0 8px 0 0 #dee3e9;
+            transition: all 0.1s ease;
+        }
+        .tactile-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 0 #dee3e9;
+        }
+
+        .tactile-button-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .tactile-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #004b71;
+        }
+
+        .tactile-button-secondary {
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .tactile-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #bec8d3;
+        }
+
+        /* Pulse animation for audio button */
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pulse-slow {
+            animation: subtle-pulse 2s infinite ease-in-out;
+        }
+
+        .correct-answer {
+            border-color: #59be1b !important;
+            background-color: #e8f5e9 !important;
+            box-shadow: 0 8px 0 0 #2b6c00 !important;
+        }
+
+        .wrong-answer {
+            border-color: #ba1a1a !important;
+            background-color: #ffebee !important;
+            box-shadow: 0 8px 0 0 #93000a !important;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface-container-low flex items-center justify-between px-container-margin py-unit h-16">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full">
+<span class="material-symbols-outlined" style="font-size: 32px;">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Flag Adventure</h1>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full">
+<span class="material-symbols-outlined" style="font-size: 32px;">volume_up</span>
+</button>
+</header>
+<main class="max-w-md mx-auto px-container-margin pt-unit flex flex-col gap-8">
+<!-- Progress Section -->
+<div class="mt-4">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-bold text-label-bold text-on-surface-variant">Level 3</span>
+<span class="font-label-bold text-label-bold text-primary">Quest 4/10</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-4">
+<div class="bg-tertiary-container h-4 rounded-full w-[40%] transition-all duration-500"></div>
+</div>
+</div>
+<!-- Question Section -->
+<div class="flex flex-col items-center text-center gap-6">
+<div class="relative">
+<button class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center tactile-button-secondary border-4 border-white animate-pulse-slow" id="play-audio">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-size: 40px; font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background px-4">
+                ¿Cuál es la bandera de Perú?
+            </h2>
+</div>
+<!-- Answer Options (Bento-like layout for variety) -->
+<div class="grid grid-cols-1 gap-6 pb-8">
+<!-- Correct Answer: Peru -->
+<button class="tactile-card bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-card-padding flex flex-col items-center gap-4 w-full" onclick="handleSelect(this, true)">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A clean, vibrant digital illustration of the national flag of Peru featuring three vertical stripes of red, white, and red. The white stripe is centered and clear. The style is educational and minimalist, set against a soft studio-lit background that fits a child-friendly mobile game interface with high saturation and bright lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4d_Bc0gc2GK92T4DrsseL38WDlrjXNsxcHMALZniQqJD7W-t2eh5fTaanlMu4BX1F4GHtkpbhrvzew33akg2OB3D1dBtf6mcTEGQY7blNv2RtsHj08Yvul3Jn00S0kay3u1rjb1lyLmHW_0Jpxrxb1GP4jaM2NOXpZWW4UaqP8uc4VYiIVVHAa2boHQT_wRvlQ8kn_CdJ5lBp00TwHNrf272PsI1OEmq1eI-EFgDyheQ50V73iUuviPUrgH-je4voCMtakb9VQwg"/>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">Perú / Peru</span>
+</button>
+<div class="grid grid-cols-2 gap-4">
+<!-- Option: Nigeria -->
+<button class="tactile-card bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-4 flex flex-col items-center gap-2" onclick="handleSelect(this, false)">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A detailed digital educational illustration of the national flag of Nigeria, consisting of three vertical bands of green, white, and green. The lighting is bright and cheerful, designed for a premium educational app for children. The colors are punchy and highly legible, maintaining a clean 3D-block aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjbHZcIpm0J4TFGZXem_ZJ6VK29ap_EBnbcXaUte0cQIPMLhLOoxG4p9MFiSpGrdqaM5yke_YMI32FfE9F3TAYYipUQHSU4oiMWD8-Z6jiQlTO_BuR4RlQvTEtadg5xham9ybEs_2hKp-ZUnEhSYuc6FkS3rfWprzraQHpXclSIYRPc1vp63BM4EnkhNQQHSZGWSQTAS_iPG_nsFKSDvzRec2Nshq-qihihLoGtCQSEgrzBz5cKp8gYaK9Qo7i_LzlTZW-gFq7zZk"/>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface-variant">Nigeria / Nigeria</span>
+</button>
+<!-- Option: Thailand -->
+<button class="tactile-card bg-surface-container-lowest border-2 border-outline-variant rounded-lg p-4 flex flex-col items-center gap-2" onclick="handleSelect(this, false)">
+<div class="w-full aspect-[3/2] rounded-lg overflow-hidden border border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A vibrant digital illustration of the national flag of Thailand, showcasing its horizontal stripes of red, white, blue, white, and red. The blue middle stripe is double the width of the others. The artwork follows a premium educational style with soft shadows and high-key lighting for young learners." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5q4M0tJKEtWu4uWxc22uZ-Z5PtNvhSPvrz0SOtl6uh_ahk479kQJTz-5t5Jb2CzdN2oZ2rz7_k9JjEUtEwZlUj8BWc6NPwUy_TYeuwv5Fi0bE0HJE-Ptlfp8ArIu00Qn7CEU295VgGncXL9jHu-qwh6duAt6OV8ajDBVzmDJvT2VLezhTpZ6K9spF5FON4ng9TttGtFhCmvN8I90eR0iC3OkXbzOXRSokfseDbCzi33_PR_CG30zacso96SuPuWPFYHMmLSK2WWk"/>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface-variant">Tailandia / Thailand</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-container-lowest border-t-4 border-surface-variant shadow-lg flex justify-around items-center px-4 pb-4 pt-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0" href="#">
+<span class="material-symbols-outlined" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Floating Confetti Effect Layer (Hidden by default) -->
+<div class="fixed inset-0 pointer-events-none z-[100] hidden" id="confetti-container"></div>
+<script>
+        function handleSelect(element, isCorrect) {
+            // Remove previous highlights
+            document.querySelectorAll('.tactile-card').forEach(card => {
+                card.classList.remove('correct-answer', 'wrong-answer');
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct-answer');
+                showConfetti();
+                // Play sound logic would go here
+            } else {
+                element.classList.add('wrong-answer');
+                // Shake effect
+                element.classList.add('animate-shake');
+                setTimeout(() => element.classList.remove('animate-shake'), 500);
+            }
+        }
+
+        function showConfetti() {
+            const container = document.getElementById('confetti-container');
+            container.classList.remove('hidden');
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = ['#fccc00', '#2bb1ff', '#59be1b', '#ba1a1a'][Math.floor(Math.random() * 4)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.borderRadius = '2px';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                container.appendChild(confetti);
+
+                const animation = confetti.animate([
+                    { transform: `translate3d(0, 0, 0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translate3d(${(Math.random() - 0.5) * 200}px, 100vh, 0) rotate(${Math.random() * 1000}deg)`, opacity: 0 }
+                ], {
+                    duration: 2000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0, .9, .57, 1)'
+                });
+
+                animation.onfinish = () => confetti.remove();
+            }
+            
+            setTimeout(() => {
+                container.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Pulse logic for audio button
+        const audioBtn = document.getElementById('play-audio');
+        audioBtn.addEventListener('click', () => {
+            audioBtn.classList.remove('animate-pulse-slow');
+            setTimeout(() => audioBtn.classList.add('animate-pulse-slow'), 100);
+        });
+    </script>
+<style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
+            animation-iteration-count: 2;
+        }
+    </style>
+
+    <!-- Custom Feedback Modal -->
+    <div id="quiz-feedback-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex-col items-center justify-center p-6 backdrop-blur-sm transition-all">
+        <div id="quiz-modal-content" class="bg-surface-container-lowest p-8 rounded-3xl w-full max-w-sm flex flex-col items-center text-center gap-6 transform transition-transform scale-95 border-b-8 border-primary-container shadow-2xl">
+            <div id="quiz-modal-icon-bg" class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-2 animate-bounce">
+                <span id="quiz-modal-icon" class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <div>
+                <h2 id="quiz-modal-title" class="font-headline-lg text-primary mb-2">¡Excelente!</h2>
+                <p id="quiz-modal-subtitle" class="font-body-lg text-on-surface-variant">Great job!</p>
+            </div>
+            <button onclick="document.getElementById('quiz-feedback-modal').classList.replace('flex', 'hidden');" class="w-full py-4 bg-primary text-white font-label-bold rounded-full active:scale-95 transition-transform mt-2 border-b-4 border-on-primary-container">
+                CONTINUAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const QuizAudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+            playSuccess() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, this.ctx.currentTime + 0.3); // C6
+                
+                gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.5);
+            },
+            playError() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.3);
+                
+                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            alarm() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime + 0.5);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.75);
+                
+                gain.gain.value = 0.1;
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 1.0);
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { window.speechSynthesis.cancel(); } catch(e) {}
+                
+                setTimeout(() => {
+                    const uEs = new SpeechSynthesisUtterance(es);
+                    uEs.lang = 'es-ES';
+                    uEs.rate = 0.95;
+                    
+                    uEs.onend = () => {
+                        const uEn = new SpeechSynthesisUtterance(en);
+                        uEn.lang = 'en-US';
+                        uEn.rate = 0.95;
+                        window.speechSynthesis.speak(uEn);
+                    };
+                    window.speechSynthesis.speak(uEs);
+                }, 80);
+            }
+        };
+    </script>
+
+</body></html>

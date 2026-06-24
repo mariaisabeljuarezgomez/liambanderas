@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Paint Adventure - Finland</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline": "#6e7882",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-container": "#6d5700",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#006495",
+                    "on-surface-variant": "#3e4851",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container": "#eaeef5",
+                    "surface-container-highest": "#dee3e9",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-tertiary-fixed": "#082100",
+                    "on-surface": "#171c21",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "background": "#f7f9ff",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary-container": "#2bb1ff",
+                    "on-secondary-fixed": "#231b00",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-container": "#59be1b",
+                    "outline-variant": "#bec8d3",
+                    "primary": "#006495",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "secondary": "#735c00",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-surface": "#2c3136",
+                    "surface": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .chunky-shadow-primary { box-shadow: 0 4px 0 0 #004b71; }
+        .chunky-shadow-secondary { box-shadow: 0 4px 0 0 #d1d5db; }
+        .chunky-shadow-yellow { box-shadow: 0 4px 0 0 #b38f00; }
+        .active-press:active { transform: translateY(4px); box-shadow: none; }
+        
+        .flag-canvas {
+            aspect-ratio: 18 / 11;
+            background: #ffffff;
+            border: 4px solid #dee3e9;
+            position: relative;
+            overflow: hidden;
+        }
+        .cross-h {
+            position: absolute;
+            top: 40%;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+        .cross-v {
+            position: absolute;
+            top: 0;
+            left: 30%;
+            width: 12%;
+            height: 100%;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+        .cross-filled { background: #006495 !important; }
+        
+        @keyframes pulse-audio {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pulse-slow { animation: pulse-audio 2s infinite ease-in-out; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-touch-target-min bg-surface dark:bg-surface">
+<button onclick="window.location.href='../world_map_hub/index.html'" class="active:translate-y-1 transition-all duration-100 p-2" aria-label="Volver">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Paint Adventure</h1>
+<button onclick="speakCountry()" class="active:translate-y-1 transition-all duration-100 p-2" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">volume_up</span>
+</button>
+</header>
+<main class="pt-20 px-container-margin max-w-4xl mx-auto">
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container-high h-4 rounded-full mb-8 overflow-hidden">
+<div class="bg-tertiary-container h-full w-2/3 rounded-full transition-all duration-500"></div>
+</div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Finlandia / Finland</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">¡Vamos a pintar la bandera!</p>
+</div>
+<button class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-yellow active-press animate-pulse-slow" onclick="speakCountry()" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button><button class="w-20 h-20 bg-secondary-container rounded-full flex flex-col items-center justify-center chunky-shadow-yellow active-press" onclick="triggerAlarm()" aria-label="Alarma"><span class="material-symbols-outlined text-on-secondary-container text-3xl" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="text-[10px] font-bold text-on-secondary-container leading-tight">¡Alarma!</span></button>
+</div>
+<!-- Flag Canvas -->
+<div class="relative group mb-10">
+<div class="flag-canvas rounded-lg shadow-inner bg-white cursor-crosshair" id="flag-container">
+<div class="cross-v" id="cross-v"></div>
+<div class="cross-h" id="cross-h"></div>
+</div>
+<div class="absolute -bottom-4 right-4 bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-bold text-label-bold shadow-md">
+                Toca para pintar
+            </div>
+</div>
+<!-- Paint Palette -->
+<div class="grid grid-cols-2 gap-gutter mb-10">
+<!-- Blue Option -->
+<button class="flex items-center gap-4 p-card-padding bg-surface-container-low rounded-lg border-2 border-transparent hover:border-primary transition-all active-press chunky-shadow-secondary" id="btn-blue" onclick="selectColor('blue')">
+<div class="w-12 h-12 bg-primary rounded-full shadow-md"></div>
+<div class="text-left">
+<span class="block font-label-bold text-label-bold text-on-surface">Azul</span>
+<span class="material-symbols-outlined text-primary">volume_up</span>
+</div>
+</button>
+<!-- White Option -->
+<button class="flex items-center gap-4 p-card-padding bg-surface-container-low rounded-lg border-2 border-transparent hover:border-primary transition-all active-press chunky-shadow-secondary" id="btn-white" onclick="selectColor('white')">
+<div class="w-12 h-12 bg-white border border-outline-variant rounded-full shadow-md"></div>
+<div class="text-left">
+<span class="block font-label-bold text-label-bold text-on-surface">Blanco</span>
+<span class="material-symbols-outlined text-outline">volume_up</span>
+</div>
+</button>
+</div>
+<!-- Fun Fact Card -->
+<div class="bg-tertiary-container/20 rounded-lg p-card-padding border-2 border-tertiary-container flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary text-3xl">lightbulb</span>
+<p class="font-body-md text-body-md text-on-tertiary-container italic">
+                "Finlandia es la tierra de los mil lagos."
+            </p>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest dark:bg-surface-container-lowest shadow-lg rounded-t-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">public</span>
+<span class="font-label-bold text-label-bold">World Map</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label-bold text-label-bold">My Gallery</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">stars</span>
+<span class="font-label-bold text-label-bold">Awards</span>
+</div>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-container-margin" id="success-modal">
+<div class="bg-white rounded-xl w-full max-w-md overflow-hidden flex flex-col items-center text-center p-8 relative">
+<div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+
+</div>
+<div class="z-10">
+<div class="w-24 h-24 bg-secondary-container rounded-full flex items-center justify-center mb-6 chunky-shadow-yellow">
+<span class="material-symbols-outlined text-6xl text-on-secondary-container">stars</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-2">¡Excelente!</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">Has pintado la bandera de Finlandia perfectamente.</p>
+<button class="w-full py-4 bg-primary text-on-primary font-headline-md text-headline-md rounded-lg chunky-shadow-primary active-press" onclick="location.reload()">
+                    ¡Siguiente reto!
+                </button>
+</div>
+</div>
+</div>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Finlandia','Finland'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Finlandia!','Finland Alarm!'),750); }
+        function playAudio(text) {
+            const labels = { 'Azul':['Azul','Blue'], 'Blanco':['Blanco','White'] };
+            const pair = labels[text] || [text, text];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        let currentColor = null;
+        let paintedParts = { h: false, v: false };
+
+        function selectColor(color) {
+            currentColor = color;
+            document.querySelectorAll('#btn-blue, #btn-white').forEach(btn => { btn.classList.remove('ring-4', 'ring-primary-container'); });
+            document.getElementById(`btn-${color}`).classList.add('ring-4', 'ring-primary-container');
+            if (color === 'blue') AudioController.speakBilingual('Azul','Blue');
+            if (color === 'white') AudioController.speakBilingual('Blanco','White');
+        }
+
+        const crossV = document.getElementById('cross-v');
+        const crossH = document.getElementById('cross-h');
+        const flagContainer = document.getElementById('flag-container');
+
+        flagContainer.addEventListener('click', (e) => {
+            if (!currentColor) {
+                alert("¡Primero selecciona un color!");
+                return;
+            }
+
+            if (currentColor === 'blue') {
+                crossV.classList.add('cross-filled');
+                crossH.classList.add('cross-filled');
+                paintedParts.v = true;
+                paintedParts.h = true;
+                checkCompletion();
+            }
+        });
+
+        function checkCompletion() {
+            if (paintedParts.v && paintedParts.h) {
+                setTimeout(() => {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                }, 800);
+            }
+        }
+    </script>
+
+
+</body></html>

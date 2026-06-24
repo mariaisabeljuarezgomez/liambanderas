@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estación de Pintura (Portugal)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "surface-variant": "#dee3e9",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "outline": "#6e7882",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "inverse-surface": "#2c3136",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1",
+                    "inverse-primary": "#90cdff",
+                    "outline-variant": "#bec8d3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "surface-container-low": "#f0f4fb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px",
+                    "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        .chunky-button {
+            transition: all 0.1s ease;
+            box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.15);
+        }
+        .chunky-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .flag-section {
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .brush-active {
+            filter: drop-shadow(0 0 10px rgba(0, 100, 149, 0.4));
+        }
+
+        @keyframes pulse-audio {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+        .pulse-audio { animation: pulse-audio 2s infinite; }
+
+        .confetti {
+            position: absolute;
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- Top Navigation -->
+<header class="w-full top-0 sticky bg-surface-container-low z-50 flex items-center justify-between px-container-margin py-unit">
+<button onclick="window.location.href='../world_map_hub/index.html'" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" aria-label="Volver">
+<span class="material-symbols-outlined text-[32px]">arrow_back</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Estación de Pintura</h1>
+<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined text-[32px]">volume_up</span>
+</button>
+<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<main class="px-container-margin py-6 max-w-4xl mx-auto">
+<!-- Fun Fact Card -->
+<div class="bg-primary-container/10 border-2 border-primary-container rounded-lg p-card-padding mb-8 flex items-center gap-4">
+<div class="bg-secondary-container p-3 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container">sailing</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-primary-container">
+<strong>Portugal</strong> es famoso por sus barcos y el mar.
+            </p>
+</div>
+<!-- Canvas Area -->
+<div class="relative bg-white rounded-lg p-8 shadow-sm border-2 border-surface-variant mb-8 flex flex-col items-center">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">¡Pinta la bandera!</h2>
+<!-- Flag Interactive Silhouette -->
+<div class="relative w-full aspect-[3/2] max-w-md border-8 border-surface-variant rounded-xl overflow-hidden shadow-inner bg-surface-dim" id="flag-canvas">
+<svg class="w-full h-full" viewbox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Left Section (Green) -->
+<rect class="flag-section" fill="#E5E7EB" height="200" id="rect-green" onclick="paintSection('green')" width="120" x="0" y="0"></rect>
+<!-- Right Section (Red) -->
+<rect class="flag-section" fill="#F3F4F6" height="200" id="rect-red" onclick="paintSection('red')" width="180" x="120" y="0"></rect>
+<!-- Shield Emblem (Gold/Center) -->
+<circle class="flag-section" cx="120" cy="100" fill="#D1D5DB" id="shield-base" onclick="paintSection('gold')" r="35"></circle>
+<!-- Inner details (simplified for kids) -->
+<circle cx="120" cy="100" fill="none" r="25" stroke="#9CA3AF" stroke-width="2"></circle>
+</svg>
+</div>
+<!-- Smart Brush Selection -->
+<div class="flex gap-4 mt-8">
+<button class="brush-btn w-16 h-16 rounded-full bg-[#006633] border-4 border-white shadow-lg chunky-button flex items-center justify-center" onclick="selectColor('green', this)">
+<span class="material-symbols-outlined text-white text-[32px]">brush</span>
+</button>
+<button class="brush-btn w-16 h-16 rounded-full bg-[#FF0000] border-4 border-white shadow-lg chunky-button flex items-center justify-center" onclick="selectColor('red', this)">
+<span class="material-symbols-outlined text-white text-[32px]">brush</span>
+</button>
+<button class="brush-btn w-16 h-16 rounded-full bg-[#FFCC00] border-4 border-white shadow-lg chunky-button flex items-center justify-center" onclick="selectColor('gold', this)">
+<span class="material-symbols-outlined text-white text-[32px]">brush</span>
+</button>
+</div>
+</div>
+<!-- Bilingual Audio Section -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-center gap-3 bg-white p-6 rounded-lg border-b-8 border-tertiary-container shadow-sm active:translate-y-1 active:border-b-4 transition-all" onclick="playAudio('verde')">
+<div class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center pulse-audio">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl">volume_up</span>
+</div>
+<div class="text-center">
+<span class="block font-headline-md text-headline-md text-tertiary">Verde</span>
+<span class="block font-body-md text-body-md text-outline">Green</span>
+</div>
+</button>
+<button class="flex flex-col items-center gap-3 bg-white p-6 rounded-lg border-b-8 border-error-container shadow-sm active:translate-y-1 active:border-b-4 transition-all" onclick="playAudio('rojo')">
+<div class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl">volume_up</span>
+</div>
+<div class="text-center">
+<span class="block font-headline-md text-headline-md text-error">Rojo</span>
+<span class="block font-body-md text-body-md text-outline">Red</span>
+</div>
+</button>
+</div>
+<!-- Artistic Decoration Image -->
+<div class="mt-12 rounded-lg overflow-hidden border-4 border-white shadow-xl rotate-1">
+<img class="w-full h-48 object-cover" data-alt="A cheerful, child-friendly illustration of a traditional Portuguese caravela sailing boat on a vibrant blue ocean with a bright cartoon sun. The style is 2D vector art with bold outlines and bright colors like sky blue, warm yellow, and deep navy. Gentle waves splash against the wooden hull of the ship, which features white sails with red crosses. The atmosphere is joyful and adventurous, set under a clear sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDquDfgSyzmfM8ojkukQ06yC5u0YifL5Qkyeyq7Fl-WM0yBSy3WUhCH5B_vphLCLl_m-b_1pEvoLoe4sDf1IILbSt7Uc07qNEwXVSf5JCsC6qcGRVPaHmmOfEsUkhxl_sohuKIOX9LmP9bJ_hLtF0vEQ8a-EWq6wk24aMc2nDu1uOQtJ-9-zPifbPE_0VUH9gN_vIH-kbIwsVrhUkMhMYsXhj-LrBvhdBoafrtnRdBnxQV1dESbDw4n2wKFJtQsuw2j32V1JUwgzd4"/>
+</div>
+</main>
+<!-- Navigation Shell -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Confetti Overlay Container -->
+<div class="fixed inset-0 pointer-events-none z-[100]" id="confetti-container"></div>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Portugal','Portugal'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Portugal!','Portugal Alarm!'),750); }
+
+        let selectedColor = null;
+        let paintedCount = 0;
+        const totalSections = 3;
+
+        function selectColor(color, btn) {
+            selectedColor = color;
+            document.querySelectorAll('.brush-btn').forEach(b => b.classList.remove('ring-4', 'ring-primary', 'scale-110'));
+            btn.classList.add('ring-4', 'ring-primary', 'scale-110');
+            
+            const labels = { 'green':['Verde','Green'], 'red':['Rojo','Red'], 'gold':['Amarillo','Yellow'] };
+            const pair = labels[color] || [color, color];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        function paintSection(sectionId) {
+            if (!selectedColor) {
+                alert("¡Primero elige un color con el pincel!");
+                return;
+            }
+
+            const element = document.getElementById('rect-' + sectionId) || document.getElementById('shield-base');
+            
+            if (sectionId === 'green' && selectedColor === 'green') {
+                element.setAttribute('fill', '#006633');
+                checkProgress();
+            } else if (sectionId === 'red' && selectedColor === 'red') {
+                element.setAttribute('fill', '#FF0000');
+                checkProgress();
+            } else if (sectionId === 'gold' && selectedColor === 'gold') {
+                element.setAttribute('fill', '#FFCC00');
+                checkProgress();
+            } else {
+                // Shake effect or feedback for wrong color
+                element.classList.add('animate-pulse');
+                setTimeout(() => element.classList.remove('animate-pulse'), 500);
+            }
+        }
+
+        function checkProgress() {
+            paintedCount++;
+            if (paintedCount >= totalSections) {
+                celebrate();
+            }
+        }
+
+        function celebrate() {
+            const container = document.getElementById('confetti-container');
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = ['#006633', '#FF0000', '#FFCC00'][Math.floor(Math.random() * 3)];
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                container.appendChild(confetti);
+
+                const animation = confetti.animate([
+                    { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translateY(100vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                ], {
+                    duration: 2000 + Math.random() * 1000,
+                    easing: 'cubic-bezier(0, .9, .57, 1)'
+                });
+
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        function playAudio(word) {
+            const labels = { 'verde':['Verde','Green'], 'rojo':['Rojo','Red'] };
+            const pair = labels[word] || [word, word];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+    </script>
+</body></html>

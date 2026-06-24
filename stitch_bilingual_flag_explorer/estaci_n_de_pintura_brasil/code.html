@@ -1,0 +1,288 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Explorador de Banderas - Brasil</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#77de3d",
+                    "secondary-container": "#fccc00",
+                    "surface-container": "#eaeef5",
+                    "inverse-surface": "#2c3136",
+                    "outline-variant": "#bec8d3",
+                    "tertiary-container": "#59be1b",
+                    "outline": "#6e7882",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "secondary-fixed": "#ffe084",
+                    "on-secondary-fixed": "#231b00",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f7f9ff",
+                    "on-tertiary-fixed": "#082100",
+                    "secondary": "#735c00",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#001e30",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#edf1f8",
+                    "on-error-container": "#93000a",
+                    "on-background": "#171c21",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#90cdff",
+                    "primary-container": "#2bb1ff",
+                    "on-primary-fixed-variant": "#004b71",
+                    "surface": "#f7f9ff",
+                    "on-surface-variant": "#3e4851",
+                    "on-primary-container": "#004163",
+                    "on-surface": "#171c21",
+                    "background": "#f7f9ff",
+                    "tertiary": "#2b6c00",
+                    "surface-container-highest": "#dee3e9",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-container": "#6d5700",
+                    "surface-tint": "#006495",
+                    "surface-container-low": "#f0f4fb",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "surface-dim": "#d6dae1",
+                    "primary": "#006495",
+                    "inverse-primary": "#90cdff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "card-padding": "20px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-bold": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"]
+            },
+            "fontSize": {
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        
+        .chunky-button-primary {
+            @apply transition-all duration-75 active:translate-y-1;
+            box-shadow: 0 4px 0 0 #004b71;
+        }
+        .chunky-button-primary:active { box-shadow: 0 0 0 0 #004b71; }
+
+        .chunky-button-secondary {
+            @apply transition-all duration-75 active:translate-y-1;
+            box-shadow: 0 4px 0 0 #bec8d3;
+        }
+        .chunky-button-secondary:active { box-shadow: 0 0 0 0 #bec8d3; }
+
+        .chunky-bucket {
+            @apply transition-all duration-100 active:scale-95;
+            box-shadow: 0 8px 0 0 rgba(0,0,0,0.1);
+        }
+
+        .pulse-audio {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .canvas-area {
+            background-image: radial-gradient(#dee3e9 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .flag-path { transition: fill 0.3s ease; fill: #ffffff; stroke: #3e4851; stroke-width: 2; }
+        .selected-color-outline { outline: 4px solid #2bb1ff; outline-offset: 4px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface flex justify-between items-center px-container-margin py-unit h-touch-target-min z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-md-mobile" data-icon="language">language</span>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">Explorador de Banderas</h1>
+</div>
+<button aria-label="Ajustes de sonido" class="w-touch-target-min h-touch-target-min flex items-center justify-center hover:bg-surface-container-high rounded-full active:translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="volume_up">volume_up</span>
+</button>
+<button aria-label="¡Alarma! / Sound Alarm" class="w-touch-target-min h-touch-target-min flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full active:translate-y-1 transition-transform shadow-[0_2px_0_0_#6d5700] ml-2" onclick="playAudio('¡Alarma! Sound Alarm')"><span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span></button></header>
+<!-- Main Content: Flag Station -->
+<main class="flex-1 flex flex-col items-center px-container-margin py-unit overflow-y-auto pb-32">
+<!-- Header Section -->
+<div class="w-full flex flex-col items-center mb-6">
+<div class="flex items-center gap-4">
+<div class="text-center">
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-background m-0">Brasil</h2>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70">Brazil</p>
+</div>
+<button class="pulse-audio w-[64px] h-[64px] bg-secondary-container rounded-full flex items-center justify-center chunky-button-secondary border-4 border-white" onclick="playAudio('Brasil, Brazil')">
+<span class="material-symbols-outlined text-on-secondary-container text-[32px]" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Interactive Flag Canvas -->
+<div class="w-full max-w-[500px] aspect-[3/2] bg-white rounded-lg p-card-padding shadow-inner relative canvas-area border-4 border-surface-container-highest flex items-center justify-center overflow-hidden">
+<svg class="w-full h-full drop-shadow-lg" id="flag-svg" viewBox="0 0 300 200">
+<!-- Green Field (Background) -->
+<rect class="flag-path cursor-pointer" height="200" id="part-green" onclick="paintPart('part-green')" width="300" x="0" y="0"></rect>
+<!-- Yellow Rhombus -->
+<polygon class="flag-path cursor-pointer" id="part-yellow" onclick="paintPart('part-yellow')" points="150,20 280,100 150,180 20,100"></polygon>
+<!-- Blue Circle -->
+<circle class="flag-path cursor-pointer" cx="150" cy="100" id="part-blue" onclick="paintPart('part-blue')" r="45"></circle>
+</svg>
+<!-- Guide Overlay -->
+<div class="absolute pointer-events-none border-4 border-dashed border-primary/40 rounded-xl px-6 py-4 bg-white/80 animate-bounce" id="paint-hint">
+<p class="font-label-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="brush">brush</span>
+                    ¡PINTA AQUÍ!
+                </p>
+</div>
+</div>
+<!-- Palette Section -->
+<div class="w-full mt-auto pt-8 flex flex-col items-center">
+<p class="font-label-bold text-on-surface-variant mb-4">ELIGE UN COLOR</p>
+<div class="flex justify-center gap-gutter w-full overflow-x-auto py-2">
+<!-- Color: Verde -->
+<div class="flex flex-col items-center gap-2">
+<button class="color-bucket w-20 h-20 rounded-full bg-[#009739] border-4 border-white chunky-bucket flex items-center justify-center text-white" onclick="selectColor('#009739', this, 'Verde, Green')">
+<span class="material-symbols-outlined text-[32px]" data-icon="format_paint">format_paint</span>
+</button>
+<div class="flex items-center gap-1 bg-surface-container-high rounded-full px-3 py-1">
+<span class="font-label-bold text-on-surface-variant">Verde</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="volume_up" style="font-size: 16px;">volume_up</span>
+</div>
+</div>
+<!-- Color: Amarillo -->
+<div class="flex flex-col items-center gap-2">
+<button class="color-bucket w-20 h-20 rounded-full bg-[#fedf00] border-4 border-white chunky-bucket flex items-center justify-center text-on-secondary-container" onclick="selectColor('#fedf00', this, 'Amarillo, Yellow')">
+<span class="material-symbols-outlined text-[32px]" data-icon="format_paint">format_paint</span>
+</button>
+<div class="flex items-center gap-1 bg-surface-container-high rounded-full px-3 py-1">
+<span class="font-label-bold text-on-surface-variant">Amarillo</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="volume_up" style="font-size: 16px;">volume_up</span>
+</div>
+</div>
+<!-- Color: Azul -->
+<div class="flex flex-col items-center gap-2">
+<button class="color-bucket w-20 h-20 rounded-full bg-[#012169] border-4 border-white chunky-bucket flex items-center justify-center text-white" onclick="selectColor('#012169', this, 'Azul, Blue')">
+<span class="material-symbols-outlined text-[32px]" data-icon="format_paint">format_paint</span>
+</button>
+<div class="flex items-center gap-1 bg-surface-container-high rounded-full px-3 py-1">
+<span class="font-label-bold text-on-surface-variant">Azul</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="volume_up" style="font-size: 16px;">volume_up</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-container-margin pb-6 pt-2 bg-surface-container-lowest border-t-4 border-surface-variant shadow-lg z-50 rounded-t-lg">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-gutter py-1 hover:bg-surface-container-high rounded-full">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-gutter py-1 shadow-[0_4px_0_0_#6d5700] active:translate-y-1 active:shadow-none transition-all duration-75">
+<span class="material-symbols-outlined" data-icon="import_contacts">import_contacts</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-gutter py-1 hover:bg-surface-container-high rounded-full">
+<span class="material-symbols-outlined" data-icon="sports_esports">sports_esports</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</button>
+</nav>
+<script>
+        let currentColor = null;
+
+        function selectColor(color, element, audioText) {
+            currentColor = color;
+            
+            // UI Feedback for selection
+            document.querySelectorAll('.color-bucket').forEach(b => b.classList.remove('selected-color-outline'));
+            element.classList.add('selected-color-outline');
+            
+            // Remove the paint hint once a color is selected
+            const hint = document.getElementById('paint-hint');
+            if (hint) hint.classList.add('hidden');
+            
+            // Audio Feedback
+            playAudio(audioText);
+        }
+
+        function paintPart(id) {
+            if (!currentColor) {
+                playAudio("¡Elige un color primero!");
+                return;
+            }
+            const part = document.getElementById(id);
+            part.style.fill = currentColor;
+            
+            // Add a little pop animation
+            part.classList.add('animate-ping');
+            setTimeout(() => part.classList.remove('animate-ping'), 150);
+
+            checkFlagCompletion();
+        }
+
+        function playAudio(text) {
+            // In a real app, this would trigger TTS or play a pre-recorded file.
+            // For now, we'll use a console log to simulate.
+            console.log("Playing Audio: " + text);
+            
+            // Visual feedback for non-readers
+            const speakerIcon = document.querySelector('.pulse-audio');
+            speakerIcon.classList.add('scale-125');
+            setTimeout(() => speakerIcon.classList.remove('scale-125'), 200);
+        }
+
+        function checkFlagCompletion() {
+            const green = document.getElementById('part-green').style.fill;
+            const yellow = document.getElementById('part-yellow').style.fill;
+            const blue = document.getElementById('part-blue').style.fill;
+
+            // Simplified check for hex/rgb equivalence
+            if (green.includes('0, 151, 57') && yellow.includes('254, 223, 0') && blue.includes('1, 33, 105')) {
+                setTimeout(() => {
+                    alert("¡Excelente! Has pintado la bandera de Brasil correctamente.");
+                }, 500);
+            }
+        }
+    </script>
+
+
+</body></html>

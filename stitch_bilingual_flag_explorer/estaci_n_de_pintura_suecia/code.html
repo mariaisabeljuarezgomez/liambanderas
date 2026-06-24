@@ -1,0 +1,322 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary": "#006495",
+                "on-surface": "#171c21",
+                "secondary-fixed": "#ffe084",
+                "on-tertiary-fixed": "#082100",
+                "secondary-container": "#fccc00",
+                "on-primary-fixed-variant": "#004b71",
+                "tertiary-fixed": "#92fc58",
+                "on-tertiary-fixed-variant": "#1f5100",
+                "surface-bright": "#f7f9ff",
+                "on-surface-variant": "#3e4851",
+                "on-tertiary-container": "#1a4600",
+                "error": "#ba1a1a",
+                "error-container": "#ffdad6",
+                "tertiary-container": "#59be1b",
+                "surface-variant": "#dee3e9",
+                "primary-fixed-dim": "#90cdff",
+                "on-background": "#171c21",
+                "primary-fixed": "#cbe6ff",
+                "surface-tint": "#006495",
+                "outline": "#6e7882",
+                "on-secondary-container": "#6d5700",
+                "secondary": "#735c00",
+                "on-secondary-fixed": "#231b00",
+                "on-error": "#ffffff",
+                "primary-container": "#2bb1ff",
+                "surface-container-high": "#e4e8ef",
+                "inverse-surface": "#2c3136",
+                "on-tertiary": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-container-highest": "#dee3e9",
+                "inverse-on-surface": "#edf1f8",
+                "surface-dim": "#d6dae1",
+                "inverse-primary": "#90cdff",
+                "outline-variant": "#bec8d3",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-fixed": "#001e30",
+                "tertiary": "#2b6c00",
+                "surface-container": "#eaeef5",
+                "on-primary": "#ffffff",
+                "tertiary-fixed-dim": "#77de3d",
+                "on-secondary-fixed-variant": "#574500",
+                "on-primary-container": "#004163",
+                "surface-container-low": "#f0f4fb",
+                "on-secondary": "#ffffff",
+                "secondary-fixed-dim": "#efc200",
+                "surface": "#f7f9ff",
+                "background": "#f7f9ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "16px",
+                "container-margin": "24px",
+                "card-padding": "20px",
+                "unit": "8px",
+                "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                "body-md": ["Quicksand"],
+                "label-bold": ["Quicksand"],
+                "headline-md": ["Quicksand"],
+                "body-lg": ["Quicksand"],
+                "headline-lg-mobile": ["Quicksand"],
+                "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        .tactile-button {
+            transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 0 0 rgba(0,0,0,0.1);
+        }
+        .tactile-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+        }
+
+        .primary-tactile {
+            background-color: #2bb1ff;
+            border-bottom: 6px solid #006495;
+            color: white;
+        }
+
+        .secondary-tactile {
+            background-color: white;
+            border-bottom: 6px solid #dee3e9;
+            color: #006495;
+        }
+
+        .audio-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+
+        .sweden-blue { background-color: #006aa7; }
+        .sweden-yellow { background-color: #fecc00; }
+
+        .flag-grid {
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            aspect-ratio: 16/10;
+        }
+
+        .paint-active {
+            outline: 6px solid #2bb1ff;
+            outline-offset: 4px;
+            z-index: 10;
+        }
+
+        .floating-forest {
+            pointer-events: none;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen pb-32">
+<!-- Top Navigation -->
+<header class="w-full top-0 sticky z-40 bg-surface-container-low flex items-center justify-between px-container-margin py-unit h-16">
+<button class="w-12 h-12 flex items-center justify-center rounded-full text-primary hover:bg-primary-container active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined text-[32px]">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Flag Adventure</h1>
+<button class="w-12 h-12 flex items-center justify-center rounded-full text-primary hover:bg-primary-container active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined text-[32px]">volume_up</span>
+</button>
+<button class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<main class="px-container-margin py-8">
+<!-- Title & Hero Info -->
+<div class="text-center mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Estación de Pintura (Suecia)</h2>
+<p class="font-body-md text-on-surface-variant max-w-xs mx-auto">¡Pinta la bandera de Suecia con los colores correctos!</p>
+</div>
+<!-- The Painting Canvas -->
+<div class="relative bg-white rounded-lg p-6 shadow-xl border-2 border-surface-variant mb-10">
+<div class="flag-grid rounded-md overflow-hidden bg-surface-variant border-4 border-white shadow-inner" id="flag-canvas">
+<!-- Background (Field) -->
+<div class="canvas-part cursor-pointer bg-white transition-colors duration-300" id="field-top-left" onclick="paintPart(this)" style="grid-area: 1 / 1 / 6 / 6;"></div>
+<div class="canvas-part cursor-pointer bg-white transition-colors duration-300" id="field-bottom-left" onclick="paintPart(this)" style="grid-area: 8 / 1 / 13 / 6;"></div>
+<div class="canvas-part cursor-pointer bg-white transition-colors duration-300" id="field-top-right" onclick="paintPart(this)" style="grid-area: 1 / 10 / 6 / 19;"></div>
+<div class="canvas-part cursor-pointer bg-white transition-colors duration-300" id="field-bottom-right" onclick="paintPart(this)" style="grid-area: 8 / 10 / 13 / 19;"></div>
+<!-- Nordic Cross (Horizontal) -->
+<div class="canvas-part cursor-pointer bg-white transition-colors duration-300" id="cross-h" onclick="paintPart(this)" style="grid-area: 6 / 1 / 8 / 19;"></div>
+<!-- Nordic Cross (Vertical) -->
+<div class="canvas-part cursor-pointer bg-white transition-colors duration-300" id="cross-v" onclick="paintPart(this)" style="grid-area: 1 / 6 / 13 / 10;"></div>
+</div>
+<!-- Audio Help Buttons -->
+<div class="absolute -top-4 -right-4 flex flex-col gap-3">
+<button class="w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full shadow-lg border-b-4 border-on-secondary-container flex items-center justify-center audio-pulse tactile-button" onclick="playAudio('azul')">
+<span class="material-symbols-outlined text-[32px]">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Color Palette Picker -->
+<div class="flex justify-center gap-6 mb-12">
+<div class="flex flex-col items-center">
+<button class="w-20 h-20 rounded-full sweden-blue border-4 border-white shadow-lg tactile-button paint-active" id="color-blue" onclick="selectColor('azul', this)">
+</button>
+<span class="mt-3 font-label-bold text-on-surface">Azul</span>
+<button class="mt-2 text-primary" onclick="playAudio('azul')">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+<div class="flex flex-col items-center">
+<button class="w-20 h-20 rounded-full sweden-yellow border-4 border-white shadow-lg tactile-button" id="color-yellow" onclick="selectColor('amarillo', this)">
+</button>
+<span class="mt-3 font-label-bold text-on-surface">Amarillo</span>
+<button class="mt-2 text-primary" onclick="playAudio('amarillo')">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Fun Fact Card -->
+<div class="bg-primary-fixed p-card-padding rounded-lg relative overflow-hidden flex items-start gap-4 shadow-md">
+<div class="w-16 h-16 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-white border-2 border-white">
+<span class="material-symbols-outlined text-[32px]">lightbulb</span>
+</div>
+<div class="z-10">
+<h3 class="font-label-bold text-on-primary-fixed-variant mb-1">Dato Curioso:</h3>
+<p class="font-body-md text-on-primary-fixed-variant leading-tight italic">
+                    "¡En Suecia hace frío y hay muchos bosques!"
+                </p>
+</div>
+<!-- Background forest silhouette style via div -->
+<div class="absolute bottom-[-10px] right-[-10px] opacity-20 transform scale-150 rotate-12">
+<span class="material-symbols-outlined text-[100px] text-primary">forest</span>
+</div>
+</div>
+<!-- Action Button -->
+<div class="mt-12 flex justify-center">
+<button class="px-12 py-5 rounded-full primary-tactile font-headline-md tactile-button flex items-center gap-3" onclick="checkResult()">
+<span class="material-symbols-outlined">check_circle</span>
+                ¡Listo!
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant active:translate-y-1 transition-transform duration-75 hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 active:translate-y-1 transition-transform duration-75" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant active:translate-y-1 transition-transform duration-75 hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Celebration Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6" id="success-modal">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm"></div>
+<div class="relative bg-secondary-fixed p-8 rounded-xl shadow-2xl text-center border-b-[8px] border-secondary text-on-secondary-fixed max-w-sm w-full scale-90 transition-transform duration-300" id="modal-content">
+<div class="w-24 h-24 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[64px] text-tertiary">celebration</span>
+</div>
+<h2 class="font-headline-lg-mobile mb-2">¡Excelente!</h2>
+<p class="font-body-lg mb-8">Has pintado la bandera de Suecia perfectamente.</p>
+<button class="w-full py-4 primary-tactile rounded-full font-headline-md tactile-button" onclick="location.reload()">
+                ¡Seguir Jugando!
+            </button>
+</div>
+</div>
+<script>
+        let selectedColor = 'azul';
+
+        function selectColor(color, el) {
+            selectedColor = color;
+            // Clear active state
+            document.getElementById('color-blue').classList.remove('paint-active');
+            document.getElementById('color-yellow').classList.remove('paint-active');
+            // Set active state
+            el.classList.add('paint-active');
+        }
+
+        function paintPart(el) {
+            if (selectedColor === 'azul') {
+                el.style.backgroundColor = '#006aa7';
+            } else if (selectedColor === 'amarillo') {
+                el.style.backgroundColor = '#fecc00';
+            }
+        }
+
+        function playAudio(term) {
+            // Logic to play audio (placeholder)
+            console.log("Playing audio for: " + term);
+            const synth = window.speechSynthesis;
+            const utter = new SpeechSynthesisUtterance(term);
+            utter.lang = 'es-ES';
+            synth.speak(utter);
+        }
+
+        function checkResult() {
+            const blueAreas = ['field-top-left', 'field-bottom-left', 'field-top-right', 'field-bottom-right'];
+            const yellowAreas = ['cross-h', 'cross-v'];
+            
+            let allCorrect = true;
+
+            blueAreas.forEach(id => {
+                const el = document.getElementById(id);
+                // Simple color check (note: rgb format)
+                if (el.style.backgroundColor !== 'rgb(0, 106, 167)') allCorrect = false;
+            });
+
+            yellowAreas.forEach(id => {
+                const el = document.getElementById(id);
+                if (el.style.backgroundColor !== 'rgb(254, 204, 0)') allCorrect = false;
+            });
+
+            if (allCorrect) {
+                const modal = document.getElementById('success-modal');
+                const content = document.getElementById('modal-content');
+                modal.classList.remove('hidden');
+                setTimeout(() => content.classList.replace('scale-90', 'scale-100'), 10);
+            } else {
+                alert("¡Casi! Intenta poner el azul en los rectángulos y el amarillo en la cruz.");
+            }
+        }
+    </script>
+
+
+</body></html>

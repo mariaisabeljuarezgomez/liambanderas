@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Estación de Pintura: México</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#006495", "on-primary": "#ffffff",
+        "primary-container": "#2bb1ff", "on-primary-container": "#004163",
+        "primary-fixed": "#cbe6ff", "primary-fixed-dim": "#90cdff",
+        "on-primary-fixed": "#001e30", "on-primary-fixed-variant": "#004b71",
+        "secondary": "#735c00", "on-secondary": "#ffffff",
+        "secondary-container": "#fccc00", "on-secondary-container": "#6d5700",
+        "secondary-fixed": "#ffe084", "secondary-fixed-dim": "#efc200",
+        "on-secondary-fixed": "#231b00", "on-secondary-fixed-variant": "#574500",
+        "tertiary": "#2b6c00", "on-tertiary": "#ffffff",
+        "tertiary-container": "#59be1b", "on-tertiary-container": "#1a4600",
+        "error": "#ba1a1a", "on-error": "#ffffff",
+        "error-container": "#ffdad6", "on-error-container": "#93000a",
+        "background": "#f7f9ff", "on-background": "#171c21",
+        "surface": "#f7f9ff", "on-surface": "#171c21",
+        "surface-variant": "#dee3e9", "on-surface-variant": "#3e4851",
+        "surface-container-lowest": "#ffffff", "surface-container-low": "#f0f4fb",
+        "surface-container": "#eaeef5", "surface-container-high": "#e4e8ef",
+        "surface-container-highest": "#dee3e9",
+        "inverse-surface": "#2c3136", "inverse-on-surface": "#edf1f8",
+        "inverse-primary": "#90cdff",
+        "outline": "#6e7882", "outline-variant": "#bec8d3"
+      },
+      borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+      spacing: { "unit": "8px", "touch-target-min": "48px", "container-margin": "24px", "gutter": "16px", "card-padding": "20px" },
+      fontFamily: { "headline-lg": ["Quicksand"], "label-bold": ["Quicksand"], "headline-lg-mobile": ["Quicksand"], "headline-md": ["Quicksand"], "body-lg": ["Quicksand"], "body-md": ["Quicksand"] },
+      fontSize: {
+        "headline-lg": ["36px", {"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],
+        "label-bold": ["16px", {"lineHeight":"20px","fontWeight":"700"}],
+        "headline-lg-mobile": ["28px", {"lineHeight":"34px","fontWeight":"700"}],
+        "headline-md": ["24px", {"lineHeight":"30px","fontWeight":"700"}],
+        "body-lg": ["20px", {"lineHeight":"28px","fontWeight":"500"}],
+        "body-md": ["18px", {"lineHeight":"24px","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+  .chunky-button { transition: all 0.1s ease; border-bottom-width: 4px; }
+  .chunky-button:active { transform: translateY(4px); border-bottom-width: 0px; }
+  .audio-pulse { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+  .canvas-bg { background-image: radial-gradient(#dee3e9 1px, transparent 1px); background-size: 20px 20px; }
+  .flag-section { transition: background-color 0.35s ease; cursor: pointer; }
+  .flag-section:hover { opacity: 0.85; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-7px); } 40% { transform: translateX(7px); }
+    60% { transform: translateX(-4px); } 80% { transform: translateX(4px); }
+  }
+  .shake { animation: shake 0.35s ease; }
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+
+<!-- TOP APP BAR -->
+<header class="w-full top-0 sticky bg-background border-b-4 border-surface-container-highest z-50">
+  <div class="flex items-center justify-between px-container-margin py-unit w-full">
+    <button onclick="window.location.href='../world_map_hub/index.html'"
+            class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container-high text-primary hover:opacity-80 active:translate-y-1 transition-all"
+            aria-label="Volver">
+      <span class="material-symbols-outlined text-headline-lg-mobile">arrow_back</span>
+    </button>
+    <div onclick="speakCountry()" class="flex flex-col items-center cursor-pointer select-none hover:opacity-80 transition-opacity">
+      <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">México</h1>
+      <span class="font-body-md text-body-md text-on-surface-variant">Mexico</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="alarm-btn" onclick="triggerAlarm()"
+              class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all"
+              aria-label="Alarma">
+        <span class="material-symbols-outlined text-2xl">notifications_active</span>
+      </button>
+      <button id="audio-main" onclick="speakCountry()"
+              class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all audio-pulse"
+              aria-label="Escuchar nombre">
+        <span class="material-symbols-outlined text-2xl">volume_up</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="flex-grow flex flex-col items-center px-container-margin pt-unit pb-32 canvas-bg">
+  <div class="w-full max-w-lg mb-4 text-center">
+    <p class="font-body-lg text-body-lg text-on-surface-variant">
+      ¡Pinta la bandera! <span class="block text-body-md opacity-60">Paint the flag!</span>
+    </p>
+  </div>
+
+  <!-- Progress dots -->
+  <div id="progress-dots" class="flex gap-2 mb-4 justify-center"></div>
+
+  <!-- FLAG CANVAS
+    México flag: 3 equal vertical stripes
+    Left = Verde (Green #006847)
+    Center = Blanco (White #FFFFFF) with eagle
+    Right = Rojo (Red #CE1126)
+  -->
+  <div class="w-full max-w-2xl bg-white rounded-xl shadow-2xl border-4 border-surface-container-highest overflow-hidden"
+       style="aspect-ratio:3/2">
+    <div class="flex h-full w-full">
+      <!-- Green stripe -->
+      <div id="stripe-verde" data-color="verde"
+           class="flag-section flex-1 border-r-2 border-surface-container-high flex items-center justify-center"
+           style="background-color:#d8f5e8;">
+        <span class="material-symbols-outlined text-5xl opacity-20 pointer-events-none">format_paint</span>
+      </div>
+      <!-- White stripe (center, with eagle emblem) -->
+      <div id="stripe-blanco" data-color="blanco"
+           class="flag-section flex-1 border-r-2 border-surface-container-high flex items-center justify-center relative"
+           style="background-color:#f0f0f0;">
+        <!-- Eagle silhouette (decorative, not interactive) -->
+        <svg viewBox="0 0 80 90" class="w-16 h-16 opacity-25 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="40" cy="55" rx="20" ry="28" fill="#555"/>
+          <ellipse cx="40" cy="30" rx="14" ry="16" fill="#555"/>
+          <path d="M26,40 Q10,30 8,50 Q20,55 26,48 Z" fill="#555"/>
+          <path d="M54,40 Q70,30 72,50 Q60,55 54,48 Z" fill="#555"/>
+          <ellipse cx="40" cy="22" rx="8" ry="10" fill="#555"/>
+          <path d="M34,16 L30,8 L36,14 Z" fill="#555"/>
+          <path d="M46,16 L50,8 L44,14 Z" fill="#555"/>
+        </svg>
+        <span class="material-symbols-outlined text-4xl opacity-20 absolute pointer-events-none">format_paint</span>
+      </div>
+      <!-- Red stripe -->
+      <div id="stripe-rojo" data-color="rojo"
+           class="flag-section flex-1 flex items-center justify-center"
+           style="background-color:#f8d8d8;">
+        <span class="material-symbols-outlined text-5xl opacity-20 pointer-events-none">format_paint</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOR PALETTE -->
+  <div class="mt-6 w-full max-w-lg grid grid-cols-3 gap-gutter">
+    <!-- Verde / Green -->
+    <button class="flex flex-col items-center gap-unit" onclick="selectColor('verde')">
+      <div id="palette-verde"
+           class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150"
+           style="background-color:#006847; border-color:#004d33;">
+        <span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark"
+              style="font-variation-settings:'FILL' 1;">check</span>
+      </div>
+      <div class="text-center">
+        <p class="font-label-bold text-label-bold text-on-surface">Verde</p>
+        <p class="text-xs text-on-surface-variant font-medium">Green</p>
+      </div>
+    </button>
+
+    <!-- Blanco / White -->
+    <button class="flex flex-col items-center gap-unit" onclick="selectColor('blanco')">
+      <div id="palette-blanco"
+           class="w-20 h-20 rounded-full bg-white border-b-8 border-outline-variant chunky-button flex items-center justify-center transition-all duration-150">
+        <span class="material-symbols-outlined text-primary text-headline-md opacity-0 check-mark"
+              style="font-variation-settings:'FILL' 1;">check</span>
+      </div>
+      <div class="text-center">
+        <p class="font-label-bold text-label-bold text-on-surface">Blanco</p>
+        <p class="text-xs text-on-surface-variant font-medium">White</p>
+      </div>
+    </button>
+
+    <!-- Rojo / Red -->
+    <button class="flex flex-col items-center gap-unit" onclick="selectColor('rojo')">
+      <div id="palette-rojo"
+           class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150"
+           style="background-color:#ce1126; border-color:#8c0c1a;">
+        <span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark"
+              style="font-variation-settings:'FILL' 1;">check</span>
+      </div>
+      <div class="text-center">
+        <p class="font-label-bold text-label-bold text-on-surface">Rojo</p>
+        <p class="text-xs text-on-surface-variant font-medium">Red</p>
+      </div>
+    </button>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="mt-6 flex gap-gutter">
+    <button id="reset-btn"
+            class="chunky-button px-gutter py-unit bg-surface-container-highest border-b-4 border-outline-variant rounded-lg flex items-center gap-2 font-label-bold text-on-surface-variant">
+      <span class="material-symbols-outlined">restart_alt</span>
+      Reiniciar
+    </button>
+    <button id="finish-btn"
+            class="chunky-button px-6 py-unit bg-tertiary-container border-b-4 border-tertiary text-on-tertiary-container rounded-lg flex items-center gap-2 font-label-bold">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">auto_awesome</span>
+      ¡Listo!
+    </button>
+  </div>
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface shadow-lg border-t-4 border-surface-container-highest z-50 rounded-t-lg">
+  <a href="../world_map_hub/index.html" class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95">
+    <span class="material-symbols-outlined">explore</span>
+    <span class="font-label-bold text-[10px] uppercase mt-1">Explorar</span>
+  </a>
+  <a href="../mi_pasaporte_passport/index.html" class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95">
+    <span class="material-symbols-outlined">menu_book</span>
+    <span class="font-label-bold text-[10px] uppercase mt-1">Pasaporte</span>
+  </a>
+  <a href="../sesi_n_de_quiz_biling_e/index.html" class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">videogame_asset</span>
+    <span class="font-label-bold text-[10px] uppercase mt-1">Jugar</span>
+  </a>
+</nav>
+
+<!-- SUCCESS MODAL -->
+<div id="celebration" class="fixed inset-0 z-[100] hidden items-center justify-center bg-white/90 backdrop-blur-sm">
+  <div class="text-center animate-bounce px-8">
+    <div class="relative inline-block">
+      <div class="absolute inset-0 bg-secondary-fixed blur-3xl opacity-50 scale-150"></div>
+      <span class="material-symbols-outlined text-[120px] text-secondary relative z-10"
+            style="font-variation-settings:'FILL' 1;">workspace_premium</span>
+    </div>
+    <h2 class="font-headline-lg text-headline-lg text-on-background mt-4">¡Increíble!</h2>
+    <p class="font-body-lg text-body-lg text-on-surface-variant">Has pintado la bandera de México</p>
+    <p class="font-body-md text-body-md text-on-surface-variant opacity-70 mt-1">You painted Mexico's flag!</p>
+    <button class="mt-6 chunky-button px-8 py-4 bg-primary text-on-primary border-b-8 border-on-primary-fixed-variant rounded-xl font-headline-md"
+            onclick="location.reload()">Jugar de Nuevo</button>
+  </div>
+</div>
+
+<script>
+// ── AUDIO ────────────────────────────────────────────────
+const Audio = (() => {
+  let _ctx = null;
+  function ctx() {
+    if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (_ctx.state === 'suspended') _ctx.resume();
+    return _ctx;
+  }
+  function tone(freq, type, dur, vol) {
+    try {
+      const c = ctx(), osc = c.createOscillator(), g = c.createGain();
+      osc.type = type; osc.frequency.value = freq;
+      g.gain.setValueAtTime(vol, c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + dur);
+      osc.connect(g); g.connect(c.destination);
+      osc.start(); osc.stop(c.currentTime + dur + 0.05);
+    } catch(e) {}
+  }
+  return {
+    boing() { tone(180,'sine',0.3,0.2); setTimeout(()=>tone(100,'square',0.15,0.08),80); },
+    sparkle() { [880,1100,1320,1540].forEach((f,i)=>setTimeout(()=>tone(f,'triangle',0.18,0.07),i*55)); },
+    victory() { [261.63,329.63,392,523.25,659.25,783.99,1046.5].forEach((f,i)=>setTimeout(()=>tone(f,'sine',0.4,0.12),i*110)); },
+    alarm() {
+      try {
+        const c=ctx(), now=c.currentTime;
+        for(let i=0;i<4;i++){
+          const t=now+i*0.32, osc=c.createOscillator(), g=c.createGain();
+          osc.type='sawtooth'; osc.frequency.setValueAtTime(750,t);
+          osc.frequency.linearRampToValueAtTime(1350,t+0.16);
+          osc.frequency.linearRampToValueAtTime(750,t+0.30);
+          g.gain.setValueAtTime(0.18,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.30);
+          osc.connect(g); g.connect(c.destination); osc.start(t); osc.stop(t+0.36);
+        }
+      } catch(e) {}
+    },
+    speak(es, en) {
+      if (!('speechSynthesis' in window)) return;
+      try { speechSynthesis.cancel(); } catch(e) {}
+      setTimeout(() => {
+        const uEs = new SpeechSynthesisUtterance(es);
+        uEs.lang = 'es-MX'; uEs.rate = 0.90; uEs.pitch = 1.10;
+        uEs.onend = () => {
+          if (!en) return;
+          setTimeout(() => {
+            const uEn = new SpeechSynthesisUtterance(en);
+            uEn.lang = 'en-US'; uEn.rate = 0.90;
+            speechSynthesis.speak(uEn);
+          }, 200);
+        };
+        speechSynthesis.speak(uEs);
+      }, 80);
+    }
+  };
+})();
+
+// ── GAME STATE ───────────────────────────────────────────
+const STRIPES = {
+  'stripe-verde':  { correct: 'verde',  hex: '#006847', resetBg: '#d8f5e8' },
+  'stripe-blanco': { correct: 'blanco', hex: '#ffffff', resetBg: '#f0f0f0' },
+  'stripe-rojo':   { correct: 'rojo',   hex: '#ce1126', resetBg: '#f8d8d8' },
+};
+const painted = { 'stripe-verde': false, 'stripe-blanco': false, 'stripe-rojo': false };
+
+const PALETTE = {
+  verde:  { es: 'Verde',   en: 'Green' },
+  blanco: { es: 'Blanco',  en: 'White' },
+  rojo:   { es: 'Rojo',    en: 'Red'   },
+};
+
+let selKey = null;
+
+// ── PROGRESS ─────────────────────────────────────────────
+function updateProgress() {
+  const dots = document.getElementById('progress-dots');
+  dots.innerHTML = '';
+  Object.keys(STRIPES).forEach(k => {
+    const d = document.createElement('div');
+    d.style.cssText = `width:14px;height:14px;border-radius:50%;
+      background:${painted[k]?'#2b6c00':'#dee3e9'};
+      border:2px solid ${painted[k]?'#1a4600':'#bec8d3'};
+      transition:background .3s;`;
+    dots.appendChild(d);
+  });
+}
+
+// ── SELECT COLOR ─────────────────────────────────────────
+function selectColor(key) {
+  selKey = key;
+  Object.keys(PALETTE).forEach(k => {
+    const pal = document.getElementById('palette-'+k);
+    if (pal) { pal.style.transform=''; pal.style.boxShadow=''; }
+    const cm = pal && pal.querySelector('.check-mark');
+    if (cm) cm.classList.add('opacity-0');
+  });
+  const sel = document.getElementById('palette-'+key);
+  if (sel) {
+    sel.style.transform='scale(1.12)';
+    sel.style.boxShadow='0 0 0 4px #006495, 0 0 0 8px #f7f9ff';
+    const cm = sel.querySelector('.check-mark');
+    if (cm) cm.classList.remove('opacity-0');
+  }
+  Audio.speak(PALETTE[key].es, PALETTE[key].en);
+}
+
+// ── PAINT ────────────────────────────────────────────────
+function paintStripe(el) {
+  if (!selKey) {
+    document.querySelectorAll('[id^="palette-"]').forEach(p => {
+      p.classList.add('shake'); setTimeout(()=>p.classList.remove('shake'),400);
+    });
+    Audio.boing(); return;
+  }
+  const id = el.id;
+  if (!STRIPES[id]) return;
+  const correctKey = STRIPES[id].correct;
+  if (selKey === correctKey) {
+    el.style.backgroundColor = STRIPES[id].hex;
+    // Hide hint icon
+    const icon = el.querySelector('.material-symbols-outlined');
+    if (icon) icon.style.opacity = '0';
+    painted[id] = true;
+    updateProgress();
+    Audio.sparkle();
+    Audio.speak('¡Correcto!', 'Correct!');
+    checkWin();
+  } else {
+    el.classList.add('shake');
+    setTimeout(()=>el.classList.remove('shake'), 400);
+    Audio.boing();
+    Audio.speak('¡Intenta otro color!', 'Try another color!');
+  }
+}
+
+// ── WIN ──────────────────────────────────────────────────
+function checkWin() {
+  if (!Object.values(painted).every(Boolean)) return;
+  Audio.victory();
+  Audio.speak('¡Increíble! ¡Pintaste la bandera de México!', 'Amazing! You painted Mexico\'s flag!');
+  setTimeout(() => {
+    const cel = document.getElementById('celebration');
+    cel.classList.remove('hidden'); cel.classList.add('flex');
+  }, 1800);
+}
+function explicitFinish() {
+  if (Object.values(painted).every(Boolean)) { checkWin(); }
+  else { Audio.boing(); Audio.speak('¡Aún no está lista!','Not done yet!'); }
+}
+
+// ── RESET ────────────────────────────────────────────────
+function resetFlag() {
+  Object.keys(STRIPES).forEach(k => {
+    painted[k] = false;
+    const el = document.getElementById(k);
+    if (el) {
+      el.style.backgroundColor = STRIPES[k].resetBg;
+      const icon = el.querySelector('.material-symbols-outlined');
+      if (icon) icon.style.opacity = '';
+    }
+  });
+  updateProgress();
+  selKey = null;
+  Object.keys(PALETTE).forEach(k => {
+    const pal = document.getElementById('palette-'+k);
+    if (pal) { pal.style.transform=''; pal.style.boxShadow=''; }
+    const cm = pal && pal.querySelector('.check-mark');
+    if (cm) cm.classList.add('opacity-0');
+  });
+}
+
+// ── GLOBAL HANDLERS ──────────────────────────────────────
+function speakCountry() { Audio.speak('México','Mexico'); }
+function triggerAlarm() {
+  Audio.alarm();
+  setTimeout(()=>Audio.speak('¡Alarma de México!','Mexico Alarm!'), 750);
+}
+
+// ── INIT ─────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  Object.keys(STRIPES).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', () => paintStripe(el));
+  });
+  document.getElementById('reset-btn').addEventListener('click', resetFlag);
+  document.getElementById('finish-btn').addEventListener('click', explicitFinish);
+  updateProgress();
+  setTimeout(speakCountry, 900);
+});
+</script>
+</body>
+</html>

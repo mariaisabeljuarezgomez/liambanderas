@@ -1,0 +1,288 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "surface-variant": "#dee3e9",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "outline": "#6e7882",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "inverse-surface": "#2c3136",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1",
+                    "inverse-primary": "#90cdff",
+                    "outline-variant": "#bec8d3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "surface-container-low": "#f0f4fb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px",
+                    "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-button-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-button-primary:active {
+            box-shadow: 0 0 0 0 #004b71;
+            transform: translateY(6px);
+        }
+        .chunky-button-secondary {
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .chunky-button-secondary:active {
+            box-shadow: 0 0 0 0 #bec8d3;
+            transform: translateY(6px);
+        }
+        .chunky-card {
+            box-shadow: 0 8px 0 0 #dee3e9;
+        }
+        .audio-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<nav class="w-full top-0 sticky bg-surface-container-low flex items-center justify-between px-container-margin py-unit z-50">
+<div class="flex items-center gap-4">
+<button onclick="window.location.href='../world_map_hub/index.html'" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" aria-label="Volver">
+<span class="material-symbols-outlined text-headline-md-mobile" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Estación de Pintura (Noruega)</h1>
+</div>
+<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button onclick="speakCountry()" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined text-headline-md-mobile" data-icon="volume_up">volume_up</span>
+</button>
+</nav>
+<main class="max-w-4xl mx-auto px-container-margin pt-unit">
+<!-- Interactive Instruction -->
+<div class="mt-4 flex flex-col md:flex-row items-center gap-6 p-card-padding bg-secondary-container rounded-lg chunky-card border-2 border-on-secondary-container/10">
+<div class="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-sm shrink-0">
+<img class="w-full h-full object-cover" data-alt="A friendly, cute cartoon arctic fox mascot wearing a tiny adventurer hat and holding a paintbrush. The fox has large kind eyes and a warm smile, set against a bright, clean, premium educational illustration style with vibrant primary colors and soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr7_CTVlT8_n4pVR9A-d9yG558LhGNsXhJCVAjVvU9xiGRnpQQwmXKUgZ5q63q74jDfSyWpTDww4f7X-8Bjzq0zaoOejNH0kmD2udSUynA8g0M4bSLiudl-jXDiWcraY0SlS-caCldl1lDoB_RxVgBv7Ua0vSt3osRzE0XsgQCVxnZnZUjUb4x9lnerjIuZcgCRMbVxRNE8caPlW5nAJzyvAnNMMSKobuDSE5ZAKNfcIANAxHj6nvRpr0YKKlVQwhXg9Rgw3Iy-eM">
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-secondary-container mb-1">¡Vamos a pintar!</h2>
+<p class="font-body-lg text-body-lg text-on-secondary-container">Usa tus pinceles mágicos para colorear la bandera de Noruega.</p>
+</div>
+</div>
+<!-- Canvas Area -->
+<div class="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Flag Canvas (Left/Main) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="bg-white p-6 rounded-lg chunky-card border-2 border-surface-variant relative aspect-[3/2] flex items-center justify-center overflow-hidden">
+<!-- Flag Template -->
+<div class="w-full h-full relative border-4 border-surface-variant/20 rounded-sm" id="flag-canvas">
+<!-- Norway Base Red -->
+<div class="absolute inset-0 bg-white transition-colors duration-300 cursor-pointer flex items-center justify-center group" id="part-red" onclick="paint('red')">
+<span class="text-surface-variant opacity-30 group-hover:opacity-50 transition-opacity material-symbols-outlined text-6xl" data-icon="format_paint">format_paint</span>
+</div>
+<!-- White Cross -->
+<div class="absolute left-0 top-[calc(50%-15%)] w-full h-[30%] bg-surface-container transition-colors duration-300 cursor-pointer" id="part-white-h" onclick="paint('white')"></div>
+<div class="absolute top-0 left-[calc(33%-10%)] h-full w-[20%] bg-surface-container transition-colors duration-300 cursor-pointer" id="part-white-v" onclick="paint('white')"></div>
+<!-- Blue Cross -->
+<div class="absolute left-0 top-[calc(50%-5%)] w-full h-[10%] bg-surface-variant transition-colors duration-300 cursor-pointer" id="part-blue-h" onclick="paint('blue')"></div>
+<div class="absolute top-0 left-[calc(33%-5%)] h-full w-[10%] bg-surface-variant transition-colors duration-300 cursor-pointer" id="part-blue-v" onclick="paint('blue')"></div>
+</div>
+</div>
+<!-- Fun Fact Card -->
+<div class="bg-tertiary-container/10 p-card-padding rounded-lg border-2 border-tertiary-container/30 flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary text-4xl" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<p class="font-body-md text-body-md text-on-tertiary-container">
+<strong>¿Sabías qué?</strong> Noruega tiene montañas nevadas y hermosos fiordos.
+                    </p>
+</div>
+</div>
+<!-- Paint Palette & Audio (Right) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-container-low p-6 rounded-lg chunky-card border-2 border-surface-variant">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-4 tracking-wider">Paleta de Colores</h3>
+<div class="flex flex-col gap-4">
+<!-- Color Rojo -->
+<div class="flex items-center justify-between gap-3 p-3 bg-white rounded-lg border-2 border-surface-variant">
+<div class="flex items-center gap-3">
+<button class="w-12 h-12 rounded-full bg-[#ba1a1a] border-4 border-white shadow-sm ring-2 ring-transparent active:ring-primary transition-all" onclick="selectColor('red')"></button>
+<span class="font-label-bold text-label-bold">Rojo</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center audio-pulse shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+<!-- Color Blanco -->
+<div class="flex items-center justify-between gap-3 p-3 bg-white rounded-lg border-2 border-surface-variant">
+<div class="flex items-center gap-3">
+<button class="w-12 h-12 rounded-full bg-white border-4 border-surface-variant/30 shadow-sm ring-2 ring-transparent active:ring-primary transition-all" onclick="selectColor('white')"></button>
+<span class="font-label-bold text-label-bold">Blanco</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center audio-pulse shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+<!-- Color Azul -->
+<div class="flex items-center justify-between gap-3 p-3 bg-white rounded-lg border-2 border-surface-variant">
+<div class="flex items-center gap-3">
+<button class="w-12 h-12 rounded-full bg-[#006495] border-4 border-white shadow-sm ring-2 ring-transparent active:ring-primary transition-all" onclick="selectColor('blue')"></button>
+<span class="font-label-bold text-label-bold">Azul</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center audio-pulse shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                    Terminar
+                </button>
+</div>
+</div>
+<!-- Landscape Context (Thematic Background Elements) -->
+<div class="mt-12 opacity-80 pointer-events-none">
+<div class="flex justify-between items-end h-32 px-4">
+<img class="h-full w-full object-contain" data-alt="A stylized digital illustration of a snowy mountain range in Norway with deep blue fjords at the base. High-contrast, clean lines, and vibrant whites and blues. Educational playful style for kids." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5x1il8L153zFP-hlq74lCiwBRzq1AO2ckmYFazXPf6Xsn6dG7Q4zXgQBRR8-g-Pa7XBTnLSHCLh0YHYTCKvyxW9XVQ9hM-0DHXqWZiUaIM-oA6tQO-EsaYV_s9saxWdAPN-7A2Eqhjj6PHdNibzWetFXCp5uXSm8_wZyET1ZqhObD-M-dttBKy5QBrYZjRYEbekA_6bmlFaTZ_PWVFXerjMGO4atsn7L0-B_7D66NJ7sdBjekC-VJRXCG1mq-sfhcWHkE_8G5fN8">
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest border-t-4 border-surface-variant shadow-lg md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0">
+<span class="material-symbols-outlined" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</div>
+</nav>
+<!-- Interactive Painting Script -->
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Noruega','Norway'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Noruega!','Norway Alarm!'),750); }
+
+        let currentColor = 'red';
+        const colorMap = {
+            'red': '#ba1a1a',
+            'white': '#ffffff',
+            'blue': '#006495'
+        };
+
+        function selectColor(color) {
+            currentColor = color;
+            const labels = { 'red':['Rojo','Red'], 'white':['Blanco','White'], 'blue':['Azul','Blue'] };
+            const pair = labels[color] || [color, color];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        function paint(part) {
+            const hex = colorMap[currentColor];
+            
+            if (part === 'red') {
+                document.getElementById('part-red').style.backgroundColor = hex;
+                document.getElementById('part-red').innerHTML = ''; // Remove icon once painted
+            } else if (part === 'white') {
+                document.getElementById('part-white-h').style.backgroundColor = hex;
+                document.getElementById('part-white-v').style.backgroundColor = hex;
+            } else if (part === 'blue') {
+                document.getElementById('part-blue-h').style.backgroundColor = hex;
+                document.getElementById('part-blue-v').style.backgroundColor = hex;
+            }
+            
+            // Check for completion logic could be here
+        }
+    </script>
+
+
+</body></html>

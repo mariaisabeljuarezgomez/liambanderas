@@ -1,0 +1,312 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Flag Paint Station - France</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Tactile Shadow Utility */
+        .tactile-button-primary {
+            box-shadow: 0 4px 0 0 #004b71;
+            transition: all 0.1s ease;
+        }
+        .tactile-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 #004b71;
+        }
+
+        .tactile-button-secondary {
+            box-shadow: 0 4px 0 0 #e4e8ef;
+            transition: all 0.1s ease;
+        }
+        .tactile-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 #e4e8ef;
+        }
+
+        .tactile-yellow {
+            box-shadow: 0 6px 0 0 #efc200;
+            transition: all 0.1s ease;
+        }
+        .tactile-yellow:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 0 #efc200;
+        }
+
+        /* Paint Bucket specific shadows */
+        .bucket-blue { box-shadow: 0 8px 0 0 #004163; }
+        .bucket-white { box-shadow: 0 8px 0 0 #dee3e9; }
+        .bucket-red { box-shadow: 0 8px 0 0 #93000a; }
+        
+        .bucket-active { transform: translateY(8px); box-shadow: 0 0 0 0 transparent !important; }
+
+        @keyframes pulse-soft {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-audio {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+
+        .flag-section {
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#6e7882",
+                      "on-secondary-fixed": "#231b00",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#574500",
+                      "surface-container-high": "#e4e8ef",
+                      "secondary-container": "#fccc00",
+                      "primary-fixed": "#cbe6ff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#77de3d",
+                      "surface-variant": "#dee3e9",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#2b6c00",
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed": "#082100",
+                      "background": "#f7f9ff",
+                      "on-secondary-container": "#6d5700",
+                      "primary-fixed-dim": "#90cdff",
+                      "surface-container-low": "#f0f4fb",
+                      "on-primary-fixed": "#001e30",
+                      "primary": "#006495",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#1a4600",
+                      "inverse-primary": "#90cdff",
+                      "tertiary-container": "#59be1b",
+                      "surface-container": "#eaeef5",
+                      "outline-variant": "#bec8d3",
+                      "surface-bright": "#f7f9ff",
+                      "secondary-fixed": "#ffe084",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#2c3136",
+                      "on-surface-variant": "#3e4851",
+                      "surface-tint": "#006495",
+                      "secondary-fixed-dim": "#efc200",
+                      "surface-container-highest": "#dee3e9",
+                      "on-surface": "#171c21",
+                      "inverse-on-surface": "#edf1f8",
+                      "surface": "#f7f9ff",
+                      "secondary": "#735c00",
+                      "on-tertiary-fixed-variant": "#1f5100",
+                      "on-primary-fixed-variant": "#004b71",
+                      "primary-container": "#2bb1ff",
+                      "tertiary-fixed": "#92fc58",
+                      "on-background": "#171c21",
+                      "on-secondary": "#ffffff",
+                      "surface-dim": "#d6dae1",
+                      "on-primary-container": "#004163"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "gutter": "16px",
+                      "container-margin": "24px",
+                      "touch-target-min": "48px",
+                      "card-padding": "20px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Quicksand"],
+                      "label-bold": ["Quicksand"],
+                      "headline-md": ["Quicksand"],
+                      "body-md": ["Quicksand"],
+                      "headline-lg-mobile": ["Quicksand"],
+                      "headline-lg": ["Quicksand"]
+              },
+              "fontSize": {
+                      "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                      "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                      "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="w-full top-0 sticky bg-surface flex justify-between items-center px-container-margin py-unit h-touch-target-min z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[32px]">language</span>
+<span class="font-headline-md text-headline-md-mobile text-primary">Explorador de Banderas</span>
+</div>
+<div class="flex items-center gap-2"><button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors active:translate-y-1">
+<span class="material-symbols-outlined text-[28px]">volume_up</span>
+</button>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors active:translate-y-1">
+<span class="material-symbols-outlined text-[28px]">close</span>
+</button>
+</div>
+</nav>
+<main class="max-w-screen-md mx-auto px-container-margin pb-32 pt-6 flex flex-col items-center">
+<!-- Header Section: Country Identity -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-6 flex items-center justify-between shadow-sm border-2 border-surface-container-high mb-8">
+<div class="flex flex-col">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary leading-tight">Francia</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">France</p>
+</div>
+<button class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center tactile-yellow pulse-audio">
+<span class="material-symbols-outlined text-on-secondary-container text-[40px] filled-icon">volume_up</span>
+</button>
+</div>
+<!-- Flag Canvas -->
+<div class="relative w-full aspect-[3/2] max-w-[500px] bg-white rounded-lg overflow-hidden border-4 border-surface-variant shadow-lg mb-12 flex">
+<!-- Blue Section -->
+<div class="flag-section flex-1 bg-surface-container-low border-r-2 border-surface-container-high flex items-center justify-center cursor-pointer group" id="section-blue" onclick="selectSection('blue')">
+<span class="material-symbols-outlined text-outline opacity-20 text-6xl group-hover:scale-110 transition-transform">format_paint</span>
+</div>
+<!-- White Section (Active State Example) -->
+<div class="flag-section flex-1 bg-surface-container-lowest ring-inset ring-4 ring-primary-container z-10 flex items-center justify-center cursor-pointer group" id="section-white" onclick="selectSection('white')">
+<div class="absolute inset-0 bg-primary-container/5 pointer-events-none"></div>
+<span class="material-symbols-outlined text-primary-container text-6xl pulse-audio">edit_note</span>
+</div>
+<!-- Red Section -->
+<div class="flag-section flex-1 bg-surface-container-low border-l-2 border-surface-container-high flex items-center justify-center cursor-pointer group" id="section-red" onclick="selectSection('red')">
+<span class="material-symbols-outlined text-outline opacity-20 text-6xl group-hover:scale-110 transition-transform">format_paint</span>
+</div>
+</div>
+<!-- Instructions Text -->
+<div class="text-center mb-10">
+<h2 class="font-headline-md text-headline-md text-primary tracking-wide uppercase">¡ELIGE UN COLOR!</h2>
+<p class="font-label-bold text-label-bold text-on-surface-variant tracking-widest uppercase">PICK A COLOR!</p>
+</div>
+<!-- Palette Section: Paint Buckets -->
+<div class="grid grid-cols-3 gap-gutter w-full">
+<!-- Blue Bucket -->
+<button class="flex flex-col items-center gap-3 transition-transform hover:-translate-y-1" onclick="applyColor('#006495', 'blue')">
+<div class="w-24 h-24 sm:w-28 sm:h-28 bg-[#006495] rounded-full flex items-center justify-center bucket-blue border-4 border-white/20 active:translate-y-2 active:shadow-none transition-all">
+<span class="material-symbols-outlined text-white text-[32px] filled-icon">volume_up</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-on-surface text-sm sm:text-base">Azul</p>
+<p class="font-body-md text-on-surface-variant text-xs sm:text-sm">Blue</p>
+</div>
+</button>
+<!-- White Bucket -->
+<button class="flex flex-col items-center gap-3 transition-transform hover:-translate-y-1" onclick="applyColor('#ffffff', 'white')">
+<div class="w-24 h-24 sm:w-28 sm:h-28 bg-white rounded-full flex items-center justify-center bucket-white border-4 border-surface-variant active:translate-y-2 active:shadow-none transition-all">
+<span class="material-symbols-outlined text-primary text-[32px] filled-icon">volume_up</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-on-surface text-sm sm:text-base">Blanco</p>
+<p class="font-body-md text-on-surface-variant text-xs sm:text-sm">White</p>
+</div>
+</button>
+<!-- Red Bucket -->
+<button class="flex flex-col items-center gap-3 transition-transform hover:-translate-y-1" onclick="applyColor('#ba1a1a', 'red')">
+<div class="w-24 h-24 sm:w-28 sm:h-28 bg-[#ba1a1a] rounded-full flex items-center justify-center bucket-red border-4 border-white/20 active:translate-y-2 active:shadow-none transition-all">
+<span class="material-symbols-outlined text-white text-[32px] filled-icon">volume_up</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-on-surface text-sm sm:text-base">Rojo</p>
+<p class="font-body-md text-on-surface-variant text-xs sm:text-sm">Red</p>
+</div>
+</button>
+</div>
+</main>
+<!-- Navigation Bar Footer (Hidden as per Destination rule, but structure maintained if needed for game loop) -->
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-container-margin pb-6 pt-2 bg-surface-container-lowest border-t-4 border-surface-variant z-40">
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-gutter py-1 shadow-[0_4px_0_0_#6d5700] active:translate-y-1 active:shadow-none transition-all">
+<span class="material-symbols-outlined text-[28px] filled-icon">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-gutter py-1 hover:bg-surface-container-high rounded-xl transition-colors">
+<span class="material-symbols-outlined text-[28px]">import_contacts</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-gutter py-1 hover:bg-surface-container-high rounded-xl transition-colors">
+<span class="material-symbols-outlined text-[28px]">sports_esports</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</button>
+</div>
+<script>
+        let currentActiveSection = 'white';
+
+        function selectSection(id) {
+            // Remove active state from all
+            document.querySelectorAll('.flag-section').forEach(el => {
+                el.classList.remove('ring-4', 'ring-primary-container', 'z-10');
+                const overlay = el.querySelector('.bg-primary-container\\/5');
+                if (overlay) overlay.remove();
+                
+                // Restore generic icons
+                const icon = el.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    icon.innerText = 'format_paint';
+                    icon.classList.remove('pulse-audio', 'text-primary-container');
+                    icon.classList.add('text-outline', 'opacity-20');
+                }
+            });
+
+            // Set active
+            const target = document.getElementById('section-' + id);
+            target.classList.add('ring-4', 'ring-primary-container', 'z-10');
+            
+            const overlay = document.createElement('div');
+            overlay.className = 'absolute inset-0 bg-primary-container/5 pointer-events-none';
+            target.appendChild(overlay);
+
+            const icon = target.querySelector('.material-symbols-outlined');
+            if (icon) {
+                icon.innerText = 'edit_note';
+                icon.classList.remove('text-outline', 'opacity-20');
+                icon.classList.add('text-primary-container', 'pulse-audio');
+            }
+
+            currentActiveSection = id;
+        }
+
+        function applyColor(hex, type) {
+            const section = document.getElementById('section-' + currentActiveSection);
+            if (!section) return;
+
+            // Apply background color
+            section.style.backgroundColor = hex;
+            
+            // Success animation
+            section.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                section.style.transform = 'scale(1)';
+            }, 200);
+
+            // Hide icon after painting
+            const icon = section.querySelector('.material-symbols-outlined');
+            if (icon) {
+                icon.style.opacity = '0';
+            }
+
+            // Check if all colors are correct for France (Blue, White, Red)
+            // This is just visual for the demo
+        }
+    </script>
+
+
+</body></html>

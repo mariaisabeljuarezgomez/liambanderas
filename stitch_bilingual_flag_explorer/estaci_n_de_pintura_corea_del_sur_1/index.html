@@ -1,0 +1,338 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Tactile Button Press Animation */
+        .chunky-button-primary {
+            @apply relative transition-all duration-75 active:translate-y-[4px];
+            box-shadow: 0 4px 0 #004b71;
+        }
+        .chunky-button-primary:active {
+            box-shadow: 0 0px 0 #004b71;
+        }
+        .chunky-button-secondary {
+            @apply relative transition-all duration-75 active:translate-y-[2px];
+            box-shadow: 0 4px 0 #bec8d3;
+        }
+        .chunky-button-secondary:active {
+            box-shadow: 0 0px 0 #bec8d3;
+        }
+        /* Squishy selection effect */
+        .color-bubble {
+            @apply relative transition-all duration-200 cursor-pointer;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.1);
+        }
+        .color-bubble.active {
+            @apply scale-110 ring-4 ring-primary-container;
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+        }
+        /* Progress bar animation */
+        @keyframes progress-fill {
+            from { width: 0%; }
+            to { width: 45%; }
+        }
+        .animate-progress {
+            animation: progress-fill 1s ease-out forwards;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#2b6c00",
+                    "surface-container-highest": "#dee3e9",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-on-surface": "#edf1f8",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "primary-fixed-dim": "#90cdff",
+                    "surface": "#f7f9ff",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#cbe6ff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#1a4600",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-primary-fixed-variant": "#004b71",
+                    "inverse-primary": "#90cdff",
+                    "surface-container": "#eaeef5",
+                    "primary": "#006495",
+                    "surface-dim": "#d6dae1",
+                    "surface-variant": "#dee3e9",
+                    "on-secondary-container": "#6d5700",
+                    "error": "#ba1a1a",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary-container": "#59be1b",
+                    "outline": "#6e7882",
+                    "on-surface-variant": "#3e4851",
+                    "outline-variant": "#bec8d3",
+                    "secondary-fixed": "#ffe084",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed": "#082100",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#92fc58",
+                    "secondary-container": "#fccc00",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#171c21",
+                    "background": "#f7f9ff",
+                    "on-background": "#171c21",
+                    "surface-container-low": "#f0f4fb",
+                    "surface-tint": "#006495",
+                    "on-primary-container": "#004163",
+                    "surface-bright": "#f7f9ff",
+                    "on-primary-fixed": "#001e30",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md flex flex-col">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
+<button aria-label="Volver" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high transition-all active:scale-90">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Corea del Sur</h1>
+<span class="font-label-bold text-label-bold text-on-surface-variant">Estación de Pintura</span>
+</div>
+<button aria-label="Escuchar nombre" class="w-touch-target-min h-touch-target-min flex items-center justify-center bg-secondary-container rounded-full shadow-[0_4px_0_#6d5700] hover:opacity-80 active:translate-y-1 active:shadow-none transition-all" onclick="playAudio('corea')">
+<span class="material-symbols-outlined text-on-secondary-container filled-icon">volume_up</span>
+</button>
+<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<main class="flex-grow flex flex-col items-center p-gutter max-w-4xl mx-auto w-full">
+<!-- Progress Bar Section -->
+<div class="w-full mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined filled-icon text-[20px]">brush</span>
+                    ¡Casi listo!
+                </span>
+<span class="font-label-bold text-outline">45%</span>
+</div>
+<div class="h-4 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container animate-progress rounded-full"></div>
+</div>
+</div>
+<!-- Canvas Area (The Flag) -->
+<div class="relative w-full aspect-[3/2] bg-white rounded-lg border-[3px] border-surface-container-highest shadow-xl p-card-padding flex items-center justify-center overflow-hidden">
+<!-- Simulated Flag Layout -->
+<div class="relative w-full h-full border-2 border-dashed border-outline-variant flex items-center justify-center" id="flag-canvas">
+<!-- Central Taegeuk Silhouette -->
+<div class="relative w-[40%] aspect-square rounded-full border-4 border-outline-variant flex flex-col pointer-events-auto cursor-pointer group hover:bg-surface-container-low transition-colors">
+<div class="h-1/2 w-full border-b-2 border-outline-variant rounded-t-full flex items-center justify-center">
+<span class="text-outline-variant font-label-bold text-sm opacity-50 group-hover:opacity-100">ROJO</span>
+</div>
+<div class="h-1/2 w-full rounded-b-full flex items-center justify-center">
+<span class="text-outline-variant font-label-bold text-sm opacity-50 group-hover:opacity-100">AZUL</span>
+</div>
+<!-- Small inner circles for the S curve feel -->
+<div class="absolute top-1/4 left-0 w-1/2 h-1/2 bg-white/20 rounded-full"></div>
+<div class="absolute bottom-1/4 right-0 w-1/2 h-1/2 bg-white/20 rounded-full"></div>
+</div>
+<!-- Trigrams (Positions) -->
+<!-- Top Left -->
+<div class="absolute top-4 left-4 w-16 h-12 flex flex-col gap-1.5 rotate-45">
+<div class="h-2 w-full bg-outline-variant rounded-full opacity-30"></div>
+<div class="h-2 w-full bg-outline-variant rounded-full opacity-30"></div>
+<div class="h-2 w-full bg-outline-variant rounded-full opacity-30"></div>
+</div>
+<!-- Bottom Left -->
+<div class="absolute bottom-4 left-4 w-16 h-12 flex flex-col gap-1.5 -rotate-45">
+<div class="h-2 w-full bg-outline-variant rounded-full opacity-30"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block ml-auto"></div>
+<div class="h-2 w-full bg-outline-variant rounded-full opacity-30"></div>
+</div>
+<!-- Top Right -->
+<div class="absolute top-4 right-4 w-16 h-12 flex flex-col gap-1.5 -rotate-45">
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block ml-auto"></div>
+<div class="h-2 w-full bg-outline-variant rounded-full opacity-30"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block ml-auto"></div>
+</div>
+<!-- Bottom Right -->
+<div class="absolute bottom-4 right-4 w-16 h-12 flex flex-col gap-1.5 rotate-45">
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block ml-auto"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block ml-auto"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block"></div>
+<div class="h-2 w-[45%] bg-outline-variant rounded-full opacity-30 inline-block ml-auto"></div>
+</div>
+<!-- Center Helper Label -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<p class="font-label-bold text-surface-container-highest text-[80px] select-none">Taegeuk</p>
+</div>
+</div>
+</div>
+<!-- Palette Section -->
+<section class="w-full mt-10">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 text-center">Elige un color</h2>
+<div class="grid grid-cols-4 gap-4 md:gap-8 px-4">
+<!-- Blanco -->
+<div class="flex flex-col items-center gap-3">
+<button class="color-bubble w-16 h-16 md:w-20 md:h-20 bg-white border-4 border-surface-container-highest rounded-full active" onclick="selectColor('white', this)"></button>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-on-surface">Blanco</span>
+<button class="p-1 text-primary hover:scale-110 active:scale-95 transition-transform" onclick="playAudio('blanco')">
+<span class="material-symbols-outlined text-[20px] filled-icon">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Rojo -->
+<div class="flex flex-col items-center gap-3">
+<button class="color-bubble w-16 h-16 md:w-20 md:h-20 bg-[#CD2E3A] border-4 border-[#8B1F27] rounded-full" onclick="selectColor('red', this)"></button>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-on-surface">Rojo</span>
+<button class="p-1 text-primary hover:scale-110 active:scale-95 transition-transform" onclick="playAudio('rojo')">
+<span class="material-symbols-outlined text-[20px] filled-icon">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Azul -->
+<div class="flex flex-col items-center gap-3">
+<button class="color-bubble w-16 h-16 md:w-20 md:h-20 bg-[#0047A0] border-4 border-[#002D66] rounded-full" onclick="selectColor('blue', this)"></button>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-on-surface">Azul</span>
+<button class="p-1 text-primary hover:scale-110 active:scale-95 transition-transform" onclick="playAudio('azul')">
+<span class="material-symbols-outlined text-[20px] filled-icon">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Negro -->
+<div class="flex flex-col items-center gap-3">
+<button class="color-bubble w-16 h-16 md:w-20 md:h-20 bg-[#000000] border-4 border-[#333333] rounded-full" onclick="selectColor('black', this)"></button>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-on-surface">Negro</span>
+<button class="p-1 text-primary hover:scale-110 active:scale-95 transition-transform" onclick="playAudio('negro')">
+<span class="material-symbols-outlined text-[20px] filled-icon">volume_up</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Controls -->
+<div class="mt-auto p-gutter flex justify-between items-center w-full max-w-4xl mx-auto pb-24">
+<button class="chunky-button-secondary bg-white text-primary px-8 py-4 rounded-xl font-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined">restart_alt</span>
+            Reiniciar
+        </button>
+<button class="chunky-button-primary bg-primary text-white px-10 py-4 rounded-xl font-headline-md flex items-center gap-2">
+            ¡Siguiente!
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- Bottom Navbar (Shell Component) -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest shadow-lg z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined filled-icon">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            playSynth(freq, type, dur, vol) { try { this.initContext(); const osc=this.ctx.createOscillator(),g=this.ctx.createGain(); osc.type=type; osc.frequency.value=freq; g.gain.setValueAtTime(vol,this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001,this.ctx.currentTime+dur); osc.connect(g); g.connect(this.ctx.destination); osc.start(); osc.stop(this.ctx.currentTime+dur+0.05); } catch(e) {} },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Corea del Sur','South Korea'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Corea del Sur!','South Korea Alarm!'),750); }
+        function playAudio(term) {
+            const labels = { 'corea':['Corea del Sur','South Korea'], 'blanco':['Blanco','White'], 'rojo':['Rojo','Red'], 'azul':['Azul','Blue'], 'negro':['Negro','Black'] };
+            const pair = labels[term.toLowerCase()] || [term, term];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        function selectColor(color, element) {
+            // Remove active class from all bubbles
+            document.querySelectorAll('.color-bubble').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Add active class to clicked bubble
+            element.classList.add('active');
+            
+            // Log for prototype simulation
+            console.log("Selected color: " + color);
+        }
+
+        function playAudio(term) {
+            // replaced by real AudioController above
+            const labels = { 'corea':['Corea del Sur','South Korea'], 'blanco':['Blanco','White'], 'rojo':['Rojo','Red'], 'azul':['Azul','Blue'], 'negro':['Negro','Black'] };
+            const pair = labels[term.toLowerCase()] || [term, term];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        // Simple haptic-like feedback on color interaction
+        document.querySelectorAll('.color-bubble').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(50);
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

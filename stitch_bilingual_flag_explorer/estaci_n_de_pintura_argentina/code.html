@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Estación de Pintura - Argentina</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+            vertical-align: middle;
+        }
+        .chunky-shadow {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .active-press {
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .active-press:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 transparent;
+        }
+        .pulse-audio {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(252, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(252, 204, 0, 0); }
+        }
+        .flag-zone {
+            aspect-ratio: 5 / 3;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#2b6c00",
+                        "surface-container-highest": "#dee3e9",
+                        "surface-container-high": "#e4e8ef",
+                        "on-secondary-fixed": "#231b00",
+                        "inverse-on-surface": "#edf1f8",
+                        "secondary-fixed-dim": "#efc200",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#77de3d",
+                        "primary-fixed-dim": "#90cdff",
+                        "surface": "#f7f9ff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#cbe6ff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#1a4600",
+                        "on-tertiary-fixed-variant": "#1f5100",
+                        "on-primary-fixed-variant": "#004b71",
+                        "inverse-primary": "#90cdff",
+                        "surface-container": "#eaeef5",
+                        "primary": "#006495",
+                        "surface-dim": "#d6dae1",
+                        "surface-variant": "#dee3e9",
+                        "on-secondary-container": "#6d5700",
+                        "error": "#ba1a1a",
+                        "secondary": "#735c00",
+                        "on-secondary-fixed-variant": "#574500",
+                        "tertiary-container": "#59be1b",
+                        "outline": "#6e7882",
+                        "on-surface-variant": "#3e4851",
+                        "outline-variant": "#bec8d3",
+                        "secondary-fixed": "#ffe084",
+                        "primary-container": "#2bb1ff",
+                        "on-tertiary-fixed": "#082100",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#92fc58",
+                        "secondary-container": "#fccc00",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#171c21",
+                        "background": "#f7f9ff",
+                        "on-background": "#171c21",
+                        "surface-container-low": "#f0f4fb",
+                        "surface-tint": "#006495",
+                        "on-primary-container": "#004163",
+                        "surface-bright": "#f7f9ff",
+                        "on-primary-fixed": "#001e30",
+                        "inverse-surface": "#2c3136",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "touch-target-min": "48px",
+                        "container-margin": "24px",
+                        "card-padding": "20px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Quicksand"],
+                        "headline-lg-mobile": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "headline-lg": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "headline-md": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit h-20">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-90 transition-all text-primary">
+<span class="material-symbols-outlined text-3xl">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Argentina</h1>
+</div>
+<button class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center shadow-md active-press pulse-audio" onclick="playSound('Argentina')">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<button class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex flex-col items-center justify-center shadow-md active-press chunky-shadow border-2 border-secondary-container" title="¡Alarma! / Sound Alarm" onclick="playSound('Alarma')"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[10px] font-label-bold leading-none">Alarma</span></button></header>
+<main class="flex-grow flex flex-col items-center px-container-margin py-8 gap-8 mb-24">
+<!-- Interactive Flag Canvas -->
+<div class="w-full max-w-2xl bg-white rounded-lg p-6 border-4 border-surface-container-highest shadow-sm relative overflow-hidden">
+<div class="flag-zone w-full border-2 border-dashed border-outline-variant rounded-lg flex flex-col transition-colors duration-500 overflow-hidden" id="flag-canvas">
+<!-- Top Stripe -->
+<div class="flex-1 bg-surface-container-low transition-colors duration-300 border-b-2 border-surface-container-highest cursor-pointer flex items-center justify-center" id="stripe-top" onclick="paintRegion('stripe-top')">
+<span class="text-outline-variant font-label-bold opacity-30 select-none">Toca para pintar</span>
+</div>
+<!-- Middle Stripe with Sun -->
+<div class="flex-1 bg-surface-container-low transition-colors duration-300 relative border-b-2 border-surface-container-highest cursor-pointer flex items-center justify-center" id="stripe-middle" onclick="paintRegion('stripe-middle')">
+<div class="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-dashed border-outline-variant transition-all duration-300 flex items-center justify-center" id="sun-of-may" onclick="event.stopPropagation(); paintRegion('sun-of-may')">
+<span class="material-symbols-outlined text-outline-variant text-4xl opacity-30 select-none">sunny</span>
+</div>
+</div>
+<!-- Bottom Stripe -->
+<div class="flex-1 bg-surface-container-low transition-colors duration-300 cursor-pointer flex items-center justify-center" id="stripe-bottom" onclick="paintRegion('stripe-bottom')">
+<span class="text-outline-variant font-label-bold opacity-30 select-none">Toca para pintar</span>
+</div>
+</div>
+<div class="mt-6 flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">¡Pintemos la bandera!</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Elige un color y toca la sección.</span>
+</div>
+<button class="bg-tertiary-container text-on-tertiary-container font-label-bold text-label-bold px-6 py-3 rounded-full active-press chunky-shadow border-b-4 border-tertiary flex items-center gap-2">
+<span class="material-symbols-outlined">check_circle</span>
+                    Listo
+                </button>
+</div>
+</div>
+<!-- Palette Selector -->
+<div class="w-full max-w-2xl grid grid-cols-3 gap-4">
+<!-- Celeste -->
+<button class="color-swatch relative group flex flex-col items-center gap-3 p-4 bg-white rounded-lg border-2 border-surface-container-highest hover:border-primary-container transition-all active-press chunky-shadow" data-color="#74ACDF" onclick="selectColor('#74ACDF', 'Celeste')">
+<div class="w-16 h-16 rounded-full bg-[#74ACDF] border-4 border-white shadow-inner"></div>
+<div class="flex items-center gap-2">
+<span class="font-label-bold text-label-bold text-on-surface">Celeste</span>
+<span class="material-symbols-outlined text-secondary text-xl" onclick="event.stopPropagation(); playSound('Celeste')">volume_up</span>
+</div>
+</button>
+<!-- Blanco -->
+<button class="color-swatch relative group flex flex-col items-center gap-3 p-4 bg-white rounded-lg border-2 border-surface-container-highest hover:border-primary-container transition-all active-press chunky-shadow" data-color="#FFFFFF" onclick="selectColor('#FFFFFF', 'Blanco')">
+<div class="w-16 h-16 rounded-full bg-white border-4 border-surface-container-highest shadow-inner"></div>
+<div class="flex items-center gap-2">
+<span class="font-label-bold text-label-bold text-on-surface">Blanco</span>
+<span class="material-symbols-outlined text-secondary text-xl" onclick="event.stopPropagation(); playSound('Blanco')">volume_up</span>
+</div>
+</button>
+<!-- Amarillo -->
+<button class="color-swatch relative group flex flex-col items-center gap-3 p-4 bg-white rounded-lg border-2 border-surface-container-highest hover:border-primary-container transition-all active-press chunky-shadow" data-color="#F6B40E" onclick="selectColor('#F6B40E', 'Amarillo')">
+<div class="w-16 h-16 rounded-full bg-[#F6B40E] border-4 border-white shadow-inner"></div>
+<div class="flex items-center gap-2">
+<span class="font-label-bold text-label-bold text-on-surface">Amarillo</span>
+<span class="material-symbols-outlined text-secondary text-xl" onclick="event.stopPropagation(); playSound('Amarillo')">volume_up</span>
+</div>
+</button>
+</div>
+<!-- Educational Bento Card -->
+<div class="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-primary-container/20 rounded-lg p-card-padding border-2 border-primary-container flex items-center gap-6">
+<div class="w-24 h-24 flex-shrink-0 bg-white rounded-xl shadow-sm overflow-hidden border-2 border-white">
+<img class="w-full h-full object-cover" data-alt="A cheerful, colorful cartoon illustration of a smiling sun character wearing sunglasses, in a playful nursery art style. The sun is central, with soft golden rays against a friendly sky blue background. The overall aesthetic is educational and joyful for children." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPbiTMvlfHseWeJXDCZ07097-73EL0mJqEmcA9HyX0RYLaUp9jYYrrCO838AIarizKDrCqqyKPwbxRGsMXCzwBVyGGXbbQxsQ3_guUaEn41z6ETIFITzACFRUXcy8u4QU6x9qNufll36oavOt0a0L618LpUBmVzaL47iOrrJpJZxR8-jDB0cSNYksa3FGwzy2l4Mxvakcyqhh7_vlg82Qo4Te3gdd0t-9gT9WQmZXoz90yWqQ_RR8KJE541_snWsZQ28B8nI_eC1Q">
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-primary-container">Sol de Mayo</h3>
+<p class="font-body-md text-body-md text-on-primary-fixed-variant">El centro de la bandera es un sol brillante que sonríe.</p>
+</div>
+</div>
+<div class="bg-secondary-container/20 rounded-lg p-card-padding border-2 border-secondary-container flex flex-col justify-center gap-2">
+<span class="font-label-bold text-label-bold text-on-secondary-container flex items-center gap-2">
+<span class="material-symbols-outlined">lightbulb</span> Sabías que...
+                </span>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant">El color celeste representa el cielo despejado de Argentina.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest shadow-lg z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined text-2xl">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined text-2xl">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<script>
+        let selectedColor = null;
+
+        function selectColor(hex, name) {
+            selectedColor = hex;
+            // Clear previous selection highlight
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.classList.remove('ring-4', 'ring-primary-container', 'border-primary');
+            });
+            // Add highlight to current
+            event.currentTarget.classList.add('ring-4', 'ring-primary-container', 'border-primary');
+            console.log("Selected:", name);
+        }
+
+        function paintRegion(regionId) {
+            if (!selectedColor) {
+                alert("¡Primero elige un color de la paleta!");
+                return;
+            }
+            const region = document.getElementById(regionId);
+            region.style.backgroundColor = selectedColor;
+            region.classList.remove('bg-surface-container-low');
+            
+            // Remove the helper text/icon if it exists
+            const helper = region.querySelector('span');
+            if (helper) helper.remove();
+
+            if (regionId === 'sun-of-may') {
+                region.style.borderColor = 'transparent';
+            }
+        }
+
+        function playSound(text) {
+            // Placeholder for audio functionality
+            console.log("Narrating:", text);
+            // In a real app, this would trigger an Audio object or Speech Synthesis
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+    </script>
+
+
+</body></html>

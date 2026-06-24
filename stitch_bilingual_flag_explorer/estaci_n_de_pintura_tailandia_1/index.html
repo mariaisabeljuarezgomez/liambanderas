@@ -1,0 +1,298 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Estación de Pintura (Tailandia)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "surface-variant": "#dee3e9",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "outline": "#6e7882",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "inverse-surface": "#2c3136",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1",
+                    "inverse-primary": "#90cdff",
+                    "outline-variant": "#bec8d3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "surface-container-low": "#f0f4fb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "unit": "8px",
+                    "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chunky-button-primary {
+            background-color: #006495;
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #004b71;
+        }
+        .chunky-button-secondary {
+            background-color: #ffffff;
+            box-shadow: 0 6px 0 0 #dee3e9;
+        }
+        .chunky-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #dee3e9;
+        }
+        .audio-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .flag-canvas {
+            border: 8px solid #eaeef5;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .paint-splat {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .paint-splat:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .color-well {
+            cursor: pointer;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .color-well.active {
+            border: 6px solid #006495;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background dark:bg-background z-50">
+<div class="bg-surface-container-low flex items-center justify-between px-container-margin py-unit h-16">
+<button onclick="window.location.href='../world_map_hub/index.html'" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all duration-100" aria-label="Volver">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary text-center flex-grow">Estación de Pintura (Tailandia)</h1>
+<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button>
+<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all duration-100" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center px-container-margin py-8 space-y-8 max-w-4xl mx-auto w-full">
+<!-- Interactive Flag Area -->
+<section class="w-full space-y-4">
+<div class="flag-canvas w-full aspect-[3/2] bg-white flex flex-col cursor-crosshair" id="flag-canvas">
+<!-- Band 1: Red -->
+<div class="h-1/6 bg-white border-b-2 border-surface-variant/20 transition-colors duration-300" id="band-0" onclick="paintBand(0)"></div>
+<!-- Band 2: White -->
+<div class="h-1/6 bg-white border-b-2 border-surface-variant/20 transition-colors duration-300" id="band-1" onclick="paintBand(1)"></div>
+<!-- Band 3: Blue (Double Width) -->
+<div class="h-2/6 bg-white border-b-2 border-surface-variant/20 transition-colors duration-300" id="band-2" onclick="paintBand(2)"></div>
+<!-- Band 4: White -->
+<div class="h-1/6 bg-white border-b-2 border-surface-variant/20 transition-colors duration-300" id="band-3" onclick="paintBand(3)"></div>
+<!-- Band 5: Red -->
+<div class="h-1/6 bg-white transition-colors duration-300" id="band-4" onclick="paintBand(4)"></div>
+</div>
+<p class="text-center font-body-md text-on-surface-variant">¡Toca las bandas para pintarlas!</p>
+</section>
+<!-- Paint Palette & Audio Buttons -->
+<section class="w-full grid grid-cols-3 gap-gutter">
+<!-- Rojo -->
+<div class="flex flex-col items-center space-y-3">
+<div class="color-well bg-[#ba1a1a] shadow-lg active:scale-95 active" id="well-red" onclick="selectColor('#ba1a1a', 'well-red')">
+<span class="material-symbols-outlined text-white text-4xl">format_paint</span>
+</div>
+<button class="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container shadow-md audio-pulse" onclick="playAudio('Rojo')">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+<span class="font-label-bold text-label-bold">Rojo</span>
+</div>
+<!-- Blanco -->
+<div class="flex flex-col items-center space-y-3">
+<div class="color-well bg-white border-4 border-surface-variant shadow-lg active:scale-95" id="well-white" onclick="selectColor('#ffffff', 'well-white')">
+<span class="material-symbols-outlined text-surface-variant text-4xl">format_paint</span>
+</div>
+<button class="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container shadow-md" onclick="playAudio('Blanco')">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+<span class="font-label-bold text-label-bold">Blanco</span>
+</div>
+<!-- Azul -->
+<div class="flex flex-col items-center space-y-3">
+<div class="color-well bg-primary shadow-lg active:scale-95" id="well-blue" onclick="selectColor('#006495', 'well-blue')">
+<span class="material-symbols-outlined text-white text-4xl">format_paint</span>
+</div>
+<button class="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container shadow-md" onclick="playAudio('Azul')">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+<span class="font-label-bold text-label-bold">Azul</span>
+</div>
+</section>
+<!-- Fun Fact Card -->
+<section class="w-full">
+<div class="bg-surface-container-high rounded-lg p-card-padding flex items-start space-x-4 border-l-8 border-tertiary-container shadow-sm">
+<div class="bg-tertiary-container text-on-tertiary p-3 rounded-full shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-tertiary-container uppercase tracking-wider mb-1">¿Sabías que...?</h3>
+<p class="font-body-lg text-body-lg text-on-surface">En Tailandia hay templos muy brillantes y elefantes.</p>
+</div>
+</div>
+</section>
+<!-- Action Button -->
+<div class="py-8 w-full">
+<button class="w-full chunky-button-primary py-5 rounded-lg text-white font-headline-md text-headline-md flex items-center justify-center space-x-2">
+<span class="">¡Listo!</span>
+<span class="material-symbols-outlined">check_circle</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest dark:bg-surface-container-lowest border-t-4 border-surface-variant shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0" href="#">
+<span class="material-symbols-outlined" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Bottom Spacing for Nav -->
+<div class="h-24"></div>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Tailandia','Thailand'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Tailandia!','Thailand Alarm!'),750); }
+
+        let selectedColor = '#ba1a1a';
+
+        function selectColor(color, elementId) {
+            selectedColor = color;
+            document.querySelectorAll('.color-well').forEach(el => el.classList.remove('active'));
+            document.getElementById(elementId).classList.add('active');
+            
+            if (window.navigator.vibrate) window.navigator.vibrate(10);
+            
+            const labels = { '#ba1a1a':['Rojo','Red'], '#ffffff':['Blanco','White'], '#006495':['Azul','Blue'] };
+            const pair = labels[color] || ['Color', 'Color'];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        function paintBand(index) {
+            const band = document.getElementById(`band-${index}`);
+            band.style.backgroundColor = selectedColor;
+        }
+
+        function playAudio(text) {
+            const labels = { 'Rojo':['Rojo','Red'], 'Blanco':['Blanco','White'], 'Azul':['Azul','Blue'] };
+            const pair = labels[text] || [text, text];
+            AudioController.speakBilingual(pair[0], pair[1]);
+            
+            const btn = event.currentTarget;
+            btn.classList.add('scale-110');
+            setTimeout(() => btn.classList.remove('scale-110'), 200);
+        }
+
+        // Initialize first color
+        selectColor('#ba1a1a', 'well-red');
+    </script>
+
+
+</body></html>

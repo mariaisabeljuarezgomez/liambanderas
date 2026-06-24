@@ -1,0 +1,302 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Paint Adventure - Israel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline": "#6e7882",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-secondary-container": "#6d5700",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#006495",
+                    "on-surface-variant": "#3e4851",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "secondary-container": "#fccc00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container": "#eaeef5",
+                    "surface-container-highest": "#dee3e9",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-tertiary-fixed": "#082100",
+                    "on-surface": "#171c21",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "background": "#f7f9ff",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe084",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary-container": "#2bb1ff",
+                    "on-secondary-fixed": "#231b00",
+                    "on-background": "#171c21",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#90cdff",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container-low": "#f0f4fb",
+                    "inverse-on-surface": "#edf1f8",
+                    "tertiary-container": "#59be1b",
+                    "outline-variant": "#bec8d3",
+                    "primary": "#006495",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6dae1",
+                    "secondary": "#735c00",
+                    "on-tertiary-container": "#1a4600",
+                    "inverse-surface": "#2c3136",
+                    "surface": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        .chunky-shadow-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-shadow-primary:active {
+            box-shadow: 0 0 0 0 #004b71;
+            transform: translateY(6px);
+        }
+        .chunky-shadow-secondary {
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .chunky-shadow-secondary:active {
+            box-shadow: 0 0 0 0 #bec8d3;
+            transform: translateY(6px);
+        }
+        .chunky-shadow-yellow {
+            box-shadow: 0 6px 0 0 #6d5700;
+        }
+        .chunky-shadow-yellow:active {
+            box-shadow: 0 0 0 0 #6d5700;
+            transform: translateY(6px);
+        }
+        .flag-outline {
+            border: 4px solid #3e4851;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ffffff;
+            cursor: crosshair;
+        }
+        .pulse-audio {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        body {
+            overscroll-behavior: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 bg-surface dark:bg-surface top-0 fixed">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Paint Adventure</h1>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</header>
+<main class="flex-grow pt-20 pb-32 px-container-margin flex flex-col gap-6">
+<!-- Flag Painting Station -->
+<div class="w-full max-w-2xl mx-auto flex flex-col gap-6">
+<!-- Bilingual Name Header -->
+<div class="flex items-center justify-between bg-surface-container-low p-card-padding rounded-lg">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Israel</h2>
+<p class="text-primary font-label-bold">ישראל</p>
+</div>
+<button class="w-20 h-20 rounded-full bg-secondary-container flex items-center justify-center chunky-shadow-yellow pulse-audio" onclick="playAudio('Israel')">
+<span class="material-symbols-outlined text-4xl text-on-secondary-container" data-icon="volume_up">volume_up</span>
+</button>
+<button class="w-20 h-20 rounded-full bg-secondary-container flex flex-col items-center justify-center chunky-shadow-yellow active:translate-y-1 transition-all" onclick="playAudio('Alarma')"><span class="material-symbols-outlined text-4xl text-on-secondary-container" data-icon="notifications_active">notifications_active</span><span class="text-[10px] font-bold text-on-secondary-container leading-none mt-1">¡Alarma!</span><span class="text-[8px] text-on-secondary-container leading-none">Sound Alarm</span></button></div>
+<!-- Drawing Canvas Area -->
+<div class="relative w-full aspect-[3/2] flag-outline shadow-xl flex flex-col">
+<!-- Top Stripe Zone (Interactive Placeholder) -->
+<div class="h-1/5 w-full bg-surface-container-high transition-colors duration-300 border-b-2 border-outline-variant flex items-center justify-center" id="stripe-top">
+<span class="text-outline-variant font-label-bold opacity-50">Azul</span>
+</div>
+<!-- Middle Zone (Star of David) -->
+<div class="h-3/5 w-full bg-white relative flex items-center justify-center p-8" id="star-zone">
+<svg class="w-40 h-40" viewBox="0 0 100 100">
+<path d="M50 5 L90 75 L10 75 Z" fill="none" id="david-star" stroke="#bec8d3" stroke-linejoin="round" stroke-width="4"></path>
+<path d="M50 95 L90 25 L10 25 Z" fill="none" id="david-star-inv" stroke="#bec8d3" stroke-linejoin="round" stroke-width="4"></path>
+</svg>
+</div>
+<!-- Bottom Stripe Zone -->
+<div class="h-1/5 w-full bg-surface-container-high transition-colors duration-300 border-t-2 border-outline-variant flex items-center justify-center" id="stripe-bottom">
+<span class="text-outline-variant font-label-bold opacity-50">Azul</span>
+</div>
+</div>
+<!-- Color Palette -->
+<div class="flex justify-center gap-6">
+<button class="group flex flex-col items-center gap-2" onclick="selectColor('azul')">
+<div class="w-20 h-20 rounded-full bg-[#0038b8] border-4 border-white shadow-lg chunky-shadow-primary active:translate-y-1 transition-all"></div>
+<span class="font-label-bold text-on-surface">Azul</span>
+</button><button class="text-primary-container" onclick="playAudio('Azul')"><span class="material-symbols-outlined text-sm" data-icon="volume_up">volume_up</span></button>
+<button class="group flex flex-col items-center gap-2" onclick="selectColor('blanco')">
+<div class="w-20 h-20 rounded-full bg-white border-4 border-outline-variant shadow-lg chunky-shadow-secondary active:translate-y-1 transition-all"></div>
+<span class="font-label-bold text-on-surface">Blanco</span>
+</button><button class="text-primary-container" onclick="playAudio('Blanco')"><span class="material-symbols-outlined text-sm" data-icon="volume_up">volume_up</span></button>
+</div>
+<!-- Fun Fact Bento Card -->
+<div class="bg-primary-container text-on-primary-container p-card-padding rounded-lg flex items-start gap-4">
+<span class="material-symbols-outlined text-3xl" data-icon="lightbulb">lightbulb</span>
+<div>
+<h3 class="font-label-bold mb-1">¿Sabías que?</h3>
+<p class="font-body-md">La estrella de la bandera se llama Estrella de David.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-gutter bg-on-surface/40 backdrop-blur-sm" id="success-modal">
+<div class="bg-surface-container-lowest rounded-lg p-8 max-w-sm w-full text-center shadow-2xl scale-0 transition-transform duration-500" id="modal-content">
+<div class="w-24 h-24 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-6xl" data-icon="stars" data-weight="fill" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<h2 class="font-headline-lg-mobile text-on-surface mb-2">¡Excelente!</h2>
+<p class="font-body-md text-on-surface-variant mb-6">Has pintado la bandera de Israel perfectamente.</p>
+<button class="w-full py-4 bg-primary text-on-primary font-label-bold rounded-full chunky-shadow-primary active:translate-y-1" onclick="location.reload()">Continuar Aventura</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest dark:bg-surface-container-lowest shadow-lg rounded-t-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+<span class="font-label-bold text-label-bold">World Map</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span class="font-label-bold text-label-bold">My Gallery</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined" data-icon="videogame_asset">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="stars">stars</span>
+<span class="font-label-bold text-label-bold">Awards</span>
+</div>
+</nav>
+<script>
+        let currentColor = null;
+        let progress = {
+            top: false,
+            bottom: false,
+            star: false
+        };
+
+        function selectColor(color) {
+            currentColor = color;
+            // Visual feedback for selection could go here
+            console.log('Selected:', color);
+        }
+
+        function playAudio(term) {
+            console.log('Playing audio for:', term);
+            // In a real app, this would trigger an actual audio file
+            const synth = window.speechSynthesis;
+            const utter = new SpeechSynthesisUtterance(term);
+            utter.lang = term === 'Israel' ? 'he-IL' : 'es-ES';
+            synth.speak(utter);
+        }
+
+        // Logic for filling the flag
+        document.getElementById('stripe-top').addEventListener('click', function() {
+            if (currentColor === 'azul') {
+                this.style.backgroundColor = '#0038b8';
+                this.innerHTML = '';
+                progress.top = true;
+                checkCompletion();
+            }
+        });
+
+        document.getElementById('stripe-bottom').addEventListener('click', function() {
+            if (currentColor === 'azul') {
+                this.style.backgroundColor = '#0038b8';
+                this.innerHTML = '';
+                progress.bottom = true;
+                checkCompletion();
+            }
+        });
+
+        document.getElementById('star-zone').addEventListener('click', function() {
+            if (currentColor === 'azul') {
+                document.getElementById('david-star').setAttribute('fill', '#0038b8');
+                document.getElementById('david-star').setAttribute('stroke', '#0038b8');
+                document.getElementById('david-star-inv').setAttribute('fill', '#0038b8');
+                document.getElementById('david-star-inv').setAttribute('stroke', '#0038b8');
+                progress.star = true;
+                checkCompletion();
+            }
+        });
+
+        function checkCompletion() {
+            if (progress.top && progress.bottom && progress.star) {
+                const modal = document.getElementById('success-modal');
+                const content = document.getElementById('modal-content');
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('scale-0');
+                    content.classList.add('scale-100');
+                }, 100);
+            }
+        }
+    </script>
+
+
+</body></html>

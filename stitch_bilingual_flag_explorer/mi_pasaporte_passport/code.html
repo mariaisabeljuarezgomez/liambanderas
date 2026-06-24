@@ -1,0 +1,287 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mi Pasaporte - Explorador de Banderas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bec8d3",
+                      "surface-variant": "#dee3e9",
+                      "surface-dim": "#d6dae1",
+                      "on-surface-variant": "#3e4851",
+                      "on-secondary-container": "#6d5700",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-container": "#1a4600",
+                      "on-primary-container": "#004163",
+                      "on-error-container": "#93000a",
+                      "on-background": "#171c21",
+                      "error-container": "#ffdad6",
+                      "background": "#f7f9ff",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-tertiary-fixed": "#082100",
+                      "inverse-surface": "#2c3136",
+                      "tertiary": "#2b6c00",
+                      "surface-bright": "#f7f9ff",
+                      "secondary": "#735c00",
+                      "outline": "#6e7882",
+                      "secondary-fixed": "#ffe084",
+                      "secondary-container": "#fccc00",
+                      "inverse-primary": "#90cdff",
+                      "tertiary-container": "#59be1b",
+                      "surface-container-high": "#e4e8ef",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "primary": "#006495",
+                      "on-surface": "#171c21",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#dee3e9",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed": "#001e30",
+                      "primary-container": "#2bb1ff",
+                      "surface-tint": "#006495",
+                      "tertiary-fixed-dim": "#77de3d",
+                      "on-tertiary-fixed-variant": "#1f5100",
+                      "on-secondary-fixed": "#231b00",
+                      "secondary-fixed-dim": "#efc200",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed-variant": "#004b71",
+                      "tertiary-fixed": "#92fc58",
+                      "surface-container-low": "#f0f4fb",
+                      "surface-container": "#eaeef5",
+                      "surface": "#f7f9ff",
+                      "primary-fixed-dim": "#90cdff",
+                      "primary-fixed": "#cbe6ff",
+                      "inverse-on-surface": "#edf1f8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "container-margin": "24px",
+                      "card-padding": "20px",
+                      "touch-target-min": "48px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Quicksand"],
+                      "body-md": ["Quicksand"],
+                      "body-lg": ["Quicksand"],
+                      "label-bold": ["Quicksand"],
+                      "headline-md": ["Quicksand"],
+                      "headline-lg": ["Quicksand"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                      "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                      "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-card {
+            box-shadow: 0 8px 0 0 #dee3e9;
+        }
+        .chunky-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 0 #dee3e9;
+        }
+        .stamp-earned {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .stamp-locked {
+            filter: grayscale(1) opacity(0.5);
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .progress-bar-inner {
+            transition: width 1s ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface flex justify-between items-center px-container-margin py-unit h-touch-target-min">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="language">language</span>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">Explorador de Banderas</h1>
+</div>
+<button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full shadow-[0_4px_0_0_#6d5700] active:translate-y-1 active:shadow-none transition-all mr-2 group relative">
+  <span class="material-symbols-outlined text-[24px]">notifications_active</span>
+  <div class="absolute -bottom-12 bg-surface-container-lowest border-2 border-outline-variant px-2 py-1 rounded text-[10px] font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+    ¡Alarma! / Sound Alarm
+  </div>
+</button><button class="hover:bg-surface-container-high rounded-full p-2 active:translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="volume_up">volume_up</span>
+</button>
+</header>
+<main class="px-container-margin pt-6 max-w-2xl mx-auto">
+<!-- Passport Header Section -->
+<section class="mb-8">
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-background">Mi Pasaporte</h2>
+<p class="font-body-md text-body-md text-on-surface-variant italic">My Passport</p>
+</div>
+<!-- Rank Card -->
+<div class="mt-6 bg-primary-container p-card-padding rounded-lg chunky-card border-2 border-primary/10">
+<div class="flex items-center gap-4 mb-4">
+<div class="bg-secondary-container p-3 rounded-full shadow-[0_4px_0_0_#6d5700]">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-primary-container">Rango: Explorador</h3>
+<p class="font-body-md text-body-md text-on-primary-fixed-variant opacity-80">Rank: Explorer</p>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-label-bold text-sm text-on-primary-container">8 / 20 Sellos</span>
+<span class="font-label-bold text-sm text-on-primary-container">40%</span>
+</div>
+<div class="h-4 w-full bg-on-primary/20 rounded-full overflow-hidden">
+<div class="progress-bar-inner h-full bg-tertiary-container rounded-full" style="width: 40%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stamps Grid Section -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-md text-headline-md text-on-background">Colección / Collection</h3>
+</div>
+<div class="grid grid-cols-3 sm:grid-cols-4 gap-gutter">
+<!-- Earned Stamp 1 -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-20 h-20 bg-white rounded-full p-1 border-4 border-primary stamp-earned flex items-center justify-center transition-transform group-hover:scale-105">
+<div class="w-full h-full rounded-full overflow-hidden relative border-2 border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A vibrant, stylized illustration of the flag of Mexico centered in a circular badge. The colors are bright and saturated, suitable for a children's learning app. The lighting is soft and even, with a slight tactile glossy finish on the badge's surface. High-key modern aesthetic with playful proportions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrqf8PtrJ2W6Gj75TyW7kThfnIuO4b0MVFRIKkrHCfm629U9UfTdAesChoq6MFauwbNYtzTNBW4e3_s4aSkmUawvOEq0YvmoyNpHLTRq_uEGlhRIrzraLbWe4AkVHjzhdIdVgavHeVEkBP6yGz6CKc2rMATzXkgxpbHgOrUuDwAI_CZ_xhiGjdsziFk95kc7EsZ4lxWkrEDDB_sgZNblsuNfZtETS_K9g7t6f8rxiNueTcqpKZAYdnv1UGmuG4mnfeu-mSdLPlWRg">
+</div>
+</div>
+<p class="font-label-bold text-sm text-on-background">México</p>
+</div>
+<!-- Earned Stamp 2 -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-20 h-20 bg-white rounded-full p-1 border-4 border-primary stamp-earned flex items-center justify-center transition-transform group-hover:scale-105">
+<div class="w-full h-full rounded-full overflow-hidden relative border-2 border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A playful and friendly digital illustration of the flag of France inside a circular collector's stamp. The blue, white, and red bands are bold and clean. The design has a thick, squishy 3D toy-like quality with subtle reflections that make it look like a physical plastic button. Set against a clean light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVnOsRTuO2qZ24zyB7Ly2BCily836HWmo22rtNLEKaVHqU5V8gAPBFxtsHTRNx2ZH9EzsXlUcZXs7GWNakp25IwPWs80BjXctjmpPd-L9jjOdIUkNGqf3hZLyzIjeoCuapl5hG40gwAmBrNxOnd59bcpphIbbzZn5TOpUozK-hTseaSzqohK1bHy3XJwdCwyr1u-X1LfLvkslDAf7X2dPXzkd8p-21iIWrj9vPwCzOOhqoRQgcrrhlnuHYNPWNzOt0LEbFmV6whj8">
+</div>
+</div>
+<p class="font-label-bold text-sm text-on-background">Francia</p>
+</div>
+<!-- Earned Stamp 3 -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-20 h-20 bg-white rounded-full p-1 border-4 border-primary stamp-earned flex items-center justify-center transition-transform group-hover:scale-105">
+<div class="w-full h-full rounded-full overflow-hidden relative border-2 border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A colorful illustration of the flag of Italy as a circular badge. The green, white, and red vertical stripes are rendered in cheerful, saturated tones. The edges of the badge are slightly rounded and thick, giving it a tactile feel for young learners. The lighting is bright and cheerful, suggesting an adventure theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1xaTAYdK-TM7gOEnnaaLd7uX2mIWV2OFf1CCFmo6T4qoisFJ0dmm2nQBzGm8FAP7BkscuGFNo5fSuyrdjvhC4FABCXAkRoYoKfjpAADjttQ6-i3XgDn4rNAdMhNO4T5_q52bnHFhtf7xcGCNQblpprs3qyRjY5kk9kZ7GPvQe-tQ4De6fAnXRSEYbhZ6YCGA9D-7YFy1KKfNAEot-yMzUnuLkiUo3Yn-kSTuDV30OjwIptP_W5TAPrdFhEqCG3CggcBAed9VHAtg">
+</div>
+</div>
+<p class="font-label-bold text-sm text-on-background">Italia</p>
+</div>
+<!-- Earned Stamp 4 -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-20 h-20 bg-white rounded-full p-1 border-4 border-primary stamp-earned flex items-center justify-center transition-transform group-hover:scale-105">
+<div class="w-full h-full rounded-full overflow-hidden relative border-2 border-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A stylized, round badge featuring the flag of Japan with its iconic red sun on a white field. The design is simplified for children, using clean lines and vibrant colors. The badge has a soft 3D effect with a solid shadow, looking like a collectible physical sticker or toy button in a digital world." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC43wI22GCLgQvXZ9vQUYoLUzxnI5ZVdCtCKh7Dn3DyyEtTtbZjlt2aEs28hp2LjndI5eUoPvdIWvECOxG72W5hdrn7DnjgOjq4NgHRTdwDXH7eGO4ETZbFrVZPYI82-rMNHo4d2lkSoESwC16d3ReKuXAnim34YeAOsCsGEE6NfNwhF3cxmGhKOFEnqwrY7lBL1ujyIQsTro_bQECq56tNYz2D4bIPXUvHvxfxN6hj9SYDArMF0mfTsQ8UGMwKCf8o8vdTOd_p7ik">
+</div>
+</div>
+<p class="font-label-bold text-sm text-on-background">Japón</p>
+</div>
+<!-- Locked Stamp 1 -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 bg-surface-variant rounded-full border-4 border-outline-variant stamp-locked flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="lock">lock</span>
+</div>
+<p class="font-label-bold text-sm text-on-surface-variant opacity-60">Brasil</p>
+</div>
+<!-- Locked Stamp 2 -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 bg-surface-variant rounded-full border-4 border-outline-variant stamp-locked flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="lock">lock</span>
+</div>
+<p class="font-label-bold text-sm text-on-surface-variant opacity-60">Canadá</p>
+</div>
+<!-- Locked Stamp 3 -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 bg-surface-variant rounded-full border-4 border-outline-variant stamp-locked flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="lock">lock</span>
+</div>
+<p class="font-label-bold text-sm text-on-surface-variant opacity-60">Egipto</p>
+</div>
+<!-- Locked Stamp 4 -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 bg-surface-variant rounded-full border-4 border-outline-variant stamp-locked flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="lock">lock</span>
+</div>
+<p class="font-label-bold text-sm text-on-surface-variant opacity-60">Australia</p>
+</div>
+</div>
+</section>
+<!-- Recent Discovery Card -->
+<section class="mb-12">
+<h3 class="font-headline-md text-headline-md text-on-background mb-4">Último Descubrimiento / Last Discovery</h3>
+<div class="bg-white p-card-padding rounded-lg chunky-card flex items-center gap-6 border-2 border-surface-variant">
+<div class="w-24 h-24 flex-shrink-0 bg-tertiary-container rounded-xl flex items-center justify-center shadow-[0_6px_0_0_#1f5100]">
+<span class="material-symbols-outlined text-white text-5xl" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-label-bold text-headline-md text-primary">¡Increíble!</h4>
+<p class="font-body-md text-body-md text-on-surface">Aprendiste sobre <strong>Japón</strong> hoy.</p>
+<button class="mt-3 bg-primary text-white font-label-bold py-2 px-6 rounded-full shadow-[0_4px_0_0_#004163] active:translate-y-1 active:shadow-none transition-all">
+                        Ver Detalles
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-container-margin pb-6 pt-2 bg-surface-container-lowest border-t-4 border-surface-variant z-50 shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-gutter py-1 hover:bg-surface-container-high rounded-xl" href="#">
+<span class="material-symbols-outlined text-[32px]" data-icon="explore">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-gutter py-1 shadow-[0_4px_0_0_#6d5700] active:translate-y-1 active:shadow-none transition-all duration-75" href="#">
+<span class="material-symbols-outlined text-[32px]" data-icon="import_contacts" style="font-variation-settings: 'FILL' 1;">import_contacts</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-gutter py-1 hover:bg-surface-container-high rounded-xl" href="#">
+<span class="material-symbols-outlined text-[32px]" data-icon="sports_esports">sports_esports</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for stamps
+        document.querySelectorAll('.stamp-earned').forEach(stamp => {
+            stamp.addEventListener('click', () => {
+                stamp.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    stamp.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+    </script>
+
+
+</body></html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Estación de Pintura: Grecia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "tertiary": "#2b6c00",
+                "surface-container-highest": "#dee3e9",
+                "surface-container-high": "#e4e8ef",
+                "on-secondary-fixed": "#231b00",
+                "inverse-on-surface": "#edf1f8",
+                "secondary-fixed-dim": "#efc200",
+                "on-secondary": "#ffffff",
+                "tertiary-fixed-dim": "#77de3d",
+                "primary-fixed-dim": "#90cdff",
+                "surface": "#f7f9ff",
+                "on-primary": "#ffffff",
+                "primary-fixed": "#cbe6ff",
+                "error-container": "#ffdad6",
+                "on-tertiary-container": "#1a4600",
+                "on-tertiary-fixed-variant": "#1f5100",
+                "on-primary-fixed-variant": "#004b71",
+                "inverse-primary": "#90cdff",
+                "surface-container": "#eaeef5",
+                "primary": "#006495",
+                "surface-dim": "#d6dae1",
+                "surface-variant": "#dee3e9",
+                "on-secondary-container": "#6d5700",
+                "error": "#ba1a1a",
+                "secondary": "#735c00",
+                "on-secondary-fixed-variant": "#574500",
+                "tertiary-container": "#59be1b",
+                "outline": "#6e7882",
+                "on-surface-variant": "#3e4851",
+                "outline-variant": "#bec8d3",
+                "secondary-fixed": "#ffe084",
+                "primary-container": "#2bb1ff",
+                "on-tertiary-fixed": "#082100",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#92fc58",
+                "secondary-container": "#fccc00",
+                "on-tertiary": "#ffffff",
+                "on-surface": "#171c21",
+                "background": "#f7f9ff",
+                "on-background": "#171c21",
+                "surface-container-low": "#f0f4fb",
+                "surface-tint": "#006495",
+                "on-primary-container": "#004163",
+                "surface-bright": "#f7f9ff",
+                "on-primary-fixed": "#001e30",
+                "inverse-surface": "#2c3136",
+                "surface-container-lowest": "#ffffff",
+                "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "16px",
+                "touch-target-min": "48px",
+                "container-margin": "24px",
+                "card-padding": "20px",
+                "unit": "8px"
+            },
+            "fontFamily": {
+                "label-bold": ["Quicksand"],
+                "headline-lg-mobile": ["Quicksand"],
+                "body-lg": ["Quicksand"],
+                "headline-lg": ["Quicksand"],
+                "body-md": ["Quicksand"],
+                "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        
+        .chunky-shadow-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-shadow-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #004b71;
+        }
+
+        .chunky-shadow-secondary {
+            box-shadow: 0 6px 0 0 #bec8d3;
+        }
+        .chunky-shadow-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #bec8d3;
+        }
+
+        .chunky-shadow-yellow {
+            box-shadow: 0 6px 0 0 #6d5700;
+        }
+        .chunky-shadow-yellow:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #6d5700;
+        }
+
+        .flag-stripe {
+            transition: background-color 0.3s ease;
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse-audio {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+
+        .brush-active {
+            outline: 6px solid #2bb1ff;
+            outline-offset: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden min-h-screen flex flex-col pb-24">
+<!-- Top Navigation (Shell Implementation) -->
+<header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
+<button class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-4xl" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">España / Spain</h1>
+<span class="font-body-md text-on-surface-variant">¡Pintamos la bandera!</span>
+</div>
+<button class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-4xl" data-icon="volume_up">volume_up</span>
+</button>
+<button class="w-12 h-12 flex flex-col items-center justify-center text-secondary bg-secondary-container rounded-full chunky-shadow-yellow active:translate-y-1 transition-all group relative" title="¡Alarma! / Sound Alarm"><span class="material-symbols-outlined text-2xl" data-icon="notifications_active">notifications_active</span><span class="absolute -bottom-8 whitespace-nowrap text-[10px] font-label-bold text-secondary opacity-0 group-hover:opacity-100 transition-opacity">¡Alarma!</span></button></header>
+<main class="flex-1 max-w-4xl mx-auto w-full px-container-margin py-8 space-y-8">
+<!-- Country Header with Interactive Speaker -->
+<section class="flex items-center gap-6 bg-surface-container-low p-card-padding rounded-lg border-2 border-surface-container-highest">
+<button class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-yellow pulse-audio text-on-secondary-container" onclick="playSound('Grecia')">
+<span class="material-symbols-outlined text-5xl" data-icon="volume_up">volume_up</span>
+</button>
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg text-primary">Grecia</h2>
+<p class="font-body-lg text-on-surface-variant">Escucha y pinta</p>
+</div>
+</section>
+<!-- Flag Painting Area -->
+<section class="relative bg-white rounded-lg border-2 border-surface-container-highest p-4 md:p-8 aspect-[3/2] flex flex-col shadow-inner overflow-hidden">
+<!-- The Interactive Flag Silhouette -->
+<div class="w-full h-full border-4 border-surface-container-highest relative grid grid-rows-9" id="flag-canvas">
+<!-- Canton (Top Left Cross) -->
+<div class="absolute top-0 left-0 h-[calc(100%/9*5)] aspect-square bg-surface-container-highest z-10 border-r-2 border-b-2 border-outline-variant cursor-pointer flag-zone flex items-center justify-center group" data-current-color="none">
+<!-- Cross Shape (Simplified) -->
+<div class="w-1/5 h-full bg-white opacity-50 pointer-events-none"></div>
+<div class="h-1/5 w-full bg-white opacity-50 absolute pointer-events-none"></div>
+<span class="material-symbols-outlined text-outline-variant opacity-20 text-6xl group-hover:opacity-40" data-icon="format_paint">format_paint</span>
+</div>
+<!-- Horizontal Stripes -->
+<div class="bg-surface-container-highest border-b-2 border-outline-variant cursor-pointer flag-zone flag-stripe" data-current-color="none"></div>
+<div class="bg-white border-b-2 border-outline-variant cursor-not-allowed"></div>
+<div class="bg-surface-container-highest border-b-2 border-outline-variant cursor-pointer flag-zone flag-stripe" data-current-color="none"></div>
+<div class="bg-white border-b-2 border-outline-variant cursor-not-allowed"></div>
+<div class="bg-surface-container-highest border-b-2 border-outline-variant cursor-pointer flag-zone flag-stripe" data-current-color="none"></div>
+<div class="bg-white border-b-2 border-outline-variant cursor-not-allowed"></div>
+<div class="bg-surface-container-highest border-b-2 border-outline-variant cursor-pointer flag-zone flag-stripe" data-current-color="none"></div>
+<div class="bg-white border-b-2 border-outline-variant cursor-not-allowed"></div>
+<div class="bg-surface-container-highest cursor-pointer flag-zone flag-stripe" data-current-color="none"></div>
+</div>
+<!-- Atmospheric Element -->
+<div class="absolute -bottom-4 -right-4 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[160px]" data-icon="palette">palette</span>
+</div>
+</section>
+<!-- Color Palette Selection -->
+<section class="grid grid-cols-2 gap-6 pt-4">
+<!-- Azul -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-full bg-primary h-24 rounded-lg chunky-shadow-primary flex items-center justify-center text-white relative" id="brush-azul" onclick="selectColor('#006495', 'Azul', this)">
+<span class="material-symbols-outlined text-4xl" data-icon="brush">brush</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md text-primary">Azul</span>
+<button class="text-primary active:scale-90 transition-transform" onclick="playSound('Azul')">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Blanco -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-full bg-white h-24 rounded-lg chunky-shadow-secondary flex items-center justify-center text-outline relative border-2 border-surface-container-highest" id="brush-blanco" onclick="selectColor('#ffffff', 'Blanco', this)">
+<span class="material-symbols-outlined text-4xl" data-icon="brush">brush</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md text-on-surface-variant">Blanco</span>
+<button class="text-on-surface-variant active:scale-90 transition-transform" onclick="playSound('Blanco')">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Fun Contextual Card (Bento-ish) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="md:col-span-2 bg-primary-container/20 border-2 border-primary-container p-6 rounded-lg flex items-center gap-4">
+<div class="flex-1">
+<h3 class="font-headline-md text-primary mb-2">¡Dato Curioso!</h3>
+<p class="font-body-md text-on-primary-container">Grecia tiene miles de islas rodeadas de mar azul. ¡Por eso usan estos colores!</p>
+</div>
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 border-4 border-white shadow-md rotate-3">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, vibrant photo of Santorini, Greece, with iconic blue-domed churches and whitewashed buildings overlooking a deep sapphire Mediterranean sea under a bright, golden-hour sun. The style is travel-documentary, high contrast, and saturated, matching a premium educational kid-friendly aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBef0v-7r6niG_EVq1fHnU860KfgpmWF9-THbk9ezlNwnNc-CP-VDh0KusEaPjGlJnts8f9LlZeYXltLm75H_X2h-LcOaHOcbTcJSPj2IdozUoRqhRR1MNEO7BcIgFq0XXYWXhPEIfmza_OSCPC4zIv7DWRHdEeFziK-4F50D1h41wEAHSasHKbksfiugeaqRQXH9IBwHv5D5tTPPUvb9ggabYp75tYT5NZ0oeCPiobFR5GXzU85gYecP7oKjkL5uz2gtgthglHE-w')"></div>
+</div>
+</div>
+<div class="bg-tertiary-container/20 border-2 border-tertiary-container p-6 rounded-lg flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-tertiary text-5xl mb-2" data-icon="star" data-weight="fill">star</span>
+<span class="font-headline-md text-tertiary">3 / 6</span>
+<span class="font-label-bold text-tertiary">Pasaporte</span>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-bold text-label-bold">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 shadow-md" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="videogame_asset">videogame_asset</span>
+<span class="font-label-bold text-label-bold">Jugar</span>
+</a>
+</nav>
+<!-- Audio & Painting Logic -->
+<script>
+        let selectedColor = null;
+        let selectedColorName = null;
+
+        function selectColor(color, name, element) {
+            selectedColor = color;
+            selectedColorName = name;
+            
+            // UI Feedback for brush selection
+            document.querySelectorAll('[id^="brush-"]').forEach(btn => btn.classList.remove('brush-active'));
+            element.classList.add('brush-active');
+            
+            playSound(name);
+        }
+
+        function playSound(text) {
+            // Logic for text-to-speech or pre-recorded clips
+            console.log("Playing audio for: " + text);
+            // Visual feedback for interaction
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Initialize Painting Interaction
+        document.querySelectorAll('.flag-zone').forEach(zone => {
+            zone.addEventListener('click', function() {
+                if (selectedColor) {
+                    this.style.backgroundColor = selectedColor;
+                    this.dataset.currentColor = selectedColorName;
+                    this.querySelector('span')?.classList.add('hidden');
+                    
+                    // Simple haptic effect
+                    this.classList.add('scale-[0.98]');
+                    setTimeout(() => this.classList.remove('scale-[0.98]'), 100);
+
+                    checkCompletion();
+                } else {
+                    // Alert to pick a color first
+                    playSound('Elige un color primero');
+                }
+            });
+        });
+
+        function checkCompletion() {
+            const zones = document.querySelectorAll('.flag-zone');
+            const allPainted = Array.from(zones).every(z => z.dataset.currentColor === 'Azul');
+            
+            if (allPainted) {
+                // Success trigger
+                confetti();
+            }
+        }
+
+        function confetti() {
+            console.log("Celebration! Flag complete.");
+            // Simple success visual
+            const main = document.querySelector('main');
+            const successOverlay = document.createElement('div');
+            successOverlay.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-secondary-container/90 pointer-events-none animate-in fade-in duration-500';
+            successOverlay.innerHTML = `
+                <div class="text-center p-8 bg-white rounded-xl shadow-2xl border-b-8 border-secondary flex flex-col items-center">
+                    <span class="material-symbols-outlined text-9xl text-secondary animate-bounce" data-weight="fill" data-icon="emoji_events">emoji_events</span>
+                    <h2 class="font-headline-lg text-primary mt-4">¡Excelente!</h2>
+                    <p class="font-body-lg text-on-surface-variant">Has pintado la bandera de Grecia</p>
+                </div>
+            `;
+            document.body.appendChild(successOverlay);
+            playSound('¡Excelente! Lo has logrado.');
+            setTimeout(() => successOverlay.remove(), 3000);
+        }
+    </script>
+
+
+</body></html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-low": "#f0f4fb",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#efc200",
+                    "primary-container": "#2bb1ff",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "on-background": "#171c21",
+                    "secondary-container": "#fccc00",
+                    "on-surface-variant": "#3e4851",
+                    "on-surface": "#171c21",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed-variant": "#574500",
+                    "outline": "#6e7882",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9ff",
+                    "on-primary-fixed": "#001e30",
+                    "primary-fixed": "#cbe6ff",
+                    "surface-bright": "#f7f9ff",
+                    "on-primary-container": "#004163",
+                    "on-tertiary-container": "#1a4600",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#92fc58",
+                    "outline-variant": "#bec8d3",
+                    "surface-dim": "#d6dae1",
+                    "surface-container-high": "#e4e8ef",
+                    "tertiary": "#2b6c00",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-on-surface": "#edf1f8",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#082100",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004b71",
+                    "surface-container-highest": "#dee3e9",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "surface-tint": "#006495",
+                    "inverse-surface": "#2c3136",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "surface-variant": "#dee3e9",
+                    "surface": "#f7f9ff",
+                    "secondary-fixed": "#ffe084",
+                    "primary": "#006495",
+                    "tertiary-container": "#59be1b",
+                    "surface-container": "#eaeef5",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "gutter": "16px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .chunky-button { transition: all 0.1s ease; border-bottom-width: 4px; }
+        .chunky-button:active { transform: translateY(4px); border-bottom-width: 0px; }
+        .flag-path { transition: fill 0.3s ease; cursor: pointer; stroke: #bec8d3; stroke-width: 2; }
+        .audio-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .canvas-bg { background-image: radial-gradient(#dee3e9 1px, transparent 1px); background-size: 20px 20px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky bg-background dark:bg-on-background border-b-4 border-surface-container-highest dark:border-inverse-surface z-50">
+<div class="flex items-center justify-between px-container-margin py-unit w-full">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary dark:text-primary-fixed-dim hover:opacity-80 active:translate-y-1 transition-all">
+<span class="material-symbols-outlined text-headline-lg-mobile">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim">Australia</h1>
+<span class="font-body-md text-body-md text-on-surface-variant">Australia</span>
+</div>
+<button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center bg-secondary-container rounded-full shadow-sm text-on-secondary-container hover:opacity-80 active:translate-y-1 transition-all mr-2" id="alarm-btn"><span class="material-symbols-outlined text-headline-md">notifications_active</span><div class="absolute -bottom-8 flex flex-col items-center whitespace-nowrap"><span class="text-[10px] font-label-bold uppercase">¡Alarma!</span><span class="text-[8px] opacity-70">Sound Alarm</span></div></button><button class="w-touch-target-min h-touch-target-min flex items-center justify-center bg-secondary-container rounded-full shadow-sm text-on-secondary-container hover:opacity-80 active:translate-y-1 transition-all audio-pulse" id="audio-main">
+<span class="material-symbols-outlined text-headline-md">volume_up</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center px-container-margin pt-unit pb-32 canvas-bg">
+<!-- Instructional Header -->
+<div class="w-full max-w-lg mb-gutter text-center">
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-unit">¡Pinta la bandera! <span class="block text-body-md opacity-60">Paint the flag!</span></p>
+</div>
+<!-- Interactive Flag Canvas -->
+<div class="w-full max-w-2xl bg-white rounded-lg shadow-xl p-unit border-4 border-surface-container-highest relative aspect-[2/1] flex items-center justify-center overflow-hidden">
+<svg class="w-full h-full drop-shadow-md" id="australia-flag-svg" viewBox="0 0 1200 600">
+<!-- Main Blue Field -->
+<rect class="flag-path" data-region="field" fill="#f7f9ff" height="600" width="1200" x="0" y="0"></rect>
+<!-- Union Jack Area -->
+<g id="union-jack" transform="scale(0.5)">
+<rect class="flag-path" data-region="uj-bg" fill="#ffffff" height="600" width="1200"></rect>
+<path class="flag-path" d="M0,0 L1200,600 M1200,0 L0,600" data-region="uj-cross-diag-bg" fill="none" stroke="#bec8d3" stroke-width="120"></path>
+<path class="flag-path" d="M0,0 L1200,600 M1200,0 L0,600" data-region="uj-cross-diag" fill="none" stroke="#ffffff" stroke-width="80"></path>
+<path class="flag-path" d="M600,0 V600 M0,300 H1200" data-region="uj-cross-main-bg" fill="none" stroke="#bec8d3" stroke-width="200"></path>
+<path class="flag-path" d="M600,0 V600 M0,300 H1200" data-region="uj-cross-main" fill="none" stroke="#ffffff" stroke-width="120"></path>
+</g>
+<!-- Federation Star -->
+<path class="flag-path" d="M300,340 l18,54 l57,-3 l-36,44 l40,41 l-55,-13 l-24,51 l-18,-54 l-57,3 l36,-44 l-40,-41 l55,13 z" data-region="star-federation" fill="#ffffff"></path>
+<!-- Southern Cross -->
+<g id="southern-cross">
+<path class="flag-path" d="M900,100 l9,27 l28,-2 l-18,22 l20,20 l-27,-6 l-12,25 l-9,-27 l-28,2 l18,-22 l-20,-20 l27,6 z" data-region="star-gamma" fill="#ffffff"></path>
+<path class="flag-path" d="M900,450 l9,27 l28,-2 l-18,22 l20,20 l-27,-6 l-12,25 l-9,-27 l-28,2 l18,-22 l-20,-20 l27,6 z" data-region="star-alpha" fill="#ffffff"></path>
+<path class="flag-path" d="M1050,250 l9,27 l28,-2 l-18,22 l20,20 l-27,-6 l-12,25 l-9,-27 l-28,2 l18,-22 l-20,-20 l27,6 z" data-region="star-beta" fill="#ffffff"></path>
+<path class="flag-path" d="M750,230 l9,27 l28,-2 l-18,22 l20,20 l-27,-6 l-12,25 l-9,-27 l-28,2 l18,-22 l-20,-20 l27,6 z" data-region="star-delta" fill="#ffffff"></path>
+<path class="flag-path" d="M950,300 l6,18 l19,-1 l-12,15 l13,13 l-18,-4 l-8,17 l-6,-18 l-19,1 l12,-15 l-13,-13 l18,4 z" data-region="star-epsilon" fill="#ffffff"></path>
+</g>
+</svg>
+</div>
+<!-- Color Palette Station -->
+<div class="mt-xl w-full max-w-lg grid grid-cols-3 gap-gutter">
+<!-- Azul -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('#001e30', 'azul')">
+<div class="w-20 h-20 rounded-full bg-[#00008b] border-b-8 border-[#000055] chunky-button flex items-center justify-center ring-offset-4 ring-primary" id="palette-azul">
+<span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Azul</p>
+<p class="text-xs text-on-surface-variant font-medium">Blue</p>
+</div>
+</button>
+<!-- Blanco -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('#ffffff', 'blanco')">
+<div class="w-20 h-20 rounded-full bg-white border-b-8 border-outline-variant chunky-button flex items-center justify-center" id="palette-blanco">
+<span class="material-symbols-outlined text-primary text-headline-md opacity-0 check-mark">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Blanco</p>
+<p class="text-xs text-on-surface-variant font-medium">White</p>
+</div>
+</button>
+<!-- Rojo -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('#ba1a1a', 'rojo')">
+<div class="w-20 h-20 rounded-full bg-[#ff0000] border-b-8 border-[#93000a] chunky-button flex items-center justify-center" id="palette-rojo">
+<span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Rojo</p>
+<p class="text-xs text-on-surface-variant font-medium">Red</p>
+</div>
+</button>
+</div>
+<!-- Action Tools -->
+<div class="mt-xl flex gap-gutter">
+<button class="chunky-button px-gutter py-unit bg-surface-container-highest border-b-4 border-outline-variant rounded-lg flex items-center gap-2 font-label-bold text-on-surface-variant" id="reset-btn">
+<span class="material-symbols-outlined">restart_alt</span>
+                Reiniciar
+            </button>
+<button class="chunky-button px-xl py-unit bg-tertiary-container border-b-4 border-tertiary text-on-tertiary-container rounded-lg flex items-center gap-2 font-label-bold" id="finish-btn">
+<span class="material-symbols-outlined">auto_awesome</span>
+                ¡Listo!
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface shadow-lg border-t-4 border-surface-container-highest z-50 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Jugar</span>
+</a>
+</nav>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-white/90" id="celebration">
+<div class="text-center animate-bounce">
+<div class="relative inline-block">
+<div class="absolute inset-0 bg-secondary-fixed blur-3xl opacity-50 scale-150"></div>
+<span class="material-symbols-outlined text-[120px] text-secondary relative z-10" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mt-4">¡Increíble!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Has pintado la bandera de Australia</p>
+<button class="mt-xl chunky-button px-xl py-4 bg-primary text-on-primary border-b-8 border-on-primary-fixed-variant rounded-xl font-headline-md" onclick="location.reload()">
+                Jugar de Nuevo
+            </button>
+</div>
+</div>
+<script>
+        let currentColor = null;
+        let colorName = '';
+
+        function selectColor(color, name) {
+            currentColor = color;
+            colorName = name;
+            
+            // UI Feedback for palette
+            document.querySelectorAll('.check-mark').forEach(el => el.classList.add('opacity-0'));
+            document.querySelectorAll('.chunky-button').forEach(el => el.classList.remove('ring-4'));
+            
+            const selectedPalette = document.getElementById(`palette-${name}`);
+            selectedPalette.querySelector('.check-mark').classList.remove('opacity-0');
+            selectedPalette.classList.add('ring-4');
+
+            // Play simulated audio
+            console.log(`Audio: ${name}`);
+        }
+
+        document.querySelectorAll('.flag-path').forEach(region => {
+            region.addEventListener('click', function() {
+                if(currentColor) {
+                    this.setAttribute('fill', currentColor);
+                    this.style.stroke = 'transparent';
+                    
+                    // Simple logic for checking if Union Jack or Stars are painted "correctly"
+                    // In a production app, we'd validate the color vs region mapping
+                } else {
+                    // Shake effect if no color selected
+                    this.animate([
+                        { transform: 'translateX(0px)' },
+                        { transform: 'translateX(-5px)' },
+                        { transform: 'translateX(5px)' },
+                        { transform: 'translateX(0px)' }
+                    ], { duration: 200 });
+                }
+            });
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            document.querySelectorAll('.flag-path').forEach(region => {
+                if(region.tagName === 'rect' && region.dataset.region === 'field') {
+                    region.setAttribute('fill', '#f7f9ff');
+                } else {
+                    region.setAttribute('fill', '#ffffff');
+                }
+                region.style.stroke = '#bec8d3';
+            });
+        });
+
+        document.getElementById('finish-btn').addEventListener('click', () => {
+            const celebration = document.getElementById('celebration');
+            celebration.classList.remove('hidden');
+            celebration.classList.add('flex');
+            
+            // Audio simulation
+            const finishAudio = new Audio();
+            // finishAudio.play();
+        });
+
+        // Add some fun hover interaction for kids
+        document.querySelectorAll('.flag-path').forEach(p => {
+            p.addEventListener('mouseenter', () => {
+                if(currentColor) p.style.opacity = "0.8";
+            });
+            p.addEventListener('mouseleave', () => {
+                p.style.opacity = "1";
+            });
+        });
+    </script>
+
+
+</body></html>

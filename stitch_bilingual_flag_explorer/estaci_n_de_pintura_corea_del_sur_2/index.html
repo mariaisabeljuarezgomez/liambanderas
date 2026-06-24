@@ -1,0 +1,351 @@
+<!DOCTYPE html><html class="light" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#cbe6ff",
+                    "surface-tint": "#006495",
+                    "primary-fixed-dim": "#90cdff",
+                    "on-background": "#171c21",
+                    "surface-variant": "#dee3e9",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#59be1b",
+                    "primary-container": "#2bb1ff",
+                    "surface-container-high": "#e4e8ef",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#6d5700",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#231b00",
+                    "outline": "#6e7882",
+                    "secondary-container": "#fccc00",
+                    "on-primary-fixed-variant": "#004b71",
+                    "secondary-fixed": "#ffe084",
+                    "on-tertiary-fixed": "#082100",
+                    "primary": "#006495",
+                    "on-surface": "#171c21",
+                    "on-surface-variant": "#3e4851",
+                    "on-tertiary-container": "#1a4600",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#92fc58",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-low": "#f0f4fb",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-container": "#004163",
+                    "tertiary": "#2b6c00",
+                    "surface-container": "#eaeef5",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001e30",
+                    "surface": "#f7f9ff",
+                    "background": "#f7f9ff",
+                    "secondary-fixed-dim": "#efc200",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bec8d3",
+                    "inverse-primary": "#90cdff",
+                    "surface-container-highest": "#dee3e9",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "card-padding": "20px",
+                    "gutter": "16px",
+                    "touch-target-min": "48px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Quicksand', sans-serif; }
+        .tactile-shadow { border-bottom-width: 6px; }
+        .tactile-active:active { transform: translateY(4px); border-bottom-width: 0px; margin-bottom: 6px; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); }
+        .flag-path { transition: fill 0.3s ease; cursor: pointer; }
+        .selected-brush { transform: scale(1.1) translateY(-8px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .swatch-active { outline: 4px solid #2bb1ff; outline-offset: 4px; }
+        
+        /* Particle animation for celebration */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        .particle { position: absolute; pointer-events: none; animation: float 3s linear forwards; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface-container-low z-40">
+<div class="flex items-center justify-between px-container-margin py-unit h-16">
+<button class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary tracking-tight">Corea del Sur</h1>
+<button onclick="triggerAlarm()" class="flex flex-col items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-lg px-2 py-1" aria-label="Alarma">
+  <span class="material-symbols-outlined">notifications_active</span>
+  <span class="font-label-bold text-[10px] leading-tight">¡Alarma!</span>
+</button>
+<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full" aria-label="Escuchar nombre">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center px-container-margin pb-32">
+<!-- Progress Bar Section -->
+<div class="w-full max-w-md mt-6 mb-8 px-4">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-label-bold text-primary">Nivel 5</span>
+<span class="font-label-bold text-label-bold text-on-surface-variant">Pintor de Banderas</span>
+</div>
+<div class="w-full h-4 bg-surface-variant rounded-full overflow-hidden">
+<div class="w-3/4 h-full bg-tertiary-container rounded-full shadow-inner transition-all duration-1000 ease-out"></div>
+</div>
+</div>
+<!-- Canvas Area -->
+<div class="relative w-full max-w-2xl aspect-[3/2] bg-white rounded-lg border-2 border-surface-variant shadow-lg p-6 mb-8 group overflow-hidden">
+<!-- Animated Background Shader (Subtle texture) -->
+
+<svg class="w-full h-full drop-shadow-md" id="flag-canvas" viewBox="0 0 900 600">
+<!-- White Background Field -->
+<rect class="flag-path" data-part="field" fill="#f0f4fb" height="600" stroke="#dee3e9" stroke-width="2" width="900"></rect>
+<!-- Taegeuk (Center Symbol) -->
+<g id="taegeuk">
+<!-- Red Top -->
+<path class="flag-path" d="M 450,300 m -150,0 a 150,150 0 1,1 300,0 a 75,75 0 1,1 -150,0 a 75,75 0 1,0 -150,0" data-part="taegeuk-red" fill="#f0f4fb" stroke="#dee3e9" stroke-width="2"></path>
+<!-- Blue Bottom -->
+<path class="flag-path" d="M 450,300 m -150,0 a 150,150 0 1,0 300,0 a 75,75 0 1,0 -150,0 a 75,75 0 1,1 -150,0" data-part="taegeuk-blue" fill="#f0f4fb" stroke="#dee3e9" stroke-width="2"></path>
+</g>
+<!-- Trigrams (Kwae) -->
+<!-- Top Left: Heaven -->
+<g class="trigram" transform="rotate(-33.69, 450, 300) translate(225, 210)">
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="150" x="0" y="0"></rect>
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="150" x="0" y="30"></rect>
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="150" x="0" y="60"></rect>
+</g>
+<!-- Bottom Right: Earth -->
+<g class="trigram" transform="rotate(-33.69, 450, 300) translate(525, 210)">
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="0" y="0"></rect> <rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="80" y="0"></rect>
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="0" y="30"></rect> <rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="80" y="30"></rect>
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="0" y="60"></rect> <rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="80" y="60"></rect>
+</g>
+<!-- Top Right: Water -->
+<g class="trigram" transform="rotate(33.69, 450, 300) translate(525, 210)">
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="0" y="0"></rect> <rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="80" y="0"></rect>
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="150" x="0" y="30"></rect>
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="0" y="60"></rect> <rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="80" y="60"></rect>
+</g>
+<!-- Bottom Left: Fire -->
+<g class="trigram" transform="rotate(33.69, 450, 300) translate(225, 210)">
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="150" x="0" y="0"></rect>
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="0" y="30"></rect> <rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="70" x="80" y="30"></rect>
+<rect class="flag-path" data-part="kwae" fill="#f0f4fb" height="20" stroke="#dee3e9" stroke-width="1" width="150" x="0" y="60"></rect>
+</g>
+</svg>
+</div>
+<!-- Palette Section -->
+<div class="flex gap-gutter mb-8 overflow-x-auto pb-4 w-full justify-center">
+<button class="color-swatch flex flex-col items-center gap-2 group transition-all duration-200 swatch-active" onclick="selectColor('#ffffff', this)">
+<div class="w-20 h-20 rounded-full bg-white border-4 border-surface-variant shadow-md tactile-shadow border-b-[8px] tactile-active flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">format_paint</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Blanco</span>
+</button>
+<button class="color-swatch flex flex-col items-center gap-2 group transition-all duration-200" onclick="selectColor('#cd2e3a', this)">
+<div class="w-20 h-20 rounded-full bg-[#cd2e3a] border-4 border-[#8b1f28] shadow-md tactile-shadow border-b-[8px] tactile-active flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">format_paint</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Rojo</span>
+</button>
+<button class="color-swatch flex flex-col items-center gap-2 group transition-all duration-200" onclick="selectColor('#0047a0', this)">
+<div class="w-20 h-20 rounded-full bg-[#0047a0] border-4 border-[#002d66] shadow-md tactile-shadow border-b-[8px] tactile-active flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">format_paint</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Azul</span>
+</button>
+<button class="color-swatch flex flex-col items-center gap-2 group transition-all duration-200" onclick="selectColor('#000000', this)">
+<div class="w-20 h-20 rounded-full bg-[#000000] border-4 border-[#333333] shadow-md tactile-shadow border-b-[8px] tactile-active flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">format_paint</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface">Negro</span>
+</button>
+</div>
+<!-- Fun Fact Card (Bento Style) -->
+<div class="w-full max-w-2xl bg-primary-fixed border-4 border-primary-container rounded-lg p-card-padding shadow-md flex items-start gap-4 mb-12">
+<div class="bg-primary-container p-3 rounded-full shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-primary-container mb-2">¿Sabías qué?</h3>
+<p class="font-body-md text-body-md text-on-primary-container">Los símbolos negros en las esquinas se llaman <strong class="text-primary">Trigramas</strong>. Cada uno representa un elemento de la naturaleza: ¡Cielo, Tierra, Agua y Fuego! El círculo del centro muestra el equilibrio perfecto del universo.</p>
+</div>
+</div>
+<button class="w-full max-w-md bg-tertiary-container text-on-tertiary-container font-headline-md py-4 rounded-lg tactile-shadow border-b-[8px] border-[#1a4600] tactile-active mb-12 hidden opacity-0 transition-opacity duration-500" id="finish-btn">
+            ¡Terminado! 🚀
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant transition-transform active:translate-y-1 duration-75 hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant transition-transform active:translate-y-1 duration-75 hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 transition-transform active:translate-y-1 duration-75" href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Success Modal Overlay -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-surface-tint/40 backdrop-blur-md" id="success-modal">
+<div class="bg-white p-8 rounded-xl max-w-sm w-full text-center shadow-2xl scale-0 transition-transform duration-500 border-4 border-secondary-container">
+<div class="w-32 h-32 mx-auto mb-6 bg-secondary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">¡Impresionante!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">Has completado la bandera de Corea del Sur perfectamente.</p>
+<button class="w-full bg-primary py-4 rounded-lg text-white font-headline-md tactile-shadow border-b-[8px] border-on-primary-fixed-variant tactile-active" onclick="location.reload()">
+                Siguiente Aventura
+            </button>
+</div>
+</div>
+<script>
+        // ── AUDIO SYSTEM ──────────────────────────────────────────
+        const AudioController = {
+            ctx: null,
+            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
+            playSynth(freq, type, dur, vol) { try { this.initContext(); const osc=this.ctx.createOscillator(),g=this.ctx.createGain(); osc.type=type; osc.frequency.value=freq; g.gain.setValueAtTime(vol,this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001,this.ctx.currentTime+dur); osc.connect(g); g.connect(this.ctx.destination); osc.start(); osc.stop(this.ctx.currentTime+dur+0.05); } catch(e) {} },
+            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
+            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+        };
+        function speakCountry() { AudioController.speakBilingual('Corea del Sur','South Korea'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Corea del Sur!','South Korea Alarm!'),750); }
+
+        let currentColor = '#ffffff';
+        const paintPaths = document.querySelectorAll('.flag-path');
+        const finishBtn = document.getElementById('finish-btn');
+        const successModal = document.getElementById('success-modal');
+        
+        const correctColors = {
+            'field': '#ffffff',
+            'taegeuk-red': '#cd2e3a',
+            'taegeuk-blue': '#0047a0',
+            'kwae': '#000000'
+        };
+
+        const currentFlagState = {
+            'field': false,
+            'taegeuk-red': false,
+            'taegeuk-blue': false,
+            'kwae_count': 0
+        };
+
+        function selectColor(color, el) {
+            currentColor = color;
+            document.querySelectorAll('.color-swatch').forEach(swatch => swatch.classList.remove('swatch-active'));
+            el.classList.add('swatch-active');
+            const labels = { '#ffffff':['Blanco','White'], '#cd2e3a':['Rojo','Red'], '#0047a0':['Azul','Blue'], '#000000':['Negro','Black'] };
+            const pair = labels[color] || [color, color];
+            AudioController.speakBilingual(pair[0], pair[1]);
+        }
+
+        paintPaths.forEach(path => {
+            path.addEventListener('click', (e) => {
+                path.setAttribute('fill', currentColor);
+                path.setAttribute('stroke', 'none');
+                
+                const part = path.getAttribute('data-part');
+                checkProgress(part, currentColor);
+            });
+        });
+
+        function checkProgress(part, color) {
+            if (part === 'kwae') {
+                if (color === '#000000') currentFlagState.kwae_count++;
+            } else {
+                if (color === correctColors[part]) currentFlagState[part] = true;
+            }
+
+            // Simple check logic
+            if (currentFlagState['field'] && currentFlagState['taegeuk-red'] && 
+                currentFlagState['taegeuk-blue'] && currentFlagState.kwae_count >= 12) {
+                showFinishButton();
+            }
+        }
+
+        function showFinishButton() {
+            finishBtn.classList.remove('hidden');
+            setTimeout(() => {
+                finishBtn.classList.remove('opacity-0');
+                finishBtn.classList.add('opacity-100');
+            }, 50);
+        }
+
+        finishBtn.addEventListener('click', () => {
+            successModal.classList.remove('hidden');
+            setTimeout(() => {
+                successModal.querySelector('div').classList.remove('scale-0');
+                successModal.querySelector('div').classList.add('scale-100');
+                celebrate();
+            }, 100);
+        });
+
+        function celebrate() {
+            const colors = ['#fccc00', '#2bb1ff', '#59be1b', '#ba1a1a'];
+            for (let i = 0; i < 50; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle material-symbols-outlined';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = '100vh';
+                p.style.color = colors[Math.floor(Math.random() * colors.length)];
+                p.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                p.style.animationDelay = (Math.random() * 2) + 's';
+                p.innerText = 'star';
+                p.style.fontVariationSettings = "'FILL' 1";
+                document.body.appendChild(p);
+                
+                setTimeout(() => p.remove(), 5000);
+            }
+        }
+    </script>
+
+
+</body></html>

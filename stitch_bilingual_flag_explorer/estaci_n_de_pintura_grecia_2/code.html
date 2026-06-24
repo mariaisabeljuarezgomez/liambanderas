@@ -1,0 +1,320 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Flag Adventure - Grecia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .tactile-shadow-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .tactile-shadow-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #004b71;
+        }
+        .tactile-shadow-white {
+            box-shadow: 0 6px 0 0 #dee3e9;
+        }
+        .tactile-shadow-white:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #dee3e9;
+        }
+        .tactile-shadow-yellow {
+            box-shadow: 0 6px 0 0 #b28900;
+        }
+        .canvas-container {
+            aspect-ratio: 3/2;
+            cursor: url('https://fonts.gstatic.com/s/i/materialiconsoutlined/brush/v12/24px.svg'), auto;
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .flag-stripe {
+            transition: background-color 0.3s ease;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-fixed": "#cbe6ff",
+                "surface-tint": "#006495",
+                "primary-fixed-dim": "#90cdff",
+                "on-background": "#171c21",
+                "surface-variant": "#dee3e9",
+                "error-container": "#ffdad6",
+                "tertiary-container": "#59be1b",
+                "primary-container": "#2bb1ff",
+                "surface-container-high": "#e4e8ef",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#6d5700",
+                "secondary": "#735c00",
+                "on-secondary-fixed": "#231b00",
+                "outline": "#6e7882",
+                "secondary-container": "#fccc00",
+                "on-primary-fixed-variant": "#004b71",
+                "secondary-fixed": "#ffe084",
+                "on-tertiary-fixed": "#082100",
+                "primary": "#006495",
+                "on-surface": "#171c21",
+                "on-surface-variant": "#3e4851",
+                "on-tertiary-container": "#1a4600",
+                "error": "#ba1a1a",
+                "tertiary-fixed": "#92fc58",
+                "on-tertiary-fixed-variant": "#1f5100",
+                "surface-bright": "#f7f9ff",
+                "surface-container-low": "#f0f4fb",
+                "tertiary-fixed-dim": "#77de3d",
+                "on-secondary-fixed-variant": "#574500",
+                "on-primary-container": "#004163",
+                "tertiary": "#2b6c00",
+                "surface-container": "#eaeef5",
+                "on-primary": "#ffffff",
+                "on-primary-fixed": "#001e30",
+                "surface": "#f7f9ff",
+                "background": "#f7f9ff",
+                "secondary-fixed-dim": "#efc200",
+                "on-secondary": "#ffffff",
+                "on-error-container": "#93000a",
+                "on-tertiary": "#ffffff",
+                "inverse-surface": "#2c3136",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#bec8d3",
+                "inverse-primary": "#90cdff",
+                "surface-container-highest": "#dee3e9",
+                "inverse-on-surface": "#edf1f8",
+                "surface-dim": "#d6dae1"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "container-margin": "24px",
+                "card-padding": "20px",
+                "gutter": "16px",
+                "touch-target-min": "48px",
+                "unit": "8px"
+            },
+            "fontFamily": {
+                "body-md": ["Quicksand"],
+                "headline-lg-mobile": ["Quicksand"],
+                "headline-lg": ["Quicksand"],
+                "label-bold": ["Quicksand"],
+                "headline-md": ["Quicksand"],
+                "body-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="w-full top-0 sticky bg-surface-container-low z-40 flex items-center justify-between px-container-margin py-unit h-16">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined text-primary text-2xl">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Flag Adventure</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+                Level 5
+            </div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined text-primary text-2xl">volume_up</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center px-container-margin py-unit gap-gutter max-w-2xl mx-auto w-full">
+<!-- Header Section -->
+<section class="w-full text-center mt-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary-container drop-shadow-sm mb-2">¡Pintemos Grecia!</h2><div class="flex justify-center mb-4"><button class="flex items-center gap-2 px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-bold tactile-shadow-yellow hover:brightness-110 active:translate-y-1 transition-all duration-100"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="">¡Alarma! / Sound Alarm</span></button></div>
+<div class="bg-primary-fixed text-on-primary-fixed-variant px-6 py-3 rounded-lg font-body-md inline-block shadow-sm">
+                Grecia tiene miles de islas rodeadas de mar azul. 🌊
+            </div>
+</section>
+<!-- Interactive Paint Station Canvas -->
+<section class="w-full relative flex flex-col items-center">
+<div class="canvas-container w-full bg-white border-4 border-surface-variant rounded-lg overflow-hidden shadow-xl relative grid grid-cols-1 grid-rows-9" id="flag-canvas">
+<!-- Greece Flag Structure: 9 stripes + canton -->
+<div class="flag-stripe bg-surface-container-low border-b border-surface-variant/20" data-id="1" data-part="stripe"></div>
+<div class="flag-stripe bg-white border-b border-surface-variant/20" data-id="2" data-part="stripe"></div>
+<div class="flag-stripe bg-surface-container-low border-b border-surface-variant/20" data-id="3" data-part="stripe"></div>
+<div class="flag-stripe bg-white border-b border-surface-variant/20" data-id="4" data-part="stripe"></div>
+<div class="flag-stripe bg-surface-container-low border-b border-surface-variant/20" data-id="5" data-part="stripe"></div>
+<div class="flag-stripe bg-white border-b border-surface-variant/20" data-id="6" data-part="stripe"></div>
+<div class="flag-stripe bg-surface-container-low border-b border-surface-variant/20" data-id="7" data-part="stripe"></div>
+<div class="flag-stripe bg-white border-b border-surface-variant/20" data-id="8" data-part="stripe"></div>
+<div class="flag-stripe bg-surface-container-low" data-id="9" data-part="stripe"></div>
+<!-- Canton with Cross -->
+<div class="absolute top-0 left-0 w-[44.4%] h-[55.5%] bg-surface-container-low border-r-2 border-b-2 border-surface-variant flex items-center justify-center overflow-hidden" data-part="canton">
+<!-- Cross Vertical -->
+<div class="absolute w-[20%] h-full bg-white" data-part="cross-v"></div>
+<!-- Cross Horizontal -->
+<div class="absolute h-[20%] w-full bg-white" data-part="cross-h"></div>
+</div>
+</div>
+<!-- Selection Indicator -->
+<div class="absolute -top-4 -right-4 bg-tertiary-container text-white p-2 rounded-full shadow-lg z-10 hidden" id="paint-indicator">
+<span class="material-symbols-outlined">brush</span>
+</div>
+</section>
+<!-- Color Palette Bento -->
+<section class="grid grid-cols-2 gap-gutter w-full mt-4 h-auto">
+<!-- Azul Selector -->
+<button class="color-btn group flex flex-col items-center justify-center bg-white p-card-padding rounded-lg tactile-shadow-white border-2 border-surface-variant transition-all h-36" onclick="selectColor('#006495', 'azul')">
+<div class="w-16 h-16 rounded-full bg-primary mb-2 shadow-inner border-4 border-white group-[.active]:ring-4 group-[.active]:ring-primary-container"></div>
+<span class="font-label-bold text-primary">Azul</span>
+</button>
+<!-- Blanco Selector -->
+<button class="color-btn group flex flex-col items-center justify-center bg-white p-card-padding rounded-lg tactile-shadow-white border-2 border-surface-variant transition-all h-36" onclick="selectColor('#ffffff', 'blanco')">
+<div class="w-16 h-16 rounded-full bg-white mb-2 shadow-inner border-4 border-surface-variant group-[.active]:ring-4 group-[.active]:ring-primary-container"></div>
+<span class="font-label-bold text-on-surface-variant">Blanco</span>
+</button>
+</section>
+<!-- Progress and Actions -->
+<section class="w-full flex items-center justify-between bg-surface-container-highest/30 p-card-padding rounded-xl mt-4">
+<div class="flex-grow mr-6">
+<div class="flex justify-between mb-2">
+<span class="font-label-bold text-on-surface-variant">Progreso</span>
+<span class="font-label-bold text-primary" id="progress-text">0%</span>
+</div>
+<div class="h-4 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container transition-all duration-500 w-0" id="progress-bar"></div>
+</div>
+</div>
+<button class="px-8 py-4 bg-primary text-white font-headline-md rounded-lg opacity-50 cursor-not-allowed transition-all duration-300 tactile-shadow-primary flex items-center gap-2" disabled="" id="finish-btn">
+                ¡Listo! <span class="material-symbols-outlined">check_circle</span>
+</button>
+</section>
+<!-- Visual Context -->
+<section class="w-full mt-8 mb-24 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="relative rounded-lg overflow-hidden h-48 shadow-lg">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic photo of the vibrant Greek coastline with white buildings and bright blue rooftops overlooking a crystalline turquoise Mediterranean sea. The lighting is bright and warm, capturing a summery midday atmosphere. Minimalist and premium photography style for children's education." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDA9F-5Q_ULERRmAfS-SKTkfEAxODVT3TT5oS3DPhedperpRDYVdbirPH4prFi6s0sT78ok-hEWzpBkeI1a3X1zIlwWGwobLpIdU8T4-JXLNyrn4M_vfU0vLWMo69wUZ0r3XRxCcRF9opBRcW9u1vz064_imeSXXZCCQiLANrmhjwTK9k2e9-XUOZAe6HxHHZK7dAE_wDVMiu1vNu-p1J3QcvpsydGIJ3eCbYH5UhrEbUoO5wPkZ1YTxRCuLMX739Ru6gtlGG_cwhU')"></div>
+<div class="absolute bottom-0 left-0 right-0 bg-black/40 backdrop-blur-sm p-3 text-white font-label-bold">
+                    Islas Griegas
+                </div>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant p-card-padding rounded-lg flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl pulse-animation" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<p class="font-body-md">¿Sabías que el azul de la bandera representa el mar y el cielo de Grecia?</p>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant rounded-t-lg">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined text-2xl">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 hover:bg-surface-variant active:translate-y-1 transition-transform duration-75">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</button>
+</nav>
+<!-- Success Modal -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-container-margin" id="success-modal">
+<div class="absolute inset-0 bg-secondary/80 backdrop-blur-md"></div>
+<div class="bg-surface-container-lowest rounded-xl p-8 max-w-sm w-full relative z-10 text-center shadow-2xl tactile-shadow-white">
+<div class="w-32 h-32 bg-secondary-container rounded-full mx-auto mb-6 flex items-center justify-center pulse-animation">
+<span class="material-symbols-outlined text-6xl text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<h2 class="font-headline-lg-mobile text-secondary mb-2">¡Increíble!</h2>
+<p class="font-body-lg text-on-surface-variant mb-8">Has completado la bandera de Grecia perfectamente. ¡Eres un experto!</p>
+<button class="w-full py-4 bg-tertiary-container text-white font-headline-md rounded-lg tactile-shadow-yellow hover:brightness-110" onclick="location.reload()">
+                ¡Siguiente Nivel!
+            </button>
+</div>
+</div>
+<script>
+        let currentColor = null;
+        let paintedCount = 0;
+        const totalParts = 12; // 9 stripes + canton + 2 cross parts
+        const paintedParts = new Set();
+
+        function selectColor(color, name) {
+            currentColor = color;
+            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active', 'border-primary-container', 'ring-4', 'ring-primary-container'));
+            event.currentTarget.classList.add('active', 'border-primary-container', 'ring-4', 'ring-primary-container');
+            document.getElementById('paint-indicator').classList.remove('hidden');
+        }
+
+        document.querySelectorAll('.flag-stripe, [data-part="canton"], [data-part="cross-v"], [data-part="cross-h"]').forEach(el => {
+            el.addEventListener('click', function() {
+                if (!currentColor) return;
+                
+                this.style.backgroundColor = currentColor;
+                
+                const partId = this.dataset.part + (this.dataset.id || '');
+                if (!paintedParts.has(partId)) {
+                    paintedParts.add(partId);
+                    updateProgress();
+                }
+
+                // Add "painted" visual haptic
+                this.classList.add('brightness-125');
+                setTimeout(() => this.classList.remove('brightness-125'), 200);
+            });
+        });
+
+        function updateProgress() {
+            const progress = Math.min(Math.round((paintedParts.size / totalParts) * 100), 100);
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').innerText = progress + '%';
+
+            if (progress >= 100) {
+                const btn = document.getElementById('finish-btn');
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                btn.classList.add('pulse-animation', 'cursor-pointer');
+            }
+        }
+
+        document.getElementById('finish-btn').addEventListener('click', () => {
+            document.getElementById('success-modal').classList.remove('hidden');
+        });
+
+        // Initialize sparkles on success background logic (visual only)
+        function createSparkle() {
+            if (document.getElementById('success-modal').classList.contains('hidden')) return;
+            const sparkle = document.createElement('div');
+            sparkle.className = 'absolute bg-white rounded-full w-2 h-2 animate-ping';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            document.querySelector('#success-modal .absolute').appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+        setInterval(createSparkle, 300);
+    </script>
+
+
+</body></html>
