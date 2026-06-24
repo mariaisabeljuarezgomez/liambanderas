@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <title>Estación de Pintura (Islandia)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
@@ -36,7 +37,15 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -128,11 +137,11 @@
 <body class="bg-background text-on-background font-body-md min-h-screen pb-32">
 <!-- TopAppBar -->
 <header class="w-full top-0 sticky bg-surface-container-low z-40 flex items-center justify-between px-container-margin py-unit h-16">
-<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined" data-icon="menu">menu</span>
 </button>
-<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold tracking-tight">Estación de Pintura</h1>
-<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button onclick="speakCountry()" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full" aria-label="Escuchar nombre">
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold tracking-tight">Estación de Pintura (Islandia)</h1>
+<button aria-label="Alarma" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button aria-label="Escuchar nombre" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100 hover:bg-primary-container rounded-full" onclick="speakCountry()">
 <span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
 </button>
 </header>
@@ -206,7 +215,7 @@
 </section>
 <!-- Action Button -->
 <div class="pt-4">
-<button class="w-full h-14 bg-primary text-on-primary font-headline-md rounded-lg tactile-shadow-primary active-press flex items-center justify-center gap-3">
+<button class="w-full h-14 bg-primary text-on-primary font-headline-md rounded-lg tactile-shadow-primary active-press flex items-center justify-center gap-3" onclick="checkCompletion()">
 <span class="">¡Terminar!</span>
 <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
 </button>
@@ -227,16 +236,54 @@
 <span class="font-label-bold text-label-bold">Play</span>
 </button>
 </nav>
-<script>
+<script>const COUNTRY_ID = 'islandia';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Islandia','Iceland'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Islandia!','Iceland Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Islandia', 'Iceland'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Islandia!', 'Iceland Alarm!'), 750); }
         function playAudio(color) {
             const labels = { 'azul':['Azul','Blue'], 'blanco':['Blanco','White'], 'rojo':['Rojo','Red'] };
             const pair = labels[color] || [color, color];
@@ -250,7 +297,42 @@
                 setTimeout(() => this.classList.remove('scale-95'), 100);
             });
         });
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

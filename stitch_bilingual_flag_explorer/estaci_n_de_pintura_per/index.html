@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <title>Estación de Pintura (Perú)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
@@ -41,7 +42,15 @@
         .animate-pulse-soft {
             animation: pulse-soft 2s infinite ease-in-out;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -134,17 +143,17 @@
 <!-- Top Navigation -->
 <header class="w-full top-0 sticky z-40 bg-surface-container-low flex items-center justify-between px-container-margin py-unit transition-all duration-100">
 <div class="flex items-center gap-2">
-<button onclick="window.location.href='../world_map_hub/index.html'" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all" aria-label="Volver">
+<button aria-label="Volver" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-primary">arrow_back</span>
 </button>
 <h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Estación de Pintura (Perú)</h1>
 </div>
 <div class="flex gap-2">
-<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all" aria-label="Escuchar nombre">
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all" onclick="speakCountry()">
 <span class="material-symbols-outlined text-primary">volume_up</span>
 </button>
 </div>
-<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<button aria-label="Alarma" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
 <main class="flex-grow px-container-margin pt-unit flex flex-col gap-6">
 <!-- Instruction Section -->
 <section class="flex flex-col items-center text-center gap-2 mt-4">
@@ -174,7 +183,7 @@
 <button class="w-20 h-24 bg-[#D91023] rounded-t-full rounded-b-lg border-x-4 border-b-8 border-[#9a0b19] flex items-end justify-center pb-2 active:translate-y-1 active:border-b-4 transition-all" id="paint-red" onclick="selectColor('bg-[#D91023]')">
 <span class="material-symbols-outlined text-white text-3xl">format_paint</span>
 </button>
-<button class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-yellow text-on-secondary-container animate-pulse-soft" onclick="playAudio('rojo')">
+<button class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-yellow text-on-secondary-container animate-pulse-soft" onclick="AudioController.speakBilingual('Rojo', 'Red')">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
 </button>
 <span class="font-label-bold text-on-surface">Rojo</span>
@@ -183,7 +192,7 @@
 <button class="w-20 h-24 bg-white rounded-t-full rounded-b-lg border-x-4 border-b-8 border-surface-variant flex items-end justify-center pb-2 active:translate-y-1 active:border-b-4 transition-all" id="paint-white" onclick="selectColor('bg-white')">
 <span class="material-symbols-outlined text-primary text-3xl">format_paint</span>
 </button>
-<button class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-yellow text-on-secondary-container animate-pulse-soft" onclick="playAudio('blanco')">
+<button class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-yellow text-on-secondary-container animate-pulse-soft" onclick="AudioController.speakBilingual('Blanco', 'White')">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
 </button>
 <span class="font-label-bold text-on-surface">Blanco</span>
@@ -192,14 +201,14 @@
 <!-- Fun Fact Card -->
 <div class="w-full bg-tertiary-container/10 border-2 border-tertiary-container rounded-lg p-card-padding flex items-center gap-4">
 <div class="w-16 h-16 shrink-0 rounded-full bg-white border-2 border-tertiary shadow-sm flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="A cute, friendly cartoon llama with large expressive eyes and a colorful Peruvian woven collar. The art style is chunky, bright, and child-friendly with soft lighting and a cheerful blue sky background. The llama looks happy and approachable, designed for an educational children's application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARpr31cGlfktTDBX7K-ncChaXL97qgwG0AeuX_P6fJK0FVHSTUvfJQJGsyH9E14NVqmLTe1kmxAkpeGkoDqPdOv3IK3nY9-qMq7LJfVIC28GeiB5rA4xD3VXaSJ-oiRofrX383MG_6ncD3iCr2G5VmDIf2VKXZOIxIhjnGbGCXpU_3HGNeNbh5Eh-hGtkBr88tiRFRNiu68QtO17lgyNKjPd8iivnCZDpov41NbpFQP8WXL2Jk0UQmtVrNXy9ozSSZZbr3Xm7FWNE">
+<img class="w-full h-full object-cover" data-alt="A cute, friendly cartoon llama with large expressive eyes and a colorful Peruvian woven collar. The art style is chunky, bright, and child-friendly with soft lighting and a cheerful blue sky background. The llama looks happy and approachable, designed for an educational children's application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARpr31cGlfktTDBX7K-ncChaXL97qgwG0AeuX_P6fJK0FVHSTUvfJQJGsyH9E14NVqmLTe1kmxAkpeGkoDqPdOv3IK3nY9-qMq7LJfVIC28GeiB5rA4xD3VXaSJ-oiRofrX383MG_6ncD3iCr2G5VmDIf2VKXZOIxIhjnGbGCXpU_3HGNeNbh5Eh-hGtkBr88tiRFRNiu68QtO17lgyNKjPd8iivnCZDpov41NbpFQP8WXL2Jk0UQmtVrNXy9ozSSZZbr3Xm7FWNE"/>
 </div>
 <div class="flex-1">
 <p class="font-label-bold text-tertiary">¿Sabías que...?</p>
 <p class="text-on-tertiary-container text-body-md">En Perú viven las simpáticas llamas.</p>
 </div>
 </div>
-</div>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 </main>
 <!-- Navigation Shell -->
 <nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
@@ -216,16 +225,54 @@
 <span class="font-label-bold text-label-bold">Play</span>
 </a>
 </nav>
-<script>
+<script>const COUNTRY_ID = 'per';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Perú','Peru'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Perú!','Peru Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Perú', 'Peru'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Perú!', 'Peru Alarm!'), 750); }
 
         let selectedColorClass = '';
 
@@ -275,7 +322,42 @@
                 setTimeout(() => AudioController.speakBilingual("¡Excelente! Has pintado la bandera de Perú.", "Excellent! You painted the flag of Peru."), 500);
             }
         }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

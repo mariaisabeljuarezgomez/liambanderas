@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Estación de Pintura: Grecia</title>
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Grecia)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -138,22 +139,30 @@
             outline: 6px solid #2bb1ff;
             outline-offset: 4px;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-background text-on-background font-body-md overflow-x-hidden min-h-screen flex flex-col pb-24">
 <!-- Top Navigation (Shell Implementation) -->
 <header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
-<button onclick="window.location.href='../world_map_hub/index.html'" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all" aria-label="Volver">
+<button aria-label="Volver" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-4xl" data-icon="arrow_back">arrow_back</span>
 </button>
 <div class="flex flex-col items-center">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Grecia / Greece</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Estación de Pintura (Grecia)</h1>
 <span class="font-body-md text-on-surface-variant">¡Pintamos la bandera!</span>
 </div>
-<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all" aria-label="Escuchar nombre">
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all" onclick="speakCountry()">
 <span class="material-symbols-outlined text-4xl" data-icon="volume_up">volume_up</span>
 </button>
-<button onclick="triggerAlarm()" class="w-12 h-12 flex flex-col items-center justify-center text-secondary bg-secondary-container rounded-full chunky-shadow-yellow active:translate-y-1 transition-all group relative" title="¡Alarma! / Sound Alarm" aria-label="Alarma"><span class="material-symbols-outlined text-2xl" data-icon="notifications_active">notifications_active</span><span class="absolute -bottom-8 whitespace-nowrap text-[10px] font-label-bold text-secondary opacity-0 group-hover:opacity-100 transition-opacity">¡Alarma!</span></button></header>
+<button aria-label="Alarma" class="w-12 h-12 flex flex-col items-center justify-center text-secondary bg-secondary-container rounded-full chunky-shadow-yellow active:translate-y-1 transition-all group relative" onclick="triggerAlarm()" title="¡Alarma! / Sound Alarm"><span class="material-symbols-outlined text-2xl" data-icon="notifications_active">notifications_active</span><span class="absolute -bottom-8 whitespace-nowrap text-[10px] font-label-bold text-secondary opacity-0 group-hover:opacity-100 transition-opacity">¡Alarma!</span></button></header>
 <main class="flex-1 max-w-4xl mx-auto w-full px-container-margin py-8 space-y-8">
 <!-- Country Header with Interactive Speaker -->
 <section class="flex items-center gap-6 bg-surface-container-low p-card-padding rounded-lg border-2 border-surface-container-highest">
@@ -201,7 +210,7 @@
 </button>
 <div class="flex items-center gap-2">
 <span class="font-headline-md text-headline-md text-primary">Azul</span>
-<button class="text-primary active:scale-90 transition-transform" onclick="playSound('Azul')">
+<button class="text-primary active:scale-90 transition-transform" onclick="AudioController.speakBilingual('Azul', 'Blue')">
 <span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
 </button>
 </div>
@@ -213,12 +222,12 @@
 </button>
 <div class="flex items-center gap-2">
 <span class="font-headline-md text-headline-md text-on-surface-variant">Blanco</span>
-<button class="text-on-surface-variant active:scale-90 transition-transform" onclick="playSound('Blanco')">
+<button class="text-on-surface-variant active:scale-90 transition-transform" onclick="AudioController.speakBilingual('Blanco', 'White')">
 <span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
 </button>
 </div>
 </div>
-</section>
+</section><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 <!-- Fun Contextual Card (Bento-ish) -->
 <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <div class="md:col-span-2 bg-primary-container/20 border-2 border-primary-container p-6 rounded-lg flex items-center gap-4">
@@ -253,16 +262,54 @@
 </a>
 </nav>
 <!-- Audio & Painting Logic -->
-<script>
+<script>const COUNTRY_ID = 'grecia_1';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Grecia','Greece'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Grecia!','Greece Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Grecia', 'Greece'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Grecia!', 'Greece Alarm!'), 750); }
         function playSound(text) {
             const labels = { 'Grecia':['Grecia','Greece'], 'Azul':['Azul','Blue'], 'Blanco':['Blanco','White'], 'Elige un color primero':['Elige un color primero','Pick a color first'], '¡Excelente! Lo has logrado.':['¡Excelente!','Excellent! You did it!'] };
             const pair = labels[text] || [text, text];
@@ -340,6 +387,4 @@
             setTimeout(() => successOverlay.remove(), 3000);
         }
     </script>
-
-
 </body></html>

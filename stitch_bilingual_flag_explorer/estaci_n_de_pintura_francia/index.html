@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Flag Paint Station - France</title>
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estación de Pintura (Francia)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -61,7 +62,15 @@
         .flag-section {
             transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <script id="tailwind-config">
         tailwind.config = {
           darkMode: "class",
@@ -157,8 +166,8 @@
 <span class="material-symbols-outlined text-primary text-[32px]">language</span>
 <span class="font-headline-md text-headline-md-mobile text-primary">Explorador de Banderas</span>
 </div>
-<div class="flex items-center gap-2"><button onclick="triggerAlarm()" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button>
-<button onclick="speakCountry()" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors active:translate-y-1" aria-label="Escuchar nombre">
+<div class="flex items-center gap-2"><button aria-label="Alarma" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button>
+<button aria-label="Escuchar nombre" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors active:translate-y-1" onclick="speakCountry()">
 <span class="material-symbols-outlined text-[28px]">volume_up</span>
 </button>
 <button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors active:translate-y-1">
@@ -170,7 +179,7 @@
 <!-- Header Section: Country Identity -->
 <div class="w-full bg-surface-container-lowest rounded-xl p-6 flex items-center justify-between shadow-sm border-2 border-surface-container-high mb-8">
 <div class="flex flex-col">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary leading-tight">Francia</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary leading-tight">Estación de Pintura (Francia)</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant">France</p>
 </div>
 <button class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center tactile-yellow pulse-audio" onclick="speakCountry()">
@@ -231,7 +240,7 @@
 </div>
 </button>
 </div>
-</main>
+<button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button></main>
 <!-- Navigation Bar Footer (Hidden as per Destination rule, but structure maintained if needed for game loop) -->
 <div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-container-margin pb-6 pt-2 bg-surface-container-lowest border-t-4 border-surface-variant z-40">
 <button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-gutter py-1 shadow-[0_4px_0_0_#6d5700] active:translate-y-1 active:shadow-none transition-all">
@@ -251,103 +260,48 @@
 
     // Audio Controller Module
     const AudioController = {
-        ctx: null,
-        
-        initContext() {
-            if (!this.ctx) {
-                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            ctx: null,
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
             }
-            if (this.ctx && this.ctx.state === 'suspended') {
-                this.ctx.resume();
-            }
-        },
-
-        playSynth(freq, type, duration = 0.2, volume = 0.1) {
-            try {
-                this.initContext();
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-                gain.gain.setValueAtTime(volume, this.ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + duration);
-            } catch(e) {
-                console.log(e);
-            }
-        },
-
-        boing() {
-            this.playSynth(150, 'sine', 0.3, 0.25);
-            this.playSynth(100, 'square', 0.1, 0.05);
-        },
-
-        sparkleSound() {
-            try {
-                this.initContext();
-                const now = this.ctx.currentTime;
-                [880, 1100, 1320].forEach((f, i) => {
-                    setTimeout(() => {
-                        this.playSynth(f, 'triangle', 0.15, 0.05);
-                    }, i * 60);
-                });
-            } catch(e) {}
-        },
-
-        victory() {
-            try {
-                this.initContext();
-                const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
-                notes.forEach((f, i) => {
-                    setTimeout(() => this.playSynth(f, 'sine', 0.4, 0.1), i * 120);
-                });
-            } catch(e) {}
-        },
-
-        alarmSound() {
-            try {
-                this.initContext();
-                const now = this.ctx.currentTime;
-                for (let j = 0; j < 3; j++) {
-                    setTimeout(() => {
-                        const osc = this.ctx.createOscillator();
-                        const gain = this.ctx.createGain();
-                        osc.type = 'sawtooth';
-                        osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-                        osc.frequency.linearRampToValueAtTime(1000, this.ctx.currentTime + 0.15);
-                        osc.frequency.linearRampToValueAtTime(800, this.ctx.currentTime + 0.3);
-                        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-                        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
-                        osc.connect(gain);
-                        gain.connect(this.ctx.destination);
-                        osc.start();
-                        osc.stop(this.ctx.currentTime + 0.35);
-                    }, j * 350);
-                }
-            } catch(e) {}
-        },
-
-        speakBilingual(es, en) {
-            if (!('speechSynthesis' in window)) return;
-            this.initContext();
-            try { window.speechSynthesis.cancel(); } catch(e) {}
-            setTimeout(() => {
-            const uEs = new SpeechSynthesisUtterance(es);
-            uEs.lang = 'es-ES';
-            uEs.rate = 0.95;
-            uEs.onend = () => {
-                const uEn = new SpeechSynthesisUtterance(en);
-                uEn.lang = 'en-US';
-                uEn.rate = 0.95;
-                window.speechSynthesis.speak(uEn);
-            };
-            window.speechSynthesis.speak(uEs);
-            }, 80);
-        }
-    };
+        };
 
     // Country configuration
     const COUNTRY_ID = 'france';
@@ -356,16 +310,9 @@
     const ALARM_TEXT_ES = '¡Alarma de Francia!';
     const ALARM_TEXT_EN = 'France Alarm!';
 
-    function speakCountry() {
-        AudioController.speakBilingual(COUNTRY_NAME_ES, COUNTRY_NAME_EN);
-    }
+    function speakCountry() { AudioController.speakBilingual('Francia', 'France'); }
 
-    function triggerAlarm() {
-        AudioController.alarmSound();
-        setTimeout(() => {
-            AudioController.speakBilingual(ALARM_TEXT_ES, ALARM_TEXT_EN);
-        }, 600);
-    }
+    function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Francia!', 'France Alarm!'), 750); }
 
         let currentActiveSection = 'white';
         let paintedState = {
@@ -465,6 +412,4 @@
         });
         
 </script>
-
-
 </body></html>

@@ -1,11 +1,12 @@
-<!DOCTYPE html><html lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Canadá - Flag Adventure</title>
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Canadá)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
@@ -47,7 +48,15 @@
             transform: scale(0.98) translateY(4px);
             border-bottom-width: 2px;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -140,22 +149,22 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
+</head>
 <body class="bg-background font-body-md text-on-background min-h-screen flex flex-col pb-24 overflow-x-hidden">
 <!-- TopAppBar -->
 <header class="w-full top-0 sticky z-40 bg-surface-container-low flex items-center justify-between px-container-margin py-unit h-16 shadow-none">
 <div class="flex items-center gap-4">
-<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100 text-primary">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100 text-primary" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-2xl">menu</span>
 </button>
-<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary tracking-tight">Flag Adventure</h1>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary tracking-tight">Estación de Pintura (Canadá)</h1>
 </div>
 <div class="flex items-center gap-2">
 <div class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-bold flex items-center gap-1">
 <span class="material-symbols-outlined filled-icon text-sm">stars</span>
 <span class="">Nivel 5</span>
 </div>
-<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100 text-primary" aria-label="Escuchar nombre">
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100 text-primary" onclick="speakCountry()">
 <span class="material-symbols-outlined text-2xl">volume_up</span>
 </button>
 </div>
@@ -179,14 +188,14 @@
 <p class="font-body-md">"La hoja de la bandera es de un árbol de Arce."</p>
 </div>
 <div class="mt-4 flex justify-center">
-    <button onclick="triggerAlarm()" class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-lg squishy-card font-label-bold hover:bg-surface-variant transition-all duration-100" aria-label="Alarma">
-        <span class="material-symbols-outlined filled-icon">notifications_active</span>
-        <span class="">¡Alarma! / Sound Alarm</span>
-    </button>
+<button aria-label="Alarma" class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-lg squishy-card font-label-bold hover:bg-surface-variant transition-all duration-100" onclick="triggerAlarm()">
+<span class="material-symbols-outlined filled-icon">notifications_active</span>
+<span class="">¡Alarma! / Sound Alarm</span>
+</button>
 </div></section>
 <!-- Canvas Area -->
 <div class="relative bg-white rounded-lg p-6 shadow-xl border-2 border-surface-variant mb-8 aspect-[2/1] flex items-center justify-center overflow-hidden">
-<svg class="w-full h-full drop-shadow-md" id="canada-flag-svg" viewBox="0 0 200 100">
+<svg class="w-full h-full drop-shadow-md" id="canada-flag-svg" viewbox="0 0 200 100">
 <!-- Left Red Strip -->
 <rect class="paint-target" fill="#f0f4fb" height="100" id="left-rect" onclick="paintElement('left-rect')" stroke="#dee3e9" stroke-width="0.5" width="50" x="0" y="0"></rect>
 <!-- Right Red Strip -->
@@ -217,7 +226,7 @@
 <p class="text-on-surface-variant font-label-bold">¡Color de nieve!</p>
 </div>
 </button>
-</section>
+</section><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 <!-- Action Buttons -->
 <div class="flex flex-col gap-4">
 <button class="w-full py-6 rounded-lg btn-primary text-white font-headline-md uppercase tracking-wider flex items-center justify-center gap-2">
@@ -253,17 +262,54 @@
 <h2 class="font-headline-lg text-on-secondary-container mt-4">¡Excelente!</h2>
 <p class="font-body-lg text-on-secondary-container">Has pintado la bandera de Canadá</p>
 </div>
-<script>
+<script>const COUNTRY_ID = 'canad_2';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            playSynth(freq, type, dur, vol) { try { this.initContext(); const osc=this.ctx.createOscillator(),g=this.ctx.createGain(); osc.type=type; osc.frequency.value=freq; g.gain.setValueAtTime(vol,this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001,this.ctx.currentTime+dur); osc.connect(g); g.connect(this.ctx.destination); osc.start(); osc.stop(this.ctx.currentTime+dur+0.05); } catch(e) {} },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Canadá','Canada'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Canadá!','Canada Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Canadá', 'Canada'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Canadá!', 'Canada Alarm!'), 750); }
 
         let selectedColor = null;
 
@@ -320,6 +366,4 @@
             console.log("Flag Station Initialized for Level 5: Canada");
         };
     </script>
-
-
 </body></html>

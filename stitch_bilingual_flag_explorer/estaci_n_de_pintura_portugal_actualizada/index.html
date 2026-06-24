@@ -127,7 +127,15 @@
             position: absolute;
             pointer-events: none;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <style>
     body {
       min-height: max(884px, 100dvh);
@@ -137,14 +145,14 @@
 <body class="bg-background text-on-background min-h-screen pb-24">
 <!-- Top Navigation -->
 <header class="w-full top-0 sticky bg-surface-container-low z-50 flex items-center justify-between px-container-margin py-unit">
-<button onclick="window.location.href='../world_map_hub/index.html'" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" aria-label="Volver">
+<button aria-label="Volver" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-[32px]">arrow_back</span>
 </button>
-<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Estación de Pintura</h1>
-<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" aria-label="Escuchar nombre">
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Estación de Pintura (Portugal)</h1>
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" onclick="speakCountry()">
 <span class="material-symbols-outlined text-[32px]">volume_up</span>
 </button>
-<button onclick="triggerAlarm()" class="w-12 h-12 flex items-center justify-center text-secondary active:translate-y-1 transition-all duration-100" aria-label="Alarma" title="¡Alarma! / Sound Alarm"><span class="material-symbols-outlined text-[32px]">notifications_active</span></button></header>
+<button aria-label="Alarma" class="w-12 h-12 flex items-center justify-center text-secondary active:translate-y-1 transition-all duration-100" onclick="triggerAlarm()" title="¡Alarma! / Sound Alarm"><span class="material-symbols-outlined text-[32px]">notifications_active</span></button></header>
 <main class="px-container-margin py-6 max-w-4xl mx-auto">
 <!-- Fun Fact Card -->
 <div class="bg-primary-container/10 border-2 border-primary-container rounded-lg p-card-padding mb-8 flex items-center gap-4">
@@ -183,7 +191,7 @@
 <span class="material-symbols-outlined text-white text-[32px]">brush</span>
 </button>
 </div>
-</div>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 <!-- Bilingual Audio Section -->
 <div class="grid grid-cols-2 gap-4">
 <button class="flex flex-col items-center gap-3 bg-white p-6 rounded-lg border-b-8 border-tertiary-container shadow-sm active:translate-y-1 active:border-b-4 transition-all" onclick="playAudio('verde')">
@@ -227,16 +235,54 @@
 </nav>
 <!-- Confetti Overlay Container -->
 <div class="fixed inset-0 pointer-events-none z-[100]" id="confetti-container"></div>
-<script>
+<script>const COUNTRY_ID = 'portugal_actualizada';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Portugal','Portugal'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Portugal!','Portugal Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Portugal', 'Portugal'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Portugal!', 'Portugal Alarm!'), 750); }
 
         let selectedColor = null;
         let paintedCount = 0;
@@ -314,5 +360,42 @@
             const pair = labels[word] || [word, word];
             AudioController.speakBilingual(pair[0], pair[1]);
         }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
+
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

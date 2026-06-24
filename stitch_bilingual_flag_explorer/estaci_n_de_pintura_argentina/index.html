@@ -1,11 +1,12 @@
-<!DOCTYPE html><html lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Estación de Pintura - Argentina</title>
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estación de Pintura (Argentina)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
@@ -32,7 +33,15 @@
         .flag-zone {
             aspect-ratio: 5 / 3;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -125,15 +134,15 @@
 <!-- TopAppBar -->
 <header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit h-20">
 <div class="flex items-center gap-4">
-<button onclick="window.location.href='../world_map_hub/index.html'" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-90 transition-all text-primary">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-90 transition-all text-primary" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-3xl">arrow_back</span>
 </button>
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Argentina</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Estación de Pintura (Argentina)</h1>
 </div>
-<button class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center shadow-md active-press pulse-audio" onclick="speakCountry()" aria-label="Escuchar nombre">
+<button aria-label="Escuchar nombre" class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center shadow-md active-press pulse-audio" onclick="speakCountry()">
 <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
 </button>
-<button class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex flex-col items-center justify-center shadow-md active-press chunky-shadow border-2 border-secondary-container" title="¡Alarma! / Sound Alarm" onclick="triggerAlarm()" aria-label="Alarma"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[10px] font-label-bold leading-none">Alarma</span></button></header>
+<button aria-label="Alarma" class="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full flex flex-col items-center justify-center shadow-md active-press chunky-shadow border-2 border-secondary-container" onclick="triggerAlarm()" title="¡Alarma! / Sound Alarm"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="text-[10px] font-label-bold leading-none">Alarma</span></button></header>
 <main class="flex-grow flex flex-col items-center px-container-margin py-8 gap-8 mb-24">
 <!-- Interactive Flag Canvas -->
 <div class="w-full max-w-2xl bg-white rounded-lg p-6 border-4 border-surface-container-highest shadow-sm relative overflow-hidden">
@@ -175,7 +184,7 @@
 </div>
 </button>
 <!-- Blanco -->
-<button class="color-swatch relative group flex flex-col items-center gap-3 p-4 bg-white rounded-lg border-2 border-surface-container-highest hover:border-primary-container transition-all active-press chunky-shadow" data-color="#FFFFFF" onclick="selectColor('#FFFFFF', 'Blanco')">
+<button class="color-swatch relative group flex flex-col items-center gap-3 p-4 bg-white rounded-lg border-2 border-surface-container-highest hover:border-primary-container transition-all active-press chunky-shadow" data-color="#FFFFFF" onclick="AudioController.speakBilingual('Blanco', 'White')">
 <div class="w-16 h-16 rounded-full bg-white border-4 border-surface-container-highest shadow-inner"></div>
 <div class="flex items-center gap-2">
 <span class="font-label-bold text-label-bold text-on-surface">Blanco</span>
@@ -183,19 +192,19 @@
 </div>
 </button>
 <!-- Amarillo -->
-<button class="color-swatch relative group flex flex-col items-center gap-3 p-4 bg-white rounded-lg border-2 border-surface-container-highest hover:border-primary-container transition-all active-press chunky-shadow" data-color="#F6B40E" onclick="selectColor('#F6B40E', 'Amarillo')">
+<button class="color-swatch relative group flex flex-col items-center gap-3 p-4 bg-white rounded-lg border-2 border-surface-container-highest hover:border-primary-container transition-all active-press chunky-shadow" data-color="#F6B40E" onclick="AudioController.speakBilingual('Amarillo', 'Yellow')">
 <div class="w-16 h-16 rounded-full bg-[#F6B40E] border-4 border-white shadow-inner"></div>
 <div class="flex items-center gap-2">
 <span class="font-label-bold text-label-bold text-on-surface">Amarillo</span>
 <span class="material-symbols-outlined text-secondary text-xl" onclick="event.stopPropagation(); playSound('Amarillo')">volume_up</span>
 </div>
 </button>
-</div>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 <!-- Educational Bento Card -->
 <div class="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="bg-primary-container/20 rounded-lg p-card-padding border-2 border-primary-container flex items-center gap-6">
 <div class="w-24 h-24 flex-shrink-0 bg-white rounded-xl shadow-sm overflow-hidden border-2 border-white">
-<img class="w-full h-full object-cover" data-alt="A cheerful, colorful cartoon illustration of a smiling sun character wearing sunglasses, in a playful nursery art style. The sun is central, with soft golden rays against a friendly sky blue background. The overall aesthetic is educational and joyful for children." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPbiTMvlfHseWeJXDCZ07097-73EL0mJqEmcA9HyX0RYLaUp9jYYrrCO838AIarizKDrCqqyKPwbxRGsMXCzwBVyGGXbbQxsQ3_guUaEn41z6ETIFITzACFRUXcy8u4QU6x9qNufll36oavOt0a0L618LpUBmVzaL47iOrrJpJZxR8-jDB0cSNYksa3FGwzy2l4Mxvakcyqhh7_vlg82Qo4Te3gdd0t-9gT9WQmZXoz90yWqQ_RR8KJE541_snWsZQ28B8nI_eC1Q">
+<img class="w-full h-full object-cover" data-alt="A cheerful, colorful cartoon illustration of a smiling sun character wearing sunglasses, in a playful nursery art style. The sun is central, with soft golden rays against a friendly sky blue background. The overall aesthetic is educational and joyful for children." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPbiTMvlfHseWeJXDCZ07097-73EL0mJqEmcA9HyX0RYLaUp9jYYrrCO838AIarizKDrCqqyKPwbxRGsMXCzwBVyGGXbbQxsQ3_guUaEn41z6ETIFITzACFRUXcy8u4QU6x9qNufll36oavOt0a0L618LpUBmVzaL47iOrrJpJZxR8-jDB0cSNYksa3FGwzy2l4Mxvakcyqhh7_vlg82Qo4Te3gdd0t-9gT9WQmZXoz90yWqQ_RR8KJE541_snWsZQ28B8nI_eC1Q"/>
 </div>
 <div>
 <h3 class="font-headline-md text-headline-md text-on-primary-container">Sol de Mayo</h3>
@@ -225,7 +234,8 @@
 <span class="font-label-bold text-label-bold">Jugar</span>
 </a>
 </nav>
-<script>
+<script>const COUNTRY_ID = 'argentina';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
@@ -233,24 +243,23 @@
                 if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
                 if (this.ctx.state === 'suspended') this.ctx.resume();
             },
-            playSynth(freq, type, dur, vol) {
-                try {
-                    this.initContext();
-                    const osc = this.ctx.createOscillator(), g = this.ctx.createGain();
-                    osc.type = type; osc.frequency.value = freq;
-                    g.gain.setValueAtTime(vol, this.ctx.currentTime);
-                    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur);
-                    osc.connect(g); g.connect(this.ctx.destination);
-                    osc.start(); osc.stop(this.ctx.currentTime + dur + 0.05);
-                } catch(e) {}
-            },
-            boing() { this.playSynth(150,'sine',0.3,0.2); },
-            sparkle() { [880,1100,1320].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'triangle',0.15,0.07),i*60)); },
-            victory() { [261.63,329.63,392,523.25,659.25,783.99,1046.5].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'sine',0.4,0.1),i*120)); },
             alarm() {
                 try {
-                    this.initContext(); const c=this.ctx;
-                    for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); }
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
                 } catch(e) {}
             },
             speakBilingual(es, en) {
@@ -258,14 +267,21 @@
                 this.initContext();
                 try { speechSynthesis.cancel(); } catch(e) {}
                 setTimeout(() => {
-                    const u = new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95;
-                    u.onend = () => { const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); };
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
                     speechSynthesis.speak(u);
                 }, 80);
             }
         };
-        function speakCountry() { AudioController.speakBilingual('Argentina','Argentina'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Argentina!','Argentina Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Argentina', 'Argentina'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Argentina!', 'Argentina Alarm!'), 750); }
         function playSound(text) {
             const labels = { 'Argentina':['Argentina','Argentina'], 'Celeste':['Celeste','Light Blue'], 'Blanco':['Blanco','White'], 'Amarillo':['Amarillo','Yellow'] };
             const pair = labels[text] || [text, text];
@@ -304,7 +320,42 @@
         }
 
 
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

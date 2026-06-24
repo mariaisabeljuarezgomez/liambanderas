@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flag Adventure - Quiz</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .chunky-shadow-primary {
+            box-shadow: 0 6px 0 0 #004b71;
+        }
+        .chunky-shadow-secondary {
+            box-shadow: 0 6px 0 0 #dee3e9;
+        }
+        .chunky-shadow-active {
+            box-shadow: 0 0px 0 0 transparent !important;
+            transform: translateY(6px);
+        }
+        .pulse-soft {
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0% { border-color: rgba(0, 100, 149, 0.2); transform: scale(1); }
+            50% { border-color: rgba(0, 100, 149, 1); transform: scale(1.02); }
+            100% { border-color: rgba(0, 100, 149, 0.2); transform: scale(1); }
+        }
+        .star-pop {
+            animation: star-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes star-pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#2b6c00",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#dee3e9",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6d5700",
+                        "background": "#f7f9ff",
+                        "on-tertiary-fixed": "#082100",
+                        "primary": "#006495",
+                        "surface-container-low": "#f0f4fb",
+                        "on-primary-fixed": "#001e30",
+                        "primary-fixed-dim": "#90cdff",
+                        "on-tertiary-container": "#1a4600",
+                        "inverse-primary": "#90cdff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6e7882",
+                        "on-secondary-fixed": "#231b00",
+                        "tertiary-fixed-dim": "#77de3d",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e4e8ef",
+                        "secondary-container": "#fccc00",
+                        "primary-fixed": "#cbe6ff",
+                        "surface": "#f7f9ff",
+                        "tertiary-fixed": "#92fc58",
+                        "primary-container": "#2bb1ff",
+                        "secondary": "#735c00",
+                        "on-tertiary-fixed-variant": "#1f5100",
+                        "on-primary-fixed-variant": "#004b71",
+                        "on-primary-container": "#004163",
+                        "surface-dim": "#d6dae1",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#171c21",
+                        "tertiary-container": "#59be1b",
+                        "outline-variant": "#bec8d3",
+                        "surface-container": "#eaeef5",
+                        "surface-bright": "#f7f9ff",
+                        "secondary-fixed": "#ffe084",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2c3136",
+                        "surface-container-highest": "#dee3e9",
+                        "on-surface": "#171c21",
+                        "inverse-on-surface": "#edf1f8",
+                        "surface-tint": "#006495",
+                        "secondary-fixed-dim": "#efc200",
+                        "on-surface-variant": "#3e4851"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "container-margin": "24px",
+                        "unit": "8px",
+                        "card-padding": "20px",
+                        "touch-target-min": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Quicksand"],
+                        "headline-lg": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "label-bold": ["Quicksand"],
+                        "headline-md": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "700" }],
+                        "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-bold": ["16px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "30px", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col pb-24">
+<!-- Top Navigation Bar (Shared Component Strategy) -->
+<header class="w-full top-0 sticky bg-surface-container-low flex items-center justify-between px-container-margin py-unit z-40">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Flag Adventure</h1>
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" id="global-volume">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</header>
+<main class="flex-1 w-full max-w-2xl mx-auto px-container-margin py-unit space-y-6">
+<!-- Progress Bar Section -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-on-surface-variant font-label-bold text-label-bold">
+<span>Progreso</span>
+<span>4 / 10</span>
+</div>
+<div class="h-4 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[40%] bg-tertiary-container rounded-full transition-all duration-500 ease-out"></div>
+</div>
+</div>
+<!-- Audio Question Interaction -->
+<div class="flex flex-col items-center justify-center space-y-4 py-4">
+<button class="w-32 h-32 rounded-full bg-secondary-container flex items-center justify-center chunky-shadow-primary active:chunky-shadow-active transition-all group overflow-hidden relative" id="audio-prompt" onclick="this.classList.toggle('animate-pulse')">
+<span class="material-symbols-outlined text-on-secondary-container !text-6xl" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-active:opacity-100 transition-opacity"></div>
+</button>
+<div class="text-center space-y-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">¿Cuál es la bandera de Estados Unidos?</h2>
+<p class="font-body-md text-on-surface-variant italic opacity-80">Which is the flag of the United States?</p>
+</div>
+</div>
+<!-- Quiz Options (Bento Style Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+<!-- Option 1: United Kingdom -->
+<button class="group relative bg-surface-container-lowest p-card-padding rounded-lg border-2 border-surface-variant chunky-shadow-secondary active:chunky-shadow-active transition-all hover:border-primary-container h-48 sm:h-64 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full flex items-center justify-center p-4"><div class="flex flex-col items-center justify-center text-center space-y-2"><span class="font-headline-md-mobile text-on-surface">Reino Unido</span><span class="font-body-md text-on-surface-variant italic opacity-80">United Kingdom</span></div></div>
+</button>
+<!-- Option 2: USA (Correct Answer with Pulse) -->
+<button class="group relative bg-surface-container-lowest p-card-padding rounded-lg border-4 border-primary/20 chunky-shadow-secondary active:chunky-shadow-active transition-all pulse-soft h-48 sm:h-64 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full flex items-center justify-center p-4"><div class="flex flex-col items-center justify-center text-center space-y-2"><span class="font-headline-md-mobile text-on-surface">Estados Unidos</span><span class="font-body-md text-on-surface-variant italic opacity-80">United States</span></div></div>
+<div class="absolute top-2 right-2 opacity-0 group-focus:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-tertiary-container !text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Option 3: China -->
+<button class="group relative bg-surface-container-lowest p-card-padding rounded-lg border-2 border-surface-variant chunky-shadow-secondary active:chunky-shadow-active transition-all hover:border-primary-container h-48 sm:h-64 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full flex items-center justify-center p-4"><div class="flex flex-col items-center justify-center text-center space-y-2"><span class="font-headline-md-mobile text-on-surface">China</span><span class="font-body-md text-on-surface-variant italic opacity-80">China</span></div></div>
+</button>
+</div>
+<!-- Performance Feedback Section -->
+<div class="pt-8 flex flex-col items-center space-y-4">
+<p class="font-label-bold text-label-bold text-on-surface-variant">Tus Estrellas</p>
+<div class="flex gap-4 items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container !text-5xl star-pop" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container !text-5xl star-pop" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary-container !text-5xl star-pop" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline-variant !text-5xl opacity-40">star</span>
+<span class="material-symbols-outlined text-outline-variant !text-5xl opacity-40">star</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Shared Component Strategy) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest border-t-4 border-surface-variant shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Simple interaction script for audio and feedback -->
+<script>
+        document.getElementById('audio-prompt').addEventListener('click', function() {
+            // Simulate speaking
+            QuizAudioController.speakBilingual(\'¿Cuál es la bandera?\', \'Which is the flag?\');
+            }
+        });
+
+        // Toggle volume icon state
+        document.getElementById('global-volume').addEventListener('click', function() {
+            const icon = this.querySelector('span');
+            if (icon.innerText === 'volume_up') {
+                icon.innerText = 'volume_off';
+            } else {
+                icon.innerText = 'volume_up';
+            }
+        });
+    </script>
+
+    <!-- Custom Feedback Modal -->
+    <div id="quiz-feedback-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex-col items-center justify-center p-6 backdrop-blur-sm transition-all">
+        <div id="quiz-modal-content" class="bg-surface-container-lowest p-8 rounded-3xl w-full max-w-sm flex flex-col items-center text-center gap-6 transform transition-transform scale-95 border-b-8 border-primary-container shadow-2xl">
+            <div id="quiz-modal-icon-bg" class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-2 animate-bounce">
+                <span id="quiz-modal-icon" class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <div>
+                <h2 id="quiz-modal-title" class="font-headline-lg text-primary mb-2">¡Excelente!</h2>
+                <p id="quiz-modal-subtitle" class="font-body-lg text-on-surface-variant">Great job!</p>
+            </div>
+            <button onclick="document.getElementById('quiz-feedback-modal').classList.replace('flex', 'hidden');" class="w-full py-4 bg-primary text-white font-label-bold rounded-full active:scale-95 transition-transform mt-2 border-b-4 border-on-primary-container">
+                CONTINUAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const QuizAudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+            playSuccess() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, this.ctx.currentTime + 0.3); // C6
+                
+                gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.5);
+            },
+            playError() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.3);
+                
+                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            alarm() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime + 0.5);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.75);
+                
+                gain.gain.value = 0.1;
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 1.0);
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { window.speechSynthesis.cancel(); } catch(e) {}
+                
+                setTimeout(() => {
+                    const uEs = new SpeechSynthesisUtterance(es);
+                    uEs.lang = 'es-ES';
+                    uEs.rate = 0.95;
+                    
+                    uEs.onend = () => {
+                        const uEn = new SpeechSynthesisUtterance(en);
+                        uEn.lang = 'en-US';
+                        uEn.rate = 0.95;
+                        window.speechSynthesis.speak(uEn);
+                    };
+                    window.speechSynthesis.speak(uEs);
+                }, 80);
+            }
+        };
+    </script>
+
+</body></html>

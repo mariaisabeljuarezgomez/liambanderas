@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html class="light" lang="es">
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Explorando Australia - Flag Explorer</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Australia)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
 tailwind.config = {
   darkMode: "class",
@@ -105,57 +106,49 @@ tailwind.config = {
     80%      { transform: translateX(4px); }
   }
   .shake { animation: shake 0.35s ease; }
+
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
 </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
-
 <!-- ══════════ TOP APP BAR ══════════ -->
 <header class="w-full top-0 sticky bg-background border-b-4 border-surface-container-highest z-50">
-  <div class="flex items-center justify-between px-container-margin py-unit w-full">
-
-    <button onclick="window.location.href='../world_map_hub/index.html'"
-            class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container-high text-primary hover:opacity-80 active:translate-y-1 transition-all"
-            aria-label="Volver">
-      <span class="material-symbols-outlined text-headline-lg-mobile">arrow_back</span>
-    </button>
-
-    <div onclick="speakCountry()"
-         class="flex flex-col items-center cursor-pointer select-none hover:opacity-80 transition-opacity"
-         title="Escuchar / Listen">
-      <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Australia</h1>
-      <span class="font-body-md text-body-md text-on-surface-variant">Australia</span>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <button id="alarm-btn" onclick="triggerAlarm()"
-              class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all"
-              title="¡Alarma! / Sound Alarm" aria-label="Alarma">
-        <span class="material-symbols-outlined text-2xl">notifications_active</span>
-      </button>
-      <button id="audio-main" onclick="speakCountry()"
-              class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all audio-pulse"
-              title="Escuchar nombre / Listen to Name" aria-label="Escuchar nombre">
-        <span class="material-symbols-outlined text-2xl">volume_up</span>
-      </button>
-    </div>
-  </div>
+<div class="flex items-center justify-between px-container-margin py-unit w-full">
+<button aria-label="Volver" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container-high text-primary hover:opacity-80 active:translate-y-1 transition-all" onclick="window.location.href='../world_map_hub/index.html'">
+<span class="material-symbols-outlined text-headline-lg-mobile">arrow_back</span>
+</button>
+<div class="flex flex-col items-center cursor-pointer select-none hover:opacity-80 transition-opacity" onclick="speakCountry()" title="Escuchar / Listen">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Estación de Pintura (Australia)</h1>
+<span class="font-body-md text-body-md text-on-surface-variant">Australia</span>
+</div>
+<div class="flex items-center gap-3">
+<button aria-label="Alarma" class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all" id="alarm-btn" onclick="triggerAlarm()" title="¡Alarma! / Sound Alarm">
+<span class="material-symbols-outlined text-2xl">notifications_active</span>
+</button>
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all audio-pulse" id="audio-main" onclick="speakCountry()" title="Escuchar nombre / Listen to Name">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+</button>
+</div>
+</div>
 </header>
-
 <!-- ══════════ MAIN CONTENT ══════════ -->
 <main class="flex-grow flex flex-col items-center px-container-margin pt-unit pb-32 canvas-bg">
-
-  <div class="w-full max-w-lg mb-4 text-center">
-    <p class="font-body-lg text-body-lg text-on-surface-variant">
+<div class="w-full max-w-lg mb-4 text-center">
+<p class="font-body-lg text-body-lg text-on-surface-variant">
       ¡Pinta la bandera!
       <span class="block text-body-md opacity-60">Paint the flag!</span>
-    </p>
-  </div>
-
-  <!-- Progress dots -->
-  <div id="progress-dots" class="flex flex-wrap gap-2 mb-4 justify-center"></div>
-
-  <!-- ══════ FLAG SVG CANVAS ══════ -->
-  <!--
+</p>
+</div>
+<!-- Progress dots -->
+<div class="flex flex-wrap gap-2 mb-4 justify-center" id="progress-dots"></div>
+<!-- ══════ FLAG SVG CANVAS ══════ -->
+<!--
     AUSTRALIAN FLAG (2:1) — viewBox 900×450
     ┌────────────────────────────────────────────────────┐
     │  Union Jack (0,0)–(450,225)  │                     │
@@ -166,188 +159,178 @@ tailwind.config = {
                       fed-star, star-alpha, star-beta, star-gamma,
                       star-delta, star-epsilon
   -->
-  <div class="w-full max-w-2xl bg-white rounded-xl shadow-2xl p-2 border-4 border-surface-container-highest overflow-hidden"
-       style="aspect-ratio:2/1">
-    <svg id="aus-flag" viewBox="0 0 900 450" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-
-      <!-- ① NAVY BLUE FIELD (full background) -->
-      <rect data-region="field"
-            x="0" y="0" width="900" height="450"
-            fill="#c8d8f0" stroke="#9ab0cc" stroke-width="2"
-            class="flag-region"/>
-
-      <!-- ② UNION JACK CANTON (top-left 450×225) -->
-      <!-- UJ base — same blue as field, linked in JS -->
-      <rect data-region="uj-bg"
-            x="0" y="0" width="450" height="225"
-            fill="#c8d8f0" stroke="none"
-            class="flag-region"/>
-
-      <!-- White St Andrew diagonals (pre-drawn, not interactive) -->
-      <line x1="0"   y1="0"   x2="450" y2="225" stroke="#ffffff" stroke-width="56" pointer-events="none"/>
-      <line x1="450" y1="0"   x2="0"   y2="225" stroke="#ffffff" stroke-width="56" pointer-events="none"/>
-
-      <!-- ③ RED diagonal / St Patrick cross stripes — INTERACTIVE -->
-      <!-- Upper-left→lower-right stripe (offset +left) -->
-      <g data-region="uj-diag-red" class="flag-region">
-        <polygon points="0,0  36,0  450,206 450,225 414,225 0,19"   fill="#ffb8b8" stroke="none"/>
-        <!-- Upper-right→lower-left stripe (offset +right) -->
-        <polygon points="414,0 450,0 450,19  36,225  0,225  0,206" fill="#ffb8b8" stroke="none"/>
-      </g>
-
-      <!-- White St George cross bands (pre-drawn, not interactive) -->
-      <rect x="175" y="0"  width="100" height="225" fill="#ffffff" pointer-events="none"/>
-      <rect x="0"   y="88" width="450" height="100" fill="#ffffff" pointer-events="none"/>
-
-      <!-- ④ RED St George cross stripes — INTERACTIVE -->
-      <g data-region="uj-cross-red" class="flag-region">
-        <rect x="192" y="0"  width="66" height="225" fill="#ffb8b8" stroke="none"/>
-        <rect x="0"   y="104" width="450" height="68" fill="#ffb8b8" stroke="none"/>
-      </g>
-
-      <!-- ⑤ FEDERATION STAR — 7-pointed, centred ~(225,345) outer-r=70, inner-r=28 -->
-      <!-- Points computed: 7 outer (every 360/7 = ~51.4°), 7 inner midway -->
-      <polygon data-region="fed-star" class="flag-region"
-        points="
+<div class="w-full max-w-2xl bg-white rounded-xl shadow-2xl p-2 border-4 border-surface-container-highest overflow-hidden" style="aspect-ratio:2/1">
+<svg class="w-full h-full" id="aus-flag" viewbox="0 0 900 450" xmlns="http://www.w3.org/2000/svg">
+<!-- ① NAVY BLUE FIELD (full background) -->
+<rect class="flag-region" data-region="field" fill="#c8d8f0" height="450" stroke="#9ab0cc" stroke-width="2" width="900" x="0" y="0"></rect>
+<!-- ② UNION JACK CANTON (top-left 450×225) -->
+<!-- UJ base — same blue as field, linked in JS -->
+<rect class="flag-region" data-region="uj-bg" fill="#c8d8f0" height="225" stroke="none" width="450" x="0" y="0"></rect>
+<!-- White St Andrew diagonals (pre-drawn, not interactive) -->
+<line pointer-events="none" stroke="#ffffff" stroke-width="56" x1="0" x2="450" y1="0" y2="225"></line>
+<line pointer-events="none" stroke="#ffffff" stroke-width="56" x1="450" x2="0" y1="0" y2="225"></line>
+<!-- ③ RED diagonal / St Patrick cross stripes — INTERACTIVE -->
+<!-- Upper-left→lower-right stripe (offset +left) -->
+<g class="flag-region" data-region="uj-diag-red">
+<polygon fill="#ffb8b8" points="0,0  36,0  450,206 450,225 414,225 0,19" stroke="none"></polygon>
+<!-- Upper-right→lower-left stripe (offset +right) -->
+<polygon fill="#ffb8b8" points="414,0 450,0 450,19  36,225  0,225  0,206" stroke="none"></polygon>
+</g>
+<!-- White St George cross bands (pre-drawn, not interactive) -->
+<rect fill="#ffffff" height="225" pointer-events="none" width="100" x="175" y="0"></rect>
+<rect fill="#ffffff" height="100" pointer-events="none" width="450" x="0" y="88"></rect>
+<!-- ④ RED St George cross stripes — INTERACTIVE -->
+<g class="flag-region" data-region="uj-cross-red">
+<rect fill="#ffb8b8" height="225" stroke="none" width="66" x="192" y="0"></rect>
+<rect fill="#ffb8b8" height="68" stroke="none" width="450" x="0" y="104"></rect>
+</g>
+<!-- ⑤ FEDERATION STAR — 7-pointed, centred ~(225,345) outer-r=70, inner-r=28 -->
+<!-- Points computed: 7 outer (every 360/7 = ~51.4°), 7 inner midway -->
+<polygon class="flag-region" data-region="fed-star" fill="#e8e8e8" points="
           225,275
           238,314  261,293  249,332  279,345  249,358  261,397
           225,376  189,397  201,358  171,345  201,332  189,293
           212,314
-        "
-        fill="#e8e8e8" stroke="#bbbbbb" stroke-width="2"/>
-
-      <!-- ⑥ SOUTHERN CROSS — right half of flag -->
-      <!-- Alpha Crucis — largest (bottom-center) ~(665,355) r=40 -->
-      <polygon data-region="star-alpha" class="flag-region"
-        points="665,315 677,349 713,349 684,370 695,404 665,383 635,404 646,370 617,349 653,349"
-        fill="#e8e8e8" stroke="#bbbbbb" stroke-width="2"/>
-
-      <!-- Gamma Crucis — (665,155) r=38 -->
-      <polygon data-region="star-gamma" class="flag-region"
-        points="665,117 677,150 712,150 684,170 695,204 665,183 635,204 646,170 618,150 653,150"
-        fill="#e8e8e8" stroke="#bbbbbb" stroke-width="2"/>
-
-      <!-- Beta Crucis — (795,225) r=38 -->
-      <polygon data-region="star-beta" class="flag-region"
-        points="795,187 807,220 842,220 814,240 825,274 795,253 765,274 776,240 748,220 783,220"
-        fill="#e8e8e8" stroke="#bbbbbb" stroke-width="2"/>
-
-      <!-- Delta Crucis — (555,245) r=34 -->
-      <polygon data-region="star-delta" class="flag-region"
-        points="555,211 565,240 596,240 572,257 581,287 555,270 529,287 538,257 514,240 545,240"
-        fill="#e8e8e8" stroke="#bbbbbb" stroke-width="2"/>
-
-      <!-- Epsilon Crucis — small (745,305) r=22 -->
-      <polygon data-region="star-epsilon" class="flag-region"
-        points="745,283 752,305 775,305 757,319 764,341 745,327 726,341 733,319 715,305 738,305"
-        fill="#e8e8e8" stroke="#bbbbbb" stroke-width="2"/>
-
-      <!-- Flag border -->
-      <rect x="1" y="1" width="898" height="448" fill="none" stroke="#8899aa" stroke-width="3" pointer-events="none"/>
-    </svg>
-  </div>
-
-  <!-- ══════ COLOR PALETTE ══════ -->
-  <div class="mt-6 w-full max-w-lg grid grid-cols-3 gap-gutter">
-
-    <!-- Azul / Blue -->
-    <button class="flex flex-col items-center gap-unit" onclick="selectColor('azul')">
-      <div id="palette-azul"
-           class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150"
-           style="background-color:#00247d; border-color:#001050;">
-        <span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark"
-              style="font-variation-settings:'FILL' 1;">check</span>
-      </div>
-      <div class="text-center">
-        <p class="font-label-bold text-label-bold text-on-surface">Azul</p>
-        <p class="text-xs text-on-surface-variant font-medium">Blue</p>
-      </div>
-    </button>
-
-    <!-- Blanco / White -->
-    <button class="flex flex-col items-center gap-unit" onclick="selectColor('blanco')">
-      <div id="palette-blanco"
-           class="w-20 h-20 rounded-full bg-white border-b-8 border-outline-variant chunky-button flex items-center justify-center transition-all duration-150">
-        <span class="material-symbols-outlined text-primary text-headline-md opacity-0 check-mark"
-              style="font-variation-settings:'FILL' 1;">check</span>
-      </div>
-      <div class="text-center">
-        <p class="font-label-bold text-label-bold text-on-surface">Blanco</p>
-        <p class="text-xs text-on-surface-variant font-medium">White</p>
-      </div>
-    </button>
-
-    <!-- Rojo / Red -->
-    <button class="flex flex-col items-center gap-unit" onclick="selectColor('rojo')">
-      <div id="palette-rojo"
-           class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150"
-           style="background-color:#cf142b; border-color:#8c0e1d;">
-        <span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark"
-              style="font-variation-settings:'FILL' 1;">check</span>
-      </div>
-      <div class="text-center">
-        <p class="font-label-bold text-label-bold text-on-surface">Rojo</p>
-        <p class="text-xs text-on-surface-variant font-medium">Red</p>
-      </div>
-    </button>
-  </div>
-
-  <!-- ══════ ACTION BUTTONS ══════ -->
-  <div class="mt-6 flex gap-gutter">
-    <button id="reset-btn"
-            class="chunky-button px-gutter py-unit bg-surface-container-highest border-b-4 border-outline-variant rounded-lg flex items-center gap-2 font-label-bold text-on-surface-variant">
-      <span class="material-symbols-outlined">restart_alt</span>
+        " stroke="#bbbbbb" stroke-width="2"></polygon>
+<!-- ⑥ SOUTHERN CROSS — right half of flag -->
+<!-- Alpha Crucis — largest (bottom-center) ~(665,355) r=40 -->
+<polygon class="flag-region" data-region="star-alpha" fill="#e8e8e8" points="665,315 677,349 713,349 684,370 695,404 665,383 635,404 646,370 617,349 653,349" stroke="#bbbbbb" stroke-width="2"></polygon>
+<!-- Gamma Crucis — (665,155) r=38 -->
+<polygon class="flag-region" data-region="star-gamma" fill="#e8e8e8" points="665,117 677,150 712,150 684,170 695,204 665,183 635,204 646,170 618,150 653,150" stroke="#bbbbbb" stroke-width="2"></polygon>
+<!-- Beta Crucis — (795,225) r=38 -->
+<polygon class="flag-region" data-region="star-beta" fill="#e8e8e8" points="795,187 807,220 842,220 814,240 825,274 795,253 765,274 776,240 748,220 783,220" stroke="#bbbbbb" stroke-width="2"></polygon>
+<!-- Delta Crucis — (555,245) r=34 -->
+<polygon class="flag-region" data-region="star-delta" fill="#e8e8e8" points="555,211 565,240 596,240 572,257 581,287 555,270 529,287 538,257 514,240 545,240" stroke="#bbbbbb" stroke-width="2"></polygon>
+<!-- Epsilon Crucis — small (745,305) r=22 -->
+<polygon class="flag-region" data-region="star-epsilon" fill="#e8e8e8" points="745,283 752,305 775,305 757,319 764,341 745,327 726,341 733,319 715,305 738,305" stroke="#bbbbbb" stroke-width="2"></polygon>
+<!-- Flag border -->
+<rect fill="none" height="448" pointer-events="none" stroke="#8899aa" stroke-width="3" width="898" x="1" y="1"></rect>
+</svg>
+</div>
+<!-- ══════ COLOR PALETTE ══════ -->
+<div class="mt-6 w-full max-w-lg grid grid-cols-3 gap-gutter">
+<!-- Azul / Blue -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('azul')">
+<div class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150" id="palette-azul" style="background-color:#00247d; border-color:#001050;">
+<span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark" style="font-variation-settings:'FILL' 1;">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Azul</p>
+<p class="text-xs text-on-surface-variant font-medium">Blue</p>
+</div>
+</button>
+<!-- Blanco / White -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('blanco')">
+<div class="w-20 h-20 rounded-full bg-white border-b-8 border-outline-variant chunky-button flex items-center justify-center transition-all duration-150" id="palette-blanco">
+<span class="material-symbols-outlined text-primary text-headline-md opacity-0 check-mark" style="font-variation-settings:'FILL' 1;">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Blanco</p>
+<p class="text-xs text-on-surface-variant font-medium">White</p>
+</div>
+</button>
+<!-- Rojo / Red -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('rojo')">
+<div class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150" id="palette-rojo" style="background-color:#cf142b; border-color:#8c0e1d;">
+<span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark" style="font-variation-settings:'FILL' 1;">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Rojo</p>
+<p class="text-xs text-on-surface-variant font-medium">Red</p>
+</div>
+</button>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
+<!-- ══════ ACTION BUTTONS ══════ -->
+<div class="mt-6 flex gap-gutter">
+<button class="chunky-button px-gutter py-unit bg-surface-container-highest border-b-4 border-outline-variant rounded-lg flex items-center gap-2 font-label-bold text-on-surface-variant" id="reset-btn">
+<span class="material-symbols-outlined">restart_alt</span>
       Reiniciar
     </button>
-    <button id="finish-btn"
-            class="chunky-button px-6 py-unit bg-tertiary-container border-b-4 border-tertiary text-on-tertiary-container rounded-lg flex items-center gap-2 font-label-bold">
-      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">auto_awesome</span>
+<button class="chunky-button px-6 py-unit bg-tertiary-container border-b-4 border-tertiary text-on-tertiary-container rounded-lg flex items-center gap-2 font-label-bold" id="finish-btn">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">auto_awesome</span>
       ¡Listo!
     </button>
-  </div>
+</div>
 </main>
-
 <!-- ══════════ BOTTOM NAV ══════════ -->
 <nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface shadow-lg border-t-4 border-surface-container-highest z-50 rounded-t-lg">
-  <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95"
-     href="../world_map_hub/index.html">
-    <span class="material-symbols-outlined">explore</span>
-    <span class="font-label-bold text-[10px] uppercase mt-1">Explorar</span>
-  </a>
-  <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95"
-     href="../mi_pasaporte_passport/index.html">
-    <span class="material-symbols-outlined">menu_book</span>
-    <span class="font-label-bold text-[10px] uppercase mt-1">Pasaporte</span>
-  </a>
-  <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95"
-     href="../sesi_n_de_quiz_biling_e/index.html">
-    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">videogame_asset</span>
-    <span class="font-label-bold text-[10px] uppercase mt-1">Jugar</span>
-  </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="../world_map_hub/index.html">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="../mi_pasaporte_passport/index.html">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95" href="../sesi_n_de_quiz_biling_e/index.html">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Jugar</span>
+</a>
 </nav>
-
 <!-- ══════════ SUCCESS MODAL ══════════ -->
-<div id="celebration" class="fixed inset-0 z-[100] hidden items-center justify-center bg-white/90 backdrop-blur-sm">
-  <div class="text-center animate-bounce px-8">
-    <div class="relative inline-block">
-      <div class="absolute inset-0 bg-secondary-fixed blur-3xl opacity-50 scale-150"></div>
-      <span class="material-symbols-outlined text-[120px] text-secondary relative z-10"
-            style="font-variation-settings:'FILL' 1;">workspace_premium</span>
-    </div>
-    <h2 class="font-headline-lg text-headline-lg text-on-background mt-4">¡Increíble!</h2>
-    <p class="font-body-lg text-body-lg text-on-surface-variant">Has pintado la bandera de Australia</p>
-    <p class="font-body-md text-body-md text-on-surface-variant opacity-70 mt-1">You painted Australia's flag!</p>
-    <button class="mt-6 chunky-button px-8 py-4 bg-primary text-on-primary border-b-8 border-on-primary-fixed-variant rounded-xl font-headline-md"
-            onclick="location.reload()">
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-white/90 backdrop-blur-sm" id="celebration">
+<div class="text-center animate-bounce px-8">
+<div class="relative inline-block">
+<div class="absolute inset-0 bg-secondary-fixed blur-3xl opacity-50 scale-150"></div>
+<span class="material-symbols-outlined text-[120px] text-secondary relative z-10" style="font-variation-settings:'FILL' 1;">workspace_premium</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mt-4">¡Increíble!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Has pintado la bandera de Australia</p>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70 mt-1">You painted Australia's flag!</p>
+<button class="mt-6 chunky-button px-8 py-4 bg-primary text-on-primary border-b-8 border-on-primary-fixed-variant rounded-xl font-headline-md" onclick="location.reload()">
       Jugar de Nuevo
     </button>
-  </div>
 </div>
-
+</div>
 <!-- ══════════════════════════════════════════════════════════
      JAVASCRIPT
 ══════════════════════════════════════════════════════════ -->
 <script>
+        const AudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
+        };
+const COUNTRY_ID = 'australia';
+
 // ─────────────────────────────────────────────
 //  AUDIO CONTROLLER
 // ─────────────────────────────────────────────
@@ -624,13 +607,8 @@ function resetFlag() {
 // ─────────────────────────────────────────────
 //  GLOBAL SPEAK FUNCTIONS (called from HTML)
 // ─────────────────────────────────────────────
-function speakCountry() {
-  Audio.speak('Australia', 'Australia');
-}
-function triggerAlarm() {
-  Audio.alarm();
-  setTimeout(() => Audio.speak('¡Alarma de Australia!', 'Australia Alarm!'), 750);
-}
+function speakCountry() { AudioController.speakBilingual('Australia', 'Australia'); }
+function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Australia!', 'Australia Alarm!'), 750); }
 
 // ─────────────────────────────────────────────
 //  INIT
@@ -649,6 +627,43 @@ document.addEventListener('DOMContentLoaded', () => {
   // Auto-announce country after short delay
   setTimeout(speakCountry, 900);
 });
-</script>
+
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
+
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body>
 </html>

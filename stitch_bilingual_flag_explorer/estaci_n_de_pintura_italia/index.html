@@ -1,10 +1,11 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -122,17 +123,25 @@
         .pulse-audio {
             animation: pulse-yellow 2s infinite ease-in-out;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col overflow-x-hidden">
 <!-- Top Navigation Bar -->
 <header class="w-full top-0 sticky bg-surface flex justify-between items-center px-container-margin py-unit h-touch-target-min z-50">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary" data-icon="language">language</span>
-<h1 class="font-headline-md text-headline-md-mobile text-primary">Explorador de Banderas</h1>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">Estación de Pintura (Italia)</h1>
 </div>
-<div class="flex items-center gap-4"><button onclick="triggerAlarm()" class="tactile-button p-2 rounded-full bg-secondary-container shadow-[0_4px_0_0_#6d5700] hover:bg-surface-container-high transition-colors flex flex-col items-center justify-center min-w-[64px]" aria-label="Alarma"><span class="material-symbols-outlined text-on-secondary-container text-[24px]" data-icon="notifications_active">notifications_active</span><div class="flex flex-col items-center -mt-1"><span class="text-[8px] font-bold text-on-secondary-container uppercase leading-none">¡Alarma!</span><span class="text-[8px] font-bold text-on-secondary-container uppercase leading-none">Alarm</span></div></button>
-<button onclick="speakCountry()" class="tactile-button p-2 rounded-full hover:bg-surface-container-high transition-colors" aria-label="Escuchar nombre">
+<div class="flex items-center gap-4"><button aria-label="Alarma" class="tactile-button p-2 rounded-full bg-secondary-container shadow-[0_4px_0_0_#6d5700] hover:bg-surface-container-high transition-colors flex flex-col items-center justify-center min-w-[64px]" onclick="triggerAlarm()"><span class="material-symbols-outlined text-on-secondary-container text-[24px]" data-icon="notifications_active">notifications_active</span><div class="flex flex-col items-center -mt-1"><span class="text-[8px] font-bold text-on-secondary-container uppercase leading-none">¡Alarma!</span><span class="text-[8px] font-bold text-on-secondary-container uppercase leading-none">Alarm</span></div></button>
+<button aria-label="Escuchar nombre" class="tactile-button p-2 rounded-full hover:bg-surface-container-high transition-colors" onclick="speakCountry()">
 <span class="material-symbols-outlined text-primary text-[32px]" data-icon="volume_up">volume_up</span>
 </button>
 <button class="tactile-button p-2 rounded-full hover:bg-surface-container-high transition-colors">
@@ -205,7 +214,7 @@
 <div class="text-[12px] font-bold text-outline uppercase">Red</div>
 </div>
 </button>
-</div>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 </main>
 <!-- Bottom Navigation Bar (Fixed) -->
 <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-container-margin pb-6 pt-2 bg-surface-container-lowest border-t-4 border-surface-variant shadow-lg z-50">
@@ -226,103 +235,48 @@
 
     // Audio Controller Module
     const AudioController = {
-        ctx: null,
-        
-        initContext() {
-            if (!this.ctx) {
-                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            ctx: null,
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
             }
-            if (this.ctx && this.ctx.state === 'suspended') {
-                this.ctx.resume();
-            }
-        },
-
-        playSynth(freq, type, duration = 0.2, volume = 0.1) {
-            try {
-                this.initContext();
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-                gain.gain.setValueAtTime(volume, this.ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + duration);
-            } catch(e) {
-                console.log(e);
-            }
-        },
-
-        boing() {
-            this.playSynth(150, 'sine', 0.3, 0.25);
-            this.playSynth(100, 'square', 0.1, 0.05);
-        },
-
-        sparkleSound() {
-            try {
-                this.initContext();
-                const now = this.ctx.currentTime;
-                [880, 1100, 1320].forEach((f, i) => {
-                    setTimeout(() => {
-                        this.playSynth(f, 'triangle', 0.15, 0.05);
-                    }, i * 60);
-                });
-            } catch(e) {}
-        },
-
-        victory() {
-            try {
-                this.initContext();
-                const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
-                notes.forEach((f, i) => {
-                    setTimeout(() => this.playSynth(f, 'sine', 0.4, 0.1), i * 120);
-                });
-            } catch(e) {}
-        },
-
-        alarmSound() {
-            try {
-                this.initContext();
-                const now = this.ctx.currentTime;
-                for (let j = 0; j < 3; j++) {
-                    setTimeout(() => {
-                        const osc = this.ctx.createOscillator();
-                        const gain = this.ctx.createGain();
-                        osc.type = 'sawtooth';
-                        osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-                        osc.frequency.linearRampToValueAtTime(1000, this.ctx.currentTime + 0.15);
-                        osc.frequency.linearRampToValueAtTime(800, this.ctx.currentTime + 0.3);
-                        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-                        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
-                        osc.connect(gain);
-                        gain.connect(this.ctx.destination);
-                        osc.start();
-                        osc.stop(this.ctx.currentTime + 0.35);
-                    }, j * 350);
-                }
-            } catch(e) {}
-        },
-
-        speakBilingual(es, en) {
-            if (!('speechSynthesis' in window)) return;
-            this.initContext();
-            try { window.speechSynthesis.cancel(); } catch(e) {}
-            setTimeout(() => {
-            const uEs = new SpeechSynthesisUtterance(es);
-            uEs.lang = 'es-ES';
-            uEs.rate = 0.95;
-            uEs.onend = () => {
-                const uEn = new SpeechSynthesisUtterance(en);
-                uEn.lang = 'en-US';
-                uEn.rate = 0.95;
-                window.speechSynthesis.speak(uEn);
-            };
-            window.speechSynthesis.speak(uEs);
-            }, 80);
-        }
-    };
+        };
 
     // Country configuration
     const COUNTRY_ID = 'italy';
@@ -331,16 +285,9 @@
     const ALARM_TEXT_ES = '¡Alarma de Italia!';
     const ALARM_TEXT_EN = 'Italy Alarm!';
 
-    function speakCountry() {
-        AudioController.speakBilingual(COUNTRY_NAME_ES, COUNTRY_NAME_EN);
-    }
+    function speakCountry() { AudioController.speakBilingual('Italia', 'Italy'); }
 
-    function triggerAlarm() {
-        AudioController.alarmSound();
-        setTimeout(() => {
-            AudioController.speakBilingual(ALARM_TEXT_ES, ALARM_TEXT_EN);
-        }, 600);
-    }
+    function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Italia!', 'Italy Alarm!'), 750); }
 
         let currentColor = null;
         let activeColorName = null;
@@ -434,7 +381,42 @@
             }
         }
         
-</script>
 
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

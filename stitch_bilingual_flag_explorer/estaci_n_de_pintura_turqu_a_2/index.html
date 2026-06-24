@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Turquía - Flag Adventure</title>
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Turquía)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
@@ -47,7 +48,15 @@
             background-image: radial-gradient(#dee3e9 1px, transparent 1px);
             background-size: 24px 24px;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -140,14 +149,14 @@
 <!-- TopAppBar -->
 <header class="w-full top-0 sticky z-40 bg-surface-container-low flex items-center justify-between px-container-margin py-unit transition-all duration-100">
 <div class="flex items-center gap-4">
-<button onclick="window.location.href='../world_map_hub/index.html'" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all" aria-label="Volver">
+<button aria-label="Volver" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined">arrow_back</span>
 </button>
-<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary">Flag Adventure</h1>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary">Estación de Pintura (Turquía)</h1>
 </div>
 <div class="flex items-center">
-<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg mr-2" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma!</span></button>
-<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all" aria-label="Escuchar nombre">
+<button aria-label="Alarma" class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full border-b-4 border-on-secondary-fixed-variant active:translate-y-1 transition-all shadow-lg mr-2" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma!</span></button>
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container text-primary active:translate-y-1 transition-all" onclick="speakCountry()">
 <span class="material-symbols-outlined">volume_up</span>
 </button>
 </div>
@@ -173,7 +182,7 @@
 </button>
 </div>
 <div class="w-full aspect-[3/2] max-w-md bg-white border-2 border-surface-variant rounded-lg overflow-hidden shadow-inner flex items-center justify-center p-4">
-<svg class="w-full h-full drop-shadow-sm" id="turkey-flag" viewBox="0 0 1200 800">
+<svg class="w-full h-full drop-shadow-sm" id="turkey-flag" viewbox="0 0 1200 800">
 <!-- Flag Background -->
 <rect class="paint-target" fill="#f0f4fb" height="800" id="flag-bg" onclick="paint('flag-bg')" stroke="#dee3e9" stroke-width="4" width="1200" x="0" y="0"></rect>
 <!-- Moon -->
@@ -212,7 +221,7 @@
 <button class="w-full py-6 rounded-lg bg-tertiary-container text-on-tertiary-container font-headline-md text-headline-md border-b-[8px] border-tertiary active:border-b-0 active:translate-y-[8px] transition-all" id="check-btn">
                 ¡Revisar Bandera!
             </button>
-</div>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 </main>
 <!-- BottomNavBar -->
 <nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
@@ -231,7 +240,6 @@
 </nav>
 <!-- Success Modal (Hidden by default) -->
 <div class="fixed inset-0 z-[100] bg-secondary-container hidden flex-col items-center justify-center p-container-margin text-center" id="success-modal">
-
 <div class="relative z-10 scale-0 transition-transform duration-500 ease-out flex flex-col items-center" id="modal-content">
 <div class="w-48 h-48 bg-white rounded-full flex items-center justify-center mb-6 shadow-2xl border-8 border-tertiary-container">
 <span class="material-symbols-outlined text-tertiary-container text-[120px]" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -243,16 +251,54 @@
             </button>
 </div>
 </div>
-<script>
+<script>const COUNTRY_ID = 'turqu_a_2';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Turquía','Turkey'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Turquía!','Turkey Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Turquía', 'Turkey'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Turquía!', 'Turkey Alarm!'), 750); }
 
         let selectedColor = null;
 
@@ -322,7 +368,42 @@
                 location.reload(); // Reset for next play
             }, 300);
         }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

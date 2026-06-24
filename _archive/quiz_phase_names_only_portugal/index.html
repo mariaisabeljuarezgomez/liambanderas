@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Tactile Button Effect */
+        .btn-tactile-primary {
+            @apply transition-all duration-75 active:translate-y-1 active:shadow-none;
+            box-shadow: 0 4px 0 #004b71;
+        }
+        .btn-tactile-secondary {
+            @apply transition-all duration-75 active:translate-y-1 active:shadow-none;
+            box-shadow: 0 4px 0 #bec8d3;
+        }
+        .btn-tactile-yellow {
+            @apply transition-all duration-75 active:translate-y-1 active:shadow-none;
+            box-shadow: 0 6px 0 #b38f00;
+        }
+        
+        /* Card Tactile Effect */
+        .card-tactile {
+            box-shadow: 0 6px 0 #eaeef5;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .card-tactile:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #eaeef5;
+        }
+
+        /* Progress Bar Animation */
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse-audio {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#90cdff",
+                        "outline": "#6e7882",
+                        "on-background": "#171c21",
+                        "surface-container-low": "#f0f4fb",
+                        "primary-fixed": "#cbe6ff",
+                        "inverse-surface": "#2c3136",
+                        "inverse-on-surface": "#edf1f8",
+                        "tertiary-fixed": "#92fc58",
+                        "on-tertiary-container": "#1a4600",
+                        "background": "#f7f9ff",
+                        "on-error-container": "#93000a",
+                        "secondary": "#735c00",
+                        "surface-bright": "#f7f9ff",
+                        "secondary-container": "#fccc00",
+                        "secondary-fixed": "#ffe084",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#77de3d",
+                        "primary": "#006495",
+                        "tertiary-container": "#59be1b",
+                        "on-primary-fixed-variant": "#004b71",
+                        "on-surface-variant": "#3e4851",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#bec8d3",
+                        "on-surface": "#171c21",
+                        "on-primary-container": "#004163",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#6d5700",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#90cdff",
+                        "surface-variant": "#dee3e9",
+                        "secondary-fixed-dim": "#efc200",
+                        "primary-container": "#2bb1ff",
+                        "on-tertiary-fixed": "#082100",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#574500",
+                        "tertiary": "#2b6c00",
+                        "surface": "#f7f9ff",
+                        "on-tertiary-fixed-variant": "#1f5100",
+                        "surface-container-highest": "#dee3e9",
+                        "on-secondary-fixed": "#231b00",
+                        "surface-container": "#eaeef5",
+                        "on-primary-fixed": "#001e30",
+                        "surface-tint": "#006495",
+                        "surface-container-high": "#e4e8ef",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d6dae1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "20px",
+                        "touch-target-min": "48px",
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Quicksand"],
+                        "headline-lg": ["Quicksand"],
+                        "label-bold": ["Quicksand"],
+                        "headline-lg-mobile": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "headline-md": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface-container-low flex items-center justify-between px-container-margin py-unit h-16">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container transition-all active:translate-y-1">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Flag Adventure</h1>
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container transition-all active:translate-y-1">
+<span class="material-symbols-outlined text-primary">volume_up</span>
+</button>
+</header>
+<main class="flex-1 flex flex-col items-center px-container-margin pt-4 pb-24 max-w-2xl mx-auto w-full">
+<!-- Progress Bar Section -->
+<div class="w-full flex items-center gap-4 mb-8">
+<div class="flex-1 h-4 bg-surface-container-high rounded-full overflow-hidden border-2 border-surface-variant">
+<div class="h-full bg-tertiary-container w-[40%] rounded-r-full transition-all duration-500 shadow-inner"></div>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface-variant">4/10</span>
+</div>
+<!-- Question Section -->
+<div class="flex flex-col items-center text-center mb-10">
+<!-- Audio Replay Button -->
+<button class="pulse-audio w-24 h-24 bg-secondary-container rounded-full flex items-center justify-center mb-6 btn-tactile-yellow group">
+<span class="material-symbols-outlined text-on-secondary-container text-5xl filled-icon">volume_up</span>
+</button>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">
+                ¿Cuál es la bandera de Portugal?
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant italic">
+                (Which is the flag of Portugal?)
+            </p>
+</div>
+<!-- Flag Options Grid -->
+<div class="grid grid-cols-1 gap-6 w-full mb-12">
+<!-- Option 1: Chile -->
+<button class="card-tactile group relative w-full aspect-[2/1] bg-surface-container-lowest border-2 border-surface-variant rounded-lg p-4 flex items-center justify-center overflow-hidden"><div class="flex flex-col items-center justify-center h-full w-full"><span class="font-headline-md-mobile text-on-surface">Chile / Chile</span></div><div class="absolute inset-0 bg-primary/10 opacity-0 group-active:opacity-100 transition-opacity"></div></button>
+<!-- Option 2: Portugal (Correct) -->
+<button class="card-tactile group relative w-full aspect-[2/1] bg-surface-container-lowest border-2 border-surface-variant rounded-lg p-4 flex items-center justify-center overflow-hidden"><div class="flex flex-col items-center justify-center h-full w-full"><span class="font-headline-md-mobile text-on-surface">Portugal / Portugal</span></div><div class="absolute inset-0 bg-primary/10 opacity-0 group-active:opacity-100 transition-opacity"></div></button>
+<!-- Option 3: Turkey -->
+<button class="card-tactile group relative w-full aspect-[2/1] bg-surface-container-lowest border-2 border-surface-variant rounded-lg p-4 flex items-center justify-center overflow-hidden"><div class="flex flex-col items-center justify-center h-full w-full"><span class="font-headline-md-mobile text-on-surface">Turquía / Turkey</span></div><div class="absolute inset-0 bg-primary/10 opacity-0 group-active:opacity-100 transition-opacity"></div></button>
+</div>
+<!-- Star Reward System -->
+<div class="flex flex-col items-center gap-3">
+<p class="font-label-bold text-label-bold text-secondary uppercase tracking-widest">Rewards</p>
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-secondary-container rounded-full flex items-center justify-center shadow-md border-2 border-white">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl filled-icon">star</span>
+</div>
+<div class="w-14 h-14 bg-secondary-container rounded-full flex items-center justify-center shadow-md border-2 border-white">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl filled-icon">star</span>
+</div>
+<div class="w-14 h-14 bg-secondary-container rounded-full flex items-center justify-center shadow-md border-2 border-white">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl filled-icon">star</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-transform duration-75 active:translate-y-1" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0" href="#">
+<span class="material-symbols-outlined filled-icon">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for flag selection
+        document.querySelectorAll('.card-tactile').forEach(button => {
+            button.addEventListener('click', function() {
+                // Audio feedback would go here in a real app
+                const isCorrect = this.querySelector('img').getAttribute('data-alt').includes('Portugal');
+                
+                if(isCorrect) {
+                    this.classList.remove('border-surface-variant');
+                    this.classList.add('border-tertiary-container', 'bg-tertiary-fixed');
+                    // Create simple celebration effect
+                    const stars = document.querySelectorAll('.filled-icon');
+                    stars.forEach(star => {
+                        star.classList.add('animate-bounce');
+                        setTimeout(() => star.classList.remove('animate-bounce'), 1000);
+                    });
+                } else {
+                    this.classList.add('animate-shake');
+                    this.classList.remove('border-surface-variant');
+                    this.classList.add('border-error');
+                    setTimeout(() => {
+                        this.classList.remove('animate-shake', 'border-error');
+                        this.classList.add('border-surface-variant');
+                    }, 500);
+                }
+            });
+        });
+
+        // Add shake animation style
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-8px); }
+                75% { transform: translateX(8px); }
+            }
+            .animate-shake {
+                animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+    <!-- Custom Feedback Modal -->
+    <div id="quiz-feedback-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex-col items-center justify-center p-6 backdrop-blur-sm transition-all">
+        <div id="quiz-modal-content" class="bg-surface-container-lowest p-8 rounded-3xl w-full max-w-sm flex flex-col items-center text-center gap-6 transform transition-transform scale-95 border-b-8 border-primary-container shadow-2xl">
+            <div id="quiz-modal-icon-bg" class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-2 animate-bounce">
+                <span id="quiz-modal-icon" class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <div>
+                <h2 id="quiz-modal-title" class="font-headline-lg text-primary mb-2">¡Excelente!</h2>
+                <p id="quiz-modal-subtitle" class="font-body-lg text-on-surface-variant">Great job!</p>
+            </div>
+            <button onclick="document.getElementById('quiz-feedback-modal').classList.replace('flex', 'hidden');" class="w-full py-4 bg-primary text-white font-label-bold rounded-full active:scale-95 transition-transform mt-2 border-b-4 border-on-primary-container">
+                CONTINUAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const QuizAudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+            playSuccess() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, this.ctx.currentTime + 0.3); // C6
+                
+                gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.5);
+            },
+            playError() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.3);
+                
+                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            alarm() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime + 0.5);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.75);
+                
+                gain.gain.value = 0.1;
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 1.0);
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { window.speechSynthesis.cancel(); } catch(e) {}
+                
+                setTimeout(() => {
+                    const uEs = new SpeechSynthesisUtterance(es);
+                    uEs.lang = 'es-ES';
+                    uEs.rate = 0.95;
+                    
+                    uEs.onend = () => {
+                        const uEn = new SpeechSynthesisUtterance(en);
+                        uEn.lang = 'en-US';
+                        uEn.rate = 0.95;
+                        window.speechSynthesis.speak(uEn);
+                    };
+                    window.speechSynthesis.speak(uEs);
+                }, 80);
+            }
+        };
+    </script>
+
+</body></html>

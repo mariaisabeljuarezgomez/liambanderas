@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html class="light" lang="es">
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Estación de Pintura: México</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (México)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
 tailwind.config = {
   darkMode: "class",
@@ -65,180 +66,197 @@ tailwind.config = {
     60% { transform: translateX(-4px); } 80% { transform: translateX(4px); }
   }
   .shake { animation: shake 0.35s ease; }
+
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
 </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
-
 <!-- TOP APP BAR -->
 <header class="w-full top-0 sticky bg-background border-b-4 border-surface-container-highest z-50">
-  <div class="flex items-center justify-between px-container-margin py-unit w-full">
-    <button onclick="window.location.href='../world_map_hub/index.html'"
-            class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container-high text-primary hover:opacity-80 active:translate-y-1 transition-all"
-            aria-label="Volver">
-      <span class="material-symbols-outlined text-headline-lg-mobile">arrow_back</span>
-    </button>
-    <div onclick="speakCountry()" class="flex flex-col items-center cursor-pointer select-none hover:opacity-80 transition-opacity">
-      <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">México</h1>
-      <span class="font-body-md text-body-md text-on-surface-variant">Mexico</span>
-    </div>
-    <div class="flex items-center gap-3">
-      <button id="alarm-btn" onclick="triggerAlarm()"
-              class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all"
-              aria-label="Alarma">
-        <span class="material-symbols-outlined text-2xl">notifications_active</span>
-      </button>
-      <button id="audio-main" onclick="speakCountry()"
-              class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all audio-pulse"
-              aria-label="Escuchar nombre">
-        <span class="material-symbols-outlined text-2xl">volume_up</span>
-      </button>
-    </div>
-  </div>
+<div class="flex items-center justify-between px-container-margin py-unit w-full">
+<button aria-label="Volver" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container-high text-primary hover:opacity-80 active:translate-y-1 transition-all" onclick="window.location.href='../world_map_hub/index.html'">
+<span class="material-symbols-outlined text-headline-lg-mobile">arrow_back</span>
+</button>
+<div class="flex flex-col items-center cursor-pointer select-none hover:opacity-80 transition-opacity" onclick="speakCountry()">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Estación de Pintura (México)</h1>
+<span class="font-body-md text-body-md text-on-surface-variant">Mexico</span>
+</div>
+<div class="flex items-center gap-3">
+<button aria-label="Alarma" class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all" id="alarm-btn" onclick="triggerAlarm()">
+<span class="material-symbols-outlined text-2xl">notifications_active</span>
+</button>
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-full border-b-4 border-secondary chunky-button hover:opacity-80 transition-all audio-pulse" id="audio-main" onclick="speakCountry()">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+</button>
+</div>
+</div>
 </header>
-
 <!-- MAIN -->
 <main class="flex-grow flex flex-col items-center px-container-margin pt-unit pb-32 canvas-bg">
-  <div class="w-full max-w-lg mb-4 text-center">
-    <p class="font-body-lg text-body-lg text-on-surface-variant">
+<div class="w-full max-w-lg mb-4 text-center">
+<p class="font-body-lg text-body-lg text-on-surface-variant">
       ¡Pinta la bandera! <span class="block text-body-md opacity-60">Paint the flag!</span>
-    </p>
-  </div>
-
-  <!-- Progress dots -->
-  <div id="progress-dots" class="flex gap-2 mb-4 justify-center"></div>
-
-  <!-- FLAG CANVAS
+</p>
+</div>
+<!-- Progress dots -->
+<div class="flex gap-2 mb-4 justify-center" id="progress-dots"></div>
+<!-- FLAG CANVAS
     México flag: 3 equal vertical stripes
     Left = Verde (Green #006847)
     Center = Blanco (White #FFFFFF) with eagle
     Right = Rojo (Red #CE1126)
   -->
-  <div class="w-full max-w-2xl bg-white rounded-xl shadow-2xl border-4 border-surface-container-highest overflow-hidden"
-       style="aspect-ratio:3/2">
-    <div class="flex h-full w-full">
-      <!-- Green stripe -->
-      <div id="stripe-verde" data-color="verde"
-           class="flag-section flex-1 border-r-2 border-surface-container-high flex items-center justify-center"
-           style="background-color:#d8f5e8;">
-        <span class="material-symbols-outlined text-5xl opacity-20 pointer-events-none">format_paint</span>
-      </div>
-      <!-- White stripe (center, with eagle emblem) -->
-      <div id="stripe-blanco" data-color="blanco"
-           class="flag-section flex-1 border-r-2 border-surface-container-high flex items-center justify-center relative"
-           style="background-color:#f0f0f0;">
-        <!-- Eagle silhouette (decorative, not interactive) -->
-        <svg viewBox="0 0 80 90" class="w-16 h-16 opacity-25 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="40" cy="55" rx="20" ry="28" fill="#555"/>
-          <ellipse cx="40" cy="30" rx="14" ry="16" fill="#555"/>
-          <path d="M26,40 Q10,30 8,50 Q20,55 26,48 Z" fill="#555"/>
-          <path d="M54,40 Q70,30 72,50 Q60,55 54,48 Z" fill="#555"/>
-          <ellipse cx="40" cy="22" rx="8" ry="10" fill="#555"/>
-          <path d="M34,16 L30,8 L36,14 Z" fill="#555"/>
-          <path d="M46,16 L50,8 L44,14 Z" fill="#555"/>
-        </svg>
-        <span class="material-symbols-outlined text-4xl opacity-20 absolute pointer-events-none">format_paint</span>
-      </div>
-      <!-- Red stripe -->
-      <div id="stripe-rojo" data-color="rojo"
-           class="flag-section flex-1 flex items-center justify-center"
-           style="background-color:#f8d8d8;">
-        <span class="material-symbols-outlined text-5xl opacity-20 pointer-events-none">format_paint</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- COLOR PALETTE -->
-  <div class="mt-6 w-full max-w-lg grid grid-cols-3 gap-gutter">
-    <!-- Verde / Green -->
-    <button class="flex flex-col items-center gap-unit" onclick="selectColor('verde')">
-      <div id="palette-verde"
-           class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150"
-           style="background-color:#006847; border-color:#004d33;">
-        <span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark"
-              style="font-variation-settings:'FILL' 1;">check</span>
-      </div>
-      <div class="text-center">
-        <p class="font-label-bold text-label-bold text-on-surface">Verde</p>
-        <p class="text-xs text-on-surface-variant font-medium">Green</p>
-      </div>
-    </button>
-
-    <!-- Blanco / White -->
-    <button class="flex flex-col items-center gap-unit" onclick="selectColor('blanco')">
-      <div id="palette-blanco"
-           class="w-20 h-20 rounded-full bg-white border-b-8 border-outline-variant chunky-button flex items-center justify-center transition-all duration-150">
-        <span class="material-symbols-outlined text-primary text-headline-md opacity-0 check-mark"
-              style="font-variation-settings:'FILL' 1;">check</span>
-      </div>
-      <div class="text-center">
-        <p class="font-label-bold text-label-bold text-on-surface">Blanco</p>
-        <p class="text-xs text-on-surface-variant font-medium">White</p>
-      </div>
-    </button>
-
-    <!-- Rojo / Red -->
-    <button class="flex flex-col items-center gap-unit" onclick="selectColor('rojo')">
-      <div id="palette-rojo"
-           class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150"
-           style="background-color:#ce1126; border-color:#8c0c1a;">
-        <span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark"
-              style="font-variation-settings:'FILL' 1;">check</span>
-      </div>
-      <div class="text-center">
-        <p class="font-label-bold text-label-bold text-on-surface">Rojo</p>
-        <p class="text-xs text-on-surface-variant font-medium">Red</p>
-      </div>
-    </button>
-  </div>
-
-  <!-- ACTION BUTTONS -->
-  <div class="mt-6 flex gap-gutter">
-    <button id="reset-btn"
-            class="chunky-button px-gutter py-unit bg-surface-container-highest border-b-4 border-outline-variant rounded-lg flex items-center gap-2 font-label-bold text-on-surface-variant">
-      <span class="material-symbols-outlined">restart_alt</span>
+<div class="w-full max-w-2xl bg-white rounded-xl shadow-2xl border-4 border-surface-container-highest overflow-hidden" style="aspect-ratio:3/2">
+<div class="flex h-full w-full">
+<!-- Green stripe -->
+<div class="flag-section flex-1 border-r-2 border-surface-container-high flex items-center justify-center" data-color="verde" id="stripe-verde" style="background-color:#d8f5e8;">
+<span class="material-symbols-outlined text-5xl opacity-20 pointer-events-none">format_paint</span>
+</div>
+<!-- White stripe (center, with eagle emblem) -->
+<div class="flag-section flex-1 border-r-2 border-surface-container-high flex items-center justify-center relative" data-color="blanco" id="stripe-blanco" style="background-color:#f0f0f0;">
+<!-- Eagle silhouette (decorative, not interactive) -->
+<svg class="w-16 h-16 opacity-25 pointer-events-none" viewbox="0 0 80 90" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="40" cy="55" fill="#555" rx="20" ry="28"></ellipse>
+<ellipse cx="40" cy="30" fill="#555" rx="14" ry="16"></ellipse>
+<path d="M26,40 Q10,30 8,50 Q20,55 26,48 Z" fill="#555"></path>
+<path d="M54,40 Q70,30 72,50 Q60,55 54,48 Z" fill="#555"></path>
+<ellipse cx="40" cy="22" fill="#555" rx="8" ry="10"></ellipse>
+<path d="M34,16 L30,8 L36,14 Z" fill="#555"></path>
+<path d="M46,16 L50,8 L44,14 Z" fill="#555"></path>
+</svg>
+<span class="material-symbols-outlined text-4xl opacity-20 absolute pointer-events-none">format_paint</span>
+</div>
+<!-- Red stripe -->
+<div class="flag-section flex-1 flex items-center justify-center" data-color="rojo" id="stripe-rojo" style="background-color:#f8d8d8;">
+<span class="material-symbols-outlined text-5xl opacity-20 pointer-events-none">format_paint</span>
+</div>
+</div>
+</div>
+<!-- COLOR PALETTE -->
+<div class="mt-6 w-full max-w-lg grid grid-cols-3 gap-gutter">
+<!-- Verde / Green -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('verde')">
+<div class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150" id="palette-verde" style="background-color:#006847; border-color:#004d33;">
+<span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark" style="font-variation-settings:'FILL' 1;">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Verde</p>
+<p class="text-xs text-on-surface-variant font-medium">Green</p>
+</div>
+</button>
+<!-- Blanco / White -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('blanco')">
+<div class="w-20 h-20 rounded-full bg-white border-b-8 border-outline-variant chunky-button flex items-center justify-center transition-all duration-150" id="palette-blanco">
+<span class="material-symbols-outlined text-primary text-headline-md opacity-0 check-mark" style="font-variation-settings:'FILL' 1;">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Blanco</p>
+<p class="text-xs text-on-surface-variant font-medium">White</p>
+</div>
+</button>
+<!-- Rojo / Red -->
+<button class="flex flex-col items-center gap-unit" onclick="selectColor('rojo')">
+<div class="w-20 h-20 rounded-full border-b-8 chunky-button flex items-center justify-center transition-all duration-150" id="palette-rojo" style="background-color:#ce1126; border-color:#8c0c1a;">
+<span class="material-symbols-outlined text-white text-headline-md opacity-0 check-mark" style="font-variation-settings:'FILL' 1;">check</span>
+</div>
+<div class="text-center">
+<p class="font-label-bold text-label-bold text-on-surface">Rojo</p>
+<p class="text-xs text-on-surface-variant font-medium">Red</p>
+</div>
+</button>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
+<!-- ACTION BUTTONS -->
+<div class="mt-6 flex gap-gutter">
+<button class="chunky-button px-gutter py-unit bg-surface-container-highest border-b-4 border-outline-variant rounded-lg flex items-center gap-2 font-label-bold text-on-surface-variant" id="reset-btn">
+<span class="material-symbols-outlined">restart_alt</span>
       Reiniciar
     </button>
-    <button id="finish-btn"
-            class="chunky-button px-6 py-unit bg-tertiary-container border-b-4 border-tertiary text-on-tertiary-container rounded-lg flex items-center gap-2 font-label-bold">
-      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">auto_awesome</span>
+<button class="chunky-button px-6 py-unit bg-tertiary-container border-b-4 border-tertiary text-on-tertiary-container rounded-lg flex items-center gap-2 font-label-bold" id="finish-btn">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">auto_awesome</span>
       ¡Listo!
     </button>
-  </div>
+</div>
 </main>
-
 <!-- BOTTOM NAV -->
 <nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface shadow-lg border-t-4 border-surface-container-highest z-50 rounded-t-lg">
-  <a href="../world_map_hub/index.html" class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95">
-    <span class="material-symbols-outlined">explore</span>
-    <span class="font-label-bold text-[10px] uppercase mt-1">Explorar</span>
-  </a>
-  <a href="../mi_pasaporte_passport/index.html" class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95">
-    <span class="material-symbols-outlined">menu_book</span>
-    <span class="font-label-bold text-[10px] uppercase mt-1">Pasaporte</span>
-  </a>
-  <a href="../sesi_n_de_quiz_biling_e/index.html" class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95">
-    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">videogame_asset</span>
-    <span class="font-label-bold text-[10px] uppercase mt-1">Jugar</span>
-  </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="../world_map_hub/index.html">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-transform duration-150 active:scale-95" href="../mi_pasaporte_passport/index.html">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Pasaporte</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 translate-y-1 transition-transform duration-150 active:scale-95" href="../sesi_n_de_quiz_biling_e/index.html">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">videogame_asset</span>
+<span class="font-label-bold text-[10px] uppercase mt-1">Jugar</span>
+</a>
 </nav>
-
 <!-- SUCCESS MODAL -->
-<div id="celebration" class="fixed inset-0 z-[100] hidden items-center justify-center bg-white/90 backdrop-blur-sm">
-  <div class="text-center animate-bounce px-8">
-    <div class="relative inline-block">
-      <div class="absolute inset-0 bg-secondary-fixed blur-3xl opacity-50 scale-150"></div>
-      <span class="material-symbols-outlined text-[120px] text-secondary relative z-10"
-            style="font-variation-settings:'FILL' 1;">workspace_premium</span>
-    </div>
-    <h2 class="font-headline-lg text-headline-lg text-on-background mt-4">¡Increíble!</h2>
-    <p class="font-body-lg text-body-lg text-on-surface-variant">Has pintado la bandera de México</p>
-    <p class="font-body-md text-body-md text-on-surface-variant opacity-70 mt-1">You painted Mexico's flag!</p>
-    <button class="mt-6 chunky-button px-8 py-4 bg-primary text-on-primary border-b-8 border-on-primary-fixed-variant rounded-xl font-headline-md"
-            onclick="location.reload()">Jugar de Nuevo</button>
-  </div>
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-white/90 backdrop-blur-sm" id="celebration">
+<div class="text-center animate-bounce px-8">
+<div class="relative inline-block">
+<div class="absolute inset-0 bg-secondary-fixed blur-3xl opacity-50 scale-150"></div>
+<span class="material-symbols-outlined text-[120px] text-secondary relative z-10" style="font-variation-settings:'FILL' 1;">workspace_premium</span>
 </div>
-
+<h2 class="font-headline-lg text-headline-lg text-on-background mt-4">¡Increíble!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Has pintado la bandera de México</p>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70 mt-1">You painted Mexico's flag!</p>
+<button class="mt-6 chunky-button px-8 py-4 bg-primary text-on-primary border-b-8 border-on-primary-fixed-variant rounded-xl font-headline-md" onclick="location.reload()">Jugar de Nuevo</button>
+</div>
+</div>
 <script>
+        const AudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
+        };
+const COUNTRY_ID = 'm_xico';
+
 // ── AUDIO ────────────────────────────────────────────────
 const Audio = (() => {
   let _ctx = null;
@@ -409,11 +427,8 @@ function resetFlag() {
 }
 
 // ── GLOBAL HANDLERS ──────────────────────────────────────
-function speakCountry() { Audio.speak('México','Mexico'); }
-function triggerAlarm() {
-  Audio.alarm();
-  setTimeout(()=>Audio.speak('¡Alarma de México!','Mexico Alarm!'), 750);
-}
+function speakCountry() { AudioController.speakBilingual('México', 'Mexico'); }
+function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de México!', 'Mexico Alarm!'), 750); }
 
 // ── INIT ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -426,6 +441,43 @@ document.addEventListener('DOMContentLoaded', () => {
   updateProgress();
   setTimeout(speakCountry, 900);
 });
-</script>
+
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
+
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body>
 </html>

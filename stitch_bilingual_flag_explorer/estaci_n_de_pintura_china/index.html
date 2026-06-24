@@ -1,10 +1,11 @@
-<!DOCTYPE html><html lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -131,18 +132,26 @@
         .animate-audio {
             animation: pulse-audio 2s infinite ease-in-out;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col">
 <!-- Top Navigation Anchor (Shared Component: TopAppBar) -->
 <header class="w-full top-0 sticky bg-background dark:bg-on-background border-b-4 border-surface-container-highest dark:border-inverse-surface z-40">
 <div class="flex items-center justify-between px-container-margin py-unit w-full">
-<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:opacity-80 active:translate-y-1 active:border-b-0 transition-all text-headline-lg-mobile" data-icon="arrow_back">arrow_back</button>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:opacity-80 active:translate-y-1 active:border-b-0 transition-all text-headline-lg-mobile" data-icon="arrow_back" onclick="window.location.href='../world_map_hub/index.html'">arrow_back</button>
 <div class="flex flex-col items-center">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim">China</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim">Estación de Pintura (China)</h1>
 </div>
-<button onclick="speakCountry()" class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:opacity-80 active:translate-y-1 active:border-b-0 transition-all text-headline-lg-mobile" aria-label="Escuchar nombre">volume_up</button>
-<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></div>
+<button aria-label="Escuchar nombre" class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:opacity-80 active:translate-y-1 active:border-b-0 transition-all text-headline-lg-mobile" onclick="speakCountry()">volume_up</button>
+<button aria-label="Alarma" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></div>
 </header>
 <main class="flex-grow container mx-auto px-container-margin py-8 flex flex-col items-center">
 <!-- Header Info -->
@@ -159,7 +168,7 @@
 </div>
 <!-- Flag Canvas -->
 <div class="relative w-full max-w-3xl aspect-[3/2] bg-surface-container-lowest rounded-lg border-4 border-surface-container-highest p-4 mb-10 shadow-inner flex items-center justify-center">
-<svg class="w-full h-full drop-shadow-md" id="china-flag" viewBox="0 0 30 20">
+<svg class="w-full h-full drop-shadow-md" id="china-flag" viewbox="0 0 30 20">
 <!-- Red Field -->
 <rect class="flag-stroke cursor-pointer" height="20" id="field" onclick="paintElement('field')" width="30" x="0" y="0"></rect>
 <!-- Main Large Star -->
@@ -181,7 +190,7 @@
 <button class="w-24 h-24 rounded-full bg-error border-b-[8px] border-red-900 transition-all active:translate-y-[4px] active:border-b-[4px] ring-offset-4 ring-4 ring-primary-container" id="btn-rojo" onclick="selectColor('#ba1a1a', 'rojo')" title="Rojo">
 </button>
 <div class="flex items-center gap-2">
-<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary active:scale-90 transition-transform" onclick="playAudio('Rojo')">
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary active:scale-90 transition-transform" onclick="AudioController.speakBilingual('Rojo', 'Red')">
 <span class="material-symbols-outlined text-xl" data-icon="volume_up">volume_up</span>
 </button>
 <span class="font-label-bold text-label-bold text-on-surface">Rojo</span>
@@ -192,7 +201,7 @@
 <button class="w-24 h-24 rounded-full bg-secondary-container border-b-[8px] border-yellow-700 transition-all active:translate-y-[4px] active:border-b-[4px] ring-offset-4" id="btn-amarillo" onclick="selectColor('#fccc00', 'amarillo')" title="Amarillo">
 </button>
 <div class="flex items-center gap-2">
-<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary active:scale-90 transition-transform" onclick="playAudio('Amarillo')">
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary active:scale-90 transition-transform" onclick="AudioController.speakBilingual('Amarillo', 'Yellow')">
 <span class="material-symbols-outlined text-xl" data-icon="volume_up">volume_up</span>
 </button>
 <span class="font-label-bold text-label-bold text-on-surface">Amarillo</span>
@@ -205,7 +214,7 @@
 </button>
 <span class="font-label-bold text-label-bold text-on-surface">Borrador</span>
 </div>
-</div>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 <!-- Success Message (Initially Hidden) -->
 <div class="hidden text-center scale-0 transition-transform duration-500 ease-out" id="celebration">
 <h3 class="font-headline-lg text-headline-lg text-tertiary mb-2">¡Excelente!</h3>
@@ -227,7 +236,8 @@
 <span class="font-label-bold text-label-bold">Jugar</span>
 </a>
 </nav>
-<script>
+<script>const COUNTRY_ID = 'china';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
@@ -235,24 +245,23 @@
                 if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
                 if (this.ctx.state === 'suspended') this.ctx.resume();
             },
-            playSynth(freq, type, dur, vol) {
-                try {
-                    this.initContext();
-                    const osc = this.ctx.createOscillator(), g = this.ctx.createGain();
-                    osc.type = type; osc.frequency.value = freq;
-                    g.gain.setValueAtTime(vol, this.ctx.currentTime);
-                    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur);
-                    osc.connect(g); g.connect(this.ctx.destination);
-                    osc.start(); osc.stop(this.ctx.currentTime + dur + 0.05);
-                } catch(e) {}
-            },
-            boing() { this.playSynth(150,'sine',0.3,0.2); },
-            sparkle() { [880,1100,1320].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'triangle',0.15,0.07),i*60)); },
-            victory() { [261.63,329.63,392,523.25,659.25,783.99,1046.5].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'sine',0.4,0.1),i*120)); },
             alarm() {
                 try {
-                    this.initContext(); const c=this.ctx;
-                    for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); }
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
                 } catch(e) {}
             },
             speakBilingual(es, en) {
@@ -260,14 +269,21 @@
                 this.initContext();
                 try { speechSynthesis.cancel(); } catch(e) {}
                 setTimeout(() => {
-                    const u = new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95;
-                    u.onend = () => { const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); };
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
                     speechSynthesis.speak(u);
                 }, 80);
             }
         };
-        function speakCountry() { AudioController.speakBilingual('China','China'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de China!','China Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('China', 'China'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de China!', 'China Alarm!'), 750); }
 
         let currentColor = '#ba1a1a';
         let activeSelection = 'rojo';
@@ -335,7 +351,42 @@
         window.onload = () => {
             selectColor('#ba1a1a', 'rojo');
         }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

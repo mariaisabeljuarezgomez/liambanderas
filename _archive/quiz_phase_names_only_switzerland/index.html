@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flag Adventure - Quiz Level 4</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#cbe6ff",
+                      "surface-tint": "#006495",
+                      "primary-fixed-dim": "#90cdff",
+                      "on-background": "#171c21",
+                      "surface-variant": "#dee3e9",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#59be1b",
+                      "primary-container": "#2bb1ff",
+                      "surface-container-high": "#e4e8ef",
+                      "on-error": "#ffffff",
+                      "on-secondary-container": "#6d5700",
+                      "secondary": "#735c00",
+                      "on-secondary-fixed": "#231b00",
+                      "outline": "#6e7882",
+                      "secondary-container": "#fccc00",
+                      "on-primary-fixed-variant": "#004b71",
+                      "secondary-fixed": "#ffe084",
+                      "on-tertiary-fixed": "#082100",
+                      "primary": "#006495",
+                      "on-surface": "#171c21",
+                      "on-surface-variant": "#3e4851",
+                      "on-tertiary-container": "#1a4600",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed": "#92fc58",
+                      "on-tertiary-fixed-variant": "#1f5100",
+                      "surface-bright": "#f7f9ff",
+                      "surface-container-low": "#f0f4fb",
+                      "tertiary-fixed-dim": "#77de3d",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-primary-container": "#004163",
+                      "tertiary": "#2b6c00",
+                      "surface-container": "#eaeef5",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#001e30",
+                      "surface": "#f7f9ff",
+                      "background": "#f7f9ff",
+                      "secondary-fixed-dim": "#efc200",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#2c3136",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#bec8d3",
+                      "inverse-primary": "#90cdff",
+                      "surface-container-highest": "#dee3e9",
+                      "inverse-on-surface": "#edf1f8",
+                      "surface-dim": "#d6dae1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-margin": "24px",
+                      "card-padding": "20px",
+                      "gutter": "16px",
+                      "touch-target-min": "48px",
+                      "unit": "8px"
+              },
+              "fontFamily": {
+                      "body-md": ["Quicksand"],
+                      "headline-lg-mobile": ["Quicksand"],
+                      "headline-lg": ["Quicksand"],
+                      "label-bold": ["Quicksand"],
+                      "headline-md": ["Quicksand"],
+                      "body-lg": ["Quicksand"]
+              },
+              "fontSize": {
+                      "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                      "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                      "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+            user-select: none;
+        }
+        .chunky-button-shadow {
+            box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .chunky-button-primary {
+            background-color: #2bb1ff;
+            border-bottom: 6px solid #006495;
+            transition: all 0.1s ease;
+        }
+        .chunky-button-primary:active {
+            transform: translateY(4px);
+            border-bottom-width: 2px;
+        }
+        .chunky-card {
+            border: 2px solid #dee3e9;
+            border-bottom: 8px solid #dee3e9;
+            transition: all 0.1s ease;
+        }
+        .chunky-card:active {
+            transform: translateY(4px);
+            border-bottom-width: 4px;
+        }
+        .audio-pulse {
+            animation: pulse 2s infinite;
+            background-color: #fccc00;
+            border-bottom: 6px solid #735c00;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .progress-track {
+            height: 16px;
+            background-color: #dee3e9;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #59be1b;
+            border-radius: 999px;
+            transition: width 0.5s ease-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background font-body-md text-on-surface min-h-screen flex flex-col">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky bg-surface-container-low flex items-center justify-between px-container-margin py-unit z-40">
+<div class="flex items-center gap-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100 text-primary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Level 4</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100 text-primary">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+</header>
+<main class="flex-grow container mx-auto max-w-lg px-container-margin py-6 flex flex-col gap-8">
+<!-- Progress Section -->
+<div class="w-full flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="font-label-bold text-on-surface-variant">Question 4 of 10</span>
+<span class="font-label-bold text-tertiary">40%</span>
+</div>
+<div class="progress-track">
+<div class="progress-fill" style="width: 40%"></div>
+</div>
+</div>
+<!-- Question Section -->
+<div class="flex flex-col items-center text-center gap-4 py-4">
+<!-- Audio Speaker -->
+<button class="w-32 h-32 rounded-full audio-pulse flex items-center justify-center shadow-lg active:translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-white" data-icon="volume_up" data-weight="fill" style="font-size: 64px;">volume_up</span>
+</button>
+<div class="mt-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1">¿Cuál es la bandera de Suiza?</h2>
+<p class="font-body-lg text-on-surface-variant">Which is the flag of Switzerland?</p>
+</div>
+</div>
+<!-- Flag Options Bento-style Grid -->
+<div class="grid grid-cols-1 gap-gutter">
+<!-- Option 1: Switzerland -->
+<button class="chunky-card bg-surface-container-lowest rounded-lg p-card-padding flex items-center gap-gutter w-full group"><div class="text-left flex-grow"><span class="font-label-bold text-primary block">A</span><span class="font-headline-md text-on-surface">Suiza / Switzerland</span></div><span class="material-symbols-outlined ml-auto text-outline-variant group-active:text-primary" data-icon="circle">circle</span></button>
+<!-- Option 2: Austria -->
+<button class="chunky-card bg-surface-container-lowest rounded-lg p-card-padding flex items-center gap-gutter w-full group"><div class="text-left flex-grow"><span class="font-label-bold text-primary block">B</span><span class="font-headline-md text-on-surface">Austria / Austria</span></div><span class="material-symbols-outlined ml-auto text-outline-variant" data-icon="circle">circle</span></button>
+<!-- Option 3: Belgium -->
+<button class="chunky-card bg-surface-container-lowest rounded-lg p-card-padding flex items-center gap-gutter w-full group"><div class="text-left flex-grow"><span class="font-label-bold text-primary block">C</span><span class="font-headline-md text-on-surface">Bélgica / Belgium</span></div><span class="material-symbols-outlined ml-auto text-outline-variant" data-icon="circle">circle</span></button>
+</div>
+<!-- Submit Placeholder (Optional for UX) -->
+<div class="mt-4 pb-24">
+<button class="chunky-button-primary w-full py-5 rounded-lg text-white font-headline-md flex items-center justify-center gap-2">
+                Check Answer
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg border-t-4 border-surface-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-bold text-label-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 border-b-4 border-surface-variant hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-bold text-label-bold">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg p-2 translate-y-1 border-b-0 shadow-inner" href="#">
+<span class="material-symbols-outlined" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-bold text-label-bold">Play</span>
+</a>
+</nav>
+<!-- Simple click interaction simulation -->
+<script>
+        document.querySelectorAll('.chunky-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove selected state from others
+                document.querySelectorAll('.chunky-card').forEach(c => {
+                    c.classList.remove('border-primary-container', 'bg-primary-fixed');
+                    c.querySelector('.material-symbols-outlined:last-child').innerText = 'circle';
+                    c.querySelector('.material-symbols-outlined:last-child').classList.remove('text-primary');
+                });
+                
+                // Add selected state
+                this.classList.add('border-primary-container', 'bg-primary-fixed');
+                const icon = this.querySelector('.material-symbols-outlined:last-child');
+                icon.innerText = 'check_circle';
+                icon.classList.add('text-primary');
+                icon.style.fontVariationSettings = "'FILL' 1";
+            });
+        });
+
+        // Speaker click animation
+        const speaker = document.querySelector('.audio-pulse');
+        speaker.addEventListener('click', () => {
+            speaker.style.transform = 'scale(0.9) translateY(4px)';
+            setTimeout(() => {
+                speaker.style.transform = 'scale(1) translateY(0)';
+            }, 100);
+        });
+    </script>
+
+    <!-- Custom Feedback Modal -->
+    <div id="quiz-feedback-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex-col items-center justify-center p-6 backdrop-blur-sm transition-all">
+        <div id="quiz-modal-content" class="bg-surface-container-lowest p-8 rounded-3xl w-full max-w-sm flex flex-col items-center text-center gap-6 transform transition-transform scale-95 border-b-8 border-primary-container shadow-2xl">
+            <div id="quiz-modal-icon-bg" class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-2 animate-bounce">
+                <span id="quiz-modal-icon" class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <div>
+                <h2 id="quiz-modal-title" class="font-headline-lg text-primary mb-2">¡Excelente!</h2>
+                <p id="quiz-modal-subtitle" class="font-body-lg text-on-surface-variant">Great job!</p>
+            </div>
+            <button onclick="document.getElementById('quiz-feedback-modal').classList.replace('flex', 'hidden');" class="w-full py-4 bg-primary text-white font-label-bold rounded-full active:scale-95 transition-transform mt-2 border-b-4 border-on-primary-container">
+                CONTINUAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const QuizAudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+            playSuccess() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, this.ctx.currentTime + 0.3); // C6
+                
+                gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.5);
+            },
+            playError() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.3);
+                
+                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            alarm() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime + 0.5);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.75);
+                
+                gain.gain.value = 0.1;
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 1.0);
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { window.speechSynthesis.cancel(); } catch(e) {}
+                
+                setTimeout(() => {
+                    const uEs = new SpeechSynthesisUtterance(es);
+                    uEs.lang = 'es-ES';
+                    uEs.rate = 0.95;
+                    
+                    uEs.onend = () => {
+                        const uEn = new SpeechSynthesisUtterance(en);
+                        uEn.lang = 'en-US';
+                        uEn.rate = 0.95;
+                        window.speechSynthesis.speak(uEn);
+                    };
+                    window.speechSynthesis.speak(uEs);
+                }, 80);
+            }
+        };
+    </script>
+
+</body></html>

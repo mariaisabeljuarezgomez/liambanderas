@@ -1,10 +1,11 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Paint Adventure - Saudi Arabia</title>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Arabia Saudita)</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -135,20 +136,28 @@
             transform: scale(1.1) translateY(-8px);
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-surface text-on-surface min-h-screen pb-24">
 <!-- Top Navigation (Shared Component Integration) -->
 <header class="bg-surface-container-low flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 fixed top-0 left-0">
 <div class="flex items-center gap-4">
-<button class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container">
+<button class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-primary text-headline-md">arrow_back</span>
 </button>
-<h1 class="font-headline-md text-headline-md font-bold text-primary">Paint Adventure</h1>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Estación de Pintura (Arabia Saudita)</h1>
 </div>
-<button onclick="triggerAlarm()" class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container" title="¡Alarma! / Sound Alarm" aria-label="Alarma">
-  <span class="material-symbols-outlined text-headline-md">notifications_active</span>
-</button><button onclick="speakCountry()" class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container" aria-label="Escuchar nombre">
+<button aria-label="Alarma" class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container" onclick="triggerAlarm()" title="¡Alarma! / Sound Alarm">
+<span class="material-symbols-outlined text-headline-md">notifications_active</span>
+</button><button aria-label="Escuchar nombre" class="active:translate-y-1 transition-all duration-100 w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-primary-container" onclick="speakCountry()">
 <span class="material-symbols-outlined text-primary text-headline-md">volume_up</span>
 </button>
 </header>
@@ -174,12 +183,12 @@
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 <!-- Left: Brush Tools (Bento Style) -->
 <div class="lg:col-span-3 flex lg:flex-col gap-4 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
-<button class="brush-active flex-shrink-0 flex flex-col items-center gap-2 p-4 bg-surface-container-highest rounded-lg transition-all border-b-8 border-green-800" id="brush-green" onclick="selectColor('green')">
+<button class="brush-active flex-shrink-0 flex flex-col items-center gap-2 p-4 bg-surface-container-highest rounded-lg transition-all border-b-8 border-green-800" id="brush-green" onclick="AudioController.speakBilingual('Verde', 'Green')">
 <div class="w-16 h-16 rounded-full bg-[#006C35] border-4 border-white shadow-inner"></div>
 <span class="font-label-bold text-label-bold">Verde</span>
 <span class="material-symbols-outlined text-primary">volume_up</span>
 </button>
-<button class="flex-shrink-0 flex flex-col items-center gap-2 p-4 bg-surface-container-highest rounded-lg transition-all border-b-8 border-gray-300" id="brush-white" onclick="selectColor('white')">
+<button class="flex-shrink-0 flex flex-col items-center gap-2 p-4 bg-surface-container-highest rounded-lg transition-all border-b-8 border-gray-300" id="brush-white" onclick="AudioController.speakBilingual('Verde', 'Green')">
 <div class="w-16 h-16 rounded-full bg-white border-4 border-surface-variant shadow-inner"></div>
 <span class="font-label-bold text-label-bold">Blanco</span>
 <span class="material-symbols-outlined text-primary">volume_up</span>
@@ -193,7 +202,7 @@
 <div class="lg:col-span-9">
 <div class="flag-canvas rounded-lg overflow-hidden relative cursor-crosshair group">
 <!-- Base Template (Kids usually color inside the lines) -->
-<svg class="w-full h-full" id="flag-svg" viewBox="0 0 300 200">
+<svg class="w-full h-full" id="flag-svg" viewbox="0 0 300 200">
 <rect class="transition-colors duration-500" fill="#f0f4fb" height="200" id="flag-bg" width="300"></rect>
 <!-- Outline of script and sword for kids to follow -->
 <g class="opacity-100 transition-all duration-300" fill="none" id="flag-elements" stroke="#bec8d3" stroke-width="2">
@@ -213,7 +222,7 @@
 <span class="material-symbols-outlined">restart_alt</span>
                         Start Over
                     </button>
-<button class="btn-tactile-primary flex items-center gap-2" onclick="completeFlag()">
+<button class="btn-tactile-primary flex items-center gap-2" onclick="checkCompletion()">
 <span class="material-symbols-outlined">check_circle</span>
                         Finish Painting
                     </button>
@@ -224,7 +233,7 @@
 <section class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 <div class="bg-surface-container-high p-card-padding rounded-lg flex flex-col gap-4">
 <div class="w-full h-40 rounded-lg overflow-hidden shadow-md">
-<img class="w-full h-full object-cover" data-alt="A cinematic, vibrant photo of massive, undulating golden sand dunes in the Arabian desert under a bright, high-contrast blue sky. The lighting is warm and golden hour, highlighting the textures of the sand ripples. Minimalist and clean composition that feels like a travel adventure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAS2d5-38rE5Nlo9K7q4wSzP8lE8TUESjeezB7wZk5WxlGowf6sxbqD2LgZ4CoVndjfgEqfcCwTNLuJrIU63qquaGZ86RRVWiSJJupi8Jm33IhZFr9xLSl8B8FmIXdjIDbloWoa5aqDBQ75bbimkpD2_i-Ta14PM0OeDhpjxlpV79QVcMIW7wD5UGF6yp-XiCmTuctP4FVLb1yUiEp2Q5BO0akffBuhs6CFm-rqzInBmZAANbkPiZgI1spqPdryqBjy7yj3xq-OaY">
+<img class="w-full h-full object-cover" data-alt="A cinematic, vibrant photo of massive, undulating golden sand dunes in the Arabian desert under a bright, high-contrast blue sky. The lighting is warm and golden hour, highlighting the textures of the sand ripples. Minimalist and clean composition that feels like a travel adventure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAS2d5-38rE5Nlo9K7q4wSzP8lE8TUESjeezB7wZk5WxlGowf6sxbqD2LgZ4CoVndjfgEqfcCwTNLuJrIU63qquaGZ86RRVWiSJJupi8Jm33IhZFr9xLSl8B8FmIXdjIDbloWoa5aqDBQ75bbimkpD2_i-Ta14PM0OeDhpjxlpV79QVcMIW7wD5UGF6yp-XiCmTuctP4FVLb1yUiEp2Q5BO0akffBuhs6CFm-rqzInBmZAANbkPiZgI1spqPdryqBjy7yj3xq-OaY"/>
 </div>
 <h3 class="font-headline-md text-headline-md text-primary">Huge Sand Dunes</h3>
 <p class="font-body-md text-body-md text-on-surface-variant">The "Rub' al Khali" is the largest sand desert in the world!</p>
@@ -275,17 +284,54 @@
 </a>
 </nav>
 <!-- Floating Action Button (Only on Home/Relevant Hubs - Suppressed here for focus as per guidelines) -->
-<script>
+<script>const COUNTRY_ID = 'arabia_saudita';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            playSynth(freq, type, dur, vol) { try { this.initContext(); const osc=this.ctx.createOscillator(),g=this.ctx.createGain(); osc.type=type; osc.frequency.value=freq; g.gain.setValueAtTime(vol,this.ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001,this.ctx.currentTime+dur); osc.connect(g); g.connect(this.ctx.destination); osc.start(); osc.stop(this.ctx.currentTime+dur+0.05); } catch(e) {} },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Arabia Saudita','Saudi Arabia'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Arabia Saudita!','Saudi Arabia Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Arabia Saudita', 'Saudi Arabia'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Arabia Saudita!', 'Saudi Arabia Alarm!'), 750); }
         function playAudio(term) {
             const labels = { 'saudi':['Arabia Saudita','Saudi Arabia'], 'verde':['Verde','Green'], 'blanco':['Blanco','White'], 'Alarm':['¡Alarma!','Alarm!'], 'Austria':['Austria','Austria'] };
             const pair = labels[term] || [term, term];
@@ -339,7 +385,42 @@
         }
 
         function playAudio(term) { /* see AudioController above */ }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

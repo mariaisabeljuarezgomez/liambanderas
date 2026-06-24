@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Flag Paint Station - Canadá</title>
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estación de Pintura (Canadá)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -120,20 +121,28 @@
             transform: translateY(4px);
             box-shadow: none !important;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-background font-body-md text-on-background min-h-screen pb-24 select-none">
 <!-- TopAppBar -->
 <header class="w-full top-0 sticky z-40 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
 <div class="flex items-center gap-2">
-<button class="w-touch-target-min h-touch-target-min flex items-center justify-center hover:opacity-80 active:translate-y-1 transition-all text-primary" onclick="window.location.href=\'../world_map_hub/index.html\'">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center hover:opacity-80 active:translate-y-1 transition-all text-primary" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-3xl">arrow_back</span>
 </button>
 <div class="flex flex-col">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Canadá / Canada</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Estación de Pintura (Canadá)</h1>
 </div>
 </div>
-<button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full chunky-shadow-yellow active:translate-y-1 transition-all mr-2" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button onclick="speakCountry()" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container chunky-shadow-yellow active:translate-y-1 active:shadow-none transition-all" aria-label="Escuchar nombre">
+<button class="flex items-center gap-1 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full chunky-shadow-yellow active:translate-y-1 transition-all mr-2" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button><button aria-label="Escuchar nombre" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container chunky-shadow-yellow active:translate-y-1 active:shadow-none transition-all" onclick="speakCountry()">
 <span class="material-symbols-outlined">volume_up</span>
 </button>
 </header>
@@ -159,7 +168,7 @@
 <span class="material-symbols-outlined text-[12rem] md:text-[18rem] text-surface-variant transition-colors duration-300" id="leaf-icon" style="font-variation-settings: 'FILL' 1;">1k</span>
 <!-- Fallback if icon font doesn't have maple leaf glyph -->
 <div class="hidden" id="leaf-fallback">
-<svg class="w-48 h-48 fill-current text-surface-variant" viewBox="0 0 100 100">
+<svg class="w-48 h-48 fill-current text-surface-variant" viewbox="0 0 100 100">
 <path d="M50 5 L55 25 L75 20 L70 40 L90 45 L75 55 L85 75 L65 70 L55 90 L50 75 L45 90 L35 70 L15 75 L25 55 L10 45 L30 40 L25 20 L45 25 Z"></path>
 </svg>
 </div>
@@ -203,7 +212,7 @@
 <span class="font-label-bold text-on-surface-variant">Borrar</span>
 </button>
 </div>
-</section>
+</section><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 <!-- Fun Fact Card -->
 <section class="bg-primary-container/20 rounded-lg p-card-padding border-2 border-dashed border-primary-container flex items-start gap-4">
 <div class="bg-primary text-white p-3 rounded-full shrink-0">
@@ -252,103 +261,48 @@
 
     // Audio Controller Module
     const AudioController = {
-        ctx: null,
-        
-        initContext() {
-            if (!this.ctx) {
-                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            ctx: null,
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
             }
-            if (this.ctx && this.ctx.state === 'suspended') {
-                this.ctx.resume();
-            }
-        },
-
-        playSynth(freq, type, duration = 0.2, volume = 0.1) {
-            try {
-                this.initContext();
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-                gain.gain.setValueAtTime(volume, this.ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + duration);
-            } catch(e) {
-                console.log(e);
-            }
-        },
-
-        boing() {
-            this.playSynth(150, 'sine', 0.3, 0.25);
-            this.playSynth(100, 'square', 0.1, 0.05);
-        },
-
-        sparkleSound() {
-            try {
-                this.initContext();
-                const now = this.ctx.currentTime;
-                [880, 1100, 1320].forEach((f, i) => {
-                    setTimeout(() => {
-                        this.playSynth(f, 'triangle', 0.15, 0.05);
-                    }, i * 60);
-                });
-            } catch(e) {}
-        },
-
-        victory() {
-            try {
-                this.initContext();
-                const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
-                notes.forEach((f, i) => {
-                    setTimeout(() => this.playSynth(f, 'sine', 0.4, 0.1), i * 120);
-                });
-            } catch(e) {}
-        },
-
-        alarmSound() {
-            try {
-                this.initContext();
-                const now = this.ctx.currentTime;
-                for (let j = 0; j < 3; j++) {
-                    setTimeout(() => {
-                        const osc = this.ctx.createOscillator();
-                        const gain = this.ctx.createGain();
-                        osc.type = 'sawtooth';
-                        osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-                        osc.frequency.linearRampToValueAtTime(1000, this.ctx.currentTime + 0.15);
-                        osc.frequency.linearRampToValueAtTime(800, this.ctx.currentTime + 0.3);
-                        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-                        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
-                        osc.connect(gain);
-                        gain.connect(this.ctx.destination);
-                        osc.start();
-                        osc.stop(this.ctx.currentTime + 0.35);
-                    }, j * 350);
-                }
-            } catch(e) {}
-        },
-
-        speakBilingual(es, en) {
-            if (!('speechSynthesis' in window)) return;
-            this.initContext();
-            try { window.speechSynthesis.cancel(); } catch(e) {}
-            setTimeout(() => {
-            const uEs = new SpeechSynthesisUtterance(es);
-            uEs.lang = 'es-ES';
-            uEs.rate = 0.95;
-            uEs.onend = () => {
-                const uEn = new SpeechSynthesisUtterance(en);
-                uEn.lang = 'en-US';
-                uEn.rate = 0.95;
-                window.speechSynthesis.speak(uEn);
-            };
-            window.speechSynthesis.speak(uEs);
-            }, 80);
-        }
-    };
+        };
 
     // Country configuration
     const COUNTRY_ID = 'canada';
@@ -357,16 +311,9 @@
     const ALARM_TEXT_ES = '¡Alarma de Canadá!';
     const ALARM_TEXT_EN = 'Canada Alarm!';
 
-    function speakCountry() {
-        AudioController.speakBilingual(COUNTRY_NAME_ES, COUNTRY_NAME_EN);
-    }
+    function speakCountry() { AudioController.speakBilingual('Canadá', 'Canada'); }
 
-    function triggerAlarm() {
-        AudioController.alarmSound();
-        setTimeout(() => {
-            AudioController.speakBilingual(ALARM_TEXT_ES, ALARM_TEXT_EN);
-        }, 600);
-    }
+    function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Canadá!', 'Canada Alarm!'), 750); }
 
         let currentColor = null;
         let paintedParts = { left: false, right: false, center: false, leaf: false };
@@ -480,6 +427,4 @@
         }
         
 </script>
-
-
 </body></html>

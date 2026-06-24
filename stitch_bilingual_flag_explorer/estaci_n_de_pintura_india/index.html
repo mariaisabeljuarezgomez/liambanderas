@@ -3,7 +3,7 @@
 <html lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>¡Pinta la Bandera de la India!</title>
+<title>Estación de Pintura (India)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -128,21 +128,29 @@
             background: #f00;
             border-radius: 50%;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
+</head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
 <!-- Top Navigation -->
 <header class="w-full top-0 sticky z-50 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit">
-<button onclick="window.location.href='../world_map_hub/index.html'" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:translate-y-1">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:translate-y-1" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-primary text-3xl">arrow_back</span>
 </button>
 <div class="flex flex-col items-center">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">India</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Estación de Pintura (India)</h1>
 <span class="font-label-bold text-label-bold text-on-surface-variant">Estación de Pintura</span>
 </div>
 <button class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full bg-secondary-container text-on-secondary-container chunky-button audio-pulse" onclick="speakCountry()">
@@ -187,7 +195,7 @@
 <!-- Palette / Color Picker -->
 <section class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
 <!-- Naranja Button -->
-<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#CC7A29] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="selectColor('naranja', '#FF9933')">
+<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#CC7A29] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="AudioController.speakBilingual('Naranja', 'Orange')">
 <div class="w-20 h-20 bg-flag-orange rounded-full shadow-inner border-4 border-white"></div>
 <div class="flex items-center gap-2">
 <span class="font-headline-md text-headline-md">Naranja</span>
@@ -198,7 +206,7 @@
 </div>
 </button>
 <!-- Blanco Button -->
-<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#C0C8D0] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="selectColor('blanco', '#FFFFFF')">
+<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#C0C8D0] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="AudioController.speakBilingual('Blanco', 'White')">
 <div class="w-20 h-20 bg-white rounded-full shadow-inner border-4 border-surface-container-highest"></div>
 <div class="flex items-center gap-2">
 <span class="font-headline-md text-headline-md">Blanco</span>
@@ -209,7 +217,7 @@
 </div>
 </button>
 <!-- Verde Button -->
-<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#0E6606] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="selectColor('verde', '#138808')">
+<button class="group relative flex flex-col items-center gap-3 p-4 bg-surface-container rounded-lg chunky-button border-b-8 border-[#0E6606] active:border-b-0 hover:bg-surface-container-high transition-all" onclick="AudioController.speakBilingual('Verde', 'Green')">
 <div class="w-20 h-20 bg-flag-green rounded-full shadow-inner border-4 border-white"></div>
 <div class="flex items-center gap-2">
 <span class="font-headline-md text-headline-md">Verde</span>
@@ -230,7 +238,7 @@
 <div class="h-full bg-tertiary-container w-0 transition-all duration-500 rounded-full" id="progress-bar" style="box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1)"></div>
 </div>
 </div>
-</main>
+<button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button></main>
 <!-- Bottom Navigation -->
 <nav class="fixed bottom-0 left-0 w-full h-touch-target-min flex justify-around items-center px-gutter pb-2 bg-surface border-t-4 border-surface-container-highest shadow-lg z-50 rounded-t-lg">
 <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-2 hover:bg-surface-container-high transition-all" href="#">
@@ -259,7 +267,8 @@
             </button>
 </div>
 </div>
-<script>
+<script>const COUNTRY_ID = 'india';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
@@ -267,24 +276,23 @@
                 if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
                 if (this.ctx.state === 'suspended') this.ctx.resume();
             },
-            playSynth(freq, type, dur, vol) {
-                try {
-                    this.initContext();
-                    const osc = this.ctx.createOscillator(), g = this.ctx.createGain();
-                    osc.type = type; osc.frequency.value = freq;
-                    g.gain.setValueAtTime(vol, this.ctx.currentTime);
-                    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur);
-                    osc.connect(g); g.connect(this.ctx.destination);
-                    osc.start(); osc.stop(this.ctx.currentTime + dur + 0.05);
-                } catch(e) {}
-            },
-            boing() { this.playSynth(150,'sine',0.3,0.2); },
-            sparkle() { [880,1100,1320].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'triangle',0.15,0.07),i*60)); },
-            victory() { [261.63,329.63,392,523.25,659.25,783.99,1046.5].forEach((f,i)=>setTimeout(()=>this.playSynth(f,'sine',0.4,0.1),i*120)); },
             alarm() {
                 try {
-                    this.initContext(); const c=this.ctx;
-                    for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); }
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
                 } catch(e) {}
             },
             speakBilingual(es, en) {
@@ -292,14 +300,21 @@
                 this.initContext();
                 try { speechSynthesis.cancel(); } catch(e) {}
                 setTimeout(() => {
-                    const u = new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95;
-                    u.onend = () => { const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); };
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
                     speechSynthesis.speak(u);
                 }, 80);
             }
         };
-        function speakCountry() { AudioController.speakBilingual('India','India'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de India!','India Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('India', 'India'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de India!', 'India Alarm!'), 750); }
 
         let selectedColor = null;
         let selectedHex = null;
@@ -425,5 +440,42 @@
                 requestAnimationFrame(animate);
             }
         }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
+
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Paint Adventure - Israel</title>
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Israel)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -137,16 +138,24 @@
         body {
             overscroll-behavior: none;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
 <!-- TopAppBar -->
 <header class="flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 bg-surface dark:bg-surface top-0 fixed">
-<button onclick="window.location.href='../world_map_hub/index.html'" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" aria-label="Volver">
+<button aria-label="Volver" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
 </button>
-<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Paint Adventure</h1>
-<button onclick="speakCountry()" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" aria-label="Escuchar nombre">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Estación de Pintura (Israel)</h1>
+<button aria-label="Escuchar nombre" class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-all duration-100" onclick="speakCountry()">
 <span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
 </button>
 </header>
@@ -159,10 +168,10 @@
 <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Israel</h2>
 <p class="text-primary font-label-bold">ישראל</p>
 </div>
-<button class="w-20 h-20 rounded-full bg-secondary-container flex items-center justify-center chunky-shadow-yellow pulse-audio" onclick="speakCountry()" aria-label="Escuchar nombre">
+<button aria-label="Escuchar nombre" class="w-20 h-20 rounded-full bg-secondary-container flex items-center justify-center chunky-shadow-yellow pulse-audio" onclick="speakCountry()">
 <span class="material-symbols-outlined text-4xl text-on-secondary-container" data-icon="volume_up">volume_up</span>
 </button>
-<button class="w-20 h-20 rounded-full bg-secondary-container flex flex-col items-center justify-center chunky-shadow-yellow active:translate-y-1 transition-all" onclick="triggerAlarm()" aria-label="Alarma"><span class="material-symbols-outlined text-4xl text-on-secondary-container" data-icon="notifications_active">notifications_active</span><span class="text-[10px] font-bold text-on-secondary-container leading-none mt-1">¡Alarma!</span><span class="text-[8px] text-on-secondary-container leading-none">Sound Alarm</span></button></div>
+<button aria-label="Alarma" class="w-20 h-20 rounded-full bg-secondary-container flex flex-col items-center justify-center chunky-shadow-yellow active:translate-y-1 transition-all" onclick="triggerAlarm()"><span class="material-symbols-outlined text-4xl text-on-secondary-container" data-icon="notifications_active">notifications_active</span><span class="text-[10px] font-bold text-on-secondary-container leading-none mt-1">¡Alarma!</span><span class="text-[8px] text-on-secondary-container leading-none">Sound Alarm</span></button></div>
 <!-- Drawing Canvas Area -->
 <div class="relative w-full aspect-[3/2] flag-outline shadow-xl flex flex-col">
 <!-- Top Stripe Zone (Interactive Placeholder) -->
@@ -171,7 +180,7 @@
 </div>
 <!-- Middle Zone (Star of David) -->
 <div class="h-3/5 w-full bg-white relative flex items-center justify-center p-8" id="star-zone">
-<svg class="w-40 h-40" viewBox="0 0 100 100">
+<svg class="w-40 h-40" viewbox="0 0 100 100">
 <path d="M50 5 L90 75 L10 75 Z" fill="none" id="david-star" stroke="#bec8d3" stroke-linejoin="round" stroke-width="4"></path>
 <path d="M50 95 L90 25 L10 25 Z" fill="none" id="david-star-inv" stroke="#bec8d3" stroke-linejoin="round" stroke-width="4"></path>
 </svg>
@@ -186,11 +195,11 @@
 <button class="group flex flex-col items-center gap-2" onclick="selectColor('azul')">
 <div class="w-20 h-20 rounded-full bg-[#0038b8] border-4 border-white shadow-lg chunky-shadow-primary active:translate-y-1 transition-all"></div>
 <span class="font-label-bold text-on-surface">Azul</span>
-</button><button class="text-primary-container" onclick="playAudio('Azul')"><span class="material-symbols-outlined text-sm" data-icon="volume_up">volume_up</span></button>
+</button><button class="text-primary-container" onclick="AudioController.speakBilingual('Azul', 'Blue')"><span class="material-symbols-outlined text-sm" data-icon="volume_up">volume_up</span></button>
 <button class="group flex flex-col items-center gap-2" onclick="selectColor('blanco')">
 <div class="w-20 h-20 rounded-full bg-white border-4 border-outline-variant shadow-lg chunky-shadow-secondary active:translate-y-1 transition-all"></div>
 <span class="font-label-bold text-on-surface">Blanco</span>
-</button><button class="text-primary-container" onclick="playAudio('Blanco')"><span class="material-symbols-outlined text-sm" data-icon="volume_up">volume_up</span></button>
+</button><button class="text-primary-container" onclick="AudioController.speakBilingual('Azul', 'Blue')"><span class="material-symbols-outlined text-sm" data-icon="volume_up">volume_up</span></button>
 </div>
 <!-- Fun Fact Bento Card -->
 <div class="bg-primary-container text-on-primary-container p-card-padding rounded-lg flex items-start gap-4">
@@ -200,7 +209,7 @@
 <p class="font-body-md">La estrella de la bandera se llama Estrella de David.</p>
 </div>
 </div>
-</div>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 </main>
 <!-- Success Modal (Hidden by default) -->
 <div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-gutter bg-on-surface/40 backdrop-blur-sm" id="success-modal">
@@ -232,16 +241,54 @@
 <span class="font-label-bold text-label-bold">Awards</span>
 </div>
 </nav>
-<script>
+<script>const COUNTRY_ID = 'israel_1';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Israel','Israel'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Israel!','Israel Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Israel', 'Israel'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Israel!', 'Israel Alarm!'), 750); }
         function playAudio(term) {
             const labels = { 'Israel':['Israel','Israel'], 'Azul':['Azul','Blue'], 'Blanco':['Blanco','White'], 'Alarma':['¡Alarma de Israel!','Israel Alarm!'] };
             if (term === 'Alarma') { triggerAlarm(); return; }
@@ -305,6 +352,4 @@
             }
         }
     </script>
-
-
 </body></html>

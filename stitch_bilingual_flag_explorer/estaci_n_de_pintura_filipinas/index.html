@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Paint Adventure - Philippines</title>
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Filipinas)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -101,16 +102,24 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
 <!-- TopAppBar -->
 <header class="bg-surface dark:bg-surface flex justify-between items-center px-container-margin h-touch-target-min w-full z-50 fixed top-0 docked full-width">
-<button onclick="window.location.href='../world_map_hub/index.html'" class="text-primary dark:text-primary-fixed-dim active:translate-y-1 transition-all duration-100 flex items-center justify-center h-touch-target-min w-touch-target-min" aria-label="Volver">
+<button aria-label="Volver" class="text-primary dark:text-primary-fixed-dim active:translate-y-1 transition-all duration-100 flex items-center justify-center h-touch-target-min w-touch-target-min" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-[32px]">arrow_back</span>
 </button>
-<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Paint Adventure</h1>
-<button class="text-primary dark:text-primary-fixed-dim active:translate-y-1 transition-all duration-100 flex items-center justify-center h-touch-target-min w-touch-target-min" onclick="playAudio('title')">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Estación de Pintura (Filipinas)</h1>
+<button class="text-primary dark:text-primary-fixed-dim active:translate-y-1 transition-all duration-100 flex items-center justify-center h-touch-target-min w-touch-target-min" onclick="speakCountry()">
 <span class="material-symbols-outlined text-[32px]">volume_up</span>
 </button>
 </header>
@@ -126,13 +135,13 @@
 <p class="font-body-lg text-on-surface-variant">Philippines</p>
 </div>
 </div>
-<div class="mt-4 flex justify-center"><button onclick="triggerAlarm()" class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full tactile-shadow-yellow transition-transform active:translate-y-1 group" aria-label="Alarma"><span class="material-symbols-outlined text-2xl">notifications_active</span><div class="text-left flex flex-col"><span class="font-label-bold text-sm leading-none">¡Alarma!</span><span class="text-[10px] opacity-80 leading-none">Sound Alarm</span></div></button></div></div>
+<div class="mt-4 flex justify-center"><button aria-label="Alarma" class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full tactile-shadow-yellow transition-transform active:translate-y-1 group" onclick="triggerAlarm()"><span class="material-symbols-outlined text-2xl">notifications_active</span><div class="text-left flex flex-col"><span class="font-label-bold text-sm leading-none">¡Alarma!</span><span class="text-[10px] opacity-80 leading-none">Sound Alarm</span></div></button></div></div>
 <!-- Painting Canvas Area -->
 <div class="w-full relative aspect-[3/2] bg-surface-container-lowest rounded-lg border-4 border-surface-variant shadow-lg overflow-hidden flag-zone" id="paintingCanvas">
 <!-- Background Image (Educational/Contextual) -->
 <div class="absolute inset-0 opacity-10 pointer-events-none" data-alt="A whimsical, child-friendly illustration of a tropical landscape with palm trees and a bright smiling sun over crystal clear ocean waters. The style is playful and educational, using soft pastel colors like baby blue and lime green. The lighting is sunny and cheerful, perfectly matching a primary school learning app aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC1dj2hlZRWAQa4-P8jmWJ5xC9kD5BqWYnzJ5sobPDzPwHL1ZKsRfw7ScNpvAjn7xoEjt1Hrz4BZLRKa9W7HV7aZE86zgQabvUux80DYrZVFF6az6f9zHihTuH3yg74kF291y_nIkdpzVI-YR4Z61jO6rEXFm-hmzz_aTIfXa8DyN09-B7XxTNTrIFT2OvZV_43HHIZGEaER3_uUeVKc7tduALV8kXnhNxmwQYWrWvc2zPJBeprJmfSX1WiW0icYXSjojJn1QPSLsc')"></div>
 <!-- Flag Outline Structure (Scalable) -->
-<svg class="w-full h-full cursor-pointer" viewBox="0 0 900 600">
+<svg class="w-full h-full cursor-pointer" viewbox="0 0 900 600">
 <!-- Blue Top Stripe -->
 <rect fill="#e4e8ef" height="300" id="stripe-blue" onclick="applyColor('stripe-blue', '#0038a8')" stroke="#bec8d3" stroke-width="2" width="900" x="0" y="0"></rect>
 <!-- Red Bottom Stripe -->
@@ -160,7 +169,7 @@
 <!-- Color Palette & Tools -->
 <div class="w-full mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
 <!-- Azul -->
-<button class="flex flex-col items-center gap-2 group" onclick="selectColor('#0038a8', 'Azul')">
+<button class="flex flex-col items-center gap-2 group" onclick="AudioController.speakBilingual('Azul', 'Blue')">
 <div class="w-20 h-20 rounded-full bg-[#0038a8] border-4 border-white tactile-shadow-white group-active:translate-y-1"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold">Azul</span>
@@ -168,7 +177,7 @@
 </div>
 </button>
 <!-- Rojo -->
-<button class="flex flex-col items-center gap-2 group" onclick="selectColor('#ce1126', 'Rojo')">
+<button class="flex flex-col items-center gap-2 group" onclick="AudioController.speakBilingual('Rojo', 'Red')">
 <div class="w-20 h-20 rounded-full bg-[#ce1126] border-4 border-white tactile-shadow-white group-active:translate-y-1"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold">Rojo</span>
@@ -176,7 +185,7 @@
 </div>
 </button>
 <!-- Amarillo -->
-<button class="flex flex-col items-center gap-2 group" onclick="selectColor('#fccc00', 'Amarillo')">
+<button class="flex flex-col items-center gap-2 group" onclick="AudioController.speakBilingual('Amarillo', 'Yellow')">
 <div class="w-20 h-20 rounded-full bg-[#fccc00] border-4 border-white tactile-shadow-white group-active:translate-y-1"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold">Amarillo</span>
@@ -184,7 +193,7 @@
 </div>
 </button>
 <!-- Blanco -->
-<button class="flex flex-col items-center gap-2 group" onclick="selectColor('#ffffff', 'Blanco')">
+<button class="flex flex-col items-center gap-2 group" onclick="AudioController.speakBilingual('Blanco', 'White')">
 <div class="w-20 h-20 rounded-full bg-white border-4 border-surface-variant tactile-shadow-white group-active:translate-y-1"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold">Blanco</span>
@@ -206,7 +215,7 @@
 <span class="material-symbols-outlined text-9xl">sailing</span>
 </div>
 </div>
-</main>
+<button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button></main>
 <!-- BottomNavBar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 pb-safe bg-surface-container-lowest dark:bg-surface-container-lowest shadow-lg rounded-t-lg">
 <a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-variant transition-all" href="#">
@@ -226,16 +235,54 @@
 <span class="font-label-bold text-[10px]">Awards</span>
 </a>
 </nav>
-<script>
+<script>const COUNTRY_ID = 'filipinas';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Filipinas','Philippines'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Filipinas!','Philippines Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Filipinas', 'Philippines'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Filipinas!', 'Philippines Alarm!'), 750); }
         function playAudio(term) {
             const labels = { 'philippines':['Filipinas','Philippines'], 'azul':['Azul','Blue'], 'rojo':['Rojo','Red'], 'amarillo':['Amarillo','Yellow'], 'blanco':['Blanco','White'], 'title':['Filipinas','Philippines'], 'alarm':['¡Alarma de Filipinas!','Philippines Alarm!'] };
             if (term === 'alarm') { triggerAlarm(); return; }
@@ -274,7 +321,42 @@
         }
 
         function playAudio(term) { /* see AudioController above */ }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

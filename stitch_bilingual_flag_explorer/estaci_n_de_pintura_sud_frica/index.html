@@ -1,9 +1,10 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -126,21 +127,29 @@
         .pulse-audio {
             animation: pulse-soft 2s infinite ease-in-out;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen pb-24 overflow-x-hidden">
 <!-- Top Navigation Bar (from Shared Components) -->
 <header class="w-full top-0 sticky z-40 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit h-16">
-<button onclick="window.location.href='../world_map_hub/index.html'" aria-label="Volver" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:opacity-80 active:translate-y-1 transition-all">
+<button aria-label="Volver" class="w-touch-target-min h-touch-target-min flex items-center justify-center rounded-full hover:opacity-80 active:translate-y-1 transition-all" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-primary text-3xl">arrow_back</span>
 </button>
 <div class="flex items-center gap-2">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Sudáfrica</h1>
-<button onclick="speakCountry()" class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center chunky-shadow-yellow pulse-audio active:translate-y-1 active:shadow-none transition-all" aria-label="Escuchar nombre">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Estación de Pintura (Sudáfrica)</h1>
+<button aria-label="Escuchar nombre" class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center chunky-shadow-yellow pulse-audio active:translate-y-1 active:shadow-none transition-all" onclick="speakCountry()">
 <span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">volume_up</span>
 </button>
 </div>
-<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<button aria-label="Alarma" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
 <main class="max-w-4xl mx-auto px-container-margin py-8">
 <!-- Progress Bar -->
 <div class="mb-8 px-4">
@@ -162,7 +171,7 @@
 </div>
 <!-- SVG Flag Outline for South Africa (Y-shape) -->
 <div class="aspect-[3/2] w-full max-w-2xl mx-auto mt-8 relative">
-<svg class="w-full h-full drop-shadow-md" id="flag-svg" viewBox="0 0 900 600">
+<svg class="w-full h-full drop-shadow-md" id="flag-svg" viewbox="0 0 900 600">
 <!-- Red Top -->
 <path class="flag-path" d="M0 0h900v200H300L200 100 100 0H0z" data-color-target="Rojo" fill="#f0f4fb" onclick="paint(this)"></path>
 <!-- Blue Bottom -->
@@ -185,7 +194,7 @@
 <!-- Color Palette Picker -->
 <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-12">
 <!-- Verde -->
-<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#2b6c00', 'Verde', this)">
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="AudioController.speakBilingual('Verde', 'Green')">
 <div class="w-16 h-16 rounded-full bg-[#2b6c00] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold text-on-surface">Verde</span>
@@ -193,7 +202,7 @@
 </div>
 </button>
 <!-- Amarillo -->
-<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#fccc00', 'Amarillo', this)">
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="AudioController.speakBilingual('Amarillo', 'Yellow')">
 <div class="w-16 h-16 rounded-full bg-[#fccc00] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold text-on-surface">Amarillo</span>
@@ -201,7 +210,7 @@
 </div>
 </button>
 <!-- Blanco -->
-<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#ffffff', 'Blanco', this)">
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="AudioController.speakBilingual('Blanco', 'White')">
 <div class="w-16 h-16 rounded-full bg-[#ffffff] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold text-on-surface">Blanco</span>
@@ -209,7 +218,7 @@
 </div>
 </button>
 <!-- Rojo -->
-<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#ba1a1a', 'Rojo', this)">
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="AudioController.speakBilingual('Rojo', 'Red')">
 <div class="w-16 h-16 rounded-full bg-[#ba1a1a] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold text-on-surface">Rojo</span>
@@ -217,7 +226,7 @@
 </div>
 </button>
 <!-- Azul -->
-<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#006495', 'Azul', this)">
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="AudioController.speakBilingual('Azul', 'Blue')">
 <div class="w-16 h-16 rounded-full bg-[#006495] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold text-on-surface">Azul</span>
@@ -225,7 +234,7 @@
 </div>
 </button>
 <!-- Negro -->
-<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="selectColor('#171c21', 'Negro', this)">
+<button class="color-btn group flex flex-col items-center gap-2 p-2 rounded-lg bg-surface-container border-2 border-transparent transition-all" onclick="AudioController.speakBilingual('Negro', 'Black')">
 <div class="w-16 h-16 rounded-full bg-[#171c21] border-4 border-white shadow-md group-active:scale-90 transition-transform"></div>
 <div class="flex items-center gap-1">
 <span class="font-label-bold text-label-bold text-on-surface">Negro</span>
@@ -243,7 +252,7 @@
 <p class="text-on-surface-variant font-body-md">La bandera de Sudáfrica tiene 6 colores. La forma de "Y" significa que muchas personas se unen para vivir en paz.</p>
 </div>
 </div>
-</main>
+<button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button></main>
 <!-- Bottom Action Bar (Fixed but distinct from Nav) -->
 <div class="fixed bottom-20 left-0 w-full px-container-margin z-30">
 <button class="w-full h-16 bg-primary text-on-primary font-headline-md text-headline-md rounded-lg chunky-shadow-primary flex items-center justify-center gap-3 active:translate-y-1 active:shadow-none transition-all">
@@ -266,16 +275,54 @@
 <span class="font-label-bold text-[10px]">Jugar</span>
 </a>
 </nav>
-<script>
+<script>const COUNTRY_ID = 'sud_frica';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Sudáfrica','South Africa'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Sudáfrica!','South Africa Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Sudáfrica', 'South Africa'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Sudáfrica!', 'South Africa Alarm!'), 750); }
 
         let currentColor = null;
         let colorName = "";
@@ -323,7 +370,42 @@
             target.parentElement.appendChild(sparkle);
             setTimeout(() => sparkle.remove(), 1000);
         }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

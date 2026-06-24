@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Flag Adventure - Grecia</title>
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Grecia)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
@@ -42,7 +43,15 @@
         .flag-stripe {
             transition: background-color 0.3s ease;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -135,17 +144,17 @@
 <!-- Top Navigation -->
 <header class="w-full top-0 sticky bg-surface-container-low z-40 flex items-center justify-between px-container-margin py-unit h-16">
 <div class="flex items-center gap-4">
-<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100">
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-primary text-2xl">menu</span>
 </button>
-<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Flag Adventure</h1>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary font-bold">Estación de Pintura (Grecia)</h1>
 </div>
 <div class="flex items-center gap-2">
 <div class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-bold flex items-center gap-2">
 <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
                 Level 5
             </div>
-<button onclick="speakCountry()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100" aria-label="Escuchar nombre">
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-primary-container active:translate-y-1 transition-all duration-100" onclick="speakCountry()">
 <span class="material-symbols-outlined text-primary text-2xl">volume_up</span>
 </button>
 </div>
@@ -153,7 +162,7 @@
 <main class="flex-grow flex flex-col items-center px-container-margin py-unit gap-gutter max-w-2xl mx-auto w-full">
 <!-- Header Section -->
 <section class="w-full text-center mt-4">
-<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary-container drop-shadow-sm mb-2">¡Pintemos Grecia!</h2><div class="flex justify-center mb-4"><button onclick="triggerAlarm()" class="flex items-center gap-2 px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-bold tactile-shadow-yellow hover:brightness-110 active:translate-y-1 transition-all duration-100" aria-label="Alarma"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="">¡Alarma! / Sound Alarm</span></button></div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary-container drop-shadow-sm mb-2">¡Pintemos Grecia!</h2><div class="flex justify-center mb-4"><button aria-label="Alarma" class="flex items-center gap-2 px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-bold tactile-shadow-yellow hover:brightness-110 active:translate-y-1 transition-all duration-100" onclick="triggerAlarm()"><span class="material-symbols-outlined text-2xl">notifications_active</span><span class="">¡Alarma! / Sound Alarm</span></button></div>
 <div class="bg-primary-fixed text-on-primary-fixed-variant px-6 py-3 rounded-lg font-body-md inline-block shadow-sm">
                 Grecia tiene miles de islas rodeadas de mar azul. 🌊
             </div>
@@ -196,7 +205,7 @@
 <div class="w-16 h-16 rounded-full bg-white mb-2 shadow-inner border-4 border-surface-variant group-[.active]:ring-4 group-[.active]:ring-primary-container"></div>
 <span class="font-label-bold text-on-surface-variant">Blanco</span>
 </button>
-</section>
+</section><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 <!-- Progress and Actions -->
 <section class="w-full flex items-center justify-between bg-surface-container-highest/30 p-card-padding rounded-xl mt-4">
 <div class="flex-grow mr-6">
@@ -255,16 +264,54 @@
             </button>
 </div>
 </div>
-<script>
+<script>const COUNTRY_ID = 'grecia_2';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Grecia','Greece'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma de Grecia!','Greece Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Grecia', 'Greece'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Grecia!', 'Greece Alarm!'), 750); }
 
         let currentColor = null;
         let paintedCount = 0;
@@ -327,7 +374,42 @@
             setTimeout(() => sparkle.remove(), 1000);
         }
         setInterval(createSparkle, 300);
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

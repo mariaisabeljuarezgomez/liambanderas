@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Flag Explorer - Quiz Review</title>
+<!-- Font: Quicksand for a friendly, rounded feel -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#004b71",
+                    "on-surface": "#171c21",
+                    "inverse-primary": "#90cdff",
+                    "tertiary-fixed-dim": "#77de3d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#fccc00",
+                    "secondary": "#735c00",
+                    "surface-container-highest": "#dee3e9",
+                    "secondary-fixed-dim": "#efc200",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#2b6c00",
+                    "surface": "#f7f9ff",
+                    "on-tertiary-fixed": "#082100",
+                    "on-surface-variant": "#3e4851",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2c3136",
+                    "on-primary-container": "#004163",
+                    "surface-container-high": "#e4e8ef",
+                    "surface-variant": "#dee3e9",
+                    "primary-fixed": "#cbe6ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#006495",
+                    "tertiary-container": "#59be1b",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-secondary-container": "#6d5700",
+                    "surface-container-low": "#f0f4fb",
+                    "surface-dim": "#d6dae1",
+                    "on-tertiary-container": "#1a4600",
+                    "outline": "#6e7882",
+                    "inverse-on-surface": "#edf1f8",
+                    "surface-container": "#eaeef5",
+                    "secondary-fixed": "#ffe084",
+                    "on-primary-fixed": "#001e30",
+                    "primary": "#006495",
+                    "on-secondary-fixed": "#231b00",
+                    "on-tertiary-fixed-variant": "#1f5100",
+                    "background": "#f7f9ff",
+                    "outline-variant": "#bec8d3",
+                    "on-background": "#171c21",
+                    "tertiary-fixed": "#92fc58",
+                    "primary-container": "#2bb1ff",
+                    "primary-fixed-dim": "#90cdff",
+                    "surface-bright": "#f7f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "touch-target-min": "48px",
+                    "gutter": "16px",
+                    "unit": "8px",
+                    "card-padding": "20px"
+            },
+            "fontFamily": {
+                    "body-md": ["Quicksand"],
+                    "label-bold": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-md": ["Quicksand"]
+            },
+            "fontSize": {
+                    "body-md": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-bold": ["16px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f7f9ff;
+            overflow-x: hidden;
+        }
+
+        /* Tactile Button Styles */
+        .tactile-button-primary {
+            @apply relative transition-all duration-100;
+            background-color: #2bb1ff; /* primary-container approx or custom sky blue */
+            box-shadow: 0 6px 0 0 #006495;
+            border-radius: 1.5rem;
+        }
+        .tactile-button-primary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #006495;
+        }
+
+        .tactile-button-secondary {
+            @apply relative transition-all duration-100;
+            background-color: #ffffff;
+            box-shadow: 0 6px 0 0 #dee3e9;
+            border-radius: 1.5rem;
+        }
+        .tactile-button-secondary:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 #dee3e9;
+        }
+
+        /* Correct State Highlight */
+        .correct-choice {
+            background-color: #92fc58 !important; /* tertiary-fixed */
+            box-shadow: 0 6px 0 0 #2b6c00 !important;
+            border: 4px solid #ffffff;
+        }
+
+        /* Progress Bar Animation */
+        .progress-fill {
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Pulse for Audio Icons */
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-audio {
+            animation: subtle-pulse 2s infinite ease-in-out;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col text-on-surface">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-on-surface border-b-4 border-surface-container-highest dark:border-outline flex justify-between items-center px-container-margin py-unit h-touch-target-min z-40">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A cute, vibrant 3D stylized rank badge for a children's educational app. It features a friendly golden star with a explorer's hat, set against a bright blue circular background with a subtle glossy plastic texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7Wu399DNjlJUXF1oNOKlkGtsx0CqOH67L_eztVJSiWu1L0aAIFhZz52TDinorB2g-qtPE3WwK_hBhMqs5Q07KNwkcarTIP6xHTUFLMvmz3Wwrs3GplZhjvxxbeh1i6VL7hfLT5WkBsoQxVrtqhrsgdfLNzwEEjfht-xW6cGsJAAPJp1Q8uoKzaELJvMb6hZmsfz8olixXRVzlnXSXcHYtX_lvW3S4ILk-fAtJooLbnx-yrQA50E3baSavpNdtuXav4gVxjjpybj4"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Flag Explorer</h1>
+</div>
+<button class="w-touch-target-min h-touch-target-min flex flex-col items-center justify-center rounded-full bg-secondary-container text-on-secondary-container hover:opacity-80 transition-all active:translate-y-1 shadow-[0_4px_0_0_#6d5700] mr-2" onclick="QuizAudioController.alarm()">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<span class="text-[8px] font-bold uppercase leading-none">¡Alarma!</span>
+</button><button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary dark:text-inverse-primary hover:scale-105 transition-transform active:translate-y-1">
+<span class="material-symbols-outlined text-[32px]">volume_up</span>
+</button>
+</header>
+<main class="flex-1 flex flex-col items-center px-container-margin py-8 gap-8 max-w-2xl mx-auto w-full pb-32">
+<!-- Progress Bar Section -->
+<div class="w-full">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-label-bold text-primary">Question 1/10</span>
+<span class="font-label-bold text-label-bold text-tertiary">Keep going!</span>
+</div>
+<div class="w-full h-4 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="progress-fill h-full bg-tertiary-container w-[10%] rounded-full shadow-inner"></div>
+</div>
+</div>
+<!-- Flag Review Card -->
+<div class="w-full bg-surface-container-lowest rounded-lg p-6 flex flex-col items-center gap-4 shadow-sm border border-outline-variant relative overflow-hidden">
+<!-- Decorative recessed pattern -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#006495 1px, transparent 1px); background-size: 16px 16px;"></div>
+<div class="w-full aspect-[3/2] max-w-sm rounded-lg overflow-hidden border-4 border-white shadow-lg z-10 transition-transform duration-500 hover:scale-[1.02]">
+<img class="w-full h-full object-cover" data-alt="A clean, high-resolution graphic of the national flag of France, featuring three vertical stripes of blue, white, and red. The flag is displayed with a slight fabric texture and subtle lighting to appear high-quality and professional for a children's learning interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAafoujHy4bGMWVRYEl9BZvoEUV8VQZLH2A0jDic73TgFF5jHIBHmlHF2xhLE0dBNUYqw-33jJDCPb5MfJ6JHrdZ2aCNmbi1VjNtf7jyhzYnkWwyOcML9tECZlSXtdD9i2WggvhnTNI4wqDeZJc4BIdXeTlwCEc9CBjN5n8DCvbJWAheJtpOXWZmDLLaOhJugXowqZ4s1UhUHZ8aTuWBl3VTsVu0cjApXNds8-ORTFTKBqvUm1CSQRtodzLlCIC-FOLuD1KIn1zLE"/>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant z-10 text-center">Which country is this?</p>
+</div>
+<!-- Choice Buttons Grid -->
+<div class="grid grid-cols-1 gap-6 w-full">
+<!-- Option 1: Italy -->
+<button class="tactile-button-secondary w-full min-h-[96px] flex items-center justify-between px-6 py-4" onclick="handleChoice(this, false)">
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-start"><span class="font-headline-md text-headline-md text-primary">Italia</span><span class="font-body-lg text-body-lg text-on-surface-variant">Italy</span></div>
+</div>
+<div class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center shadow-md pulse-audio">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl fill-icon">volume_up</span>
+</div>
+</button>
+<!-- Option 2: France (Correct) -->
+<button class="tactile-button-secondary w-full min-h-[96px] flex items-center justify-between px-6 py-4" onclick="handleChoice(this, true)">
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-start"><span class="font-headline-md text-headline-md text-primary">Francia</span><span class="font-body-lg text-body-lg text-on-surface-variant">France</span></div>
+</div>
+<div class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center shadow-md pulse-audio">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl fill-icon">volume_up</span>
+</div>
+</button>
+<!-- Option 3: Germany -->
+<button class="tactile-button-secondary w-full min-h-[96px] flex items-center justify-between px-6 py-4" onclick="handleChoice(this, false)">
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-start"><span class="font-headline-md text-headline-md text-primary">Alemania</span><span class="font-body-lg text-body-lg text-on-surface-variant">Germany</span></div>
+</div>
+<div class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center shadow-md pulse-audio">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl fill-icon">volume_up</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter pb-4 pt-2 bg-surface-container-lowest dark:bg-on-surface border-t-4 border-surface-container-highest dark:border-outline shadow-lg rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">map</span>
+<span class="font-label-bold text-label-bold mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+<span class="font-label-bold text-label-bold mt-1">Passport</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 translate-y-[-4px] active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl fill-icon">quiz</span>
+<span class="font-label-bold text-label-bold mt-1">Play</span>
+</a>
+</nav>
+<!-- Confetti Canvas -->
+<canvas id="confetti-canvas"></canvas>
+<script>
+        function showCustomFeedback(isSuccess, titleEs, subtitleEn) {
+            const modal = document.getElementById('quiz-feedback-modal');
+            const modalContent = document.getElementById('quiz-modal-content');
+            const iconBg = document.getElementById('quiz-modal-icon-bg');
+            const icon = document.getElementById('quiz-modal-icon');
+            const title = document.getElementById('quiz-modal-title');
+            const subtitle = document.getElementById('quiz-modal-subtitle');
+            
+            modal.classList.replace('hidden', 'flex');
+            
+            title.innerText = titleEs;
+            subtitle.innerText = subtitleEn;
+            
+            if (isSuccess) {
+                iconBg.className = "w-24 h-24 rounded-full bg-tertiary-container flex items-center justify-center mb-2 animate-bounce";
+                icon.innerText = "celebration";
+                modalContent.style.borderColor = "#59be1b";
+                QuizAudioController.playSuccess();
+                QuizAudioController.speakBilingual(titleEs, subtitleEn);
+            } else {
+                iconBg.className = "w-24 h-24 rounded-full bg-error-container flex items-center justify-center mb-2";
+                icon.innerText = "refresh";
+                icon.classList.add("text-error");
+                modalContent.style.borderColor = "#ba1a1a";
+                QuizAudioController.playError();
+            }
+        }
+
+        function handleChoice(button, isCorrect) {
+            if (isCorrect) {
+                button.classList.remove('tactile-button-secondary');
+                button.classList.add('correct-choice');
+                triggerConfetti();
+                
+                // Audio feedback (Simulation)
+                const audio = new Audio(); // Placeholder for sound effect
+                QuizAudioController.speakBilingual("¿Cuál es la bandera?", "Which is the flag?");
+                
+                // Vibrate if available
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate([100, 30, 100]);
+                }
+
+                // Wait 2 seconds then "next question"
+                setTimeout(() => {
+                    showCustomFeedback(true, "¡Excelente!", "You found it!");
+                    window.location.reload();
+                }, 2500);
+            } else {
+                button.style.transform = "translateX(10px)";
+                button.classList.add('bg-error-container');
+                setTimeout(() => {
+                    button.style.transform = "";
+                    button.classList.remove('bg-error-container');
+                }, 200);
+            }
+        }
+
+        // Basic Confetti Implementation
+        function triggerConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particles = [];
+            const colors = ['#fccc00', '#2bb1ff', '#92fc58', '#ffdad6', '#ffffff'];
+
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: canvas.height + Math.random() * 100,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedY: Math.random() * -10 - 10,
+                    speedX: Math.random() * 10 - 5,
+                    rotation: Math.random() * 360,
+                    rotSpeed: Math.random() * 10 - 5
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, i) => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.speedY += 0.25; // Gravity
+                    p.rotation += p.rotSpeed;
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+
+                    if (p.y > canvas.height + 50) {
+                        particles.splice(i, 1);
+                    }
+                });
+
+                if (particles.length > 0) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            animate();
+        }
+    </script>
+
+    <!-- Custom Feedback Modal -->
+    <div id="quiz-feedback-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex-col items-center justify-center p-6 backdrop-blur-sm transition-all">
+        <div id="quiz-modal-content" class="bg-surface-container-lowest p-8 rounded-3xl w-full max-w-sm flex flex-col items-center text-center gap-6 transform transition-transform scale-95 border-b-8 border-primary-container shadow-2xl">
+            <div id="quiz-modal-icon-bg" class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-2 animate-bounce">
+                <span id="quiz-modal-icon" class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <div>
+                <h2 id="quiz-modal-title" class="font-headline-lg text-primary mb-2">¡Excelente!</h2>
+                <p id="quiz-modal-subtitle" class="font-body-lg text-on-surface-variant">Great job!</p>
+            </div>
+            <button onclick="document.getElementById('quiz-feedback-modal').classList.replace('flex', 'hidden');" class="w-full py-4 bg-primary text-white font-label-bold rounded-full active:scale-95 transition-transform mt-2 border-b-4 border-on-primary-container">
+                CONTINUAR
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const QuizAudioController = {
+            ctx: null,
+            initContext() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+            playSuccess() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.2); // G5
+                osc.frequency.setValueAtTime(1046.50, this.ctx.currentTime + 0.3); // C6
+                
+                gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.3, this.ctx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.5);
+            },
+            playError() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.3);
+                
+                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            alarm() {
+                this.initContext();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.25);
+                osc.frequency.setValueAtTime(400, this.ctx.currentTime + 0.5);
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.75);
+                
+                gain.gain.value = 0.1;
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 1.0);
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { window.speechSynthesis.cancel(); } catch(e) {}
+                
+                setTimeout(() => {
+                    const uEs = new SpeechSynthesisUtterance(es);
+                    uEs.lang = 'es-ES';
+                    uEs.rate = 0.95;
+                    
+                    uEs.onend = () => {
+                        const uEn = new SpeechSynthesisUtterance(en);
+                        uEn.lang = 'en-US';
+                        uEn.rate = 0.95;
+                        window.speechSynthesis.speak(uEn);
+                    };
+                    window.speechSynthesis.speak(uEs);
+                }, 80);
+            }
+        };
+    </script>
+
+</body></html>

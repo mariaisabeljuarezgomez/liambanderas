@@ -1,11 +1,12 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-<title>Estación de Pintura: Reino Unido</title>
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estación de Pintura (Reino Unido)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -164,21 +165,29 @@
             align-items: center;
             flex-direction: column;
         }
-    </style>
+    
+        .celebration {
+            animation: celebration-glow 1.5s infinite alternate;
+        }
+        @keyframes celebration-glow {
+            from { box-shadow: 0 0 8px #22c55e, inset 0 0 8px #22c55e; }
+            to { box-shadow: 0 0 24px #22c55e, inset 0 0 24px #22c55e; }
+        }
+</style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col pb-24">
 <!-- Top Navigation Bar -->
 <header class="w-full top-0 sticky z-40 bg-background border-b-4 border-surface-container-highest flex items-center justify-between px-container-margin py-unit h-16">
-<button onclick="window.location.href='../world_map_hub/index.html'" aria-label="Volver" class="w-12 h-12 flex items-center justify-center hover:opacity-80 active:translate-y-1 transition-all text-primary">
+<button aria-label="Volver" class="w-12 h-12 flex items-center justify-center hover:opacity-80 active:translate-y-1 transition-all text-primary" onclick="window.location.href='../world_map_hub/index.html'">
 <span class="material-symbols-outlined text-[32px]">arrow_back</span>
 </button>
 <div class="flex items-center gap-2">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Reino Unido / UK</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Estación de Pintura (Reino Unido)</h1>
 </div>
-<button onclick="speakCountry()" aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center bg-secondary-container rounded-full audio-pulse active:scale-95 transition-transform shadow-[0_4px_0_#b38f00]">
+<button aria-label="Escuchar nombre" class="w-12 h-12 flex items-center justify-center bg-secondary-container rounded-full audio-pulse active:scale-95 transition-transform shadow-[0_4px_0_#b38f00]" onclick="speakCountry()">
 <span class="material-symbols-outlined text-on-secondary-fixed">volume_up</span>
 </button>
-<button onclick="triggerAlarm()" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" aria-label="Alarma"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
+<button aria-label="Alarma" class="flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-full border-b-4 border-on-tertiary-fixed-variant active:translate-y-1 transition-all shadow-lg" onclick="triggerAlarm()"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span><span class="font-label-bold text-[10px] uppercase tracking-tighter">¡Alarma! / Sound Alarm</span></button></header>
 <main class="flex-grow container mx-auto px-container-margin py-unit flex flex-col items-center">
 <!-- Instructional Header -->
 <div class="text-center mb-8 mt-4">
@@ -189,7 +198,7 @@
 </div>
 <!-- Flag Canvas Section -->
 <div class="w-full max-w-lg bg-surface-container-lowest rounded-lg p-card-padding border-2 border-surface-container-highest shadow-sm relative mb-8">
-<svg class="w-full h-auto drop-shadow-md rounded-md overflow-hidden bg-white" id="union-jack" viewBox="0 0 60 30">
+<svg class="w-full h-auto drop-shadow-md rounded-md overflow-hidden bg-white" id="union-jack" viewbox="0 0 60 30">
 <!-- UK Flag Structure (Simplified for Painting Interaction) -->
 <!-- Base / Blue areas -->
 <path class="flag-path" d="M0,0 L60,0 L60,30 L0,30 Z" data-part="blue-bg" fill="#e5e7eb"></path>
@@ -214,7 +223,7 @@
 <div class="flex flex-col items-center gap-2">
 <button class="color-bubble active" data-color-name="Azul" onclick="selectColor('#00247d', this)" style="background-color: #00247d;"></button>
 <span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider">Azul</span>
-<button class="w-10 h-10 bg-secondary-fixed rounded-full flex items-center justify-center shadow-[0_3px_0_#b38f00] active:translate-y-1 transition-all">
+<button class="w-10 h-10 bg-secondary-fixed rounded-full flex items-center justify-center shadow-[0_3px_0_#b38f00] active:translate-y-1 transition-all" onclick="AudioController.speakBilingual('Azul', 'Blue')">
 <span class="material-symbols-outlined text-[20px]">volume_up</span>
 </button>
 </div>
@@ -222,7 +231,7 @@
 <div class="flex flex-col items-center gap-2">
 <button class="color-bubble" data-color-name="Blanco" onclick="selectColor('#ffffff', this)" style="background-color: #ffffff;"></button>
 <span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider">Blanco</span>
-<button class="w-10 h-10 bg-secondary-fixed rounded-full flex items-center justify-center shadow-[0_3px_0_#b38f00] active:translate-y-1 transition-all">
+<button class="w-10 h-10 bg-secondary-fixed rounded-full flex items-center justify-center shadow-[0_3px_0_#b38f00] active:translate-y-1 transition-all" onclick="AudioController.speakBilingual('Blanco', 'White')">
 <span class="material-symbols-outlined text-[20px]">volume_up</span>
 </button>
 </div>
@@ -230,7 +239,7 @@
 <div class="flex flex-col items-center gap-2">
 <button class="color-bubble" data-color-name="Rojo" onclick="selectColor('#cf142b', this)" style="background-color: #cf142b;"></button>
 <span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider">Rojo</span>
-<button class="w-10 h-10 bg-secondary-fixed rounded-full flex items-center justify-center shadow-[0_3px_0_#b38f00] active:translate-y-1 transition-all">
+<button class="w-10 h-10 bg-secondary-fixed rounded-full flex items-center justify-center shadow-[0_3px_0_#b38f00] active:translate-y-1 transition-all" onclick="AudioController.speakBilingual('Rojo', 'Red')">
 <span class="material-symbols-outlined text-[20px]">volume_up</span>
 </button>
 </div>
@@ -238,11 +247,11 @@
 <!-- Hint Section -->
 <div class="bg-surface-container-lowest rounded-lg p-unit flex items-center gap-4">
 <div class="w-16 h-10 rounded border border-outline-variant overflow-hidden shrink-0">
-<img class="w-full h-full object-cover" data-alt="A bright educational illustration of the United Kingdom Union Jack flag, professional digital art for children, vibrant red white and blue colors, thick bold outlines, soft lighting, cheerful minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGaJ5ZPQEweDR3Lm2HvK8ywQmsJ4652JKCWQcu0tY_EYnrKV9q3sfv5Kamc7K7GugXICeVIa5sAjPjkLUo2p9zsnHhUHHjHHRSsszCnkXDvlVMXtUlh4WIajP1K11z9Kp9G18U7PK-hb53BLbEgCIMbqmZlcP_Hjf2DQluGfIQEDpNfezaRD9zd_HqETKDa9cjZhH2dNU5Xrp6tzs1VLf7z5g-TVDMbhampjCCuIRXT35zrULYqJQLzhyuMKdMHu4VhHnnIgBE0_s">
+<img class="w-full h-full object-cover" data-alt="A bright educational illustration of the United Kingdom Union Jack flag, professional digital art for children, vibrant red white and blue colors, thick bold outlines, soft lighting, cheerful minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGaJ5ZPQEweDR3Lm2HvK8ywQmsJ4652JKCWQcu0tY_EYnrKV9q3sfv5Kamc7K7GugXICeVIa5sAjPjkLUo2p9zsnHhUHHjHHRSsszCnkXDvlVMXtUlh4WIajP1K11z9Kp9G18U7PK-hb53BLbEgCIMbqmZlcP_Hjf2DQluGfIQEDpNfezaRD9zd_HqETKDa9cjZhH2dNU5Xrp6tzs1VLf7z5g-TVDMbhampjCCuIRXT35zrULYqJQLzhyuMKdMHu4VhHnnIgBE0_s"/>
 </div>
 <p class="font-body-md text-body-md text-on-surface-variant italic">Mira cómo debe quedar...</p>
 </div>
-</div>
+</div><button class="w-full py-5 chunky-button-primary bg-primary text-white font-headline-md rounded-lg flex items-center justify-center gap-2 transition-all mt-6" onclick="checkCompletion()"><span class="material-symbols-outlined">check_circle</span> Terminar </button>
 <!-- Action Button -->
 <div class="mt-10 w-full max-w-xs">
 <button class="btn-chunky-primary w-full py-4 text-xl" onclick="checkFlag()">
@@ -279,16 +288,54 @@
             CONTINUAR
         </button>
 </div>
-<script>
+<script>const COUNTRY_ID = 'reino_unido';
+
         // ── AUDIO SYSTEM ──────────────────────────────────────────
         const AudioController = {
             ctx: null,
-            initContext() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (this.ctx.state === 'suspended') this.ctx.resume(); },
-            alarm() { try { this.initContext(); const c=this.ctx; for(let i=0;i<3;i++){ setTimeout(()=>{ const o=c.createOscillator(),g=c.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(800,c.currentTime); o.frequency.linearRampToValueAtTime(1000,c.currentTime+0.15); o.frequency.linearRampToValueAtTime(800,c.currentTime+0.3); g.gain.setValueAtTime(0.1,c.currentTime); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.3); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.35); },i*350); } } catch(e) {} },
-            speakBilingual(es, en) { if (!('speechSynthesis' in window)) return; this.initContext(); try { speechSynthesis.cancel(); } catch(e) {} setTimeout(() => { const u=new SpeechSynthesisUtterance(es); u.lang='es-ES'; u.rate=0.95; u.onend=()=>{ const u2=new SpeechSynthesisUtterance(en); u2.lang='en-US'; u2.rate=0.95; speechSynthesis.speak(u2); }; speechSynthesis.speak(u); }, 80); }
+            initContext() {
+                if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            },
+            alarm() {
+                try {
+                    this.initContext();
+                    const c = this.ctx;
+                    for (let i = 0; i < 3; i++) {
+                        setTimeout(() => {
+                            const o = c.createOscillator(), g = c.createGain();
+                            o.type = 'sawtooth';
+                            o.frequency.setValueAtTime(800, c.currentTime);
+                            o.frequency.linearRampToValueAtTime(1000, c.currentTime + 0.15);
+                            o.frequency.linearRampToValueAtTime(800, c.currentTime + 0.3);
+                            g.gain.setValueAtTime(0.1, c.currentTime);
+                            g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.3);
+                            o.connect(g); g.connect(c.destination);
+                            o.start(); o.stop(c.currentTime + 0.35);
+                        }, i * 350);
+                    }
+                } catch(e) {}
+            },
+            speakBilingual(es, en) {
+                if (!('speechSynthesis' in window)) return;
+                this.initContext();
+                try { speechSynthesis.cancel(); } catch(e) {}
+                setTimeout(() => {
+                    const u = new SpeechSynthesisUtterance(es);
+                    u.lang = 'es-ES';
+                    u.rate = 0.95;
+                    u.onend = () => {
+                        const u2 = new SpeechSynthesisUtterance(en);
+                        u2.lang = 'en-US';
+                        u2.rate = 0.95;
+                        speechSynthesis.speak(u2);
+                    };
+                    speechSynthesis.speak(u);
+                }, 80);
+            }
         };
-        function speakCountry() { AudioController.speakBilingual('Reino Unido','United Kingdom'); }
-        function triggerAlarm() { AudioController.alarm(); setTimeout(()=>AudioController.speakBilingual('¡Alarma del Reino Unido!','UK Alarm!'),750); }
+        function speakCountry() { AudioController.speakBilingual('Reino Unido', 'United Kingdom'); }
+        function triggerAlarm() { AudioController.alarm(); setTimeout(() => AudioController.speakBilingual('¡Alarma de Reino Unido!', 'United Kingdom Alarm!'), 750); }
 
         let currentColor = '#00247d';
         const partsPainted = {
@@ -358,7 +405,42 @@
         function closeSuccess() {
             document.getElementById('success-overlay').style.display = 'none';
         }
-    </script>
+    
+        
+        function checkCompletion() {
+            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
+            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
+            if (done) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                document.getElementById('flag-canvas').classList.add('celebration');
+                setTimeout(() => {
+                    window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
+                }, 2000);
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
+            }
+        }
 
-
+        // Auto-painted observer to dynamically track coloring
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.style.backgroundColor && target.style.backgroundColor !== 'transparent' && target.style.backgroundColor !== '') {
+                        target.dataset.painted = 'true';
+                    } else {
+                        target.removeAttribute('data-painted');
+                    }
+                }
+            });
+        });
+        const canvas = document.getElementById('flag-canvas');
+        if (canvas) {
+            observer.observe(canvas, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['style']
+            });
+        }
+        </script>
 </body></html>

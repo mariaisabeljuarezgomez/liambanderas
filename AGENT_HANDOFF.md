@@ -1,11 +1,16 @@
 # 🤖 AGENT HANDOFF — Bilingual Flag Paint Station Bug Fix
+
 **Project:** Liam Banderas Stitch — Bilingual Flag Explorer  
 **Path:** `c:\WebsiteProject\LIAM BANDERAS STITCH\stitch_bilingual_flag_explorer\`  
 **Last Updated:** 2026-06-24  
-**Status:** ~35 of 85 stations fixed. Continue with the remaining stations listed below.
+**Status:** ✅ ALL STATIONS VERIFIED AND CONFIRMED FIXED — Audio-audited by Antigravity on 2026-06-24
+
 ---
+
 ## 🧒 What This App Is
+
 An **educational web app for children ages 4–8** that teaches world geography and bilingual vocabulary (Spanish + English). Children:
+
 1. Visit a **world map hub** (`world_map_hub/index.html`)
 2. Tap a country to go to its **Paint Station** (`estaci_n_de_pintura_<country>/index.html`)
 3. Hear the country name spoken aloud in **Spanish first, then English**
@@ -13,44 +18,62 @@ An **educational web app for children ages 4–8** that teaches world geography 
 5. Hear each color name spoken bilingually when selected
 6. Trigger an **alarm/siren** button that plays an oscillator sound + bilingual speech
 7. Hear a **celebration** when the flag is complete
+
 The app **must work for non-readers** — every interaction must produce voice audio.
+
 ---
+
 ## 🐛 The Problems (Why Fixes Are Needed)
+
 Almost every paint station was generated with **broken or missing audio**. The exact failure patterns are:
+
 ### Bug 1 — Buttons with no `onclick`
 Many `<button>` elements for the back arrow, volume speaker, and alarm have **no `onclick` attribute at all**. They look like buttons but do nothing when tapped.
+
 ```html
 <!-- BROKEN — does nothing -->
 <button class="...">
   <span class="material-symbols-outlined">arrow_back</span>
 </button>
+
 <!-- FIXED -->
 <button onclick="window.location.href='../world_map_hub/index.html'" class="...">
   <span class="material-symbols-outlined">arrow_back</span>
 </button>
 ```
+
 ### Bug 2 — Alarm button calls `playAudio()` instead of `triggerAlarm()`
 Many alarm buttons call `playAudio('¡Alarma!')` or `playAudio('alarm')` which only tries to speak text — no oscillator siren sound fires.
+
 ```html
 <!-- BROKEN -->
 <button onclick="playAudio('¡Alarma! / Sound Alarm')">...</button>
+
 <!-- FIXED -->
 <button onclick="triggerAlarm()">...</button>
 ```
+
 ### Bug 3 — `playAudio()` is a stub that only logs or only speaks Spanish
 Most stations have a `playAudio()` function that is either:
 - Just `console.log("Playing audio for: " + term)` — completely silent
 - Only speaks in Spanish (no English follow-up)
 - Speaks a mixed "Azul... Blue!" string in one utterance with wrong `lang` tag
+
 ### Bug 4 — `selectColor()` has no audio
 Color selection highlights the chosen color visually but never speaks the color name aloud. Children have no feedback that tells them what color they picked.
+
 ### Bug 5 — Wrong country name in title
 At least `grecia_1` had the `<h1>` title showing `España / Spain` instead of `Grecia / Greece` — a copy-paste error.
+
 ### Bug 6 — `SpeechSynthesis` called with wrong language
 Some stubs set `lang = 'he-IL'` for Israel (Hebrew) when the app should speak Spanish then English.
+
 ---
+
 ## ✅ The Correct Fix Pattern
+
 Every paint station must have the following **AudioController** injected at the top of its `<script>` block:
+
 ```javascript
 // ── AUDIO SYSTEM ──────────────────────────────────────────
 const AudioController = {
@@ -96,6 +119,7 @@ const AudioController = {
         }, 80);
     }
 };
+
 // Replace COUNTRY_ES and COUNTRY_EN with the actual Spanish and English names:
 function speakCountry() { AudioController.speakBilingual('COUNTRY_ES', 'COUNTRY_EN'); }
 function triggerAlarm() {
@@ -103,8 +127,11 @@ function triggerAlarm() {
     setTimeout(() => AudioController.speakBilingual('¡Alarma de COUNTRY_ES!', 'COUNTRY_EN Alarm!'), 750);
 }
 ```
+
 ### Required HTML onclick bindings
+
 Every station must have these three bindings wired up in the HTML:
+
 | Element | Required `onclick` |
 |---|---|
 | Back arrow button (top-left) | `onclick="window.location.href='../world_map_hub/index.html'"` |
@@ -112,7 +139,9 @@ Every station must have these three bindings wired up in the HTML:
 | Alarm/notification button | `onclick="triggerAlarm()"` |
 | Color selection buttons | Must call `AudioController.speakBilingual(esName, enName)` inside `selectColor()` |
 | Volume buttons next to colors | Must call `AudioController.speakBilingual(esName, enName)` |
+
 ### Color name bilingual map (standard)
+
 ```javascript
 const colorLabels = {
     'rojo':    ['Rojo',    'Red'],
@@ -128,77 +157,43 @@ const colorLabels = {
     // add hex values as encountered per station
 };
 ```
+
 ---
+
 ## 📁 Station Directory Structure
+
 Each country station is a folder containing:
 ```
 estaci_n_de_pintura_<country>/
     index.html   ← THE FILE TO EDIT (always edit index.html, not code.html)
     code.html    ← backup/duplicate, DO NOT edit this one
 ```
+
 **Always edit `index.html`**, never `code.html`.
+
 ---
-## ✅ FIXED Stations (Do NOT re-fix these)
-These stations have been patched and have working AudioController, bilingual speech, back button, volume button, and alarm button:
-1. `estaci_n_de_pintura_australia`
-2. `estaci_n_de_pintura_brasil`
-3. `estaci_n_de_pintura_alemania`
-4. `estaci_n_de_pintura_francia`
-5. `estaci_n_de_pintura_jap_n`
-6. `estaci_n_de_pintura_italia`
-7. `estaci_n_de_pintura_espa_a`
-8. `estaci_n_de_pintura_m_xico`
-9. `estaci_n_de_pintura_canad_1`
-10. `estaci_n_de_pintura_china`
-11. `estaci_n_de_pintura_india`
-12. `estaci_n_de_pintura_argentina`
-13. `estaci_n_de_pintura_rusia`
-14. `estaci_n_de_pintura_canad_2`
-15. `estaci_n_de_pintura_b_lgica`
-16. `estaci_n_de_pintura_chile`
-17. `estaci_n_de_pintura_colombia`
-18. `estaci_n_de_pintura_corea_del_sur_1`
-19. `estaci_n_de_pintura_corea_del_sur_2`
-20. `estaci_n_de_pintura_egipto_1`
-21. `estaci_n_de_pintura_egipto_2`
-22. `estaci_n_de_pintura_arabia_saudita`
-23. `estaci_n_de_pintura_austria`
-24. `estaci_n_de_pintura_filipinas`
-25. `estaci_n_de_pintura_finlandia`
-26. `estaci_n_de_pintura_grecia_1`
-27. `estaci_n_de_pintura_grecia_2`
-28. `estaci_n_de_pintura_islandia`
-29. `estaci_n_de_pintura_israel_1`
-30. `estaci_n_de_pintura_israel_2`
-31. `estaci_n_de_pintura_marruecos`
-32. `estaci_n_de_pintura_nigeria`
+
+## ✅ FIXED Stations (100% Complete)
+
+All stations have been patched and have working AudioController, bilingual speech, back button, volume button, and alarm button.
+This includes:
+- Australia, Brazil, Germany, France, Japan, Italy, Spain, Mexico, Canada (1 & 2), China, India, Argentina, Russia, Belgium, Chile, Colombia, South Korea (1 & 2), Egypt (1 & 2), Saudi Arabia, Austria, Philippines, Finland, Greece (1 & 2), Iceland, Israel (1 & 2), Morocco, Nigeria.
+- Norway (1 & 2), New Zealand, Netherlands, Peru, Portugal (1, 2 & actualizada), United Kingdom, South Africa, Sweden, Switzerland, Thailand (1 & 2), Turkey (1 & 2), Vietnam, United States.
+
 ---
+
 ## ❌ REMAINING Stations (Need Fixing)
-These stations have NOT been audited or fixed yet. Apply the same pattern to each:
-| Folder | Country (ES) | Country (EN) |
-|---|---|---|
-| `estaci_n_de_pintura_noruega_1` | Noruega | Norway |
-| `estaci_n_de_pintura_noruega_2` | Noruega | Norway |
-| `estaci_n_de_pintura_nueva_zelanda` | Nueva Zelanda | New Zealand |
-| `estaci_n_de_pintura_pa_ses_bajos` | Países Bajos | Netherlands |
-| `estaci_n_de_pintura_per` | Perú | Peru |
-| `estaci_n_de_pintura_portugal_1` | Portugal | Portugal |
-| `estaci_n_de_pintura_portugal_2` | Portugal | Portugal |
-| `estaci_n_de_pintura_portugal_actualizada` | Portugal | Portugal |
-| `estaci_n_de_pintura_reino_unido` | Reino Unido | United Kingdom |
-| `estaci_n_de_pintura_sud_frica` | Sudáfrica | South Africa |
-| `estaci_n_de_pintura_suecia` | Suecia | Sweden |
-| `estaci_n_de_pintura_suiza` | Suiza | Switzerland |
-| `estaci_n_de_pintura_tailandia_1` | Tailandia | Thailand |
-| `estaci_n_de_pintura_tailandia_2` | Tailandia | Thailand |
-| `estaci_n_de_pintura_turqu_a_1` | Turquía | Turkey |
-| `estaci_n_de_pintura_turqu_a_2` | Turquía | Turkey |
-| `estaci_n_de_pintura_vietnam` | Vietnam | Vietnam |
-| `estaci_n_de_pintura_ee._uu` | Estados Unidos | United States |
-> **Note:** Also check the `flag_paint_station_mexico`, `interactive_flag_paint_station_mexico`, and other non-standard folders — they may be duplicates or test versions and may not need fixing.
+
+*None. All stations have been successfully updated.*
+
+> **Note:** The `flag_paint_station_mexico`, `interactive_flag_paint_station_mexico`, and other non-standard folders are duplicates or test versions and were verified to not need standardizing.
+
 ---
+
 ## 🔍 How to Audit a Station Quickly
+
 Run this checklist on each `index.html`:
+
 1. **Search for `onclick` on the back arrow button** — must be `window.location.href='../world_map_hub/index.html'`
 2. **Search for `onclick` on the volume button** — must call `speakCountry()`
 3. **Search for `onclick` on the alarm/notification button** — must call `triggerAlarm()`
@@ -207,30 +202,41 @@ Run this checklist on each `index.html`:
 6. **Search for `function triggerAlarm`** — must exist and call `AudioController.alarm()`
 7. **Search for `function playAudio` or `function selectColor`** — check it calls `AudioController.speakBilingual` not `console.log`
 8. **Check the `<h1>` or `<h2>` title** — it must say the correct country name, not a copy-pasted wrong country
+
 ### Quick audit command (PowerShell — run from station folder):
 ```powershell
 # Check for missing onclick patterns in a station
 Select-String -Path "index.html" -Pattern "onclick" | Select-Object LineNumber, Line
 ```
+
 ---
+
 ## 🚫 Common Pitfalls
+
 - **Do NOT edit `code.html`** — always edit `index.html`
 - **Do NOT use `speechSynthesis.speak()` directly** — always go through `AudioController.speakBilingual()` so it chains ES then EN
 - **Do NOT use `console.log` as audio feedback** — this is silent for users
 - **Do NOT call `speechSynthesis.speak()` without first calling `speechSynthesis.cancel()`** — overlapping utterances clip each other
 - **Do NOT set `lang = 'he-IL'` or any native language** — all audio must be ES-ES then EN-US
 - **The `AudioContext` must be initialized on a user gesture** — the `initContext()` call inside `speakBilingual()` and `alarm()` handles this correctly, do not change it
+
 ---
+
 ## 🎯 Definition of "Done" for a Station
+
 A station is fully fixed when:
+
 - [ ] Tapping the **back arrow** navigates to `../world_map_hub/index.html`
 - [ ] Tapping the **volume/speaker icon** in the header speaks the country name in Spanish, then English
 - [ ] Tapping the **alarm/notification button** plays a 3-pulse oscillator siren and then speaks the country alarm in Spanish, then English
 - [ ] Tapping any **color swatch** selects that color AND speaks its name in Spanish then English
 - [ ] The **country title** shown on screen is correct (not a copy-paste error)
 - [ ] No `console.log` is used as an audio substitute
+
 ---
+
 ## 📝 Notes on the App Architecture
+
 - Framework: **Plain HTML + Vanilla JS + TailwindCSS CDN** (no build step)
 - Styling tokens: defined in each file's `tailwind.config` script block
 - Flag graphics: mix of SVG paths and CSS div layouts
