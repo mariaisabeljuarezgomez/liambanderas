@@ -322,15 +322,65 @@
         });
     
         
+        function compareColor(el, expected) {
+            if (!el) return false;
+            const clean = (s) => s.replace(/\s+/g, '').toLowerCase();
+            const exp = clean(expected);
+            
+            const bg = el.style.backgroundColor;
+            if (bg) {
+                if (clean(bg).includes(exp)) return true;
+                if (exp.startsWith('#') && exp.length === 7) {
+                    const r = parseInt(exp.slice(1, 3), 16);
+                    const g = parseInt(exp.slice(3, 5), 16);
+                    const b = parseInt(exp.slice(5, 7), 16);
+                    if (clean(bg).includes(`rgb(${r},${g},${b})`)) return true;
+                }
+            }
+            
+            const fill = el.getAttribute('fill');
+            if (fill) {
+                if (clean(fill).includes(exp)) return true;
+                if (exp.startsWith('#') && exp.length === 7) {
+                    const r = parseInt(exp.slice(1, 3), 16);
+                    const g = parseInt(exp.slice(3, 5), 16);
+                    const b = parseInt(exp.slice(5, 7), 16);
+                    if (clean(fill).includes(`rgb(${r},${g},${b})`)) return true;
+                }
+            }
+            
+            const sFill = el.style.fill;
+            if (sFill) {
+                if (clean(sFill).includes(exp)) return true;
+                if (exp.startsWith('#') && exp.length === 7) {
+                    const r = parseInt(exp.slice(1, 3), 16);
+                    const g = parseInt(exp.slice(3, 5), 16);
+                    const b = parseInt(exp.slice(5, 7), 16);
+                    if (clean(sFill).includes(`rgb(${r},${g},${b})`)) return true;
+                }
+            }
+            
+            const classes = el.className;
+            if (classes && typeof classes === 'string') {
+                if (clean(classes).includes('bg-[' + exp + ']') || clean(classes).includes('bg-' + exp)) return true;
+            }
+            
+            return false;
+        }
+
         function checkCompletion() {
-            const parts = document.querySelectorAll('#flag-canvas [id^="part-"], #flag-canvas [id^="stripe-"]');
-            const done = [...parts].every(p => p.dataset.painted === 'true' || (p.style.backgroundColor && p.style.backgroundColor !== 'transparent' && p.style.backgroundColor !== ''));
-            if (done) {
+            const allPainted = false;
+            const isCorrect = false;
+            
+            if (isCorrect) {
                 AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
-                document.getElementById('flag-canvas').classList.add('celebration');
+                const canvas = document.getElementById('flag-canvas') || document.getElementById('paintingCanvas') || document.getElementById('flag-container') || document.getElementById('flag-svg') || document.getElementById('australia-flag-svg');
+                if (canvas) canvas.classList.add('celebration');
                 setTimeout(() => {
                     window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
                 }, 2000);
+            } else if (allPainted) {
+                AudioController.speakBilingual('¡Casi! Sigue intentando con los colores correctos.', 'Almost! Keep trying with the correct colors.');
             } else {
                 AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
             }

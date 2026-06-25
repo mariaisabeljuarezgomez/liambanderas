@@ -448,20 +448,69 @@
             document.getElementById('celebration').classList.add('opacity-0');
         }
 
-        function checkCompletion() {
-            const stripesWin = paintedState.stripes.every((color, idx) => {
-                const correctColor = (idx % 2 === 0) ? 'rojo' : 'blanco';
-                return color === correctColor;
-            });
-            const unionWin = paintedState.union === 'azul';
+        function compareColor(el, expected) {
+            if (!el) return false;
+            const clean = (s) => s.replace(/\s+/g, '').toLowerCase();
+            const exp = clean(expected);
             
-            if (stripesWin && unionWin) {
-                const celebration = document.getElementById('celebration');
-                celebration.classList.remove('opacity-0');
-                AudioController.victory();
+            const bg = el.style.backgroundColor;
+            if (bg) {
+                if (clean(bg).includes(exp)) return true;
+                if (exp.startsWith('#') && exp.length === 7) {
+                    const r = parseInt(exp.slice(1, 3), 16);
+                    const g = parseInt(exp.slice(3, 5), 16);
+                    const b = parseInt(exp.slice(5, 7), 16);
+                    if (clean(bg).includes(`rgb(${r},${g},${b})`)) return true;
+                }
+            }
+            
+            const fill = el.getAttribute('fill');
+            if (fill) {
+                if (clean(fill).includes(exp)) return true;
+                if (exp.startsWith('#') && exp.length === 7) {
+                    const r = parseInt(exp.slice(1, 3), 16);
+                    const g = parseInt(exp.slice(3, 5), 16);
+                    const b = parseInt(exp.slice(5, 7), 16);
+                    if (clean(fill).includes(`rgb(${r},${g},${b})`)) return true;
+                }
+            }
+            
+            const sFill = el.style.fill;
+            if (sFill) {
+                if (clean(sFill).includes(exp)) return true;
+                if (exp.startsWith('#') && exp.length === 7) {
+                    const r = parseInt(exp.slice(1, 3), 16);
+                    const g = parseInt(exp.slice(3, 5), 16);
+                    const b = parseInt(exp.slice(5, 7), 16);
+                    if (clean(sFill).includes(`rgb(${r},${g},${b})`)) return true;
+                }
+            }
+            
+            const classes = el.className;
+            if (classes && typeof classes === 'string') {
+                if (clean(classes).includes('bg-[' + exp + ']') || clean(classes).includes('bg-' + exp)) return true;
+            }
+            
+            return false;
+        }
+
+        function checkCompletion() {
+            const union = document.querySelector('[data-type="union"]');
+            const stripes = Array.from(document.querySelectorAll('.paint-zone')).filter(z => z !== union);
+            const allPainted = union && stripes.length === 13 && stripes.every(s => s.getAttribute('fill') !== '#FFFFFF' && s.getAttribute('fill') !== '#F0F4FB') && union.getAttribute('fill') !== '#FFFFFF' && union.getAttribute('fill') !== '#F0F4FB';
+            const isCorrect = allPainted && compareColor(union, '#004163') && stripes.every((s, i) => compareColor(s, i % 2 === 0 ? '#ba1a1a' : '#ffffff'));
+            
+            if (isCorrect) {
+                AudioController.speakBilingual('¡Lo lograste! ¡Bandera completa!', 'You did it! Flag complete!');
+                const canvas = document.getElementById('flag-canvas') || document.getElementById('paintingCanvas') || document.getElementById('flag-container') || document.getElementById('flag-svg') || document.getElementById('australia-flag-svg');
+                if (canvas) canvas.classList.add('celebration');
                 setTimeout(() => {
                     window.location.href = `../celebration_reward/index.html?country=${COUNTRY_ID}`;
                 }, 2000);
+            } else if (allPainted) {
+                AudioController.speakBilingual('¡Casi! Sigue intentando con los colores correctos.', 'Almost! Keep trying with the correct colors.');
+            } else {
+                AudioController.speakBilingual('¡Sigue pintando!', 'Keep painting!');
             }
         }
         
