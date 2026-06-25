@@ -246,4 +246,40 @@ A station is fully fixed when:
 
 ---
 
+## 🛠️ Phase 2: Hub Navigation, Progression Gates, Quiz Standardization, Bubbling Bug Fixes, and Color Validation
+
+We introduced a series of critical repairs to fix progression, layout overlaps, and child-interaction bugs:
+
+### 1. Map Pin Overlaps & Touch Targets
+- **The Issue**: In dense map regions (like Europe), decorative pulsing ring containers (`-inset-8` and `-inset-4`) overlapped neighboring country pins. Because they lacked `pointer-events-none`, they hijacked clicks, preventing the user from selecting adjacent countries.
+- **The Fix**: All decorative outer containers have been marked with the `pointer-events-none` class. Only the main physical icon/swatch is interactive. Coordinates were also slightly shifted to ensure clean spacing.
+
+### 2. Progression Safeguards & Quiz Gates
+- **The Issue**: Clicking "Next Flag" after completing a flag (like Australia) originally sent children straight to the Level 1 Completed screen and unlocked the quiz, even if they had only painted 4 or 5 flags.
+- **The Fix**: 
+  - **Sequential Loop Navigation**: The "Next Flag" button now checks `localStorage` keys for all 10 Level 1 flags. If any remain unpainted, it routes the child directly to the next unpainted flag in the sequence, wrapping around if necessary. It only loads the Level Completed screen if all 10 flags are finished.
+  - **Quiz Gates**: The "Jugar" button on the bottom navigation and the floating "¡A JUGAR!" button on the Map Hub are locked until all 10 flags are complete. Tapping them plays a warning siren and triggers a bilingual voice announcement. Direct URL access to the quiz page is also guarded and auto-redirects back to the hub.
+
+### 3. DOM Event Bubbling/Propagation (e.g. Canada Flag)
+- **The Issue**: In the Canada Paint Station, the maple leaf icon is placed inside the central white stripe container. Clicking the leaf to paint it Red bubbled up to the center stripe. The stripe's listener interpreted the Red click as an error (since the stripe needs White), wiggled, and played the "Boing" error sound. This locked up validation and made the station feel broken.
+- **The Fix**: Added `e.stopPropagation()` inside the click handler for child overlaid elements (like `leaf-icon`) to prevent events from bubbling up to parent containers.
+
+### 4. Color Correctness Validation (`checkCompletion()` Logic Gap Fixes)
+- **The Issue**: Previously, the `checkCompletion()` function used a generic check (or was hardcoded to bypass) verifying if parts had style attributes or any color applied. This allowed children to paint elements incorrect colors (e.g. painting the red stripe in Norway's flag blue) and still receive the completion reward.
+- **The Fix**: 
+  - We refactored `checkCompletion()` across all 50 flag paint stations to inspect DOM color properties explicitly.
+  - Injected a robust helper function `compareColor(element, expectedColor)` that normalizes SVG `fill`, inline `style.backgroundColor`, inline `style.fill`, and Tailwind `bg-` class definitions to verify color validity.
+  - Structured the check so that unpainted flags prompt `¡Sigue pintando! / Keep painting!`, incorrectly painted flags prompt `¡Casi! Sigue intentando con los colores correctos. / Almost! Keep trying with the correct colors.`, and only fully correct flags trigger the celebration reward redirection.
+
+### 5. Repository Cleanup & Git Sync
+- **The Issue**: The duplicate file `design_system_code.html` was sitting in the repository alongside `design_system.html`.
+- **The Fix**: Successfully purged `design_system_code.html` from the workspace and pushed the deletion to GitHub `origin/main` (commit `307ef66dc16a6ef3794d3472624baa3a49e4262e`). Verified that the remote is clean.
+
+### 6. What Future Agents Should Look Out For:
+1. **Always stop event propagation (`e.stopPropagation()`)** on child elements layered inside clickable parent sections (e.g., emblems, coats of arms, stars placed inside stripes).
+2. **Never hardcode direct completion jumps** based on index sequence alone. Always verify progress by querying `localStorage.getItem('<country>_completed') === 'true'` across all level flags.
+3. **Keep pointer events off decorative rings** on the map so they don't block adjacent coordinates.
+4. **Ensure `checkCompletion()` checks correct color values** (hex strings/Tailwind classes) with the helper `compareColor`, rather than checking for the mere presence of styling or hardcoding `allPainted = true;`.
+
+---
 *This document was written to hand off repair work to another AI agent. Follow the fix pattern exactly. When in doubt, look at a known-fixed station like `estaci_n_de_pintura_australia/index.html` as a reference implementation.*
