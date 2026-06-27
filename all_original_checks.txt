@@ -1,0 +1,664 @@
+STATION: estaci_n_de_pintura_alemania
+  Functions: ['selectColor', 'paintStripe', 'checkWin', 'resetFlag', 'closeModal', 'playAudio']
+  Function checkWin code:
+function checkWin() {
+            const isCorrect = stripeState.every((color, index) => color === correctFlag[index]);
+            if (isCorrect) {
+                setTimeout(() => {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                    playAudio('Success');
+                }, 500);
+            }
+        }
+  Function resetFlag code:
+function resetFlag() {
+            stripeState = [null, null, null];
+            for(let i=0; i<3; i++) {
+                const stripe = document.getElementById(`stripe-${i}`);
+                stripe.style.backgroundColor = "";
+                stripe.innerHTML = `<span class="material-symbols-outlined text-outline-variant opacity-20 group-hover:opacity-50 text-4xl">format_paint</span>`;
+                stripe.classList.add('group');
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_arabia_saudita
+  Functions: ['selectColor', 'completeFlag', 'playAudio']
+  Function completeFlag code:
+function completeFlag() {
+            const overlay = document.getElementById('success-overlay');
+            const star = document.getElementById('star-icon');
+            
+            overlay.classList.remove('bg-white/0');
+            overlay.classList.add('bg-white/60');
+            star.classList.remove('scale-0');
+            star.classList.add('scale-100');
+
+            setTimeout(() => {
+                alert("¡Felicidades! You painted the flag of Saudi Arabia.");
+                overlay.classList.add('bg-white/0');
+                overlay.classList.remove('bg-white/60');
+                star.classList.add('scale-0');
+                star.classList.remove('scale-100');
+            }, 2000);
+        }
+==================================================
+STATION: estaci_n_de_pintura_argentina
+  Functions: ['selectColor', 'paintRegion', 'playSound']
+==================================================
+STATION: estaci_n_de_pintura_australia
+  Functions: ['selectColor']
+==================================================
+STATION: estaci_n_de_pintura_austria
+  Functions: ['setSelectedColor', 'paintStripe', 'playAudio', 'closeSuccess']
+  Function closeSuccess code:
+function closeSuccess() {
+            document.getElementById('success-modal').classList.add('hidden');
+            // Reset for next demo loop or redirect
+            location.reload();
+        }
+==================================================
+STATION: estaci_n_de_pintura_b_lgica
+  Functions: ['selectColor', 'paintStripe', 'resetFlag', 'checkFlag', 'showSuccess', 'closeModal', 'createConfetti', 'playAudio']
+  Function resetFlag code:
+function resetFlag() {
+            paintedColors = [null, null, null];
+            for (let i = 0; i < 3; i++) {
+                const stripe = document.getElementById(`stripe-${i}`);
+                stripe.style.backgroundColor = '';
+                stripe.classList.add('bg-surface-variant');
+                stripe.innerHTML = '<span class="material-symbols-outlined text-outline group-hover:scale-125 transition-transform">format_paint</span>';
+            }
+        }
+  Function checkFlag code:
+function checkFlag() {
+            const isCorrect = paintedColors.every((color, index) => color === correctFlag[index]);
+            
+            if (isCorrect) {
+                showSuccess();
+            } else {
+                alert("¡Oh oh! La bandera de Bélgica tiene Negro, Amarillo y Rojo en ese orden. ¡Inténtalo de nuevo!");
+                resetFlag();
+            }
+        }
+  Function showSuccess code:
+function showSuccess() {
+            const modal = document.getElementById('success-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-0');
+                content.classList.add('scale-100');
+            }, 10);
+            createConfetti();
+        }
+==================================================
+STATION: estaci_n_de_pintura_brasil
+  Functions: ['selectColor', 'paintPart', 'playAudio', 'checkFlagCompletion']
+  Function checkFlagCompletion code:
+function checkFlagCompletion() {
+            const green = document.getElementById('part-green').style.fill;
+            const yellow = document.getElementById('part-yellow').style.fill;
+            const blue = document.getElementById('part-blue').style.fill;
+
+            // Simplified check for hex/rgb equivalence
+            if (green.includes('0, 151, 57') && yellow.includes('254, 223, 0') && blue.includes('1, 33, 105')) {
+                setTimeout(() => {
+                    alert("¡Excelente! Has pintado la bandera de Brasil correctamente.");
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_canad_1
+  Functions: ['selectColor', 'resetCanvas', 'checkCompletion', 'closeModal']
+  Function checkCompletion code:
+function checkCompletion() {
+            if (paintedParts.left && paintedParts.right && paintedParts.center && paintedParts.leaf) {
+                setTimeout(() => {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_canad_2
+  Functions: ['selectColor', 'paintElement', 'checkCompletion', 'showCelebration']
+  Function checkCompletion code:
+function checkCompletion() {
+            const left = document.getElementById('left-rect').getAttribute('fill');
+            const right = document.getElementById('right-rect').getAttribute('fill');
+            const leaf = document.getElementById('maple-leaf').getAttribute('fill');
+            const mid = document.getElementById('mid-rect').getAttribute('fill');
+
+            // Simplified win condition: all painted correctly
+            if (left === '#ba1a1a' && right === '#ba1a1a' && leaf === '#ba1a1a' && mid === '#ffffff') {
+                showCelebration();
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_chile
+  Functions: ['selectColor', 'paint', 'updateProgress', 'checkWin', 'resetGame']
+  Function updateProgress code:
+function updateProgress() {
+            const count = Object.values(paintedZones).filter(v => v).length;
+            const percentage = (count / 3) * 100;
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.querySelector('.text-tertiary').innerText = `${count}/3`;
+        }
+  Function checkWin code:
+function checkWin() {
+            if (paintedZones.blue && paintedZones.white && paintedZones.red) {
+                setTimeout(() => {
+                    document.getElementById('win-modal').classList.remove('hidden');
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_china
+  Functions: ['selectColor', 'paintElement', 'playAudio', 'checkProgress', 'showCelebration']
+  Function checkProgress code:
+function checkProgress() {
+            const field = document.getElementById('field').style.fill;
+            const s1 = document.getElementById('star1').style.fill;
+            const s2 = document.getElementById('star2').style.fill;
+            const s3 = document.getElementById('star3').style.fill;
+            const s4 = document.getElementById('star4').style.fill;
+            const s5 = document.getElementById('star5').style.fill;
+
+            // Simplified check: Field is red and stars are yellow
+            // Using RGB because style.fill returns rgb()
+            const isRed = (c) => c === 'rgb(186, 26, 26)' || c === '#ba1a1a';
+            const isYellow = (c) => c === 'rgb(252, 204, 0)' || c === '#fccc00';
+
+            if (isRed(field) && isYellow(s1) && isYellow(s2) && isYellow(s3) && isYellow(s4) && isYellow(s5)) {
+                showCelebration();
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_colombia
+  Functions: ['selectColor', 'paintStripe', 'checkCompletion', 'playAudio']
+  Function checkCompletion code:
+function checkCompletion() {
+            if (painted.yellow && painted.blue && painted.red) {
+                setTimeout(() => {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                    playAudio('Success');
+                }, 600);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_corea_del_sur_1
+  Functions: ['selectColor', 'playAudio']
+==================================================
+STATION: estaci_n_de_pintura_corea_del_sur_2
+  Functions: ['selectColor', 'checkProgress', 'showFinishButton', 'celebrate']
+  Function checkProgress code:
+function checkProgress(part, color) {
+            if (part === 'kwae') {
+                if (color === '#000000') currentFlagState.kwae_count++;
+            } else {
+                if (color === correctColors[part]) currentFlagState[part] = true;
+            }
+
+            // Simple check logic
+            if (currentFlagState['field'] && currentFlagState['taegeuk-red'] && 
+                currentFlagState['taegeuk-blue'] && currentFlagState.kwae_count >= 12) {
+                showFinishButton();
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_ee._uu
+  Functions: ['selectColor', 'resetFlag', 'checkCompletion', 'playAudio']
+  Function resetFlag code:
+function resetFlag() {
+            document.querySelectorAll('.paint-zone').forEach(zone => {
+                zone.setAttribute('fill', '#FFFFFF');
+                zone.setAttribute('stroke', '#D1D5DB');
+            });
+            document.querySelectorAll('#stars circle').forEach(star => star.setAttribute('fill', '#F0F4FB'));
+            paintedParts = 0;
+            document.getElementById('celebration').classList.add('opacity-0');
+        }
+  Function checkCompletion code:
+function checkCompletion() {
+            if(paintedParts >= totalParts) {
+                const celebration = document.getElementById('celebration');
+                celebration.classList.remove('opacity-0');
+                playAudio('win');
+                setTimeout(() => {
+                    celebration.classList.add('opacity-0');
+                }, 3000);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_egipto_1
+  Functions: ['selectColor', 'paintStripe', 'checkWin', 'resetPainting', 'playAudio']
+  Function checkWin code:
+function checkWin() {
+            if (currentFlag.top === correctFlag.top && 
+                currentFlag.middle === correctFlag.middle && 
+                currentFlag.bottom === correctFlag.bottom) {
+                
+                setTimeout(() => {
+                    document.getElementById('celebration').classList.remove('hidden');
+                    document.getElementById('celebration').classList.add('flex');
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_egipto_2
+  Functions: ['selectColor']
+  Listener for 'check-flag':
+function() {
+            const top = document.getElementById('stripe-top'
+==================================================
+STATION: estaci_n_de_pintura_espa_a
+  Functions: ['selectColor', 'playAudio', 'checkCompletion', 'closeCelebration']
+  Function checkCompletion code:
+function checkCompletion() {
+            if (paintedState.top && paintedState.middle && paintedState.bottom) {
+                setTimeout(() => {
+                    document.getElementById('celebration').classList.remove('hidden');
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_filipinas
+  Functions: ['selectColor', 'applyColor', 'playAudio']
+==================================================
+STATION: estaci_n_de_pintura_finlandia
+  Functions: ['selectColor', 'playAudio', 'checkCompletion']
+  Function checkCompletion code:
+function checkCompletion() {
+            if (paintedParts.v && paintedParts.h) {
+                setTimeout(() => {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                }, 800);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_francia
+  Functions: ['selectSection', 'applyColor']
+==================================================
+STATION: estaci_n_de_pintura_grecia_1
+  Functions: ['selectColor', 'playSound', 'checkCompletion', 'confetti']
+  Function checkCompletion code:
+function checkCompletion() {
+            const zones = document.querySelectorAll('.flag-zone');
+            const allPainted = Array.from(zones).every(z => z.dataset.currentColor === 'Azul');
+            
+            if (allPainted) {
+                // Success trigger
+                confetti();
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_grecia_2
+  Functions: ['selectColor', 'updateProgress', 'createSparkle']
+  Function updateProgress code:
+function updateProgress() {
+            const progress = Math.min(Math.round((paintedParts.size / totalParts) * 100), 100);
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').innerText = progress + '%';
+
+            if (progress >= 100) {
+                const btn = document.getElementById('finish-btn');
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                btn.classList.add('pulse-animation', 'cursor-pointer');
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_india
+  Functions: ['selectColor', 'paintArea', 'updateProgress', 'showSuccess', 'playAudio', 'createParticles']
+  Function updateProgress code:
+function updateProgress() {
+            const total = Object.keys(paintedParts).length;
+            const painted = Object.values(paintedParts).filter(v => v).length;
+            const percentage = Math.round((painted / total) * 100);
+            
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('progress-text').innerText = percentage + '%';
+
+            if (percentage === 100) {
+                setTimeout(showSuccess, 500);
+            }
+        }
+  Function showSuccess code:
+function showSuccess() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.querySelector('div').classList.remove('scale-90');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 10);
+            
+            // Confetti burst
+            for(let i=0; i<50; i++) {
+                setTimeout(() => createParticles(window.innerWidth/2, window.innerHeight/2), i * 20);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_islandia
+  Functions: ['playAudio']
+==================================================
+STATION: estaci_n_de_pintura_israel_1
+  Functions: ['selectColor', 'playAudio', 'checkCompletion']
+  Function checkCompletion code:
+function checkCompletion() {
+            if (progress.top && progress.bottom && progress.star) {
+                const modal = document.getElementById('success-modal');
+                const content = document.getElementById('modal-content');
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('scale-0');
+                    content.classList.add('scale-100');
+                }, 100);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_israel_2
+  Functions: ['selectColor', 'paintPath', 'playAudio', 'showCelebration', 'hideCelebration']
+==================================================
+STATION: estaci_n_de_pintura_italia
+  Functions: ['selectColor', 'paintSection', 'checkWin', 'playAudio']
+  Function checkWin code:
+function checkWin() {
+            const s0 = document.getElementById('section-0').style.backgroundColor;
+            const s1 = document.getElementById('section-1').style.backgroundColor;
+            const s2 = document.getElementById('section-2').style.backgroundColor;
+
+            // Simple check for hex values or rgb strings
+            const isGreen = s0.includes('rgb(0, 146, 70)') || s0 === 'rgb(0, 146, 70)';
+            const isWhite = s1.includes('rgb(255, 255, 255)') || s1 === 'rgb(255, 255, 255)';
+            const isRed = s2.includes('rgb(206, 43, 55)') || s2 === 'rgb(206, 43, 55)';
+
+            if (isGreen && isWhite && isRed) {
+                setTimeout(() => {
+                    alert("¡Excelente! ¡Has pintado la bandera de Italia! 🇮🇹");
+                }, 300);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_jap_n
+  Functions: []
+==================================================
+STATION: estaci_n_de_pintura_m_xico
+  Functions: ['selectOption']
+==================================================
+STATION: estaci_n_de_pintura_marruecos
+  Functions: ['selectColor', 'checkWin', 'playAudio']
+  Function checkWin code:
+function checkWin() {
+            if (paintedBg && paintedStar) {
+                setTimeout(() => {
+                    success.classList.remove('hidden');
+                    success.classList.add('flex');
+                    playAudio('Victory');
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_nigeria
+  Functions: ['selectColor', 'paintBand', 'checkCompletion', 'playAudio']
+  Function checkCompletion code:
+function checkCompletion() {
+            const b1 = document.getElementById('band-1').style.backgroundColor;
+            const b2 = document.getElementById('band-2').style.backgroundColor;
+            const b3 = document.getElementById('band-3').style.backgroundColor;
+
+            // Simple validation (Green: #2b6c00, White: #ffffff)
+            // Note: color strings might return as rgb()
+            if (b1 && b2 && b3) {
+                // If all painted, show a mini celebration effect or audio
+                console.log("¡Bandera pintada!");
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_noruega_1
+  Functions: ['selectColor', 'paint']
+==================================================
+STATION: estaci_n_de_pintura_noruega_2
+  Functions: ['selectColor', 'paintPart', 'createSparkles', 'checkFlag', 'closeModal']
+  Function checkFlag code:
+function checkFlag() {
+            const red = document.getElementById('part-red').classList.contains('bg-error');
+            const whiteV = document.getElementById('part-white-v').classList.contains('bg-white');
+            const whiteH = document.getElementById('part-white-h').classList.contains('bg-white');
+            const blueV = document.getElementById('part-blue-v').classList.contains('bg-primary');
+            const blueH = document.getElementById('part-blue-h').classList.contains('bg-primary');
+
+            if (red && whiteV && whiteH && blueV && blueH) {
+                document.getElementById('success-modal').classList.remove('hidden');
+                document.getElementById('success-modal').classList.add('flex');
+            } else {
+                alert("¡Casi! Sigue pintando con los colores de Noruega: Rojo, Blanco y Azul.");
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_nueva_zelanda
+  Functions: ['playAudio']
+==================================================
+STATION: estaci_n_de_pintura_pa_ses_bajos
+  Functions: ['selectColor', 'paintStrip', 'checkWin']
+  Function checkWin code:
+function checkWin() {
+            if (progress.top && progress.middle && progress.bottom) {
+                setTimeout(() => {
+                    document.getElementById('success-overlay').classList.remove('hidden');
+                    document.getElementById('success-overlay').classList.add('flex');
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_per
+  Functions: ['selectColor', 'paintBand', 'playAudio', 'checkWinCondition']
+  Function checkWinCondition code:
+function checkWinCondition() {
+            const bands = document.querySelectorAll('.flag-band');
+            let allCorrect = true;
+            
+            bands.forEach(band => {
+                const correct = band.getAttribute('data-correct-color');
+                if (!band.classList.contains(correct)) {
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                const celebration = document.getElementById('celebration');
+                celebration.classList.remove('opacity-0');
+                celebration.classList.add('opacity-100');
+                
+                // Audio feedback
+                setTimeout(() => {
+                    const winMsg = new SpeechSynthesisUtterance("¡Excelente! Has pintado la bandera de Perú.");
+                    winMsg.lang = 'es-PE';
+                    window.speechSynthesis.speak(winMsg);
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_portugal_1
+  Functions: ['selectColor', 'paintSection', 'checkProgress', 'celebrate', 'playAudio']
+  Function checkProgress code:
+function checkProgress() {
+            paintedCount++;
+            if (paintedCount >= totalSections) {
+                celebrate();
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_portugal_2
+  Functions: ['selectColor', 'applyColor', 'checkCompletion']
+  Function checkCompletion code:
+function checkCompletion() {
+            const green = document.getElementById('part-green').style.backgroundColor;
+            const red = document.getElementById('part-red').style.backgroundColor;
+            
+            if (green && red) {
+                console.log("Flag looking good!");
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_portugal_actualizada
+  Functions: ['selectColor', 'paintSection', 'checkProgress', 'celebrate', 'playAudio']
+  Function checkProgress code:
+function checkProgress() {
+            paintedCount++;
+            if (paintedCount >= totalSections) {
+                celebrate();
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_reino_unido
+  Functions: ['selectColor', 'resetFlag', 'checkFlag', 'closeSuccess']
+  Function resetFlag code:
+function resetFlag() {
+            document.querySelectorAll('.flag-path').forEach(path => {
+                const part = path.getAttribute('data-part');
+                if (part.includes('red')) {
+                    path.style.stroke = '#e5e7eb';
+                } else {
+                    path.style.fill = '#e5e7eb';
+                }
+                partsPainted[part] = false;
+            });
+        }
+  Function checkFlag code:
+function checkFlag() {
+            // Logic to check if correct colors were used for each part
+            const bluePart = document.querySelector('[data-part="blue-bg"]').style.fill;
+            const saltirePart = document.querySelector('[data-part="red-saltire"]').style.stroke;
+            const crossPart = document.querySelector('[data-part="red-cross"]').style.stroke;
+
+            // Approximate hex check (UK Blue #00247d, UK Red #cf142b)
+            const isBlueCorrect = bluePart.includes('rgb(0, 36, 125)') || bluePart === '#00247d';
+            const isSaltireCorrect = saltirePart.includes('rgb(207, 20, 43)') || saltirePart === '#cf142b';
+            const isCrossCorrect = crossPart.includes('rgb(207, 20, 43)') || crossPart === '#cf142b';
+
+            if (isBlueCorrect && isSaltireCorrect && isCrossCorrect) {
+                document.getElementById('success-overlay').style.display = 'flex';
+            } else {
+                alert("¡Casi lo tienes! Fíjate bien en los colores de la pista.");
+            }
+        }
+  Function closeSuccess code:
+function closeSuccess() {
+            document.getElementById('success-overlay').style.display = 'none';
+        }
+==================================================
+STATION: estaci_n_de_pintura_rusia
+  Functions: ['selectColor', 'paintStripe', 'updateProgress', 'checkWin', 'speak']
+  Function updateProgress code:
+function updateProgress() {
+            const count = paintedStripes.filter(Boolean).length;
+            const progress = (count / 3) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+        }
+  Function checkWin code:
+function checkWin() {
+            if (paintedStripes.every(Boolean)) {
+                setTimeout(() => {
+                    document.getElementById('celebration').classList.remove('hidden');
+                    speak("¡Felicidades! Has completado Rusia");
+                }, 500);
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_sud_frica
+  Functions: ['selectColor', 'paint', 'playAudio', 'createSparkle']
+==================================================
+STATION: estaci_n_de_pintura_suecia
+  Functions: ['selectColor', 'paintPart', 'playAudio', 'checkResult']
+  Function checkResult code:
+function checkResult() {
+            const blueAreas = ['field-top-left', 'field-bottom-left', 'field-top-right', 'field-bottom-right'];
+            const yellowAreas = ['cross-h', 'cross-v'];
+            
+            let allCorrect = true;
+
+            blueAreas.forEach(id => {
+                const el = document.getElementById(id);
+                // Simple color check (note: rgb format)
+                if (el.style.backgroundColor !== 'rgb(0, 106, 167)') allCorrect = false;
+            });
+
+            yellowAreas.forEach(id => {
+                const el = document.getElementById(id);
+                if (el.style.backgroundColor !== 'rgb(254, 204, 0)') allCorrect = false;
+            });
+
+            if (allCorrect) {
+                const modal = document.getElementById('success-modal');
+                const content = document.getElementById('modal-content');
+                modal.classList.remove('hidden');
+                setTimeout(() => content.classList.replace('scale-90', 'scale-100'), 10);
+            } else {
+                alert("¡Casi! Intenta poner el azul en los rectángulos y el amarillo en la cruz.");
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_suiza
+  Functions: ['applyColor']
+==================================================
+STATION: estaci_n_de_pintura_tailandia_1
+  Functions: ['selectColor', 'paintBand', 'playAudio']
+==================================================
+STATION: estaci_n_de_pintura_tailandia_2
+  Functions: ['selectColor', 'paintStripe', 'resetFlag', 'checkFlag', 'closeModal', 'triggerConfetti']
+  Function resetFlag code:
+function resetFlag() {
+            const stripes = document.querySelectorAll('.flag-stripe');
+            stripes.forEach(s => {
+                s.style.backgroundColor = '#ffffff';
+                s.classList.add('bg-white');
+            });
+        }
+  Function checkFlag code:
+function checkFlag() {
+            const stripes = document.querySelectorAll('.flag-stripe');
+            let isCorrect = true;
+            
+            stripes.forEach((stripe, index) => {
+                const bg = stripe.style.backgroundColor;
+                // Basic check logic (convert RGB to Hex for simplicity)
+                if (!bg || bg === 'white' || bg === 'rgb(255, 255, 255)') {
+                    isCorrect = false;
+                }
+            });
+
+            if (isCorrect) {
+                document.getElementById('success-modal').classList.remove('hidden');
+                triggerConfetti();
+            } else {
+                alert("¡Casi! Sigue pintando hasta llenar todas las franjas.");
+            }
+        }
+==================================================
+STATION: estaci_n_de_pintura_turqu_a_1
+  Functions: []
+==================================================
+STATION: estaci_n_de_pintura_turqu_a_2
+  Functions: ['selectColor', 'paint', 'playAudio', 'showSuccess', 'closeModal']
+  Function showSuccess code:
+function showSuccess() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-0');
+                modalContent.classList.add('scale-100');
+            }, 50);
+        }
+==================================================
+STATION: estaci_n_de_pintura_vietnam
+  Functions: ['selectColor', 'checkSuccess', 'playAudio']
+  Function checkSuccess code:
+function checkSuccess() {
+            if (paintedRed && paintedYellow) {
+                const celebration = document.getElementById('celebration');
+                celebration.classList.remove('hidden');
+                setTimeout(() => {
+                    celebration.classList.add('hidden');
+                }, 3000);
+            }
+        }
+==================================================

@@ -1,0 +1,20 @@
+{
+  "name": "liam-banderas-stitch",
+  "version": "1.0.0",
+  "description": "Bilingual (Spanish/English) flag-learning game for kids — a static, installable PWA.",
+  "private": true,
+  "scripts": {
+    "start": "serve . --no-clipboard --listen ${PORT:-3000} --no-port-switching"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariaisabeljuarezgomez/liambanderas.git"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "serve": "^14.2.4"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.2.1"
+  }
+}

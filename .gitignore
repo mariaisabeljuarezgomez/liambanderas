@@ -1,0 +1,11 @@
+# Dependencies (puppeteer/chromium — only needed for automated testing, not the app)
+node_modules/
+
+# Test scratch artifacts
+scratch/shots/
+npm-debug.log*
+package-lock.json
+
+# OS junk
+.DS_Store
+Thumbs.db

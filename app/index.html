@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<!-- 📱 MOBILE-FIRST: no zoom, no accidental scroll, respects notch/home-bar -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a5fbe">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Liam Banderas">
+<!-- iOS home-screen icon (no transparent gaps; uses a solid bg) -->
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<!-- inline favicon = no 404 in the logs -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a5fbe'/%3E%3Ccircle cx='50' cy='50' r='28' fill='%23bfe4ff'/%3E%3C/svg%3E">
+<!-- Manifest only over http(s): browsers block it under file:// (harmless, but noisy).
+     PWAs can't install from file:// anyway, so we add the link only when served on the web. -->
+<script>if(/^http(s?):/i.test(location.protocol)){document.write('<link rel="manifest" href="manifest.json">');}</script>
+<title>Liam Banderas — Explorador de Banderas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,-25..0&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/premium.css">
+</head>
+<body>
+
+<!-- ═════════ THE APP ═════════ -->
+<div id="app">
+
+  <!-- ░░░░ SPLASH / TITLE ░░░░ -->
+  <section class="screen active" id="screen-splash">
+    <div class="splash-bg"></div>
+    <!-- floating sun + stars for atmosphere -->
+    <div class="splash-sun"><span class="mi">wb_sunny</span></div>
+    <div class="splash-orbit">
+      <div class="splash-globe"><span class="mi globe-spin">public</span></div>
+      <div class="orbit-ring r1"><span class="orbit-flag">🇲🇽</span></div>
+      <div class="orbit-ring r2"><span class="orbit-flag">🇯🇵</span></div>
+      <div class="orbit-ring r3"><span class="orbit-flag">🇨🇦</span></div>
+      <div class="orbit-ring r4"><span class="orbit-flag">🇧🇷</span></div>
+    </div>
+    <div class="splash-stars">
+      <span class="mi">star</span><span class="mi">star</span><span class="mi">star</span>
+    </div>
+    <div class="splash-content">
+      <h1 class="splash-title">
+        <span class="st-es">Liam Banderas</span>
+        <span class="st-en">Flag Explorer</span>
+      </h1>
+      <p class="splash-sub">
+        <span class="ss-es">¡Aprende las banderas del mundo!</span>
+        <span class="ss-en">Learn the flags of the world!</span>
+      </p>
+      <button class="btn-chunky primary splash-play" id="splash-start">
+        <span class="mi">play_arrow</span><span>¡JUGAR!</span>
+      </button>
+      <p class="splash-hint">Toca para empezar · Tap to start</p>
+    </div>
+  </section>
+
+  <!-- ░░░░ LEVEL HUB ░░░░ -->
+  <section class="screen" id="screen-hub">
+    <div class="screen-scroll hub-body"></div>
+  </section>
+
+  <!-- ░░░░ PAINT STATION ░░░░ -->
+  <section class="screen paint-screen" id="screen-paint">
+    <div class="paint-body"></div>
+  </section>
+
+  <!-- ░░░░ QUIZ ░░░░ -->
+  <section class="screen quiz-screen" id="screen-quiz">
+    <div class="screen-scroll quiz-body"></div>
+  </section>
+
+  <!-- ░░░░ LEVEL UP / RESULTS ░░░░ -->
+  <section class="screen levelup-screen" id="screen-levelup">
+    <div class="levelup-body"></div>
+  </section>
+
+  <!-- ░░░░ PASSPORT ░░░░ -->
+  <section class="screen passport-screen" id="screen-passport">
+    <div class="screen-scroll passport-body"></div>
+  </section>
+
+  <!-- ░░░░ PROGRESS / PARENT REPORT ░░░░ -->
+  <section class="screen report-screen" id="screen-report">
+    <div class="screen-scroll report-body"></div>
+  </section>
+
+</div>
+
+<!-- ═════════ SCRIPTS (load order matters) ═════════ -->
+<script src="js/data.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/celebrate.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/paint.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/flow.js"></script>
+<script src="js/hub.js"></script>
+<script src="js/passport.js"></script>
+<script src="js/report.js"></script>
+<script src="js/settings.js"></script>
+
+<script>
+/* ═════════ APP BOOTSTRAP ═════════ */
+(function init(){
+  'use strict';
+
+  // ── Service Worker: makes the whole app work OFFLINE on Liam's phone ──
+  // The SW lives at the repo root (../sw.js) so its scope covers /app/ + /music/.
+  if ('serviceWorker' in navigator) {
+    // Only register when served over http(s) or as an installed PWA — never via
+    // file:// (service workers aren't allowed there, and that's fine).
+    if (/^http(s?):/i.test(location.protocol)) {
+      navigator.serviceWorker.register('../sw.js', { scope: '../' })
+        .then(() => console.log('[sw] registered — app will work offline'))
+        .catch((e) => console.warn('[sw] registration failed', e.message));
+    }
+  }
+
+  // Register all screens with the UI manager
+  document.querySelectorAll('.screen').forEach(s => {
+    UI.register(s.id.replace('screen-',''), s);
+  });
+
+  // Splash → unlock audio (mobile requires a user gesture), then go to hub
+  const startBtn = document.getElementById('splash-start');
+  function startApp() {
+    Audio2.unlock();               // 🔊 unlock audio context on this tap
+    Celebrate.mount();
+    UI.mountMusicWidget();         // 🎵 floating Brainrot / Raining Tacos control
+    Audio2.speak('¡Vamos a aprender las banderas!', "Let's learn the flags!");
+    Hub.render();
+    UI.show('hub');
+  }
+  startBtn.addEventListener('click', startApp);
+
+  // Prevent mobile gestures that break the app
+  ['gesturestart','touchmove'].forEach(ev =>
+    document.addEventListener(ev, e => { if (e.type==='touchmove' && e.target.closest('.screen-scroll')) return; e.preventDefault(); }, { passive:false })
+  );
+  // double-tap zoom guard
+  let lastTap = 0;
+  document.addEventListener('touchend', e => {
+    const now = Date.now();
+    if (now - lastTap < 300) e.preventDefault();
+    lastTap = now;
+  }, { passive: false });
+})();
+</script>
+</body>
+</html>
