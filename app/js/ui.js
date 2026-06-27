@@ -154,8 +154,7 @@ const UI = (() => {
     overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
   }
 
-  // ── Floating background-music control (two labeled buttons + stop) ──
-  // Mounted once, sits bottom-left above the safe area, visible across all screens.
+  // ── Floating background-music control (draggable around screen) ──
   let musicWidget = null;
   function mountMusicWidget() {
     if (musicWidget) return musicWidget;
@@ -171,6 +170,74 @@ const UI = (() => {
       </div>`;
     document.body.appendChild(musicWidget);
 
+    // Initial positioning (bottom left)
+    const initLeft = 12;
+    const initTop = Math.max(10, window.innerHeight - 74);
+    musicWidget.style.left = initLeft + 'px';
+    musicWidget.style.top = initTop + 'px';
+
+    const toggleBtn = musicWidget.querySelector('.music-toggle');
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let initialLeft = initLeft, initialTop = initTop;
+    let moved = false;
+
+    function updatePanelPosition() {
+      const rect = musicWidget.getBoundingClientRect();
+      const isTop = rect.top < window.innerHeight / 2;
+      const isRight = rect.left > window.innerWidth / 2;
+      musicWidget.classList.toggle('panel-down', isTop);
+      musicWidget.classList.toggle('panel-right', isRight);
+    }
+
+    function onPointerDown(e) {
+      const touch = e.touches ? e.touches[0] : e;
+      isDragging = true;
+      moved = false;
+      startX = touch.clientX;
+      startY = touch.clientY;
+      const rect = musicWidget.getBoundingClientRect();
+      initialLeft = rect.left;
+      initialTop = rect.top;
+      musicWidget.style.transition = 'none';
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging) return;
+      const touch = e.touches ? e.touches[0] : e;
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+      if (Math.hypot(dx, dy) > 6) {
+        moved = true;
+      }
+      if (moved) {
+        let newLeft = initialLeft + dx;
+        let newTop = initialTop + dy;
+        const maxLeft = window.innerWidth - 60;
+        const maxTop = window.innerHeight - 60;
+        newLeft = Math.max(8, Math.min(maxLeft, newLeft));
+        newTop = Math.max(8, Math.min(maxTop, newTop));
+        musicWidget.style.left = newLeft + 'px';
+        musicWidget.style.top = newTop + 'px';
+        updatePanelPosition();
+      }
+    }
+
+    function onPointerEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      musicWidget.style.transition = '';
+    }
+
+    toggleBtn.addEventListener('touchstart', onPointerDown, { passive: true });
+    window.addEventListener('touchmove', onPointerMove, { passive: true });
+    window.addEventListener('touchend', onPointerEnd);
+    window.addEventListener('touchcancel', onPointerEnd);
+
+    toggleBtn.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerEnd);
+
     const btns = musicWidget.querySelector('.music-btns');
     Object.entries(tracks).forEach(([id, t]) => {
       const b = document.createElement('button');
@@ -181,18 +248,26 @@ const UI = (() => {
         Audio2.unlock();
         const st = Audio2.getMusicState();
         if (st.current === id && st.playing) {
-          Audio2.stopMusic();        // tap the playing track → stop
+          Audio2.stopMusic();
         } else {
-          Audio2.playMusic(id);      // tap a track → play (switches if another was on)
+          Audio2.playMusic(id);
         }
         refreshMusicUI();
       });
       btns.appendChild(b);
     });
+
     musicWidget.querySelector('.music-stop').addEventListener('click', () => {
       Audio2.stopMusic(); refreshMusicUI();
     });
-    musicWidget.querySelector('.music-toggle').addEventListener('click', () => {
+
+    toggleBtn.addEventListener('click', (e) => {
+      if (moved) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return;
+      }
+      updatePanelPosition();
       musicWidget.classList.toggle('open');
     });
 
