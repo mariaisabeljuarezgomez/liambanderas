@@ -283,3 +283,8 @@ We introduced a series of critical repairs to fix progression, layout overlaps, 
 
 ---
 *This document was written to hand off repair work to another AI agent. Follow the fix pattern exactly. When in doubt, look at a known-fixed station like `estaci_n_de_pintura_australia/index.html` as a reference implementation.*
+### 7. YouTube Iframe Alarms (v2.3)
+1. **Never use direct <audio> or XHR for YouTube videos** — YouTube policies and CORS forbid this.
+2. We use the YouTube Iframe Player API (https://www.youtube.com/iframe_api).
+3. The iframe is visually hidden (opacity: 0; pointer-events: none;) or made very small, and we call player.loadVideoById() when the alarm button is clicked.
+4. If a future agent modifies the music widget, ensure the pointerdown, pointermove, and pointerup handlers for drag-and-drop are preserved so it doesn't block the screen.

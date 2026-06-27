@@ -386,3 +386,17 @@ No reading required. No navigation required. Just **play, learn, celebrate, repe
 ---
 
 *Let's build something Liam loves. â€” ZCode*
+
+## 13. ?? v2.3 — Country Alarm Sounds & Draggable Widget
+
+You requested to add country alarm sounds sourced from the @MardekSirenen YouTube channel, and to fix the music widget so it no longer covers important parts of the screen.
+
+### What I built
+- **Draggable Music Widget:** The music widget in the bottom-left is now fully draggable using pointer events (touch and mouse). It can be moved anywhere on the screen so it doesn't block interactions.
+- **YouTube Alarm Integration:** Replaced the hallucinatory AI-generated URLs with accurate ones scraped directly from @MardekSirenen.
+- Added a new ?? Alarm button to the paint station.
+- Added a hidden YouTube Iframe API player that triggers the alarm sound when the ?? button is clicked without leaving the app.
+
+### Verification
+- **Music Widget:** pointerdown, pointermove, pointerup events properly track movement.
+- **Alarms:** Correct video IDs are triggered on the hidden iframe to play country alarms natively without CORS or external link issues.

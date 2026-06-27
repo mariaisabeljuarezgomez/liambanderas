@@ -57,7 +57,7 @@ const UI = (() => {
   }
 
   // Top app bar with back + title + speaker + settings
-  function topBar({ titleEs, titleEn, onBack, onSpeak, onSettings }) {
+  function topBar({ titleEs, titleEn, onBack, onSpeak, onSettings, onAlarm }) {
     const bar = document.createElement('header');
     bar.className = 'topbar glass';
     if (onBack) {
@@ -76,6 +76,14 @@ const UI = (() => {
     if (onSpeak) t.addEventListener('click', onSpeak);
     bar.appendChild(t);
     const right = document.createElement('div'); right.className = 'topbar-right';
+    if (onAlarm) {
+      const al = document.createElement('button');
+      al.className = 'icon-btn alarm';
+      al.setAttribute('aria-label', 'Alarma / Alarm');
+      al.innerHTML = '🚨';
+      al.addEventListener('click', () => { onAlarm(); });
+      right.appendChild(al);
+    }
     if (onSpeak) {
       const sp = document.createElement('button');
       sp.className = 'icon-btn speaker';
@@ -191,22 +199,21 @@ const UI = (() => {
     }
 
     function onPointerDown(e) {
-      const touch = e.touches ? e.touches[0] : e;
       isDragging = true;
       moved = false;
-      startX = touch.clientX;
-      startY = touch.clientY;
+      startX = e.clientX;
+      startY = e.clientY;
       const rect = musicWidget.getBoundingClientRect();
       initialLeft = rect.left;
       initialTop = rect.top;
       musicWidget.style.transition = 'none';
+      toggleBtn.setPointerCapture(e.pointerId);
     }
 
     function onPointerMove(e) {
       if (!isDragging) return;
-      const touch = e.touches ? e.touches[0] : e;
-      const dx = touch.clientX - startX;
-      const dy = touch.clientY - startY;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
       if (Math.hypot(dx, dy) > 6) {
         moved = true;
       }
@@ -223,20 +230,17 @@ const UI = (() => {
       }
     }
 
-    function onPointerEnd() {
+    function onPointerEnd(e) {
       if (!isDragging) return;
       isDragging = false;
       musicWidget.style.transition = '';
+      toggleBtn.releasePointerCapture(e.pointerId);
     }
 
-    toggleBtn.addEventListener('touchstart', onPointerDown, { passive: true });
-    window.addEventListener('touchmove', onPointerMove, { passive: true });
-    window.addEventListener('touchend', onPointerEnd);
-    window.addEventListener('touchcancel', onPointerEnd);
-
-    toggleBtn.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('mouseup', onPointerEnd);
+    toggleBtn.addEventListener('pointerdown', onPointerDown);
+    toggleBtn.addEventListener('pointermove', onPointerMove);
+    toggleBtn.addEventListener('pointerup', onPointerEnd);
+    toggleBtn.addEventListener('pointercancel', onPointerEnd);
 
     const btns = musicWidget.querySelector('.music-btns');
     Object.entries(tracks).forEach(([id, t]) => {

@@ -326,6 +326,39 @@ const Audio2 = (() => {
   function setSpeechMuted(v) { speechMuted = v; if (v) try { window.speechSynthesis.cancel(); } catch (e) {} }
   function setSfxMuted(v) { sfxMuted = v; }
 
+  // ── YOUTUBE ALARMS ──
+  let ytPlayer = null;
+  let ytReady = false;
+
+  window.onYouTubeIframeAPIReady = function() {
+    ytPlayer = new YT.Player('youtube-alarm-player', {
+      height: '1',
+      width: '1',
+      videoId: '',
+      playerVars: { 'autoplay': 0, 'controls': 0, 'playsinline': 1 },
+      events: {
+        'onReady': () => { ytReady = true; }
+      }
+    });
+  };
+
+  function playYoutubeAlarm(url) {
+    if (!ytReady || !ytPlayer || !url) return;
+    const match = url.match(/[?&]v=([^&]+)/);
+    if (match && match[1]) {
+      ytPlayer.loadVideoById(match[1]);
+      ytPlayer.playVideo();
+      duckStart();
+      setTimeout(duckEnd, 15000); 
+    }
+  }
+
+  function stopYoutubeAlarm() {
+    if (ytReady && ytPlayer && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+      ytPlayer.stopVideo();
+      duckEnd();
+    }
+  }
   return {
     unlock: ensureCtx,
     speak: speakBilingual,     // (es, en)
@@ -336,5 +369,6 @@ const Audio2 = (() => {
     isSfxMuted: () => sfxMuted,
     // background music + ducking
     playMusic, stopMusic, setMusicEnabled, getMusicState, musicTracks: MUSIC_TRACKS,
+    playYoutubeAlarm, stopYoutubeAlarm
   };
 })();

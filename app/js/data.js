@@ -63,7 +63,7 @@ const MAGEN_DAVID = [
 const FLAGS = [
 
   /* ───────────── LEVEL 1 — Explorador (simple stripes) ───────────── */
-  { id:'francia', es:'Francia', en:'France', level:1,
+  { id:'francia', es:'Francia', en:'France', level:1, youtube_url:'https://www.youtube.com/watch?v=QWHvcehrGxk',
     palette:[{key:'azul',hex:'#0055A4'},{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#EF4135'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:100,h:200},
@@ -71,7 +71,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'rojo',x:200,y:0,w:100,h:200},
     ]},
 
-  { id:'italia', es:'Italia', en:'Italy', level:1,
+  { id:'italia', es:'Italia', en:'Italy', level:1, youtube_url:'https://www.youtube.com/watch?v=C7siXYQVsqU',
     palette:[{key:'verde',hex:'#008C45'},{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#CD212A'}],
     parts:[
       {type:'rect',region:'a',correct:'verde',x:0,y:0,w:100,h:200},
@@ -79,7 +79,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'rojo',x:200,y:0,w:100,h:200},
     ]},
 
-  { id:'alemania', es:'Alemania', en:'Germany', level:1,
+  { id:'alemania', es:'Alemania', en:'Germany', level:1, youtube_url:'https://www.youtube.com/watch?v=A91fnxaUWuI',
     palette:[{key:'negro',hex:'#000000'},{key:'rojo',hex:'#DD0000'},{key:'amarillo',hex:'#FFCE00'}],
     parts:[
       {type:'rect',region:'a',correct:'negro',x:0,y:0,w:300,h:67},
@@ -87,7 +87,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'amarillo',x:0,y:133,w:300,h:67},
     ]},
 
-  { id:'belgica', es:'Bélgica', en:'Belgium', level:1,
+  { id:'belgica', es:'Bélgica', en:'Belgium', level:1, youtube_url:'https://www.youtube.com/watch?v=lBDq4wNxQ1E',
     palette:[{key:'negro',hex:'#000000'},{key:'amarillo',hex:'#FAE042'},{key:'rojo',hex:'#ED2939'}],
     parts:[
       {type:'rect',region:'a',correct:'negro',x:0,y:0,w:100,h:200},
@@ -95,7 +95,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'rojo',x:200,y:0,w:100,h:200},
     ]},
 
-  { id:'rusia', es:'Rusia', en:'Russia', level:1,
+  { id:'rusia', es:'Rusia', en:'Russia', level:1, youtube_url:'https://www.youtube.com/watch?v=fz_VtSss3hc',
     palette:[{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#0039A6'},{key:'rojo',hex:'#D52B1E'}],
     parts:[
       {type:'rect',region:'a',correct:'blanco',x:0,y:0,w:300,h:67},
@@ -103,7 +103,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'rojo',x:0,y:133,w:300,h:67},
     ]},
 
-  { id:'paises_bajos', es:'Países Bajos', en:'Netherlands', level:1,
+  { id:'paises_bajos', es:'Países Bajos', en:'Netherlands', level:1, youtube_url:'https://www.youtube.com/watch?v=8eMbuHVdevw',
     palette:[{key:'rojo',hex:'#AE1C28'},{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#21468B'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:67},
@@ -111,7 +111,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'azul',x:0,y:133,w:300,h:67},
     ]},
 
-  { id:'polonia', es:'Polonia', en:'Poland', level:1,
+  { id:'polonia', es:'Polonia', en:'Poland', level:1, youtube_url:'https://www.youtube.com/watch?v=bcVX4np0yCk',
     palette:[{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#DC143C'}],
     parts:[
       {type:'rect',region:'a',correct:'blanco',x:0,y:0,w:300,h:100},
@@ -125,7 +125,7 @@ const FLAGS = [
       {type:'rect',region:'b',correct:'blanco',x:0,y:100,w:300,h:100},
     ]},
 
-  { id:'austria', es:'Austria', en:'Austria', level:1,
+  { id:'austria', es:'Austria', en:'Austria', level:1, youtube_url:'https://www.youtube.com/watch?v=ecOEk_wItTI',
     palette:[{key:'rojo',hex:'#ED2939'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:60},
@@ -150,7 +150,7 @@ const FLAGS = [
     ],
     deco:[{type:'rect',fill:'#AA151B',x:112,y:70,w:76,h:60,rx:4,stroke:'#7a0e12'}]},
 
-  { id:'mexico', es:'México', en:'Mexico', level:2,
+  { id:'mexico', es:'México', en:'Mexico', level:2, youtube_url:'https://www.youtube.com/watch?v=-l478LYkEws',
     palette:[{key:'verde',hex:'#006847'},{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#CE1126'}],
     parts:[
       {type:'rect',region:'a',correct:'verde',x:0,y:0,w:100,h:200},
@@ -159,7 +159,7 @@ const FLAGS = [
     ],
     deco:[{type:'circle',fill:'#006847',cx:150,cy:100,r:26,stroke:'#00452e'}]},
 
-  { id:'peru', es:'Perú', en:'Peru', level:2,
+  { id:'peru', es:'Perú', en:'Peru', level:2, youtube_url:'https://www.youtube.com/watch?v=viDoKicCPmg',
     palette:[{key:'rojo',hex:'#D91023'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:100,h:200},
@@ -202,7 +202,7 @@ const FLAGS = [
     ],
     deco:[{type:'path',fill:'#ffffff',d:'M108,96 Q150,80 192,96',stroke:'#ffffff',strokeWidth:7}]},
 
-  { id:'suecia', es:'Suecia', en:'Sweden', level:2,
+  { id:'suecia', es:'Suecia', en:'Sweden', level:2, youtube_url:'https://www.youtube.com/watch?v=Sq8D2GXFsT8',
     palette:[{key:'azul',hex:'#006AA7'},{key:'amarillo',hex:'#FECC00'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:200},
@@ -212,7 +212,7 @@ const FLAGS = [
       ]},
     ]},
 
-  { id:'dinamarca', es:'Dinamarca', en:'Denmark', level:2,
+  { id:'dinamarca', es:'Dinamarca', en:'Denmark', level:2, youtube_url:'https://www.youtube.com/watch?v=92F-g3w1bhQ',
     palette:[{key:'rojo',hex:'#C8102E'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:200},
@@ -222,7 +222,7 @@ const FLAGS = [
       ]},
     ]},
 
-  { id:'suiza', es:'Suiza', en:'Switzerland', level:2,
+  { id:'suiza', es:'Suiza', en:'Switzerland', level:2, youtube_url:'https://www.youtube.com/watch?v=2itGTAQ88Pw',
     palette:[{key:'rojo',hex:'#DA291C'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:200},
@@ -233,7 +233,7 @@ const FLAGS = [
     ]},
 
   /* ───────────── LEVEL 3 — Capitán (complex crosses & stars) ───────────── */
-  { id:'noruega', es:'Noruega', en:'Norway', level:3,
+  { id:'noruega', es:'Noruega', en:'Norway', level:3, youtube_url:'https://www.youtube.com/watch?v=2uox7z310uc',
     palette:[{key:'rojo',hex:'#BA0C2F'},{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#00205B'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:200},
@@ -247,7 +247,7 @@ const FLAGS = [
       ]},
     ]},
 
-  { id:'finlandia', es:'Finlandia', en:'Finland', level:3,
+  { id:'finlandia', es:'Finlandia', en:'Finland', level:3, youtube_url:'https://www.youtube.com/watch?v=jn0Ju6u-R7Y',
     palette:[{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#003580'}],
     parts:[
       {type:'rect',region:'a',correct:'blanco',x:0,y:0,w:300,h:200},
@@ -280,7 +280,7 @@ const FLAGS = [
       {type:'star',region:'d',correct:'blanco',cx:75,cy:50,outer:26,inner:10},
     ]},
 
-  { id:'grecia', es:'Grecia', en:'Greece', level:3,
+  { id:'grecia', es:'Grecia', en:'Greece', level:3, youtube_url:'https://www.youtube.com/watch?v=BcXLoqcBXkU',
     palette:[{key:'azul',hex:'#0D5EAF'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:200},
@@ -380,7 +380,7 @@ const FLAGS = [
       {type:'polygon',region:'d',correct:'verde',points:'0,0 110,100 0,200'},
     ]},
 
-  { id:'portugal', es:'Portugal', en:'Portugal', level:4,
+  { id:'portugal', es:'Portugal', en:'Portugal', level:4, youtube_url:'https://www.youtube.com/watch?v=NtzP37uV27U',
     palette:[{key:'verde',hex:'#006600'},{key:'rojo',hex:'#FF0000'},{key:'amarillo',hex:'#FFD700'}],
     parts:[
       {type:'rect',region:'a',correct:'verde',x:0,y:0,w:120,h:200},
@@ -405,7 +405,7 @@ const FLAGS = [
       {type:'group',region:'e',correct:'rojo',children:[{type:'rect',x:0,y:170,w:300,h:30}]},
     ]},
 
-  { id:'israel', es:'Israel', en:'Israel', level:4,
+  { id:'israel', es:'Israel', en:'Israel', level:4, youtube_url:'https://www.youtube.com/watch?v=KGy07BDhhz0',
     palette:[{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#0038B8'}],
     parts:[
       {type:'rect',region:'a',correct:'blanco',x:0,y:0,w:300,h:200},
@@ -432,7 +432,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'naranja',x:200,y:0,w:100,h:200},
     ]},
 
-  { id:'nuevazelanda', es:'Nueva Zelanda', en:'New Zealand', level:4,
+  { id:'nuevazelanda', es:'Nueva Zelanda', en:'New Zealand', level:4, youtube_url:'https://www.youtube.com/watch?v=gzxjBZCwyY8',
     palette:[{key:'azul',hex:'#012169'},{key:'rojo',hex:'#C8102E'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:200},
@@ -443,7 +443,7 @@ const FLAGS = [
       ]},
     ]},
 
-  { id:'rumania', es:'Rumania', en:'Romania', level:4,
+  { id:'rumania', es:'Rumania', en:'Romania', level:4, youtube_url:'https://www.youtube.com/watch?v=ETWgwJXFrtQ',
     palette:[{key:'azul',hex:'#002B7F'},{key:'amarillo',hex:'#FCD116'},{key:'rojo',hex:'#CE1126'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:100,h:200},
@@ -452,7 +452,7 @@ const FLAGS = [
     ]},
 
   /* ───────────── LEVEL 5 — Experto Mundial (mastery) ───────────── */
-  { id:'filipinas', es:'Filipinas', en:'Philippines', level:5,
+  { id:'filipinas', es:'Filipinas', en:'Philippines', level:5, youtube_url:'https://www.youtube.com/watch?v=2mZjJD-wTEw',
     palette:[{key:'azul',hex:'#0038A8'},{key:'rojo',hex:'#CE1126'},{key:'blanco',hex:'#ffffff'},{key:'amarillo',hex:'#FCD116'}],
     parts:[
       {type:'polygon',region:'a',correct:'azul',points:'0,0 300,100 0,100'},
@@ -462,7 +462,7 @@ const FLAGS = [
       {type:'star',region:'e',correct:'amarillo',cx:118,cy:100,outer:16,inner:6},
     ]},
 
-  { id:'arabia', es:'Arabia Saudita', en:'Saudi Arabia', level:5,
+  { id:'arabia', es:'Arabia Saudita', en:'Saudi Arabia', level:5, youtube_url:'https://www.youtube.com/watch?v=PQ8mhpeT4Ys',
     palette:[{key:'verde',hex:'#006C35'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'verde',x:0,y:0,w:300,h:200},
@@ -486,7 +486,7 @@ const FLAGS = [
       {type:'circle',region:'c',correct:'rojo',cx:150,cy:118,r:42},
     ]},
 
-  { id:'australia', es:'Australia', en:'Australia', level:5,
+  { id:'australia', es:'Australia', en:'Australia', level:5, youtube_url:'https://www.youtube.com/watch?v=wSSOldlhUgk',
     palette:[{key:'azul',hex:'#00247D'},{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#CF142B'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:200},
@@ -500,7 +500,7 @@ const FLAGS = [
     ],
     deco:[{type:'rect',fill:'#00247D',x:0,y:0,w:120,h:80},{type:'polygon',fill:'#ffffff',points:'0,0 120,80 0,80',opacity:0}]},
 
-  { id:'lituania', es:'Lituania', en:'Lithuania', level:5,
+  { id:'lituania', es:'Lituania', en:'Lithuania', level:5, youtube_url:'https://www.youtube.com/watch?v=QegWYAmIV5A',
     palette:[{key:'amarillo',hex:'#FDB913'},{key:'verde',hex:'#006A44'},{key:'rojo',hex:'#C1272D'}],
     parts:[
       {type:'rect',region:'a',correct:'amarillo',x:0,y:0,w:300,h:67},
@@ -508,7 +508,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'rojo',x:0,y:133,w:300,h:67},
     ]},
 
-  { id:'estonia', es:'Estonia', en:'Estonia', level:5,
+  { id:'estonia', es:'Estonia', en:'Estonia', level:5, youtube_url:'https://www.youtube.com/watch?v=R6HBbX0rUao',
     palette:[{key:'azul',hex:'#0072CE'},{key:'negro',hex:'#000000'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:67},
@@ -536,7 +536,7 @@ const FLAGS = [
       {type:'star',region:'e',correct:'azul',cx:190,cy:100,outer:14,inner:6},
     ]},
 
-  { id:'ucrania', es:'Ucrania', en:'Ukraine', level:5,
+  { id:'ucrania', es:'Ucrania', en:'Ukraine', level:5, youtube_url:'https://www.youtube.com/watch?v=5fNocuhzc3E',
     palette:[{key:'azul',hex:'#0057B7'},{key:'amarillo',hex:'#FFD700'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:100},
@@ -602,3 +602,5 @@ function getFlagSVG(flag) {
   </svg>`;
   return { svg, regions: flag.parts };
 }
+
+
