@@ -4,41 +4,39 @@
    so its scope covers both /app/ (the game) and /music/ (his songs).
    ════════════════════════════════════════════════════════════════ */
 
-const CACHE = 'liam-banderas-v1';
+const CACHE = 'liam-banderas-v2';
 
-// Everything needed to run the app with no network. Keep this list in sync
-// whenever a file is added/renamed.
+// Everything needed to run the app with no network.
 const ASSETS = [
-  './',
-  './app/',
-  './app/index.html',
-  './app/manifest.json',
-  './app/css/premium.css',
-  './app/js/data.js',
-  './app/js/audio.js',
-  './app/js/celebrate.js',
-  './app/js/store.js',
-  './app/js/ui.js',
-  './app/js/paint.js',
-  './app/js/quiz.js',
-  './app/js/flow.js',
-  './app/js/hub.js',
-  './app/js/passport.js',
-  './app/js/report.js',
-  './app/js/settings.js',
-  './app/icons/icon-192.png',
-  './app/icons/icon-512.png',
-  './app/icons/icon-maskable-512.png',
-  './music/brainrot.mp3',
-  './music/rainingtacos.mp3',
+  '/',
+  '/manifest.json',
+  '/app/',
+  '/app/index.html',
+  '/app/manifest.json',
+  '/app/css/premium.css',
+  '/app/js/data.js',
+  '/app/js/audio.js',
+  '/app/js/celebrate.js',
+  '/app/js/store.js',
+  '/app/js/ui.js',
+  '/app/js/paint.js',
+  '/app/js/quiz.js',
+  '/app/js/flow.js',
+  '/app/js/hub.js',
+  '/app/js/passport.js',
+  '/app/js/report.js',
+  '/app/js/settings.js',
+  '/app/icons/icon-192.png',
+  '/app/icons/icon-512.png',
+  '/app/icons/icon-maskable-512.png',
+  '/music/brainrot.mp3',
+  '/music/rainingtacos.mp3',
 ];
 
 // Install: pre-cache the app shell.
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE).then(async (cache) => {
-      // addAll fails entirely if one file 404s; cache them individually so a
-      // missing optional asset doesn't break the whole install.
       await Promise.all(ASSETS.map((url) =>
         cache.add(url).catch((e) => console.warn('[sw] skip', url, e.message))
       ));
@@ -60,7 +58,6 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
-  // Only handle same-origin requests (let cross-origin fonts/etc pass through).
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
@@ -68,13 +65,16 @@ self.addEventListener('fetch', (event) => {
     caches.match(req).then((cached) => {
       if (cached) return cached;
       return fetch(req).then((res) => {
-        // Cache successful responses for resilience (skip opaque/errored).
         if (res && res.status === 200 && res.type === 'basic') {
           const copy = res.clone();
           caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
         }
         return res;
-      }).catch(() => caches.match('./app/index.html'));
+      }).catch(() => {
+        if (req.mode === 'navigate') {
+          return caches.match('/app/index.html').then((res) => res || caches.match('/app/'));
+        }
+      });
     })
   );
 });
