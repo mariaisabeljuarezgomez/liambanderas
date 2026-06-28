@@ -4,7 +4,7 @@
    so its scope covers both /app/ (the game) and /music/ (his songs).
    ════════════════════════════════════════════════════════════════ */
 
-const CACHE = 'liam-banderas-v2.4';
+const CACHE = 'liam-banderas-v2.5';
 
 // Everything needed to run the app with no network.
 const ASSETS = [

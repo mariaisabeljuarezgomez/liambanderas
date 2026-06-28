@@ -2,7 +2,7 @@
 node_modules/
 
 # Test scratch artifacts
-scratch/shots/
+scratch/
 npm-debug.log*
 package-lock.json
 
