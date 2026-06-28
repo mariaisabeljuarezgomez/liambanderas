@@ -4,7 +4,7 @@
    so its scope covers both /app/ (the game) and /music/ (his songs).
    ════════════════════════════════════════════════════════════════ */
 
-const CACHE = 'liam-banderas-v2.3';
+const CACHE = 'liam-banderas-v2.4';
 
 // Everything needed to run the app with no network.
 const ASSETS = [
@@ -32,31 +32,31 @@ const ASSETS = [
   '/music/brainrot.mp3',
   '/music/rainingtacos.mp3',
 ,
-  '/app/music/alarms/australia.webm',
-  '/app/music/alarms/austria.webm',
-  '/app/music/alarms/belgium.webm',
-  '/app/music/alarms/denmark.webm',
-  '/app/music/alarms/estonia.webm',
-  '/app/music/alarms/finland.webm',
-  '/app/music/alarms/france.webm',
-  '/app/music/alarms/germany.webm',
-  '/app/music/alarms/greece.webm',
-  '/app/music/alarms/israel.webm',
-  '/app/music/alarms/italy.webm',
-  '/app/music/alarms/lithuania.webm',
-  '/app/music/alarms/mexico.webm',
-  '/app/music/alarms/netherlands.webm',
-  '/app/music/alarms/new_zealand.webm',
-  '/app/music/alarms/norway.webm',
-  '/app/music/alarms/peru.webm',
-  '/app/music/alarms/philippines.webm',
-  '/app/music/alarms/portugal.webm',
-  '/app/music/alarms/romania.webm',
-  '/app/music/alarms/russia.webm',
-  '/app/music/alarms/saudi_arabia.webm',
-  '/app/music/alarms/sweden.webm',
-  '/app/music/alarms/switzerland.webm',
-  '/app/music/alarms/ukraine.webm'
+  '/app/music/alarms/australia.mp3',
+  '/app/music/alarms/austria.mp3',
+  '/app/music/alarms/belgium.mp3',
+  '/app/music/alarms/denmark.mp3',
+  '/app/music/alarms/estonia.mp3',
+  '/app/music/alarms/finland.mp3',
+  '/app/music/alarms/france.mp3',
+  '/app/music/alarms/germany.mp3',
+  '/app/music/alarms/greece.mp3',
+  '/app/music/alarms/israel.mp3',
+  '/app/music/alarms/italy.mp3',
+  '/app/music/alarms/lithuania.mp3',
+  '/app/music/alarms/mexico.mp3',
+  '/app/music/alarms/netherlands.mp3',
+  '/app/music/alarms/new_zealand.mp3',
+  '/app/music/alarms/norway.mp3',
+  '/app/music/alarms/peru.mp3',
+  '/app/music/alarms/philippines.mp3',
+  '/app/music/alarms/portugal.mp3',
+  '/app/music/alarms/romania.mp3',
+  '/app/music/alarms/russia.mp3',
+  '/app/music/alarms/saudi_arabia.mp3',
+  '/app/music/alarms/sweden.mp3',
+  '/app/music/alarms/switzerland.mp3',
+  '/app/music/alarms/ukraine.mp3'
 ];
 
 // Install: pre-cache the app shell.
@@ -104,3 +104,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
