@@ -4,7 +4,7 @@
    so its scope covers both /app/ (the game) and /music/ (his songs).
    ════════════════════════════════════════════════════════════════ */
 
-const CACHE = 'liam-banderas-v2.5';
+const CACHE = 'liam-banderas-v2.6';
 
 // Everything needed to run the app with no network.
 const ASSETS = [
@@ -50,6 +50,7 @@ const ASSETS = [
   '/app/music/alarms/norway.mp3',
   '/app/music/alarms/peru.mp3',
   '/app/music/alarms/philippines.mp3',
+  '/app/music/alarms/poland.mp3',
   '/app/music/alarms/portugal.mp3',
   '/app/music/alarms/romania.mp3',
   '/app/music/alarms/russia.mp3',

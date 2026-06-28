@@ -111,7 +111,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'azul',x:0,y:133,w:300,h:67},
     ]},
 
-  { id:'polonia', es:'Polonia', en:'Poland', level:1,
+  { id:'polonia', es:'Polonia', en:'Poland', level:1, alarm_audio: 'music/alarms/poland.mp3',
     palette:[{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#DC143C'}],
     parts:[
       {type:'rect',region:'a',correct:'blanco',x:0,y:0,w:300,h:100},
