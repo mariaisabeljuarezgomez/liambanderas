@@ -221,6 +221,8 @@ body::after{ width:420px;height:420px; bottom:-120px; right:-100px; animation:dr
 }
 .icon-btn:active{ transform:translateY(4px); box-shadow:0 0 0 transparent; }
 .icon-btn.speaker{ background:linear-gradient(180deg,#fff3c4,#ffe066); color:#7a4d00; box-shadow:0 4px 0 var(--gold-d); }
+.icon-btn.alarm{ background:linear-gradient(180deg,#ff6b6b,#d63031); color:#fff; box-shadow:0 4px 0 #b32525; animation: pulsingAlarm 1.2s infinite alternate; font-size: 24px; }
+@keyframes pulsingAlarm { 0% { transform: scale(1); box-shadow:0 4px 0 #b32525, 0 0 10px rgba(214, 48, 49, 0.5); } 100% { transform: scale(1.05); box-shadow:0 4px 0 #b32525, 0 0 20px rgba(214, 48, 49, 0.9); } }
 .speaker.talking{ animation:talking .5s ease-in-out infinite; }
 @keyframes talking{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
 .topbar-right{ display:flex; gap:8px; }

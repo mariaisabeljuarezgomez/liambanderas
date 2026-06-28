@@ -4,7 +4,7 @@
    so its scope covers both /app/ (the game) and /music/ (his songs).
    ════════════════════════════════════════════════════════════════ */
 
-const CACHE = 'liam-banderas-v2';
+const CACHE = 'liam-banderas-v2.3';
 
 // Everything needed to run the app with no network.
 const ASSETS = [
@@ -31,6 +31,32 @@ const ASSETS = [
   '/app/icons/icon-maskable-512.png',
   '/music/brainrot.mp3',
   '/music/rainingtacos.mp3',
+,
+  '/app/music/alarms/australia.webm',
+  '/app/music/alarms/austria.webm',
+  '/app/music/alarms/belgium.webm',
+  '/app/music/alarms/denmark.webm',
+  '/app/music/alarms/estonia.webm',
+  '/app/music/alarms/finland.webm',
+  '/app/music/alarms/france.webm',
+  '/app/music/alarms/germany.webm',
+  '/app/music/alarms/greece.webm',
+  '/app/music/alarms/israel.webm',
+  '/app/music/alarms/italy.webm',
+  '/app/music/alarms/lithuania.webm',
+  '/app/music/alarms/mexico.webm',
+  '/app/music/alarms/netherlands.webm',
+  '/app/music/alarms/new_zealand.webm',
+  '/app/music/alarms/norway.webm',
+  '/app/music/alarms/peru.webm',
+  '/app/music/alarms/philippines.webm',
+  '/app/music/alarms/portugal.webm',
+  '/app/music/alarms/romania.webm',
+  '/app/music/alarms/russia.webm',
+  '/app/music/alarms/saudi_arabia.webm',
+  '/app/music/alarms/sweden.webm',
+  '/app/music/alarms/switzerland.webm',
+  '/app/music/alarms/ukraine.webm'
 ];
 
 // Install: pre-cache the app shell.

@@ -57,10 +57,10 @@ const Flow = (() => {
 
     const bar = UI.topBar({
       titleEs: flag.es, titleEn: flag.en,
-      onBack: () => { Audio2.stopYoutubeAlarm(); clearTimeout(advanceTimer); UI.show('hub'); },
+      onBack: () => { Audio2.stopAlarm(); clearTimeout(advanceTimer); UI.show('hub'); },
       onSpeak: () => Paint.speakCountry(flag),
       onSettings: () => Settings.open(),
-      onAlarm: flag.youtube_url ? () => { Audio2.playYoutubeAlarm(flag.youtube_url); } : null
+      onAlarm: flag.alarm_audio ? () => { Audio2.playAlarm(flag.alarm_audio); } : null
     });
     main.appendChild(bar);
 
@@ -128,7 +128,7 @@ const Flow = (() => {
   }
 
   function advance() {
-    Audio2.stopYoutubeAlarm();
+    Audio2.stopAlarm();
     if (skipEl) { skipEl.remove(); skipEl = null; }
     pos++;
     const remaining = queue.slice(pos).filter(id => !Store.isPainted(id));
