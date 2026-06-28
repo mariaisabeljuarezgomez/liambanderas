@@ -4,10 +4,34 @@
    so its scope covers both /app/ (the game) and /music/ (his songs).
    ════════════════════════════════════════════════════════════════ */
 
-const CACHE = 'liam-banderas-v2.6';
+const CACHE = 'liam-banderas-v2.7';
 
 // Everything needed to run the app with no network.
 const ASSETS = [
+  '/app/music/alarms/indonesia.mp3',
+  '/app/music/alarms/japan.mp3',
+  '/app/music/alarms/spain.mp3',
+  '/app/music/alarms/canada.mp3',
+  '/app/music/alarms/colombia.mp3',
+  '/app/music/alarms/argentina.mp3',
+  '/app/music/alarms/brazil.mp3',
+  '/app/music/alarms/iceland.mp3',
+  '/app/music/alarms/chile.mp3',
+  '/app/music/alarms/united_states.mp3',
+  '/app/music/alarms/united_kingdom.mp3',
+  '/app/music/alarms/china.mp3',
+  '/app/music/alarms/vietnam.mp3',
+  '/app/music/alarms/turkey.mp3',
+  '/app/music/alarms/india.mp3',
+  '/app/music/alarms/south_africa.mp3',
+  '/app/music/alarms/morocco.mp3',
+  '/app/music/alarms/thailand.mp3',
+  '/app/music/alarms/nigeria.mp3',
+  '/app/music/alarms/ireland.mp3',
+  '/app/music/alarms/egypt.mp3',
+  '/app/music/alarms/south_korea.mp3',
+  '/app/music/alarms/costa_rica.mp3',
+  '/app/music/alarms/honduras.mp3',
   '/',
   '/manifest.json',
   '/app/',

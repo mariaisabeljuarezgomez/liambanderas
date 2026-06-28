@@ -118,7 +118,7 @@ const FLAGS = [
       {type:'rect',region:'b',correct:'rojo',x:0,y:100,w:300,h:100},
     ]},
 
-  { id:'indonesia', es:'Indonesia', en:'Indonesia', level:1,
+  { id:'indonesia', es:'Indonesia', en:'Indonesia', level:1, alarm_audio: 'music/alarms/indonesia.mp3',
     palette:[{key:'rojo',hex:'#FF0000'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:100},
@@ -133,7 +133,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'rojo',x:0,y:140,w:300,h:60},
     ]},
 
-  { id:'japon', es:'Japón', en:'Japan', level:1,
+  { id:'japon', es:'Japón', en:'Japan', level:1, alarm_audio: 'music/alarms/japan.mp3',
     palette:[{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#BC002D'}],
     parts:[
       {type:'rect',region:'a',correct:'blanco',x:0,y:0,w:300,h:200},
@@ -141,7 +141,7 @@ const FLAGS = [
     ]},
 
   /* ───────────── LEVEL 2 — Aventurero (emblems & crosses) ───────────── */
-  { id:'espana', es:'España', en:'Spain', level:2,
+  { id:'espana', es:'España', en:'Spain', level:2, alarm_audio: 'music/alarms/spain.mp3',
     palette:[{key:'rojo',hex:'#AA151B'},{key:'amarillo',hex:'#F1BF00'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:50},
@@ -167,7 +167,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'rojo',x:200,y:0,w:100,h:200},
     ]},
 
-  { id:'canada', es:'Canadá', en:'Canada', level:2,
+  { id:'canada', es:'Canadá', en:'Canada', level:2, alarm_audio: 'music/alarms/canada.mp3',
     palette:[{key:'rojo',hex:'#FF0000'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:75,h:200},
@@ -176,7 +176,7 @@ const FLAGS = [
     ],
     deco:[{type:'path',fill:'#FF0000',d:MAPLE_LEAF}]},
 
-  { id:'colombia', es:'Colombia', en:'Colombia', level:2,
+  { id:'colombia', es:'Colombia', en:'Colombia', level:2, alarm_audio: 'music/alarms/colombia.mp3',
     palette:[{key:'amarillo',hex:'#FCD116'},{key:'azul',hex:'#003893'},{key:'rojo',hex:'#CE1126'}],
     parts:[
       {type:'rect',region:'a',correct:'amarillo',x:0,y:0,w:300,h:100},
@@ -184,7 +184,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'rojo',x:0,y:150,w:300,h:50},
     ]},
 
-  { id:'argentina', es:'Argentina', en:'Argentina', level:2,
+  { id:'argentina', es:'Argentina', en:'Argentina', level:2, alarm_audio: 'music/alarms/argentina.mp3',
     palette:[{key:'celeste',hex:'#74ACDF'},{key:'blanco',hex:'#ffffff'},{key:'amarillo',hex:'#FCBF49'}],
     parts:[
       {type:'rect',region:'a',correct:'celeste',x:0,y:0,w:300,h:67},
@@ -193,7 +193,7 @@ const FLAGS = [
       {type:'star',region:'d',correct:'amarillo',cx:150,cy:100,outer:24,inner:9,points:16,rot:0},
     ]},
 
-  { id:'brasil', es:'Brasil', en:'Brazil', level:2,
+  { id:'brasil', es:'Brasil', en:'Brazil', level:2, alarm_audio: 'music/alarms/brazil.mp3',
     palette:[{key:'verde',hex:'#009C3B'},{key:'amarillo',hex:'#FFDF00'},{key:'azul',hex:'#002776'}],
     parts:[
       {type:'rect',region:'a',correct:'verde',x:0,y:0,w:300,h:200},
@@ -257,7 +257,7 @@ const FLAGS = [
       ]},
     ]},
 
-  { id:'islandia', es:'Islandia', en:'Iceland', level:3,
+  { id:'islandia', es:'Islandia', en:'Iceland', level:3, alarm_audio: 'music/alarms/iceland.mp3',
     palette:[{key:'azul',hex:'#02529C'},{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#DC1E35'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:200},
@@ -271,7 +271,7 @@ const FLAGS = [
       ]},
     ]},
 
-  { id:'chile', es:'Chile', en:'Chile', level:3,
+  { id:'chile', es:'Chile', en:'Chile', level:3, alarm_audio: 'music/alarms/chile.mp3',
     palette:[{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#D52B1E'},{key:'azul',hex:'#0039A6'}],
     parts:[
       {type:'rect',region:'a',correct:'blanco',x:0,y:0,w:300,h:100},
@@ -297,7 +297,7 @@ const FLAGS = [
       ]},
     ]},
 
-  { id:'eeuu', es:'Estados Unidos', en:'United States', level:3,
+  { id:'eeuu', es:'Estados Unidos', en:'United States', level:3, alarm_audio: 'music/alarms/united_states.mp3',
     palette:[{key:'rojo',hex:'#B22234'},{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#3C3B6E'}],
     parts:[
       {type:'group',region:'a',correct:'rojo',children:[
@@ -315,7 +315,7 @@ const FLAGS = [
     ],
     deco:(()=>{const s=[];for(let i=0;i<5;i++)for(let j=0;j<6;j++)s.push({type:'circle',fill:'#ffffff',cx:14+i*26,cy:14+j*18,r:2.6});return s;})()},
 
-  { id:'reinounido', es:'Reino Unido', en:'United Kingdom', level:3,
+  { id:'reinounido', es:'Reino Unido', en:'United Kingdom', level:3, alarm_audio: 'music/alarms/united_kingdom.mp3',
     palette:[{key:'azul',hex:'#012169'},{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#C8102E'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:200},
@@ -333,7 +333,7 @@ const FLAGS = [
       ]},
     ]},
 
-  { id:'china', es:'China', en:'China', level:3,
+  { id:'china', es:'China', en:'China', level:3, alarm_audio: 'music/alarms/china.mp3',
     palette:[{key:'rojo',hex:'#DE2910'},{key:'amarillo',hex:'#FFDE00'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:200},
@@ -346,14 +346,14 @@ const FLAGS = [
       {type:'star',fill:'#FFDE00',cx:128,cy:114,outer:10,inner:4,rot:-90+35},
     ]},
 
-  { id:'vietnam', es:'Vietnam', en:'Vietnam', level:3,
+  { id:'vietnam', es:'Vietnam', en:'Vietnam', level:3, alarm_audio: 'music/alarms/vietnam.mp3',
     palette:[{key:'rojo',hex:'#DA251D'},{key:'amarillo',hex:'#FFFF00'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:200},
       {type:'star',region:'b',correct:'amarillo',cx:150,cy:100,outer:50,inner:20},
     ]},
 
-  { id:'turquia', es:'Turquía', en:'Turkey', level:3,
+  { id:'turquia', es:'Turquía', en:'Turkey', level:3, alarm_audio: 'music/alarms/turkey.mp3',
     palette:[{key:'rojo',hex:'#E30A17'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:200},
@@ -362,7 +362,7 @@ const FLAGS = [
     ]},
 
   /* ───────────── LEVEL 4 — Navegante ───────────── */
-  { id:'india', es:'India', en:'India', level:4,
+  { id:'india', es:'India', en:'India', level:4, alarm_audio: 'music/alarms/india.mp3',
     palette:[{key:'naranja',hex:'#FF9933'},{key:'blanco',hex:'#ffffff'},{key:'verde',hex:'#138808'},{key:'azul',hex:'#000080'}],
     parts:[
       {type:'rect',region:'a',correct:'naranja',x:0,y:0,w:300,h:67},
@@ -371,7 +371,7 @@ const FLAGS = [
       {type:'circle',region:'d',correct:'azul',cx:150,cy:100,r:26},
     ]},
 
-  { id:'sudafrica', es:'Sudáfrica', en:'South Africa', level:4,
+  { id:'sudafrica', es:'Sudáfrica', en:'South Africa', level:4, alarm_audio: 'music/alarms/south_africa.mp3',
     palette:[{key:'rojo',hex:'#DE3831'},{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#002395'},{key:'verde',hex:'#007A4D'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:100},
@@ -388,14 +388,14 @@ const FLAGS = [
       {type:'circle',region:'c',correct:'amarillo',cx:120,cy:100,r:30},
     ]},
 
-  { id:'marruecos', es:'Marruecos', en:'Morocco', level:4,
+  { id:'marruecos', es:'Marruecos', en:'Morocco', level:4, alarm_audio: 'music/alarms/morocco.mp3',
     palette:[{key:'rojo',hex:'#C1272D'},{key:'verde',hex:'#006233'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:200},
       {type:'star',region:'b',correct:'verde',cx:150,cy:100,outer:48,inner:22,rot:0},
     ]},
 
-  { id:'tailandia', es:'Tailandia', en:'Thailand', level:4,
+  { id:'tailandia', es:'Tailandia', en:'Thailand', level:4, alarm_audio: 'music/alarms/thailand.mp3',
     palette:[{key:'rojo',hex:'#A51931'},{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#2D2A4A'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:30},
@@ -416,7 +416,7 @@ const FLAGS = [
       {type:'group',region:'c',correct:'azul',children:MAGEN_DAVID},
     ]},
 
-  { id:'nigeria', es:'Nigeria', en:'Nigeria', level:4,
+  { id:'nigeria', es:'Nigeria', en:'Nigeria', level:4, alarm_audio: 'music/alarms/nigeria.mp3',
     palette:[{key:'verde',hex:'#008751'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'verde',x:0,y:0,w:100,h:200},
@@ -424,7 +424,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'verde',x:200,y:0,w:100,h:200},
     ]},
 
-  { id:'irlanda', es:'Irlanda', en:'Ireland', level:4,
+  { id:'irlanda', es:'Irlanda', en:'Ireland', level:4, alarm_audio: 'music/alarms/ireland.mp3',
     palette:[{key:'verde',hex:'#169B62'},{key:'blanco',hex:'#ffffff'},{key:'naranja',hex:'#FF883E'}],
     parts:[
       {type:'rect',region:'a',correct:'verde',x:0,y:0,w:100,h:200},
@@ -469,7 +469,7 @@ const FLAGS = [
       {type:'rect',region:'b',correct:'blanco',x:130,y:80,w:90,h:40,rx:6},
     ]},
 
-  { id:'egipto', es:'Egipto', en:'Egypt', level:5,
+  { id:'egipto', es:'Egipto', en:'Egypt', level:5, alarm_audio: 'music/alarms/egypt.mp3',
     palette:[{key:'rojo',hex:'#CE1126'},{key:'blanco',hex:'#ffffff'},{key:'negro',hex:'#000000'},{key:'amarillo',hex:'#C09300'}],
     parts:[
       {type:'rect',region:'a',correct:'rojo',x:0,y:0,w:300,h:67},
@@ -478,7 +478,7 @@ const FLAGS = [
       {type:'star',region:'d',correct:'amarillo',cx:150,cy:100,outer:18,inner:7},
     ]},
 
-  { id:'corea', es:'Corea del Sur', en:'South Korea', level:5,
+  { id:'corea', es:'Corea del Sur', en:'South Korea', level:5, alarm_audio: 'music/alarms/south_korea.mp3',
     palette:[{key:'blanco',hex:'#ffffff'},{key:'azul',hex:'#003478'},{key:'rojo',hex:'#CD2E3A'}],
     parts:[
       {type:'rect',region:'a',correct:'blanco',x:0,y:0,w:300,h:200},
@@ -516,7 +516,7 @@ const FLAGS = [
       {type:'rect',region:'c',correct:'blanco',x:0,y:133,w:300,h:67},
     ]},
 
-  { id:'costarica', es:'Costa Rica', en:'Costa Rica', level:5,
+  { id:'costarica', es:'Costa Rica', en:'Costa Rica', level:5, alarm_audio: 'music/alarms/costa_rica.mp3',
     palette:[{key:'azul',hex:'#002B7F'},{key:'blanco',hex:'#ffffff'},{key:'rojo',hex:'#CE1126'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:40},
@@ -526,7 +526,7 @@ const FLAGS = [
       {type:'group',region:'e',correct:'azul',children:[{type:'rect',x:0,y:160,w:300,h:40}]},
     ]},
 
-  { id:'honduras', es:'Honduras', en:'Honduras', level:5,
+  { id:'honduras', es:'Honduras', en:'Honduras', level:5, alarm_audio: 'music/alarms/honduras.mp3',
     palette:[{key:'azul',hex:'#0073CF'},{key:'blanco',hex:'#ffffff'}],
     parts:[
       {type:'rect',region:'a',correct:'azul',x:0,y:0,w:300,h:67},
